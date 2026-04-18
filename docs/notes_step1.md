@@ -34,9 +34,18 @@ Daneman S3 is the more stringent list — FDR < 1% is a harder cutoff than p < 0
 
 ## Daneman_Filter Column
 
-All Daneman genes currently in the master list come from **S3**, which requires enrichment in brain ECs vs **both** liver and lung simultaneously. This is marked in the `Daneman_Filter` column as `liver_and_lung`.
+The master list incorporates genes from all three Daneman supplementary tables, each reflecting a different level of stringency. The `Daneman_Filter` column records which comparison(s) each Daneman gene passed:
 
-Future enhancement: Daneman S4 (brain vs liver only) and S5 (brain vs lung only) could be added with filter labels `liver_only` and `lung_only` respectively. This would allow downstream analyses to ask whether the most stringent BBB genes (both filters) are more evolutionarily conserved than the less stringent ones — a more nuanced scientific question than a flat gene list.
+| Value | Meaning | Source file |
+|-------|---------|-------------|
+| `liver_and_lung` | Enriched in brain ECs vs both liver AND lung simultaneously | S3 (or in both S4 and S5) |
+| `liver_only` | Enriched in brain ECs vs liver only | S4 only |
+| `lung_only` | Enriched in brain ECs vs lung only | S5 only |
+| `NA` | Munji-only gene — Munji did not use this two-organ filter | — |
+
+A gene that appears in both S4 and S5 (but not S3) is also labelled `liver_and_lung` — it passed both comparisons separately, which is logically equivalent to S3.
+
+This column adds analytical depth: in the downstream conservation analysis, you can ask whether the most stringent BBB genes (`liver_and_lung`) are more evolutionarily conserved across human, macaque, and mouse than the less stringent ones (`liver_only`, `lung_only`).
 
 ---
 

@@ -20,9 +20,9 @@ eval_master_BBB_genelist <- function(filepath = "processed/master_BBB_genelist.c
   n <- nrow(df)
   cat(sprintf("INFO: Total genes in master list: %d\n", n))
   if (n < 300) {
-    cat("WARN: Fewer than 300 genes — Daneman S3 has 213 and Munji S5 has 518, expect ~400-600 after deduplication\n")
-  } else if (n > 800) {
-    cat("WARN: More than 800 genes — possible duplication issue\n")
+    cat("WARN: Fewer than 300 genes — something may have gone wrong with loading\n")
+  } else if (n > 2500) {
+    cat("WARN: More than 2500 genes — possible duplication issue\n")
   } else {
     cat("PASS: Gene count looks reasonable\n")
   }
