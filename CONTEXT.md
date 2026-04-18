@@ -296,6 +296,24 @@ Save this as `scripts/eval_step1.R` and run it after Step 1 is done. All PASS = 
 ---
 
 ## Still Pending / Blockers
-- [ ] Push repo to GitHub (Yara to do — needs empty repo created first at github.com/Mmynemious)
+- [x] Push repo to GitHub — done at github.com/Mmynemious/BBB-Gene-Conservation
+- [x] Step 1 complete — 545-gene master BBB gene list created (Daneman S3 + Munji S5)
 - [ ] Dr. Clelland approval of control gene set strategy (Step 5)
 - [ ] Andrew Yang contact (potential additional dataset)
+
+---
+
+## Future Enhancement: Macaque Input Dataset
+
+**Decision:** Core analysis proceeds without a macaque-specific input dataset. BioMart ortholog mapping (Step 3) handles the mouse→macaque gene mapping computationally. A macaque expression dataset can be added in a later phase.
+
+**Best candidate when ready:**
+- **Paper:** "A single-cell multi-omic atlas spanning the adult rhesus macaque brain" — Science Advances, 2023
+- **Why it's good:** 1 million nuclei from 28 brain regions, explicitly identifies endothelial cells and vascular subtypes, directly compared to Wälchli and Winkler human atlases
+- **Data:** Available on CellxGene — https://cellxgene.cziscience.com/collections/8c4bcf0d-b4df-45c7-888c-74fb0013e9e7
+- **What it would add:** Any BBB gene confirmed in mouse (Daneman/Munji) + human (Wälchli/Winkler) + macaque (this atlas) = very high-confidence conserved BBB gene
+- **Action required:** Flag to Dr. Clelland before adding — it expands project scope
+
+**Claude Code prompt to add this dataset later** (save and use when ready):
+
+> "I want to add a macaque brain endothelial dataset to the BBB gene conservation project as an optional input layer. The dataset is the rhesus macaque brain single-cell atlas from Science Advances 2023, available on CellxGene at https://cellxgene.cziscience.com/collections/8c4bcf0d-b4df-45c7-888c-74fb0013e9e7. Please: (1) download the endothelial cell subset from CellxGene, (2) extract average expression per cluster using Seurat, (3) filter to genes that overlap with our master BBB gene list at processed/master_BBB_genelist.csv, and (4) add a new column to the master list called Macaque_Expressed (TRUE/FALSE) indicating whether each BBB gene is expressed in macaque brain endothelium above a reasonable threshold. Save the updated list as processed/master_BBB_genelist_with_macaque.csv. Explain each step conceptually as you go — I am a beginner in R and bioinformatics."
