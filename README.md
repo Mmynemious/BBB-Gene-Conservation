@@ -1,5 +1,5 @@
 # BBB Gene Conservation Analysis
-**Clelland Lab Collaboration — Yara Shamshoum**
+**Clelland Lab Collaboration — Yara**
 
 ## Project Goal
 How similar are the genomes of human, non-human primate (rhesus macaque), and mouse across blood-brain barrier (BBB) genes? This project compares BBB coding regions, non-coding regions, and regulatory regions across three species to assess evolutionary conservation.
