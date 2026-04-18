@@ -84,5 +84,5 @@ BBB-Gene-Conservation/
 
 ---
 
-*Analysis lead: Yara Shamshoum*
+*Analysis lead: Yara*
 *Supervisor: Dr. Clelland*
