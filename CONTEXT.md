@@ -4,7 +4,7 @@
 ---
 
 ## Who You're Working With
-- **Name:** Yara Shamshoum
+- **Name:** Yara 
 - **Level:** Beginner in R, Python, and bioinformatics. Has a strong conceptual understanding of the biology but is new to coding and data analysis pipelines.
 - **Supervision:** Dr. Clelland (Clelland Lab). Andrew Yang (Gladstone) may provide additional data later.
 - **GitHub:** Mmynemious
