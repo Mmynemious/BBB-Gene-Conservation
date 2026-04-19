@@ -7,7 +7,7 @@ Re-queried Ensembl BioMart (release 115, main server) to:
 2. Add `orthology_type` for each mouse and macaque orthologue
 3. Add `perc_id` (% sequence identity between human gene and its orthologue)
 
-**Output:** `processed/BBB_genes_orthology_confidence.csv` — 1,724 rows (expanded from 1,526 due to paralogue rows), 12 columns including all validation columns from Step 4b.
+**Output:** `processed/master_BBB_genelist_complete.csv` — 1,724 rows (expanded from 1,526 due to paralogue rows), 12 columns including all validation columns from Step 4b.
 
 ---
 

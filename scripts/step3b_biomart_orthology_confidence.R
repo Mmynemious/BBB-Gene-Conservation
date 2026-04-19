@@ -144,6 +144,6 @@ cat(sprintf("Macaque %%id: median=%.1f  mean=%.1f  min=%.1f\n",
     min(final$Macaque_PercId, na.rm=TRUE)))
 
 # ── Save ─────────────────────────────────────────────────────────────────────
-write_csv(final, "processed/BBB_genes_orthology_confidence.csv")
-cat("\nSaved: processed/BBB_genes_orthology_confidence.csv\n")
+write_csv(final, "processed/master_BBB_genelist_complete.csv")
+cat("\nSaved: processed/master_BBB_genelist_complete.csv\n")
 cat("Run scripts/eval_step3b.R to validate.\n")

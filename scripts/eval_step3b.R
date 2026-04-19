@@ -2,7 +2,7 @@
 library(readr)
 library(dplyr)
 
-eval_orthology_confidence <- function(filepath = "processed/BBB_genes_orthology_confidence.csv") {
+eval_orthology_confidence <- function(filepath = "processed/master_BBB_genelist_complete.csv") {
 
   cat("=== EVAL: Orthology Confidence Table ===\n\n")
   df <- read_csv(filepath, show_col_types = FALSE)
