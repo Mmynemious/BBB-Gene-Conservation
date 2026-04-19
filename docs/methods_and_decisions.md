@@ -111,3 +111,24 @@ Macaque does not contribute a gene list — it contributes a genome. The macaque
 4. **HomoloGene dropped genes:** 138 mouse genes had no human orthologue in HomoloGene. Is it worth recovering these using biomaRt before proceeding, or is the current 1,526-gene list sufficient?
 
 5. **Giger macaque dataset:** After Step 5 is complete, the Giger data could be used to ask whether highly conserved BBB genes are also the most actively expressed in macaque endothelium. Should this be included in the final analysis?
+
+---
+
+## AI Transparency
+
+I have decided to use **Claude** (specifically Sonnet 4.6) to make use of my R scripts and my approach to the project. Claude was not used in these settings:
+
+- the project structure and deliverables
+- data set search and usage
+- setting up evaluation metrics to ensure meaningful and correct R-script results
+- which species to include, whether to use S3 only vs S3+S4+S5 (Daneman supplemental files), reporting both paralogues, DNA over protein alignment, adding human    validation before Step 5
+- confirmation (as of my knowledge after reading the papers)
+- catching anomalies (such as CLDN5)
+- biological interpretation of data
+
+**Claude** was used in these settings:
+
+- helping brainstorm R scripts to write
+- debugging mistakes
+- advise on structuring of table design
+- markdown enhancement (corrected grammar, style formats)
