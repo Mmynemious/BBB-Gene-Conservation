@@ -100,17 +100,21 @@ Macaque does not contribute a gene list — it contributes a genome. The macaque
 
 ---
 
-## Open Questions — Flag for Dr. Clelland
+## Decisions — Confirmed by Dr. Clelland
 
-1. **Control gene set strategy (Step 5):** A randomly sampled set of ~3x genes matched for length and chromosome distribution is proposed as the control group. Dr. Clelland must approve this before the conservation comparison runs.
+1. **Control gene set:** ✅ Use **liver-expressed genes** as the control. Liver is highly conserved across species, giving a biologically meaningful baseline. If BBB genes are more conserved than liver genes, that is a strong result. If similarly conserved, it suggests conservation is a general property of metabolically active tissues rather than BBB-specific. This is a more interpretable comparison than a randomly matched gene set.
 
-2. **Human validation timing:** Should we cross-reference the master list against Winkler/Yang expression data before or after the conservation analysis? Doing it before would give a cleaner, human-confirmed gene list going into Step 5. Doing it after keeps the analysis broader.
+2. **Human validation timing:** ✅ Done before Step 5. Cross-referencing against Wälchli, Yang, and Winkler was completed in Step 4b. Each gene now carries a `Human_BBB_Datasets_N` score (0–3) for stratified analysis.
 
-3. **Daneman S4/S5 inclusion:** Is it scientifically appropriate to include less stringent Daneman genes (liver_only, lung_only) in the conservation analysis, or should we restrict to S3 (liver_and_lung) only? The Daneman_Filter column makes it easy to filter either way.
+3. **Daneman S4/S5 inclusion:** ✅ Run Step 5 on **S3 only first** (strictest: enriched vs liver AND lung), then repeat on the full list (S3 + S4 + S5) and compare. The `Daneman_Filter` column makes this straightforward.
 
-4. **HomoloGene dropped genes:** 138 mouse genes had no human orthologue in HomoloGene. Is it worth recovering these using biomaRt before proceeding, or is the current 1,526-gene list sufficient?
+4. **HomoloGene dropped genes:** ✅ Resolved in Step 3b. BioMart re-query recovered dropped genes and added orthology type + % identity. Final table is `master_BBB_genelist_complete.csv` (1,724 rows).
 
-5. **Giger macaque dataset:** After Step 5 is complete, the Giger data could be used to ask whether highly conserved BBB genes are also the most actively expressed in macaque endothelium. Should this be included in the final analysis?
+5. **Alignment metrics:** ✅ Compute **both** % nucleotide identity and dN/dS, then compare. % identity is the primary metric (easier to communicate); dN/dS adds interpretive depth. Run both and report whichever tells the cleaner story, with the other as supplementary.
+
+6. **Regulatory regions:** ✅ Keep Step 5 as **coding sequence only**. Noncoding regions are under less evolutionary pressure and will differ substantially by design — this is expected, not informative for the core question. Flagged as a future extension.
+
+7. **Extended analyses (Giger etc.):** ✅ Start simple. Once the primary conservation analysis is complete and results look credible on manual review, additional questions can be layered on. Avoid overextending before the foundation is validated.
 
 ---
 
