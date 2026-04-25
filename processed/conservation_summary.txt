@@ -1,0 +1,187 @@
+=======================================================
+BBB Gene Conservation Analysis — Statistical Summary
+=======================================================
+
+== 1. Full BBB list vs Liver control ==
+
+--- % identity — Human vs Mouse ---
+  BBB: n=1539  median=84.12  IQR=[77.39, 88.38]
+  Liver: n=5265  median=84.32  IQR=[78.79, 88.40]
+  Wilcoxon p = 0.02229  |  effect size r = 0.038
+
+--- % identity — Human vs Macaque ---
+  BBB: n=1474  median=96.82  IQR=[91.26, 98.12]
+  Liver: n=3701  median=96.15  IQR=[89.29, 97.86]
+  Wilcoxon p = 1.808e-05  |  effect size r = -0.076
+
+--- dN/dS — Human vs Mouse ---
+  BBB: n=1539  median=0.20  IQR=[0.12, 0.45]
+  Liver: n=5265  median=0.21  IQR=[0.12, 0.44]
+  Wilcoxon p = 0.1363  |  effect size r = 0.025
+
+--- dN/dS — Human vs Macaque ---
+  BBB: n=1472  median=0.23  IQR=[0.09, 0.57]
+  Liver: n=3696  median=0.26  IQR=[0.14, 0.64]
+  Wilcoxon p = 2.657e-08  |  effect size r = 0.099
+
+== 2. S3-only BBB (strictest) vs Liver control ==
+
+S3-only genes: 124
+
+--- % identity — Human vs Mouse ---
+  BBB_S3: n=116  median=85.49  IQR=[82.16, 89.20]
+  Liver: n=5265  median=84.32  IQR=[78.79, 88.40]
+  Wilcoxon p = 0.03632  |  effect size r = -0.113
+
+$p
+[1] 0.03632251
+
+$r
+[1] -0.1134542
+
+$n_x
+[1] 116
+
+$n_y
+[1] 5265
+
+$median_x
+[1] 85.48586
+
+$median_y
+[1] 84.32432
+
+--- % identity — Human vs Macaque ---
+  BBB_S3: n=113  median=97.01  IQR=[91.96, 97.82]
+  Liver: n=3701  median=96.15  IQR=[89.29, 97.86]
+  Wilcoxon p = 0.06154  |  effect size r = -0.103
+
+$p
+[1] 0.06153677
+
+$r
+[1] -0.1030982
+
+$n_x
+[1] 113
+
+$n_y
+[1] 3701
+
+$median_x
+[1] 97.00967
+
+$median_y
+[1] 96.15234
+
+--- dN/dS — Human vs Mouse ---
+  BBB_S3: n=116  median=0.19  IQR=[0.11, 0.41]
+  Liver: n=5265  median=0.21  IQR=[0.12, 0.44]
+  Wilcoxon p = 0.1616  |  effect size r = 0.076
+
+$p
+[1] 0.1616088
+
+$r
+[1] 0.07585388
+
+$n_x
+[1] 116
+
+$n_y
+[1] 5265
+
+$median_x
+[1] 0.189839
+
+$median_y
+[1] 0.2097062
+
+--- dN/dS — Human vs Macaque ---
+  BBB_S3: n=113  median=0.21  IQR=[0.07, 0.50]
+  Liver: n=3696  median=0.26  IQR=[0.14, 0.64]
+  Wilcoxon p = 0.002154  |  effect size r = 0.169
+
+$p
+[1] 0.002154181
+
+$r
+[1] 0.1691161
+
+$n_x
+[1] 113
+
+$n_y
+[1] 3696
+
+$median_x
+[1] 0.2106982
+
+$median_y
+[1] 0.2603643
+
+== 3. BBB genes by human validation score (N=0 to 3) ==
+
+N=0 (23 genes): Mouse %id median=83.1%  Macaque %id median=96.7%
+N=1 (1281 genes): Mouse %id median=84.0%  Macaque %id median=97.0%
+N=2 (297 genes): Mouse %id median=84.8%  Macaque %id median=96.5%
+N=3 (31 genes): Mouse %id median=83.2%  Macaque %id median=97.2%
+
+== 4. BBB: one2one vs one2many mouse orthologues ==
+
+--- % identity — Human vs Mouse ---
+  one2one: n=1327  median=85.04  IQR=[80.11, 88.79]
+  one2many: n=194  median=47.33  IQR=[46.27, 76.73]
+  Wilcoxon p = 1.115e-59  |  effect size r = -0.723
+
+$p
+[1] 1.114812e-59
+
+$r
+[1] -0.7232693
+
+$n_x
+[1] 1327
+
+$n_y
+[1] 194
+
+$median_x
+[1] 85.04098
+
+$median_y
+[1] 47.32771
+
+--- dN/dS — Human vs Mouse ---
+  one2one: n=1327  median=0.21  IQR=[0.10, 0.47]
+  one2many: n=194  median=0.14  IQR=[0.13, 0.22]
+  Wilcoxon p = 0.005966  |  effect size r = -0.122
+
+$p
+[1] 0.005966015
+
+$r
+[1] -0.1220527
+
+$n_x
+[1] 1327
+
+$n_y
+[1] 194
+
+$median_x
+[1] 0.2117114
+
+$median_y
+[1] 0.1437063
+
+== 5. BBB: by source ==
+
+Daneman (1224 genes): Mouse %id=84.2%  Macaque %id=97.0%  Mouse dN/dS=0.196
+Munji (332 genes): Mouse %id=83.8%  Macaque %id=96.2%  Mouse dN/dS=0.228
+Both (76 genes): Mouse %id=84.8%  Macaque %id=96.6%  Mouse dN/dS=0.240
+
+=======================================================
+Note: Wilcoxon rank-sum test used throughout (non-parametric).
+Effect size: rank-biserial r (|r|>0.1 small, >0.3 medium, >0.5 large).
+=======================================================
