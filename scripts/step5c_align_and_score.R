@@ -19,7 +19,7 @@ library(Biostrings)
 library(pwalign)
 library(readr)
 library(dplyr)
-library(ape)
+library(seqinr)
 
 # ── Load sequences ────────────────────────────────────────────────────────────
 cat("Loading CDS sequences...\n")
@@ -48,24 +48,24 @@ calc_pct_identity <- function(seq1, seq2) {
   }, error = function(e) NA_real_)
 }
 
-# ── Helper: dN/dS via ape ────────────────────────────────────────────────────
+# ── Helper: dN/dS via seqinr ─────────────────────────────────────────────────
 calc_dnds <- function(seq1, seq2) {
   tryCatch({
-    # Trim both to multiple of 3 (in-frame)
-    len <- min(nchar(as.character(seq1)), nchar(as.character(seq2)))
-    len <- floor(len / 3) * 3
+    len <- floor(min(nchar(as.character(seq1)), nchar(as.character(seq2))) / 3) * 3
     if (len < 30) return(list(dN = NA, dS = NA, dNdS = NA))
 
-    s1 <- substr(as.character(seq1), 1, len)
-    s2 <- substr(as.character(seq2), 1, len)
+    s1 <- tolower(substr(as.character(seq1), 1, len))
+    s2 <- tolower(substr(as.character(seq2), 1, len))
 
-    # Write temp alignment for ape
-    tmp <- tempfile()
-    write(c(paste0(">seq1\n", s1), paste0(">seq2\n", s2)), tmp)
-    aln <- read.dna(tmp, format = "fasta", as.character = FALSE)
-    res <- kaks(as.alignment(aln))
-    list(dN = res$ka, dS = res$ks,
-         dNdS = ifelse(res$ks > 0, res$ka / res$ks, NA))
+    aln <- list(nb = 2, nam = c("seq1", "seq2"), seq = c(s1, s2), com = c(NA, NA))
+    class(aln) <- "alignment"
+
+    res <- seqinr::kaks(aln)
+    dN <- as.numeric(res$ka)
+    dS <- as.numeric(res$ks)
+    list(dN   = dN,
+         dS   = dS,
+         dNdS = ifelse(!is.na(dS) && dS > 0, dN / dS, NA_real_))
   }, error = function(e) list(dN = NA, dS = NA, dNdS = NA))
 }
 
