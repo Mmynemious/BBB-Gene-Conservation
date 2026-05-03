@@ -146,6 +146,62 @@ Macaque does not contribute a gene list — it contributes a genome. The macaque
 
 ---
 
+## Project Milestones and Results
+
+### Milestones
+
+| # | Milestone | Status |
+|---|-----------|--------|
+| 1 | Master BBB gene list built (Daneman + Munji, 1,526 genes, filter-tagged) | ✅ |
+| 2 | Wälchli single-cell EC expression processed (26,666 × 12 matrix) | ✅ |
+| 3 | Cross-species Ensembl IDs mapped (human, mouse, macaque) | ✅ |
+| 3b | Orthology confidence (type + % identity) added via BioMart | ✅ |
+| 4b | Human EC validation against 3 datasets (Wälchli, Yang, Winkler) | ✅ |
+| 4c | Liver control set built from HPA (7,131 genes) | ✅ |
+| 5a-b | CDS sequences downloaded and extracted for all gene sets | ✅ |
+| 5c-d | Pairwise alignment + % identity + dN/dS for BBB and liver | ✅ |
+| 5e | Statistical comparison (Wilcoxon, stratified) | ✅ |
+| 5f-g | dN/dS recomputed with codon-aware alignment + multiple-testing correction | ✅ |
+| 5h | Direct mouse vs macaque comparison (closing the triangle) | ✅ |
+
+### Headline Results
+
+**Three-species conservation triangle (BBB genes, median % nucleotide identity):**
+
+```
+                Human
+              /        \
+          84.1%        96.8%
+            /              \
+        Mouse  ── 82.6% ── Macaque
+```
+
+- Macaque is the closest model to human BBB at the DNA level (96.8% identical).
+- Mouse is more divergent (84.1%) but still substantially conserved.
+- Mouse vs Macaque (82.6%) reflects their similar evolutionary distance from each other.
+
+**BBB vs Liver — purifying selection (codon-aligned dN/dS):**
+
+| Comparison | BBB dN/dS | Liver dN/dS | p (Bonferroni) | Interpretation |
+|------------|-----------|-------------|----------------|----------------|
+| Human vs Macaque | **0.152** | **0.196** | 1.97 × 10⁻⁶ | BBB under stronger purifying selection |
+| Human vs Mouse | 0.117 | 0.119 | 0.504 | No detectable difference |
+| Mouse vs Macaque | 0.128 | 0.129 | n.s. | No detectable difference |
+
+The BBB-vs-liver conservation differential is real and statistically robust in the human-vs-macaque comparison. The signal is not visible in deeper evolutionary comparisons (mouse-human, mouse-macaque), likely because all genes have accumulated extensive change at that distance, washing out subtle BBB-specific signal.
+
+**Paralogue effect (one-to-many orthologues):**
+
+| Group | Median % identity | Median dN/dS |
+|-------|-------------------|--------------|
+| One-to-one orthologues | 85.0% | 0.107 |
+| One-to-many (paralogues) | 47.3% | 0.354 |
+| Effect size r | -0.72 (huge) | 0.59 (large) |
+
+Gene duplications in the rodent lineage (e.g. ABCB1 → Abcb1a + Abcb1b) lead to substantial divergence between paralogues. Both paralogue rows are retained in the master table with their orthologue type flagged.
+
+---
+
 ## Decisions Confirmed by Dr. Clelland
 
 1. **Control gene set:** ✅ Liver-expressed genes (HPA) — more biologically interpretable than a random matched set.
@@ -159,6 +215,36 @@ Macaque does not contribute a gene list — it contributes a genome. The macaque
 5. **Regulatory regions:** ✅ Coding sequence only for now. Noncoding regions are under less evolutionary pressure and will differ substantially — flagged as future work.
 
 6. **Extended analyses:** ✅ Start simple, validate results manually, then extend. Do not overextend before the primary analysis is confirmed.
+
+---
+
+## Things to Consider — Caveats and Future Work
+
+These are honest limitations of the current pipeline. They do not invalidate the results but should be stated alongside any presentation.
+
+### Methodological caveats
+
+- **Pairwise dN/dS, not phylogenetic.** Current dN/dS values use the Nei-Gojobori method on pairs of sequences. A more rigorous analysis would use a multi-species phylogenetic model (PAML codeml) that accounts for the tree topology and lineage-specific rates. Pairwise gives a reasonable first approximation but is sensitive to local sequence ambiguities.
+- **Longest-transcript heuristic.** When a gene has multiple isoforms, we used the longest CDS. A cleaner choice would be the MANE Select transcript (a curated canonical isoform per gene), which requires an extra lookup but is more standard.
+- **Alignment parameters are defaults.** We used standard scoring (match +1, mismatch -1, gap -5/-2 for nucleotide; BLOSUM62 with gap 10/4 for protein). These are fine for closely related species but could be tuned for sensitivity in divergent regions.
+- **Multiple testing was applied to primary tests only.** The four BBB-vs-liver primary comparisons were corrected (Bonferroni + FDR). Stratified analyses (by Daneman filter, validation score, orthologue type) were not corrected and should be treated as exploratory.
+
+### Biological caveats
+
+- **The starting gene list is enrichment-based, not exhaustive.** Daneman and Munji built their lists by comparing brain ECs to other endothelia. CLDN5 — the canonical BBB tight junction protein — is missing because it failed the differential cutoff. Other broadly endothelial genes important to the BBB may be similarly absent.
+- **Liver control is one specific choice.** Liver was chosen for biological interpretability (a metabolically active, highly conserved tissue), but it has functional differences from BBB endothelium that could confound the comparison. A complementary control would be brain-expressed non-BBB genes, or genes matched on protein domain composition.
+- **Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) are deliberately excluded. Many BBB-relevant cross-species differences may live in regulation rather than protein sequence.
+- **HPA "brain" is whole brain, not endothelium.** When excluding brain-high genes from the liver control set, no genes were removed because HPA's brain sample is dominated by neuronal expression. A finer EC-specific filter would be cleaner.
+- **The BBB-vs-liver signal is small in absolute terms.** Effect sizes (rank-biserial r) for the primary comparisons are under 0.1. Statistical significance comes largely from the large sample size. The biological story is real but subtle.
+
+### Future extensions (in roughly increasing scope)
+
+1. **Run PAML codeml** on the same alignments for proper phylogenetic dN/dS.
+2. **Add promoter sequence comparison** (2 kb upstream of TSS) to test whether regulatory regions diverge more than coding regions, as expected.
+3. **Re-run with MANE Select transcripts** instead of longest-transcript heuristic.
+4. **Extend to additional control sets** — brain non-BBB genes; genes matched on domain composition or expression level.
+5. **Bring the Giger macaque dataset back in** to ask whether the most-conserved BBB genes are also the most expressed in macaque endothelium.
+6. **Compare different BBB cell types** (capillary vs arteriole vs venule) using the Wälchli per-cluster expression to ask whether conservation correlates with cell-type expression specificity.
 
 ---
 

@@ -23,3 +23,6 @@ __pycache__/
 *.tmp
 *.log
 genomes/
+
+# Large HPA files — keep .zip for reproducibility, ignore extracted .tsv
+raw_data/hpa_liver/*.tsv
