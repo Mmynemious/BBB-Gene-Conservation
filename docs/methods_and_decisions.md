@@ -19,10 +19,16 @@ Specifically: are BBB genes more conserved across these three species than rando
 | Step 2 | Process Wälchli Seurat object — average expression per EC cell type | `Walchli2024_AverageExpression.csv` |
 | Step 3 | Map BBB genes to Ensembl IDs across human, mouse, macaque | `BBB_genes_crossspecies_ensembl.csv` |
 | Step 3b | Re-query BioMart for orthology type + % sequence identity | `master_BBB_genelist_complete.csv` |
-| Step 4 | Download GTF genome annotation files (Ensembl release 113) | `genomes/*.gtf.gz` |
 | Step 4b | Cross-reference master list against 3 human EC datasets | Adds `Human_BBB_Datasets_N` to master list |
 | Step 4c | Build liver control gene set from Human Protein Atlas | `liver_control_genelist.csv` (7,131 genes) |
-| Step 5 | Conservation analysis — DNA alignment, % identity, dN/dS | *(pending)* |
+| Step 5a | Download Ensembl CDS FASTA files (coding sequences only) | `genomes/*.cds.all.fa.gz` |
+| Step 5b | Extract longest CDS per gene for BBB and liver gene sets | `cds_BBB_*.fa`, `cds_liver_human.fa` |
+| Step 5c | Pairwise alignment + % identity + dN/dS for BBB genes | `conservation_scores_BBB.csv` |
+| Step 5d | Same alignment pipeline for liver control genes | `conservation_scores_liver.csv` |
+| Step 5e | Statistical comparison (Wilcoxon) BBB vs liver | `conservation_summary.txt` |
+| Step 5f | Recompute dN/dS with proper codon-aware alignment | `conservation_scores_combined_v2.csv` |
+
+**Note on the original Step 4:** An earlier draft of this pipeline included a Step 4 that downloaded GTF (genome annotation) files. The plan was to use those coordinates plus full genome FASTA files to extract coding sequences manually. Step 5a replaced this with a simpler approach — Ensembl provides pre-extracted CDS FASTA files (~20 MB per species vs ~800 MB for full genomes), so the GTF approach was unused and has been removed from the pipeline.
 
 ---
 
