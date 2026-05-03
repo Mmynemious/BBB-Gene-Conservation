@@ -1,0 +1,76 @@
+=======================================================
+BBB Gene Conservation — v2 (codon-aligned dN/dS)
+=======================================================
+
+== 1. Full BBB list vs Liver control ==
+
+--- % identity — Human vs Mouse ---
+  BBB: n=1539  median=84.119  IQR=[77.388, 88.378]
+  Liver: n=5265  median=84.324  IQR=[78.788, 88.404]
+  Wilcoxon p = 0.02229  |  effect size r = 0.038
+
+--- % identity — Human vs Macaque ---
+  BBB: n=1474  median=96.825  IQR=[91.262, 98.122]
+  Liver: n=3701  median=96.152  IQR=[89.291, 97.856]
+  Wilcoxon p = 1.808e-05  |  effect size r = -0.076
+
+--- dN/dS v2 — Human vs Mouse ---
+  BBB: n=1539  median=0.117  IQR=[0.058, 0.222]
+  Liver: n=5265  median=0.119  IQR=[0.055, 0.207]
+  Wilcoxon p = 0.126  |  effect size r = -0.026
+
+--- dN/dS v2 — Human vs Macaque ---
+  BBB: n=1472  median=0.152  IQR=[0.072, 0.325]
+  Liver: n=3695  median=0.196  IQR=[0.077, 0.370]
+  Wilcoxon p = 4.928e-07  |  effect size r = 0.089
+
+== 2. S3-only BBB (strictest) vs Liver control ==
+
+S3-only genes: 124
+
+--- S3 % id — Human vs Mouse ---
+  BBB_S3: n=116  median=85.486  IQR=[82.164, 89.202]
+  Liver: n=5265  median=84.324  IQR=[78.788, 88.404]
+  Wilcoxon p = 0.03632  |  effect size r = -0.113
+
+--- S3 % id — Human vs Macaque ---
+  BBB_S3: n=113  median=97.010  IQR=[91.959, 97.823]
+  Liver: n=3701  median=96.152  IQR=[89.291, 97.856]
+  Wilcoxon p = 0.06154  |  effect size r = -0.103
+
+--- S3 dN/dS v2 — Human vs Mouse ---
+  BBB_S3: n=116  median=0.106  IQR=[0.047, 0.173]
+  Liver: n=5265  median=0.119  IQR=[0.055, 0.207]
+  Wilcoxon p = 0.06319  |  effect size r = 0.101
+
+--- S3 dN/dS v2 — Human vs Macaque ---
+  BBB_S3: n=113  median=0.159  IQR=[0.047, 0.304]
+  Liver: n=3695  median=0.196  IQR=[0.077, 0.370]
+  Wilcoxon p = 0.03571  |  effect size r = 0.116
+
+== 3. Multiple testing correction (Bonferroni & FDR) ==
+
+  % identity — Human vs Mouse                  p=0.02229  Bonf=0.08916  FDR=0.02972
+  % identity — Human vs Macaque                p=1.808e-05  Bonf=7.231e-05  FDR=3.616e-05
+  dN/dS v2 — Human vs Mouse                    p=0.126  Bonf=0.5039  FDR=0.126
+  dN/dS v2 — Human vs Macaque                  p=4.928e-07  Bonf=1.971e-06  FDR=1.971e-06
+
+== 4. BBB: one2one vs one2many mouse orthologues ==
+
+--- % id — Mouse ---
+  one2one: n=1327  median=85.041  IQR=[80.112, 88.790]
+  one2many: n=194  median=47.328  IQR=[46.273, 76.730]
+  Wilcoxon p = 1.115e-59  |  effect size r = -0.723
+
+--- dN/dS v2 — Mouse ---
+  one2one: n=1327  median=0.107  IQR=[0.053, 0.189]
+  one2many: n=194  median=0.354  IQR=[0.138, 0.377]
+  Wilcoxon p = 2.545e-40  |  effect size r = 0.590
+
+=======================================================
+Notes:
+ - Wilcoxon rank-sum (non-parametric)
+ - Effect size: rank-biserial r (|r|>0.1 small, >0.3 medium, >0.5 large)
+ - dN/dS v2: codon-aligned (translate→align→back-map)
+ - Bonferroni and FDR applied to the 4 primary tests
+=======================================================
