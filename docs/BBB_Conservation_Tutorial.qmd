@@ -23,9 +23,9 @@ execute:
 
 This document walks through the full pipeline of a project that asks a single biological question:
 
-> **Are the genes that make up the blood-brain barrier (BBB) conserved across human, mouse, and macaque — and if so, by how much?**
+> **Are the genes that make up the blood-brain barrier (BBB) conserved across human, mouse, and macaque and if so, by how much?**
 
-The motivation: nearly every drug developed to cross or bypass the BBB is first tested in mice. If mouse BBB genes look very different from human BBB genes at the DNA level, that pipeline is on shaky ground. If they look similar, mouse models are scientifically defensible. Macaque is included as a primate intermediate — closer to human evolutionarily, expensive but rigorous as a model.
+The motivation: nearly every drug developed to cross or bypass the BBB is first tested in mice. If mouse BBB genes look very different from human BBB genes at the DNA level, that pipeline is not sustainable. If they look similar, mouse models are scientifically defensible. Macaque is included as a primate intermediate: closer to human evolutionarily, expensive but rigorous as a model.
 
 The full pipeline runs entirely in R with publicly available data. This tutorial shows each step with the code that ran, the data it produced, and what to make of it.
 
@@ -425,7 +425,7 @@ The fact that this signal is most visible in the human-macaque comparison rather
 
 # AI Transparency
 
-This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.
+This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.
 
 ---
 
