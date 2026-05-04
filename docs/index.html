@@ -3467,444 +3467,445 @@ Step 5h  Direct mouse vs macaque comparison</code></pre>
 <span id="cb38-10"><a href="#cb38-10" aria-hidden="true" tabindex="-1"></a><span class="co">    code-tools: true</span></span>
 <span id="cb38-11"><a href="#cb38-11" aria-hidden="true" tabindex="-1"></a><span class="co">    theme: cosmo</span></span>
 <span id="cb38-12"><a href="#cb38-12" aria-hidden="true" tabindex="-1"></a><span class="co">    embed-resources: true</span></span>
-<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
-<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
-<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
-<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
-<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
-<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
-<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
-<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a>This document walks through the full pipeline of a project that asks a single biological question:</span>
-<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Are the genes that make up the blood-brain barrier (BBB) conserved across human, mouse, and macaque — and if so, by how much?**</span></span>
-<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a>The motivation: nearly every drug developed to cross or bypass the BBB is first tested in mice. If mouse BBB genes look very different from human BBB genes at the DNA level, that pipeline is on shaky ground. If they look similar, mouse models are scientifically defensible. Macaque is included as a primate intermediate — closer to human evolutionarily, expensive but rigorous as a model.</span>
-<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a>The full pipeline runs entirely in R with publicly available data. This tutorial shows each step with the code that ran, the data it produced, and what to make of it.</span>
-<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pipeline at a glance</span></span>
-<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a><span class="in">Step 1   Build master BBB gene list (Daneman + Munji)</span></span>
-<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="in">Step 2   Process Wälchli single-cell EC expression</span></span>
-<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a><span class="in">Step 3   Map gene symbols → Ensembl IDs (3 species)</span></span>
-<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a><span class="in">Step 3b  Add orthology confidence (type + % identity)</span></span>
-<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a><span class="in">Step 4b  Cross-reference against human EC datasets</span></span>
-<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a><span class="in">Step 4c  Build liver control set from Human Protein Atlas</span></span>
-<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5a  Download CDS (coding sequence) FASTAs</span></span>
-<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5b  Extract one CDS per gene</span></span>
-<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5c  Pairwise alignment + % identity + dN/dS for BBB</span></span>
-<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5d  Same for liver control</span></span>
-<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5e  Statistical comparison (Wilcoxon)</span></span>
-<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5f  Recompute dN/dS with codon-aware alignment</span></span>
-<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5g  Multiple testing correction</span></span>
-<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5h  Direct mouse vs macaque comparison</span></span>
-<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setup</span></span>
-<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
-<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
-<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(readr)</span>
-<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
-<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
-<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(knitr)</span>
-<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the working directory to project root</span></span>
-<span id="cb38-61"><a href="#cb38-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust this path if running from a different location</span></span>
-<span id="cb38-62"><a href="#cb38-62" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_knit<span class="sc">$</span><span class="fu">set</span>(<span class="at">root.dir =</span> <span class="st">&quot;..&quot;</span>)</span>
-<span id="cb38-63"><a href="#cb38-63" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-64"><a href="#cb38-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-65"><a href="#cb38-65" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-66"><a href="#cb38-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-67"><a href="#cb38-67" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 1: Master BBB Gene List</span></span>
-<span id="cb38-68"><a href="#cb38-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-69"><a href="#cb38-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Daneman + Munji</span></span>
-<span id="cb38-70"><a href="#cb38-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-71"><a href="#cb38-71" aria-hidden="true" tabindex="-1"></a>Two foundational papers each profiled brain endothelial cells in mouse:</span>
-<span id="cb38-72"><a href="#cb38-72" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-73"><a href="#cb38-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Daneman et al. 2010** — compared brain ECs to peripheral, liver, and lung ECs (supplementary tables S3, S4, S5). The S3 list is the strictest (genes enriched vs both liver AND lung).</span>
-<span id="cb38-74"><a href="#cb38-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Munji et al. 2019** — top CNS endothelial-enriched genes (supplementary table S5).</span>
-<span id="cb38-75"><a href="#cb38-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-76"><a href="#cb38-76" aria-hidden="true" tabindex="-1"></a>Mouse symbols were converted to human HGNC symbols using the <span class="in">`homologene`</span> R package (offline orthologue database). Each gene was tagged by source paper and which Daneman filter it passed (<span class="in">`liver_and_lung`</span>, <span class="in">`liver_only`</span>, or <span class="in">`lung_only`</span>).</span>
-<span id="cb38-77"><a href="#cb38-77" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-78"><a href="#cb38-78" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
-<span id="cb38-79"><a href="#cb38-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-80"><a href="#cb38-80" aria-hidden="true" tabindex="-1"></a><span class="in">```{r master-list}</span></span>
-<span id="cb38-81"><a href="#cb38-81" aria-hidden="true" tabindex="-1"></a>master <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/master_BBB_genelist.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-82"><a href="#cb38-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-83"><a href="#cb38-83" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total genes in master list:&quot;</span>, <span class="fu">nrow</span>(master), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-84"><a href="#cb38-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-85"><a href="#cb38-85" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(master<span class="sc">$</span>Source) <span class="sc">|&gt;</span></span>
-<span id="cb38-86"><a href="#cb38-86" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
-<span id="cb38-87"><a href="#cb38-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Source =</span> Var1, <span class="at">Genes =</span> Freq) <span class="sc">|&gt;</span></span>
-<span id="cb38-88"><a href="#cb38-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
-<span id="cb38-89"><a href="#cb38-89" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-90"><a href="#cb38-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-91"><a href="#cb38-91" aria-hidden="true" tabindex="-1"></a><span class="in">```{r daneman-filter}</span></span>
-<span id="cb38-92"><a href="#cb38-92" aria-hidden="true" tabindex="-1"></a>master <span class="sc">|&gt;</span></span>
-<span id="cb38-93"><a href="#cb38-93" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Daneman_Filter)) <span class="sc">|&gt;</span></span>
-<span id="cb38-94"><a href="#cb38-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Daneman_Filter) <span class="sc">|&gt;</span></span>
-<span id="cb38-95"><a href="#cb38-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Daneman stringency breakdown — `liver_and_lung` is the strictest&quot;</span>)</span>
-<span id="cb38-96"><a href="#cb38-96" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-97"><a href="#cb38-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-98"><a href="#cb38-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why we expanded to S3+S4+S5</span></span>
-<span id="cb38-99"><a href="#cb38-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-100"><a href="#cb38-100" aria-hidden="true" tabindex="-1"></a>Initial work used only the strict S3 list (~545 genes). When we checked, canonical BBB genes like SLC2A1 (GLUT1, the brain glucose transporter) were missing. Reason: S3 demands enrichment vs liver AND lung simultaneously, and SLC2A1 is also expressed in liver endothelium. Including S4 and S5 with stringency tags captured these missing genes while preserving the ability to filter back to S3 for sensitivity analysis.</span>
-<span id="cb38-101"><a href="#cb38-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-102"><a href="#cb38-102" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-103"><a href="#cb38-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-104"><a href="#cb38-104" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 2: Wälchli Single-Cell Expression</span></span>
-<span id="cb38-105"><a href="#cb38-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-106"><a href="#cb38-106" aria-hidden="true" tabindex="-1"></a>The Wälchli 2024 dataset is a Seurat object containing 30,000+ human brain endothelial cells annotated by EC subtype (capillary, arteriole, venule, etc.).</span>
-<span id="cb38-107"><a href="#cb38-107" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-108"><a href="#cb38-108" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
-<span id="cb38-109"><a href="#cb38-109" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-110"><a href="#cb38-110" aria-hidden="true" tabindex="-1"></a>Used Seurat&#39;s <span class="in">`AverageExpression()`</span> to collapse cells into 12 cell-type means. The trickiest part was that the default cell identities were patient ages (15, 19 years) — we had to override with <span class="in">`group.by = &quot;ECclusters&quot;`</span>.</span>
-<span id="cb38-111"><a href="#cb38-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-112"><a href="#cb38-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
-<span id="cb38-113"><a href="#cb38-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-114"><a href="#cb38-114" aria-hidden="true" tabindex="-1"></a><span class="in">```{r walchli}</span></span>
-<span id="cb38-115"><a href="#cb38-115" aria-hidden="true" tabindex="-1"></a>walchli <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/Walchli2024_AverageExpression.csv&quot;</span>,</span>
-<span id="cb38-116"><a href="#cb38-116" aria-hidden="true" tabindex="-1"></a>                    <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-117"><a href="#cb38-117" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-118"><a href="#cb38-118" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Wälchli expression matrix:&quot;</span>, <span class="fu">nrow</span>(walchli), <span class="st">&quot;genes x&quot;</span>,</span>
-<span id="cb38-119"><a href="#cb38-119" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ncol</span>(walchli) <span class="sc">-</span> <span class="dv">1</span>, <span class="st">&quot;cell types</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-120"><a href="#cb38-120" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-121"><a href="#cb38-121" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Cell types:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-122"><a href="#cb38-122" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot;  -&quot;</span>, <span class="fu">colnames</span>(walchli)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
-<span id="cb38-123"><a href="#cb38-123" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-124"><a href="#cb38-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-125"><a href="#cb38-125" aria-hidden="true" tabindex="-1"></a>The Mitochondrial cluster was excluded from downstream analysis as a quality artefact (cells with abnormally high mitochondrial gene content are typically dying or low-quality).</span>
-<span id="cb38-126"><a href="#cb38-126" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-127"><a href="#cb38-127" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-128"><a href="#cb38-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-129"><a href="#cb38-129" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 3 &amp; 3b: Cross-Species Mapping</span></span>
-<span id="cb38-130"><a href="#cb38-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-131"><a href="#cb38-131" aria-hidden="true" tabindex="-1"></a>For DNA conservation analysis, we need a permanent identifier per gene per species — the Ensembl gene ID.</span>
-<span id="cb38-132"><a href="#cb38-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-133"><a href="#cb38-133" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
-<span id="cb38-134"><a href="#cb38-134" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-135"><a href="#cb38-135" aria-hidden="true" tabindex="-1"></a>Three queries to Ensembl BioMart (each one uses a different &quot;attribute page&quot; in BioMart&#39;s data model, so they can&#39;t be combined):</span>
-<span id="cb38-136"><a href="#cb38-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-137"><a href="#cb38-137" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Human gene symbol → human Ensembl ID</span>
-<span id="cb38-138"><a href="#cb38-138" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Human Ensembl ID → mouse orthologue Ensembl ID</span>
-<span id="cb38-139"><a href="#cb38-139" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Human Ensembl ID → macaque orthologue Ensembl ID</span>
-<span id="cb38-140"><a href="#cb38-140" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-141"><a href="#cb38-141" aria-hidden="true" tabindex="-1"></a>Step 3b re-ran this with two extra fields per orthologue:</span>
-<span id="cb38-142"><a href="#cb38-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`orthology_type`</span>: <span class="in">`ortholog_one2one`</span>, <span class="in">`ortholog_one2many`</span>, or <span class="in">`ortholog_many2many`</span></span>
-<span id="cb38-143"><a href="#cb38-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`perc_id`</span>: pre-computed % sequence identity from Ensembl&#39;s own alignments</span>
-<span id="cb38-144"><a href="#cb38-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-145"><a href="#cb38-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
-<span id="cb38-146"><a href="#cb38-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-147"><a href="#cb38-147" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ensembl-map}</span></span>
-<span id="cb38-148"><a href="#cb38-148" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/master_BBB_genelist_complete.csv&quot;</span>,</span>
-<span id="cb38-149"><a href="#cb38-149" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-150"><a href="#cb38-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-151"><a href="#cb38-151" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total rows in master table:&quot;</span>, <span class="fu">nrow</span>(combined), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-152"><a href="#cb38-152" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Human Ensembl IDs:   &quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(combined<span class="sc">$</span>HumanEnsembl)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-153"><a href="#cb38-153" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Mouse orthologues:   &quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(combined<span class="sc">$</span>MouseEnsembl)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-154"><a href="#cb38-154" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Macaque orthologues: &quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(combined<span class="sc">$</span>MacaqueEnsembl)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-155"><a href="#cb38-155" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-156"><a href="#cb38-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-157"><a href="#cb38-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{r orthology-types}</span></span>
-<span id="cb38-158"><a href="#cb38-158" aria-hidden="true" tabindex="-1"></a>combined <span class="sc">|&gt;</span></span>
-<span id="cb38-159"><a href="#cb38-159" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Mouse_OrthoType)) <span class="sc">|&gt;</span></span>
-<span id="cb38-160"><a href="#cb38-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Mouse_OrthoType) <span class="sc">|&gt;</span></span>
-<span id="cb38-161"><a href="#cb38-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Mouse orthologue type distribution&quot;</span>)</span>
-<span id="cb38-162"><a href="#cb38-162" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-163"><a href="#cb38-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-164"><a href="#cb38-164" aria-hidden="true" tabindex="-1"></a>The 1,724 rows (vs 1,526 input genes) reflects the one-to-many cases — for example, human ABCB1 maps to both mouse Abcb1a *and* Abcb1b. Both rows are kept and flagged.</span>
-<span id="cb38-165"><a href="#cb38-165" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-166"><a href="#cb38-166" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-167"><a href="#cb38-167" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-168"><a href="#cb38-168" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 4b: Human EC Validation</span></span>
-<span id="cb38-169"><a href="#cb38-169" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-170"><a href="#cb38-170" aria-hidden="true" tabindex="-1"></a>The master list came from mouse studies. We needed to check which genes are also expressed in human brain endothelium.</span>
-<span id="cb38-171"><a href="#cb38-171" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-172"><a href="#cb38-172" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
-<span id="cb38-173"><a href="#cb38-173" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-174"><a href="#cb38-174" aria-hidden="true" tabindex="-1"></a>Three independent human datasets:</span>
-<span id="cb38-175"><a href="#cb38-175" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Wälchli 2024** — full expression matrix; gene &quot;validated&quot; if expressed &gt; 0 in any EC cluster</span>
-<span id="cb38-176"><a href="#cb38-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Yang 2022** — 112-gene endothelial subtype marker list</span>
-<span id="cb38-177"><a href="#cb38-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Winkler 2022** — large brain vascular atlas EC marker list</span>
-<span id="cb38-178"><a href="#cb38-178" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-179"><a href="#cb38-179" aria-hidden="true" tabindex="-1"></a>Each gene gets binary flags + a count (0–3) indicating how many datasets confirm it.</span>
-<span id="cb38-180"><a href="#cb38-180" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-181"><a href="#cb38-181" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
-<span id="cb38-182"><a href="#cb38-182" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-183"><a href="#cb38-183" aria-hidden="true" tabindex="-1"></a><span class="in">```{r validation}</span></span>
-<span id="cb38-184"><a href="#cb38-184" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/master_BBB_genelist_complete.csv&quot;</span>,</span>
-<span id="cb38-185"><a href="#cb38-185" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-186"><a href="#cb38-186" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-187"><a href="#cb38-187" aria-hidden="true" tabindex="-1"></a>combined <span class="sc">|&gt;</span></span>
-<span id="cb38-188"><a href="#cb38-188" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Human_BBB_Datasets_N) <span class="sc">|&gt;</span></span>
-<span id="cb38-189"><a href="#cb38-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at"># datasets confirming</span><span class="st">`</span> <span class="ot">=</span> Human_BBB_Datasets_N, <span class="at">Genes =</span> n) <span class="sc">|&gt;</span></span>
-<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Human EC validation score distribution&quot;</span>)</span>
-<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-193"><a href="#cb38-193" aria-hidden="true" tabindex="-1"></a>74 genes have zero human EC evidence — these came purely from mouse data. Worth flagging.</span>
-<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-195"><a href="#cb38-195" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-196"><a href="#cb38-196" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-197"><a href="#cb38-197" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 4c: Liver Control Gene Set</span></span>
-<span id="cb38-198"><a href="#cb38-198" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-199"><a href="#cb38-199" aria-hidden="true" tabindex="-1"></a>We needed a non-BBB gene set for comparison. Random matched samples are unbiased but uninformative. Liver was chosen because it&#39;s a metabolically active, highly conserved tissue — providing a meaningful baseline.</span>
-<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
-<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a>Downloaded the Human Protein Atlas RNA tissue consensus file. Filtered for genes with liver nTPM ≥ 10 (meaningfully expressed) that are NOT in the BBB master list.</span>
-<span id="cb38-204"><a href="#cb38-204" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
-<span id="cb38-206"><a href="#cb38-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-207"><a href="#cb38-207" aria-hidden="true" tabindex="-1"></a><span class="in">```{r liver}</span></span>
-<span id="cb38-208"><a href="#cb38-208" aria-hidden="true" tabindex="-1"></a>liver <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/liver_control_genelist.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-209"><a href="#cb38-209" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Liver control set:&quot;</span>, <span class="fu">nrow</span>(liver), <span class="st">&quot;genes</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-210"><a href="#cb38-210" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Liver nTPM — median:&quot;</span>, <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>Liver_nTPM), <span class="dv">1</span>),</span>
-<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; mean:&quot;</span>, <span class="fu">round</span>(<span class="fu">mean</span>(liver<span class="sc">$</span>Liver_nTPM), <span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-214"><a href="#cb38-214" aria-hidden="true" tabindex="-1"></a>Landmark liver genes (ALB at 198,523 nTPM — albumin, the most liver-specific gene; CYP3A4, APOB, TTR) all confirmed present.</span>
-<span id="cb38-215"><a href="#cb38-215" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-216"><a href="#cb38-216" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-217"><a href="#cb38-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5a-b: Coding Sequence Extraction</span></span>
-<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a>To compare DNA at the gene level, we need the actual coding sequence (CDS) per gene per species.</span>
-<span id="cb38-221"><a href="#cb38-221" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-222"><a href="#cb38-222" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
-<span id="cb38-223"><a href="#cb38-223" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-224"><a href="#cb38-224" aria-hidden="true" tabindex="-1"></a>Downloaded Ensembl&#39;s pre-extracted CDS FASTA files (~20 MB per species — much smaller than full genome FASTAs). For each gene with multiple transcripts (alternative splicing), we kept the longest CDS.</span>
-<span id="cb38-225"><a href="#cb38-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Note on alternatives:** A more rigorous approach uses **Ensembl Canonical / MANE Select** transcripts — one curated canonical transcript per gene, designated by NCBI + EMBL-EBI. The script </span><span class="in">`step5b_alt_canonical_transcripts.R`</span><span class="at"> produces canonical-only FASTAs that can be swapped in. Same compute cost, more standard — recommended for publication-grade work.</span></span>
-<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cds-stats}</span></span>
-<span id="cb38-229"><a href="#cb38-229" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span>
-<span id="cb38-230"><a href="#cb38-230" aria-hidden="true" tabindex="-1"></a>bbb_human <span class="ot">&lt;-</span> <span class="fu">readDNAStringSet</span>(<span class="st">&quot;genomes/cds_BBB_human.fa&quot;</span>)</span>
-<span id="cb38-231"><a href="#cb38-231" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Human BBB CDS sequences:&quot;</span>, <span class="fu">length</span>(bbb_human), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-232"><a href="#cb38-232" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Length: median =&quot;</span>, <span class="fu">as.integer</span>(<span class="fu">median</span>(<span class="fu">width</span>(bbb_human))), <span class="st">&quot;bp</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-233"><a href="#cb38-233" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;        mean   =&quot;</span>, <span class="fu">as.integer</span>(<span class="fu">mean</span>(<span class="fu">width</span>(bbb_human))), <span class="st">&quot;bp</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
-<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-238"><a href="#cb38-238" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5c-d: Conservation Scoring</span></span>
-<span id="cb38-239"><a href="#cb38-239" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-240"><a href="#cb38-240" aria-hidden="true" tabindex="-1"></a>For each gene with orthologues across species, we did:</span>
-<span id="cb38-241"><a href="#cb38-241" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-242"><a href="#cb38-242" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Pairwise global alignment** (Needleman-Wunsch via <span class="in">`pwalign::pairwiseAlignment`</span>)</span>
-<span id="cb38-243"><a href="#cb38-243" aria-hidden="true" tabindex="-1"></a>   Match +1, mismatch −1, gap opening −5, gap extension −2.</span>
-<span id="cb38-244"><a href="#cb38-244" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**% nucleotide identity** = matches / alignment length.</span>
-<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**dN/dS** via <span class="in">`seqinr::kaks()`</span> (initial version; corrected in Step 5f).</span>
-<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why global alignment</span></span>
-<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a>These are orthologous genes — they should align end-to-end. Local alignment would only find the most similar segment, which would over-estimate similarity for genes that diverge at the edges.</span>
-<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why % identity AND dN/dS</span></span>
-<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**% identity** is the simple &quot;how similar are the letters&quot; measure. Easy to interpret.</span>
-<span id="cb38-254"><a href="#cb38-254" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**dN/dS** distinguishes neutral drift from selection: how often do mutations *change the protein* (non-synonymous, dN) vs leave it unchanged (synonymous, dS). dN/dS &lt;&lt; 1 means evolution is removing protein-changing mutations (purifying selection — gene is being protected).</span>
-<span id="cb38-255"><a href="#cb38-255" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5e-g: Statistical Comparison + dN/dS Fix</span></span>
-<span id="cb38-259"><a href="#cb38-259" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-260"><a href="#cb38-260" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5e: First-pass statistics</span></span>
-<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-262"><a href="#cb38-262" aria-hidden="true" tabindex="-1"></a>Wilcoxon rank-sum tests (non-parametric — % identity is bounded between 0 and 100, often skewed). Stratified analyses by Daneman filter, validation score, and orthologue type.</span>
-<span id="cb38-263"><a href="#cb38-263" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5f: dN/dS recomputation</span></span>
-<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a>A subtle methodological problem: <span class="in">`seqinr::kaks()`</span> assumes the two input sequences are already codon-aligned (same length, same reading frame). We were passing trimmed but unaligned sequences. For closely related species this barely matters, but for divergent ones (human vs mouse) it inflates dN/dS.</span>
-<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a>**The fix:** translate both nucleotide sequences to protein → align the proteins → use the protein alignment to back-map codons → strip codon columns containing gaps → pass the cleaned codon-aligned pair to <span class="in">`seqinr::kaks()`</span>.</span>
-<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a>The corrected dN/dS values are systematically lower (the bug was inflating them similarly for both BBB and liver), but the *relative pattern* between BBB and liver is preserved and cleaner.</span>
-<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5g: Multiple testing correction</span></span>
-<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a>Bonferroni and FDR (Benjamini-Hochberg) applied to the four primary BBB-vs-liver comparisons. Stratified subgroup tests are reported but flagged as exploratory.</span>
-<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final results</span></span>
-<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a><span class="in">```{r v2-results}</span></span>
-<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/conservation_scores_combined_v2.csv&quot;</span>,</span>
-<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a>               <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-282"><a href="#cb38-282" aria-hidden="true" tabindex="-1"></a>bbb   <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Gene_Set <span class="sc">==</span> <span class="st">&quot;BBB&quot;</span>, ]</span>
-<span id="cb38-283"><a href="#cb38-283" aria-hidden="true" tabindex="-1"></a>liver <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Gene_Set <span class="sc">==</span> <span class="st">&quot;Liver_Control&quot;</span>, ]</span>
-<span id="cb38-284"><a href="#cb38-284" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-285"><a href="#cb38-285" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb38-286"><a href="#cb38-286" aria-hidden="true" tabindex="-1"></a>  <span class="at">Comparison =</span> <span class="fu">c</span>(<span class="st">&quot;Human vs Mouse — % identity&quot;</span>,</span>
-<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human vs Macaque — % identity&quot;</span>,</span>
-<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human vs Mouse — dN/dS (corrected)&quot;</span>,</span>
-<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human vs Macaque — dN/dS (corrected)&quot;</span>),</span>
-<span id="cb38-290"><a href="#cb38-290" aria-hidden="true" tabindex="-1"></a>  <span class="at">BBB_median =</span> <span class="fu">c</span>(</span>
-<span id="cb38-291"><a href="#cb38-291" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Mouse, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">2</span>),</span>
-<span id="cb38-292"><a href="#cb38-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">2</span>),</span>
-<span id="cb38-293"><a href="#cb38-293" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>dNdS_Human_Mouse_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">3</span>),</span>
-<span id="cb38-294"><a href="#cb38-294" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>dNdS_Human_Macaque_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">3</span>)</span>
-<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb38-296"><a href="#cb38-296" aria-hidden="true" tabindex="-1"></a>  <span class="at">Liver_median =</span> <span class="fu">c</span>(</span>
-<span id="cb38-297"><a href="#cb38-297" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>PctId_Human_Mouse, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">2</span>),</span>
-<span id="cb38-298"><a href="#cb38-298" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>PctId_Human_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">2</span>),</span>
-<span id="cb38-299"><a href="#cb38-299" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>dNdS_Human_Mouse_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">3</span>),</span>
-<span id="cb38-300"><a href="#cb38-300" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>dNdS_Human_Macaque_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">3</span>)</span>
-<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a>  )</span>
-<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results, <span class="at">caption =</span> <span class="st">&quot;BBB vs liver conservation — final corrected values&quot;</span>)</span>
-<span id="cb38-304"><a href="#cb38-304" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-305"><a href="#cb38-305" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-306"><a href="#cb38-306" aria-hidden="true" tabindex="-1"></a><span class="in">```{r v2-pid-plot, fig.cap=&quot;Distribution of % nucleotide identity&quot;}</span></span>
-<span id="cb38-307"><a href="#cb38-307" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb38-308"><a href="#cb38-308" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_Set, PctId_Human_Mouse, PctId_Human_Macaque) <span class="sc">|&gt;</span></span>
-<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Gene_Set, <span class="at">names_to =</span> <span class="st">&quot;Comparison&quot;</span>,</span>
-<span id="cb38-310"><a href="#cb38-310" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">&quot;PctIdentity&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb38-311"><a href="#cb38-311" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PctIdentity)) <span class="sc">|&gt;</span></span>
-<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Comparison =</span> <span class="fu">sub</span>(<span class="st">&quot;PctId_&quot;</span>, <span class="st">&quot;&quot;</span>, Comparison),</span>
-<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a>         <span class="at">Comparison =</span> <span class="fu">sub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; vs &quot;</span>, Comparison))</span>
-<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-315"><a href="#cb38-315" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> PctIdentity, <span class="at">fill =</span> Gene_Set)) <span class="sc">+</span></span>
-<span id="cb38-316"><a href="#cb38-316" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb38-317"><a href="#cb38-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Comparison) <span class="sc">+</span></span>
-<span id="cb38-318"><a href="#cb38-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;BBB&quot;</span> <span class="ot">=</span> <span class="st">&quot;#d62728&quot;</span>, <span class="st">&quot;Liver_Control&quot;</span> <span class="ot">=</span> <span class="st">&quot;#1f77b4&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb38-319"><a href="#cb38-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;% nucleotide identity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>,</span>
-<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;BBB vs Liver: distribution of % identity&quot;</span>,</span>
-<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Gene set&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-324"><a href="#cb38-324" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a><span class="in">```{r v2-dnds-plot, fig.cap=&quot;Distribution of dN/dS (codon-aligned)&quot;}</span></span>
-<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a>df_dnds <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
-<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_Set, dNdS_Human_Mouse_v2, dNdS_Human_Macaque_v2) <span class="sc">|&gt;</span></span>
-<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Gene_Set, <span class="at">names_to =</span> <span class="st">&quot;Comparison&quot;</span>,</span>
-<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">&quot;dNdS&quot;</span>) <span class="sc">|&gt;</span></span>
-<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dNdS), dNdS <span class="sc">&lt;</span> <span class="dv">2</span>)  <span class="co"># cap extreme values for readability</span></span>
-<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_dnds, <span class="fu">aes</span>(<span class="at">x =</span> dNdS, <span class="at">fill =</span> Gene_Set)) <span class="sc">+</span></span>
-<span id="cb38-333"><a href="#cb38-333" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
-<span id="cb38-334"><a href="#cb38-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Comparison) <span class="sc">+</span></span>
-<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;BBB&quot;</span> <span class="ot">=</span> <span class="st">&quot;#d62728&quot;</span>, <span class="st">&quot;Liver_Control&quot;</span> <span class="ot">=</span> <span class="st">&quot;#1f77b4&quot;</span>)) <span class="sc">+</span></span>
-<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dN/dS (codon-aligned)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>,</span>
-<span id="cb38-337"><a href="#cb38-337" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;BBB vs Liver: distribution of dN/dS&quot;</span>,</span>
-<span id="cb38-338"><a href="#cb38-338" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Gene set&quot;</span>) <span class="sc">+</span></span>
-<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
-<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5h: The Three-Species Triangle</span></span>
-<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a>Earlier comparisons all used human as the reference. To answer the original question — *how similar are the three species across BBB genes?* — we needed the third side of the triangle: mouse vs macaque directly.</span>
-<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a><span class="in">```{r triangle}</span></span>
-<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a>mm <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/conservation_scores_mouse_macaque.csv&quot;</span>,</span>
-<span id="cb38-350"><a href="#cb38-350" aria-hidden="true" tabindex="-1"></a>               <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
-<span id="cb38-351"><a href="#cb38-351" aria-hidden="true" tabindex="-1"></a>mm_bbb <span class="ot">&lt;-</span> mm[mm<span class="sc">$</span>Gene_Set <span class="sc">==</span> <span class="st">&quot;BBB&quot;</span>, ]</span>
-<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a>triangle <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
-<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a>  <span class="at">Comparison =</span> <span class="fu">c</span>(<span class="st">&quot;Human  vs Mouse&quot;</span>,</span>
-<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human  vs Macaque&quot;</span>,</span>
-<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Mouse  vs Macaque&quot;</span>),</span>
-<span id="cb38-357"><a href="#cb38-357" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Median % identity (BBB genes)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
-<span id="cb38-358"><a href="#cb38-358" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Mouse, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
-<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
-<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(mm_bbb<span class="sc">$</span>PctId_Mouse_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="dv">1</span>)</span>
-<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a>  ),</span>
-<span id="cb38-362"><a href="#cb38-362" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
-<span id="cb38-363"><a href="#cb38-363" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb38-364"><a href="#cb38-364" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(triangle)</span>
-<span id="cb38-365"><a href="#cb38-365" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-366"><a href="#cb38-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-367"><a href="#cb38-367" aria-hidden="true" tabindex="-1"></a>This gives the complete picture of evolutionary distance for BBB genes across the three species:</span>
-<span id="cb38-368"><a href="#cb38-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-369"><a href="#cb38-369" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-370"><a href="#cb38-370" aria-hidden="true" tabindex="-1"></a><span class="in">                Human</span></span>
-<span id="cb38-371"><a href="#cb38-371" aria-hidden="true" tabindex="-1"></a><span class="in">              /        \</span></span>
-<span id="cb38-372"><a href="#cb38-372" aria-hidden="true" tabindex="-1"></a><span class="in">          84.1%        96.8%</span></span>
-<span id="cb38-373"><a href="#cb38-373" aria-hidden="true" tabindex="-1"></a><span class="in">            /              \</span></span>
-<span id="cb38-374"><a href="#cb38-374" aria-hidden="true" tabindex="-1"></a><span class="in">        Mouse  ── 82.6% ── Macaque</span></span>
-<span id="cb38-375"><a href="#cb38-375" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb38-376"><a href="#cb38-376" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-377"><a href="#cb38-377" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-378"><a href="#cb38-378" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-379"><a href="#cb38-379" aria-hidden="true" tabindex="-1"></a><span class="fu"># Results and Interpretation</span></span>
-<span id="cb38-380"><a href="#cb38-380" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-381"><a href="#cb38-381" aria-hidden="true" tabindex="-1"></a><span class="fu">## Headline findings</span></span>
-<span id="cb38-382"><a href="#cb38-382" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-383"><a href="#cb38-383" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Macaque is the closest model to human BBB.** 96.8% nucleotide identity at the coding-sequence level. Strong support for using macaque as a translational model.</span>
-<span id="cb38-384"><a href="#cb38-384" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-385"><a href="#cb38-385" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Mouse is more divergent (84.1%) but still highly conserved.** Mouse models remain biologically defensible, but expect ~16% sequence divergence. Where mouse and human BBB phenotypes differ in a clinical setting, this divergence is one possible explanation.</span>
-<span id="cb38-386"><a href="#cb38-386" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-387"><a href="#cb38-387" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**BBB genes are under stronger purifying selection than liver genes** — but only visibly so in the human-macaque comparison (BBB dN/dS 0.152 vs Liver 0.196, p &lt; 10⁻⁶ after Bonferroni correction). The signal washes out in mouse-human comparisons because all genes have accumulated extensive change at that distance.</span>
-<span id="cb38-388"><a href="#cb38-388" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-389"><a href="#cb38-389" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Gene duplication produces dramatic divergence.** Paralogous mouse genes (e.g. Abcb1a + Abcb1b for human ABCB1) are only 47% identical to their human counterpart, vs 85% for one-to-one orthologues. Effect size is huge (rank-biserial r = 0.72). Both paralogue rows are reported and flagged.</span>
-<span id="cb38-390"><a href="#cb38-390" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-391"><a href="#cb38-391" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Conservation and human BBB expression are independent.** A gene&#39;s <span class="in">`Human_BBB_Datasets_N`</span> score (0–3) does not predict how conserved it is. These are two different aspects of gene importance.</span>
-<span id="cb38-392"><a href="#cb38-392" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-393"><a href="#cb38-393" aria-hidden="true" tabindex="-1"></a><span class="fu">## Biological interpretation</span></span>
-<span id="cb38-394"><a href="#cb38-394" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-395"><a href="#cb38-395" aria-hidden="true" tabindex="-1"></a>The strong purifying selection on BBB genes makes biological sense. The BBB controls what enters and exits the brain — broken transporters or tight junctions would let toxins in or block essential nutrients. Evolution actively removes protein-changing mutations from these genes, more aggressively than for liver genes (which can tolerate more variation because the liver as a system is more redundant and regenerative).</span>
-<span id="cb38-396"><a href="#cb38-396" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-397"><a href="#cb38-397" aria-hidden="true" tabindex="-1"></a>The fact that this signal is most visible in the human-macaque comparison rather than the deeper human-mouse comparison reflects evolutionary timescale: subtle differential selection pressure is detectable when species are close enough that not all genes have saturated their substitutions. At greater distances (~80 million years for human-mouse), this fine-grained signal is lost.</span>
-<span id="cb38-398"><a href="#cb38-398" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-399"><a href="#cb38-399" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-400"><a href="#cb38-400" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-401"><a href="#cb38-401" aria-hidden="true" tabindex="-1"></a><span class="fu"># Limitations and Future Work</span></span>
-<span id="cb38-402"><a href="#cb38-402" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-403"><a href="#cb38-403" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methodological caveats</span></span>
-<span id="cb38-404"><a href="#cb38-404" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-405"><a href="#cb38-405" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pairwise dN/dS, not phylogenetic.** A more rigorous analysis would use PAML codeml on a multi-species alignment to model the phylogenetic tree explicitly. Discuss with supervisor before publication.</span>
-<span id="cb38-406"><a href="#cb38-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Longest-transcript heuristic.** MANE Select / Ensembl Canonical (see <span class="in">`step5b_alt_canonical_transcripts.R`</span>) is the cleaner choice for publication-grade work. Same compute cost, more standard.</span>
-<span id="cb38-407"><a href="#cb38-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, etc.) should be treated as exploratory.</span>
-<span id="cb38-408"><a href="#cb38-408" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-409"><a href="#cb38-409" aria-hidden="true" tabindex="-1"></a><span class="fu">## Biological caveats</span></span>
-<span id="cb38-410"><a href="#cb38-410" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-411"><a href="#cb38-411" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The starting gene list is enrichment-based.** Daneman and Munji built their lists by comparing brain ECs to other endothelia. CLDN5 (the canonical BBB tight junction protein) is missing because it failed the differential cutoff — it&#39;s expressed in all endothelia. Other broadly endothelial BBB-relevant genes may be similarly absent.</span>
-<span id="cb38-412"><a href="#cb38-412" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Liver is one specific control choice.** A different control (brain non-BBB genes, or genes matched on protein domain) could give a different picture.</span>
-<span id="cb38-413"><a href="#cb38-413" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most expression-level cross-species differences live — were deliberately excluded.</span>
-<span id="cb38-414"><a href="#cb38-414" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-415"><a href="#cb38-415" aria-hidden="true" tabindex="-1"></a><span class="fu">## Future extensions</span></span>
-<span id="cb38-416"><a href="#cb38-416" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-417"><a href="#cb38-417" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**PAML codeml** for proper phylogenetic dN/dS.</span>
-<span id="cb38-418"><a href="#cb38-418" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Promoter sequence comparison** (~2 kb upstream of TSS) to test regulatory divergence.</span>
-<span id="cb38-419"><a href="#cb38-419" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**MANE Select transcripts** (the alternative path is already scripted).</span>
-<span id="cb38-420"><a href="#cb38-420" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Brain non-BBB genes** as a complementary control set.</span>
-<span id="cb38-421"><a href="#cb38-421" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Bring in the Giger macaque dataset** to ask whether the most-conserved BBB genes are also the most highly expressed in macaque endothelium.</span>
-<span id="cb38-422"><a href="#cb38-422" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-423"><a href="#cb38-423" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-424"><a href="#cb38-424" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-425"><a href="#cb38-425" aria-hidden="true" tabindex="-1"></a><span class="fu"># AI Transparency</span></span>
-<span id="cb38-426"><a href="#cb38-426" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-427"><a href="#cb38-427" aria-hidden="true" tabindex="-1"></a>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.</span>
-<span id="cb38-428"><a href="#cb38-428" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-429"><a href="#cb38-429" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-430"><a href="#cb38-430" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-431"><a href="#cb38-431" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
-<span id="cb38-432"><a href="#cb38-432" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-433"><a href="#cb38-433" aria-hidden="true" tabindex="-1"></a>Datasets:</span>
-<span id="cb38-434"><a href="#cb38-434" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-435"><a href="#cb38-435" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Daneman R, et al. (2010). The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.</span>
-<span id="cb38-436"><a href="#cb38-436" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Munji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892-1902.</span>
-<span id="cb38-437"><a href="#cb38-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. *Nature* 614: 945-954.</span>
-<span id="cb38-438"><a href="#cb38-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Yang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer&#39;s risk. *Nature* 603: 885-892.</span>
-<span id="cb38-439"><a href="#cb38-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Winkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.</span>
-<span id="cb38-440"><a href="#cb38-440" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-441"><a href="#cb38-441" aria-hidden="true" tabindex="-1"></a>Tools:</span>
-<span id="cb38-442"><a href="#cb38-442" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-443"><a href="#cb38-443" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensembl release 113. https://www.ensembl.org</span>
-<span id="cb38-444"><a href="#cb38-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>BioMart (<span class="in">`biomaRt`</span> R package).</span>
-<span id="cb38-445"><a href="#cb38-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human Protein Atlas. https://www.proteinatlas.org</span>
-<span id="cb38-446"><a href="#cb38-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bioconductor: <span class="in">`Biostrings`</span>, <span class="in">`pwalign`</span>, <span class="in">`seqinr`</span>.</span>
-<span id="cb38-447"><a href="#cb38-447" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-448"><a href="#cb38-448" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb38-449"><a href="#cb38-449" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb38-450"><a href="#cb38-450" aria-hidden="true" tabindex="-1"></a>*Render this document with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root. Outputs an HTML file you can open in any browser.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
+<span id="cb38-13"><a href="#cb38-13" aria-hidden="true" tabindex="-1"></a><span class="co">    output-file: index.html</span></span>
+<span id="cb38-14"><a href="#cb38-14" aria-hidden="true" tabindex="-1"></a><span class="co">  pdf:</span></span>
+<span id="cb38-15"><a href="#cb38-15" aria-hidden="true" tabindex="-1"></a><span class="co">    toc: true</span></span>
+<span id="cb38-16"><a href="#cb38-16" aria-hidden="true" tabindex="-1"></a><span class="an">execute:</span></span>
+<span id="cb38-17"><a href="#cb38-17" aria-hidden="true" tabindex="-1"></a><span class="co">  warning: false</span></span>
+<span id="cb38-18"><a href="#cb38-18" aria-hidden="true" tabindex="-1"></a><span class="co">  message: false</span></span>
+<span id="cb38-19"><a href="#cb38-19" aria-hidden="true" tabindex="-1"></a><span class="co">  cache: true</span></span>
+<span id="cb38-20"><a href="#cb38-20" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb38-21"><a href="#cb38-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-22"><a href="#cb38-22" aria-hidden="true" tabindex="-1"></a><span class="fu"># Introduction</span></span>
+<span id="cb38-23"><a href="#cb38-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-24"><a href="#cb38-24" aria-hidden="true" tabindex="-1"></a>This document walks through the full pipeline of a project that asks a single biological question:</span>
+<span id="cb38-25"><a href="#cb38-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-26"><a href="#cb38-26" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Are the genes that make up the blood-brain barrier (BBB) conserved across human, mouse, and macaque — and if so, by how much?**</span></span>
+<span id="cb38-27"><a href="#cb38-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-28"><a href="#cb38-28" aria-hidden="true" tabindex="-1"></a>The motivation: nearly every drug developed to cross or bypass the BBB is first tested in mice. If mouse BBB genes look very different from human BBB genes at the DNA level, that pipeline is on shaky ground. If they look similar, mouse models are scientifically defensible. Macaque is included as a primate intermediate — closer to human evolutionarily, expensive but rigorous as a model.</span>
+<span id="cb38-29"><a href="#cb38-29" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-30"><a href="#cb38-30" aria-hidden="true" tabindex="-1"></a>The full pipeline runs entirely in R with publicly available data. This tutorial shows each step with the code that ran, the data it produced, and what to make of it.</span>
+<span id="cb38-31"><a href="#cb38-31" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-32"><a href="#cb38-32" aria-hidden="true" tabindex="-1"></a><span class="fu">## Pipeline at a glance</span></span>
+<span id="cb38-33"><a href="#cb38-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-34"><a href="#cb38-34" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-35"><a href="#cb38-35" aria-hidden="true" tabindex="-1"></a><span class="in">Step 1   Build master BBB gene list (Daneman + Munji)</span></span>
+<span id="cb38-36"><a href="#cb38-36" aria-hidden="true" tabindex="-1"></a><span class="in">Step 2   Process Wälchli single-cell EC expression</span></span>
+<span id="cb38-37"><a href="#cb38-37" aria-hidden="true" tabindex="-1"></a><span class="in">Step 3   Map gene symbols → Ensembl IDs (3 species)</span></span>
+<span id="cb38-38"><a href="#cb38-38" aria-hidden="true" tabindex="-1"></a><span class="in">Step 3b  Add orthology confidence (type + % identity)</span></span>
+<span id="cb38-39"><a href="#cb38-39" aria-hidden="true" tabindex="-1"></a><span class="in">Step 4b  Cross-reference against human EC datasets</span></span>
+<span id="cb38-40"><a href="#cb38-40" aria-hidden="true" tabindex="-1"></a><span class="in">Step 4c  Build liver control set from Human Protein Atlas</span></span>
+<span id="cb38-41"><a href="#cb38-41" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5a  Download CDS (coding sequence) FASTAs</span></span>
+<span id="cb38-42"><a href="#cb38-42" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5b  Extract one CDS per gene</span></span>
+<span id="cb38-43"><a href="#cb38-43" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5c  Pairwise alignment + % identity + dN/dS for BBB</span></span>
+<span id="cb38-44"><a href="#cb38-44" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5d  Same for liver control</span></span>
+<span id="cb38-45"><a href="#cb38-45" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5e  Statistical comparison (Wilcoxon)</span></span>
+<span id="cb38-46"><a href="#cb38-46" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5f  Recompute dN/dS with codon-aware alignment</span></span>
+<span id="cb38-47"><a href="#cb38-47" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5g  Multiple testing correction</span></span>
+<span id="cb38-48"><a href="#cb38-48" aria-hidden="true" tabindex="-1"></a><span class="in">Step 5h  Direct mouse vs macaque comparison</span></span>
+<span id="cb38-49"><a href="#cb38-49" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-50"><a href="#cb38-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-51"><a href="#cb38-51" aria-hidden="true" tabindex="-1"></a><span class="fu">## Setup</span></span>
+<span id="cb38-52"><a href="#cb38-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-53"><a href="#cb38-53" aria-hidden="true" tabindex="-1"></a><span class="in">```{r setup}</span></span>
+<span id="cb38-54"><a href="#cb38-54" aria-hidden="true" tabindex="-1"></a><span class="fu">suppressPackageStartupMessages</span>({</span>
+<span id="cb38-55"><a href="#cb38-55" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(readr)</span>
+<span id="cb38-56"><a href="#cb38-56" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(dplyr)</span>
+<span id="cb38-57"><a href="#cb38-57" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(ggplot2)</span>
+<span id="cb38-58"><a href="#cb38-58" aria-hidden="true" tabindex="-1"></a>  <span class="fu">library</span>(knitr)</span>
+<span id="cb38-59"><a href="#cb38-59" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb38-60"><a href="#cb38-60" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-61"><a href="#cb38-61" aria-hidden="true" tabindex="-1"></a><span class="co"># Set the working directory to project root</span></span>
+<span id="cb38-62"><a href="#cb38-62" aria-hidden="true" tabindex="-1"></a><span class="co"># Adjust this path if running from a different location</span></span>
+<span id="cb38-63"><a href="#cb38-63" aria-hidden="true" tabindex="-1"></a>knitr<span class="sc">::</span>opts_knit<span class="sc">$</span><span class="fu">set</span>(<span class="at">root.dir =</span> <span class="st">&quot;..&quot;</span>)</span>
+<span id="cb38-64"><a href="#cb38-64" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-65"><a href="#cb38-65" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-66"><a href="#cb38-66" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-67"><a href="#cb38-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-68"><a href="#cb38-68" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 1: Master BBB Gene List</span></span>
+<span id="cb38-69"><a href="#cb38-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-70"><a href="#cb38-70" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why Daneman + Munji</span></span>
+<span id="cb38-71"><a href="#cb38-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-72"><a href="#cb38-72" aria-hidden="true" tabindex="-1"></a>Two foundational papers each profiled brain endothelial cells in mouse:</span>
+<span id="cb38-73"><a href="#cb38-73" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-74"><a href="#cb38-74" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Daneman et al. 2010** — compared brain ECs to peripheral, liver, and lung ECs (supplementary tables S3, S4, S5). The S3 list is the strictest (genes enriched vs both liver AND lung).</span>
+<span id="cb38-75"><a href="#cb38-75" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Munji et al. 2019** — top CNS endothelial-enriched genes (supplementary table S5).</span>
+<span id="cb38-76"><a href="#cb38-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-77"><a href="#cb38-77" aria-hidden="true" tabindex="-1"></a>Mouse symbols were converted to human HGNC symbols using the <span class="in">`homologene`</span> R package (offline orthologue database). Each gene was tagged by source paper and which Daneman filter it passed (<span class="in">`liver_and_lung`</span>, <span class="in">`liver_only`</span>, or <span class="in">`lung_only`</span>).</span>
+<span id="cb38-78"><a href="#cb38-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-79"><a href="#cb38-79" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
+<span id="cb38-80"><a href="#cb38-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-81"><a href="#cb38-81" aria-hidden="true" tabindex="-1"></a><span class="in">```{r master-list}</span></span>
+<span id="cb38-82"><a href="#cb38-82" aria-hidden="true" tabindex="-1"></a>master <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/master_BBB_genelist.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-83"><a href="#cb38-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-84"><a href="#cb38-84" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total genes in master list:&quot;</span>, <span class="fu">nrow</span>(master), <span class="st">&quot;</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-85"><a href="#cb38-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-86"><a href="#cb38-86" aria-hidden="true" tabindex="-1"></a><span class="fu">table</span>(master<span class="sc">$</span>Source) <span class="sc">|&gt;</span></span>
+<span id="cb38-87"><a href="#cb38-87" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as.data.frame</span>() <span class="sc">|&gt;</span></span>
+<span id="cb38-88"><a href="#cb38-88" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="at">Source =</span> Var1, <span class="at">Genes =</span> Freq) <span class="sc">|&gt;</span></span>
+<span id="cb38-89"><a href="#cb38-89" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>()</span>
+<span id="cb38-90"><a href="#cb38-90" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-91"><a href="#cb38-91" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-92"><a href="#cb38-92" aria-hidden="true" tabindex="-1"></a><span class="in">```{r daneman-filter}</span></span>
+<span id="cb38-93"><a href="#cb38-93" aria-hidden="true" tabindex="-1"></a>master <span class="sc">|&gt;</span></span>
+<span id="cb38-94"><a href="#cb38-94" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Daneman_Filter)) <span class="sc">|&gt;</span></span>
+<span id="cb38-95"><a href="#cb38-95" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Daneman_Filter) <span class="sc">|&gt;</span></span>
+<span id="cb38-96"><a href="#cb38-96" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Daneman stringency breakdown — `liver_and_lung` is the strictest&quot;</span>)</span>
+<span id="cb38-97"><a href="#cb38-97" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-98"><a href="#cb38-98" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-99"><a href="#cb38-99" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why we expanded to S3+S4+S5</span></span>
+<span id="cb38-100"><a href="#cb38-100" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-101"><a href="#cb38-101" aria-hidden="true" tabindex="-1"></a>Initial work used only the strict S3 list (~545 genes). When we checked, canonical BBB genes like SLC2A1 (GLUT1, the brain glucose transporter) were missing. Reason: S3 demands enrichment vs liver AND lung simultaneously, and SLC2A1 is also expressed in liver endothelium. Including S4 and S5 with stringency tags captured these missing genes while preserving the ability to filter back to S3 for sensitivity analysis.</span>
+<span id="cb38-102"><a href="#cb38-102" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-103"><a href="#cb38-103" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-104"><a href="#cb38-104" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-105"><a href="#cb38-105" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 2: Wälchli Single-Cell Expression</span></span>
+<span id="cb38-106"><a href="#cb38-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-107"><a href="#cb38-107" aria-hidden="true" tabindex="-1"></a>The Wälchli 2024 dataset is a Seurat object containing 30,000+ human brain endothelial cells annotated by EC subtype (capillary, arteriole, venule, etc.).</span>
+<span id="cb38-108"><a href="#cb38-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-109"><a href="#cb38-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
+<span id="cb38-110"><a href="#cb38-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-111"><a href="#cb38-111" aria-hidden="true" tabindex="-1"></a>Used Seurat&#39;s <span class="in">`AverageExpression()`</span> to collapse cells into 12 cell-type means. The trickiest part was that the default cell identities were patient ages (15, 19 years) — we had to override with <span class="in">`group.by = &quot;ECclusters&quot;`</span>.</span>
+<span id="cb38-112"><a href="#cb38-112" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-113"><a href="#cb38-113" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
+<span id="cb38-114"><a href="#cb38-114" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-115"><a href="#cb38-115" aria-hidden="true" tabindex="-1"></a><span class="in">```{r walchli}</span></span>
+<span id="cb38-116"><a href="#cb38-116" aria-hidden="true" tabindex="-1"></a>walchli <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/Walchli2024_AverageExpression.csv&quot;</span>,</span>
+<span id="cb38-117"><a href="#cb38-117" aria-hidden="true" tabindex="-1"></a>                    <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-118"><a href="#cb38-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-119"><a href="#cb38-119" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Wälchli expression matrix:&quot;</span>, <span class="fu">nrow</span>(walchli), <span class="st">&quot;genes x&quot;</span>,</span>
+<span id="cb38-120"><a href="#cb38-120" aria-hidden="true" tabindex="-1"></a>    <span class="fu">ncol</span>(walchli) <span class="sc">-</span> <span class="dv">1</span>, <span class="st">&quot;cell types</span><span class="sc">\n\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-121"><a href="#cb38-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-122"><a href="#cb38-122" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Cell types:</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-123"><a href="#cb38-123" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="fu">paste</span>(<span class="st">&quot;  -&quot;</span>, <span class="fu">colnames</span>(walchli)[<span class="sc">-</span><span class="dv">1</span>], <span class="at">collapse =</span> <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>))</span>
+<span id="cb38-124"><a href="#cb38-124" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-125"><a href="#cb38-125" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-126"><a href="#cb38-126" aria-hidden="true" tabindex="-1"></a>The Mitochondrial cluster was excluded from downstream analysis as a quality artefact (cells with abnormally high mitochondrial gene content are typically dying or low-quality).</span>
+<span id="cb38-127"><a href="#cb38-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-128"><a href="#cb38-128" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-129"><a href="#cb38-129" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-130"><a href="#cb38-130" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 3 &amp; 3b: Cross-Species Mapping</span></span>
+<span id="cb38-131"><a href="#cb38-131" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-132"><a href="#cb38-132" aria-hidden="true" tabindex="-1"></a>For DNA conservation analysis, we need a permanent identifier per gene per species — the Ensembl gene ID.</span>
+<span id="cb38-133"><a href="#cb38-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-134"><a href="#cb38-134" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
+<span id="cb38-135"><a href="#cb38-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-136"><a href="#cb38-136" aria-hidden="true" tabindex="-1"></a>Three queries to Ensembl BioMart (each one uses a different &quot;attribute page&quot; in BioMart&#39;s data model, so they can&#39;t be combined):</span>
+<span id="cb38-137"><a href="#cb38-137" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-138"><a href="#cb38-138" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>Human gene symbol → human Ensembl ID</span>
+<span id="cb38-139"><a href="#cb38-139" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>Human Ensembl ID → mouse orthologue Ensembl ID</span>
+<span id="cb38-140"><a href="#cb38-140" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>Human Ensembl ID → macaque orthologue Ensembl ID</span>
+<span id="cb38-141"><a href="#cb38-141" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-142"><a href="#cb38-142" aria-hidden="true" tabindex="-1"></a>Step 3b re-ran this with two extra fields per orthologue:</span>
+<span id="cb38-143"><a href="#cb38-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`orthology_type`</span>: <span class="in">`ortholog_one2one`</span>, <span class="in">`ortholog_one2many`</span>, or <span class="in">`ortholog_many2many`</span></span>
+<span id="cb38-144"><a href="#cb38-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span><span class="in">`perc_id`</span>: pre-computed % sequence identity from Ensembl&#39;s own alignments</span>
+<span id="cb38-145"><a href="#cb38-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-146"><a href="#cb38-146" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
+<span id="cb38-147"><a href="#cb38-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-148"><a href="#cb38-148" aria-hidden="true" tabindex="-1"></a><span class="in">```{r ensembl-map}</span></span>
+<span id="cb38-149"><a href="#cb38-149" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/master_BBB_genelist_complete.csv&quot;</span>,</span>
+<span id="cb38-150"><a href="#cb38-150" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-151"><a href="#cb38-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-152"><a href="#cb38-152" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Total rows in master table:&quot;</span>, <span class="fu">nrow</span>(combined), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-153"><a href="#cb38-153" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Human Ensembl IDs:   &quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(combined<span class="sc">$</span>HumanEnsembl)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-154"><a href="#cb38-154" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Mouse orthologues:   &quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(combined<span class="sc">$</span>MouseEnsembl)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-155"><a href="#cb38-155" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;  Macaque orthologues: &quot;</span>, <span class="fu">sum</span>(<span class="sc">!</span><span class="fu">is.na</span>(combined<span class="sc">$</span>MacaqueEnsembl)), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-156"><a href="#cb38-156" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-157"><a href="#cb38-157" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-158"><a href="#cb38-158" aria-hidden="true" tabindex="-1"></a><span class="in">```{r orthology-types}</span></span>
+<span id="cb38-159"><a href="#cb38-159" aria-hidden="true" tabindex="-1"></a>combined <span class="sc">|&gt;</span></span>
+<span id="cb38-160"><a href="#cb38-160" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(Mouse_OrthoType)) <span class="sc">|&gt;</span></span>
+<span id="cb38-161"><a href="#cb38-161" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Mouse_OrthoType) <span class="sc">|&gt;</span></span>
+<span id="cb38-162"><a href="#cb38-162" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Mouse orthologue type distribution&quot;</span>)</span>
+<span id="cb38-163"><a href="#cb38-163" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-164"><a href="#cb38-164" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-165"><a href="#cb38-165" aria-hidden="true" tabindex="-1"></a>The 1,724 rows (vs 1,526 input genes) reflects the one-to-many cases — for example, human ABCB1 maps to both mouse Abcb1a *and* Abcb1b. Both rows are kept and flagged.</span>
+<span id="cb38-166"><a href="#cb38-166" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-167"><a href="#cb38-167" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-168"><a href="#cb38-168" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-169"><a href="#cb38-169" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 4b: Human EC Validation</span></span>
+<span id="cb38-170"><a href="#cb38-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-171"><a href="#cb38-171" aria-hidden="true" tabindex="-1"></a>The master list came from mouse studies. We needed to check which genes are also expressed in human brain endothelium.</span>
+<span id="cb38-172"><a href="#cb38-172" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-173"><a href="#cb38-173" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
+<span id="cb38-174"><a href="#cb38-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-175"><a href="#cb38-175" aria-hidden="true" tabindex="-1"></a>Three independent human datasets:</span>
+<span id="cb38-176"><a href="#cb38-176" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Wälchli 2024** — full expression matrix; gene &quot;validated&quot; if expressed &gt; 0 in any EC cluster</span>
+<span id="cb38-177"><a href="#cb38-177" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Yang 2022** — 112-gene endothelial subtype marker list</span>
+<span id="cb38-178"><a href="#cb38-178" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Winkler 2022** — large brain vascular atlas EC marker list</span>
+<span id="cb38-179"><a href="#cb38-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-180"><a href="#cb38-180" aria-hidden="true" tabindex="-1"></a>Each gene gets binary flags + a count (0–3) indicating how many datasets confirm it.</span>
+<span id="cb38-181"><a href="#cb38-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-182"><a href="#cb38-182" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
+<span id="cb38-183"><a href="#cb38-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-184"><a href="#cb38-184" aria-hidden="true" tabindex="-1"></a><span class="in">```{r validation}</span></span>
+<span id="cb38-185"><a href="#cb38-185" aria-hidden="true" tabindex="-1"></a>combined <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/master_BBB_genelist_complete.csv&quot;</span>,</span>
+<span id="cb38-186"><a href="#cb38-186" aria-hidden="true" tabindex="-1"></a>                     <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-187"><a href="#cb38-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-188"><a href="#cb38-188" aria-hidden="true" tabindex="-1"></a>combined <span class="sc">|&gt;</span></span>
+<span id="cb38-189"><a href="#cb38-189" aria-hidden="true" tabindex="-1"></a>  <span class="fu">count</span>(Human_BBB_Datasets_N) <span class="sc">|&gt;</span></span>
+<span id="cb38-190"><a href="#cb38-190" aria-hidden="true" tabindex="-1"></a>  <span class="fu">rename</span>(<span class="st">`</span><span class="at"># datasets confirming</span><span class="st">`</span> <span class="ot">=</span> Human_BBB_Datasets_N, <span class="at">Genes =</span> n) <span class="sc">|&gt;</span></span>
+<span id="cb38-191"><a href="#cb38-191" aria-hidden="true" tabindex="-1"></a>  <span class="fu">kable</span>(<span class="at">caption =</span> <span class="st">&quot;Human EC validation score distribution&quot;</span>)</span>
+<span id="cb38-192"><a href="#cb38-192" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-193"><a href="#cb38-193" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-194"><a href="#cb38-194" aria-hidden="true" tabindex="-1"></a>74 genes have zero human EC evidence — these came purely from mouse data. Worth flagging.</span>
+<span id="cb38-195"><a href="#cb38-195" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-196"><a href="#cb38-196" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-197"><a href="#cb38-197" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-198"><a href="#cb38-198" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 4c: Liver Control Gene Set</span></span>
+<span id="cb38-199"><a href="#cb38-199" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-200"><a href="#cb38-200" aria-hidden="true" tabindex="-1"></a>We needed a non-BBB gene set for comparison. Random matched samples are unbiased but uninformative. Liver was chosen because it&#39;s a metabolically active, highly conserved tissue — providing a meaningful baseline.</span>
+<span id="cb38-201"><a href="#cb38-201" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-202"><a href="#cb38-202" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
+<span id="cb38-203"><a href="#cb38-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-204"><a href="#cb38-204" aria-hidden="true" tabindex="-1"></a>Downloaded the Human Protein Atlas RNA tissue consensus file. Filtered for genes with liver nTPM ≥ 10 (meaningfully expressed) that are NOT in the BBB master list.</span>
+<span id="cb38-205"><a href="#cb38-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-206"><a href="#cb38-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Result</span></span>
+<span id="cb38-207"><a href="#cb38-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-208"><a href="#cb38-208" aria-hidden="true" tabindex="-1"></a><span class="in">```{r liver}</span></span>
+<span id="cb38-209"><a href="#cb38-209" aria-hidden="true" tabindex="-1"></a>liver <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/liver_control_genelist.csv&quot;</span>, <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-210"><a href="#cb38-210" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Liver control set:&quot;</span>, <span class="fu">nrow</span>(liver), <span class="st">&quot;genes</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-211"><a href="#cb38-211" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Liver nTPM — median:&quot;</span>, <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>Liver_nTPM), <span class="dv">1</span>),</span>
+<span id="cb38-212"><a href="#cb38-212" aria-hidden="true" tabindex="-1"></a>    <span class="st">&quot; mean:&quot;</span>, <span class="fu">round</span>(<span class="fu">mean</span>(liver<span class="sc">$</span>Liver_nTPM), <span class="dv">1</span>), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-213"><a href="#cb38-213" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-214"><a href="#cb38-214" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-215"><a href="#cb38-215" aria-hidden="true" tabindex="-1"></a>Landmark liver genes (ALB at 198,523 nTPM — albumin, the most liver-specific gene; CYP3A4, APOB, TTR) all confirmed present.</span>
+<span id="cb38-216"><a href="#cb38-216" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-217"><a href="#cb38-217" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-218"><a href="#cb38-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-219"><a href="#cb38-219" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5a-b: Coding Sequence Extraction</span></span>
+<span id="cb38-220"><a href="#cb38-220" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-221"><a href="#cb38-221" aria-hidden="true" tabindex="-1"></a>To compare DNA at the gene level, we need the actual coding sequence (CDS) per gene per species.</span>
+<span id="cb38-222"><a href="#cb38-222" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-223"><a href="#cb38-223" aria-hidden="true" tabindex="-1"></a><span class="fu">## What we did</span></span>
+<span id="cb38-224"><a href="#cb38-224" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-225"><a href="#cb38-225" aria-hidden="true" tabindex="-1"></a>Downloaded Ensembl&#39;s pre-extracted CDS FASTA files (~20 MB per species — much smaller than full genome FASTAs). For each gene with multiple transcripts (alternative splicing), we kept the longest CDS.</span>
+<span id="cb38-226"><a href="#cb38-226" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-227"><a href="#cb38-227" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Note on alternatives:** A more rigorous approach uses **Ensembl Canonical / MANE Select** transcripts — one curated canonical transcript per gene, designated by NCBI + EMBL-EBI. The script </span><span class="in">`step5b_alt_canonical_transcripts.R`</span><span class="at"> produces canonical-only FASTAs that can be swapped in. Same compute cost, more standard — recommended for publication-grade work.</span></span>
+<span id="cb38-228"><a href="#cb38-228" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-229"><a href="#cb38-229" aria-hidden="true" tabindex="-1"></a><span class="in">```{r cds-stats}</span></span>
+<span id="cb38-230"><a href="#cb38-230" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Biostrings)</span>
+<span id="cb38-231"><a href="#cb38-231" aria-hidden="true" tabindex="-1"></a>bbb_human <span class="ot">&lt;-</span> <span class="fu">readDNAStringSet</span>(<span class="st">&quot;genomes/cds_BBB_human.fa&quot;</span>)</span>
+<span id="cb38-232"><a href="#cb38-232" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Human BBB CDS sequences:&quot;</span>, <span class="fu">length</span>(bbb_human), <span class="st">&quot;</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-233"><a href="#cb38-233" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;Length: median =&quot;</span>, <span class="fu">as.integer</span>(<span class="fu">median</span>(<span class="fu">width</span>(bbb_human))), <span class="st">&quot;bp</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-234"><a href="#cb38-234" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">&quot;        mean   =&quot;</span>, <span class="fu">as.integer</span>(<span class="fu">mean</span>(<span class="fu">width</span>(bbb_human))), <span class="st">&quot;bp</span><span class="sc">\n</span><span class="st">&quot;</span>)</span>
+<span id="cb38-235"><a href="#cb38-235" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-236"><a href="#cb38-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-237"><a href="#cb38-237" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-238"><a href="#cb38-238" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-239"><a href="#cb38-239" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5c-d: Conservation Scoring</span></span>
+<span id="cb38-240"><a href="#cb38-240" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-241"><a href="#cb38-241" aria-hidden="true" tabindex="-1"></a>For each gene with orthologues across species, we did:</span>
+<span id="cb38-242"><a href="#cb38-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-243"><a href="#cb38-243" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Pairwise global alignment** (Needleman-Wunsch via <span class="in">`pwalign::pairwiseAlignment`</span>)</span>
+<span id="cb38-244"><a href="#cb38-244" aria-hidden="true" tabindex="-1"></a>   Match +1, mismatch −1, gap opening −5, gap extension −2.</span>
+<span id="cb38-245"><a href="#cb38-245" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**% nucleotide identity** = matches / alignment length.</span>
+<span id="cb38-246"><a href="#cb38-246" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**dN/dS** via <span class="in">`seqinr::kaks()`</span> (initial version; corrected in Step 5f).</span>
+<span id="cb38-247"><a href="#cb38-247" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-248"><a href="#cb38-248" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why global alignment</span></span>
+<span id="cb38-249"><a href="#cb38-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-250"><a href="#cb38-250" aria-hidden="true" tabindex="-1"></a>These are orthologous genes — they should align end-to-end. Local alignment would only find the most similar segment, which would over-estimate similarity for genes that diverge at the edges.</span>
+<span id="cb38-251"><a href="#cb38-251" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-252"><a href="#cb38-252" aria-hidden="true" tabindex="-1"></a><span class="fu">## Why % identity AND dN/dS</span></span>
+<span id="cb38-253"><a href="#cb38-253" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-254"><a href="#cb38-254" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**% identity** is the simple &quot;how similar are the letters&quot; measure. Easy to interpret.</span>
+<span id="cb38-255"><a href="#cb38-255" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**dN/dS** distinguishes neutral drift from selection: how often do mutations *change the protein* (non-synonymous, dN) vs leave it unchanged (synonymous, dS). dN/dS &lt;&lt; 1 means evolution is removing protein-changing mutations (purifying selection — gene is being protected).</span>
+<span id="cb38-256"><a href="#cb38-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-257"><a href="#cb38-257" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-258"><a href="#cb38-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-259"><a href="#cb38-259" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5e-g: Statistical Comparison + dN/dS Fix</span></span>
+<span id="cb38-260"><a href="#cb38-260" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-261"><a href="#cb38-261" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5e: First-pass statistics</span></span>
+<span id="cb38-262"><a href="#cb38-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-263"><a href="#cb38-263" aria-hidden="true" tabindex="-1"></a>Wilcoxon rank-sum tests (non-parametric — % identity is bounded between 0 and 100, often skewed). Stratified analyses by Daneman filter, validation score, and orthologue type.</span>
+<span id="cb38-264"><a href="#cb38-264" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-265"><a href="#cb38-265" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5f: dN/dS recomputation</span></span>
+<span id="cb38-266"><a href="#cb38-266" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-267"><a href="#cb38-267" aria-hidden="true" tabindex="-1"></a>A subtle methodological problem: <span class="in">`seqinr::kaks()`</span> assumes the two input sequences are already codon-aligned (same length, same reading frame). We were passing trimmed but unaligned sequences. For closely related species this barely matters, but for divergent ones (human vs mouse) it inflates dN/dS.</span>
+<span id="cb38-268"><a href="#cb38-268" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-269"><a href="#cb38-269" aria-hidden="true" tabindex="-1"></a>**The fix:** translate both nucleotide sequences to protein → align the proteins → use the protein alignment to back-map codons → strip codon columns containing gaps → pass the cleaned codon-aligned pair to <span class="in">`seqinr::kaks()`</span>.</span>
+<span id="cb38-270"><a href="#cb38-270" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-271"><a href="#cb38-271" aria-hidden="true" tabindex="-1"></a>The corrected dN/dS values are systematically lower (the bug was inflating them similarly for both BBB and liver), but the *relative pattern* between BBB and liver is preserved and cleaner.</span>
+<span id="cb38-272"><a href="#cb38-272" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-273"><a href="#cb38-273" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 5g: Multiple testing correction</span></span>
+<span id="cb38-274"><a href="#cb38-274" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-275"><a href="#cb38-275" aria-hidden="true" tabindex="-1"></a>Bonferroni and FDR (Benjamini-Hochberg) applied to the four primary BBB-vs-liver comparisons. Stratified subgroup tests are reported but flagged as exploratory.</span>
+<span id="cb38-276"><a href="#cb38-276" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-277"><a href="#cb38-277" aria-hidden="true" tabindex="-1"></a><span class="fu">## Final results</span></span>
+<span id="cb38-278"><a href="#cb38-278" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-279"><a href="#cb38-279" aria-hidden="true" tabindex="-1"></a><span class="in">```{r v2-results}</span></span>
+<span id="cb38-280"><a href="#cb38-280" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/conservation_scores_combined_v2.csv&quot;</span>,</span>
+<span id="cb38-281"><a href="#cb38-281" aria-hidden="true" tabindex="-1"></a>               <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-282"><a href="#cb38-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-283"><a href="#cb38-283" aria-hidden="true" tabindex="-1"></a>bbb   <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Gene_Set <span class="sc">==</span> <span class="st">&quot;BBB&quot;</span>, ]</span>
+<span id="cb38-284"><a href="#cb38-284" aria-hidden="true" tabindex="-1"></a>liver <span class="ot">&lt;-</span> df[df<span class="sc">$</span>Gene_Set <span class="sc">==</span> <span class="st">&quot;Liver_Control&quot;</span>, ]</span>
+<span id="cb38-285"><a href="#cb38-285" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-286"><a href="#cb38-286" aria-hidden="true" tabindex="-1"></a>results <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-287"><a href="#cb38-287" aria-hidden="true" tabindex="-1"></a>  <span class="at">Comparison =</span> <span class="fu">c</span>(<span class="st">&quot;Human vs Mouse — % identity&quot;</span>,</span>
+<span id="cb38-288"><a href="#cb38-288" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human vs Macaque — % identity&quot;</span>,</span>
+<span id="cb38-289"><a href="#cb38-289" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human vs Mouse — dN/dS (corrected)&quot;</span>,</span>
+<span id="cb38-290"><a href="#cb38-290" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human vs Macaque — dN/dS (corrected)&quot;</span>),</span>
+<span id="cb38-291"><a href="#cb38-291" aria-hidden="true" tabindex="-1"></a>  <span class="at">BBB_median =</span> <span class="fu">c</span>(</span>
+<span id="cb38-292"><a href="#cb38-292" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Mouse, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">2</span>),</span>
+<span id="cb38-293"><a href="#cb38-293" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">2</span>),</span>
+<span id="cb38-294"><a href="#cb38-294" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>dNdS_Human_Mouse_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">3</span>),</span>
+<span id="cb38-295"><a href="#cb38-295" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>dNdS_Human_Macaque_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">3</span>)</span>
+<span id="cb38-296"><a href="#cb38-296" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb38-297"><a href="#cb38-297" aria-hidden="true" tabindex="-1"></a>  <span class="at">Liver_median =</span> <span class="fu">c</span>(</span>
+<span id="cb38-298"><a href="#cb38-298" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>PctId_Human_Mouse, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">2</span>),</span>
+<span id="cb38-299"><a href="#cb38-299" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>PctId_Human_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">2</span>),</span>
+<span id="cb38-300"><a href="#cb38-300" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>dNdS_Human_Mouse_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),    <span class="dv">3</span>),</span>
+<span id="cb38-301"><a href="#cb38-301" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(liver<span class="sc">$</span>dNdS_Human_Macaque_v2, <span class="at">na.rm=</span><span class="cn">TRUE</span>),  <span class="dv">3</span>)</span>
+<span id="cb38-302"><a href="#cb38-302" aria-hidden="true" tabindex="-1"></a>  )</span>
+<span id="cb38-303"><a href="#cb38-303" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-304"><a href="#cb38-304" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(results, <span class="at">caption =</span> <span class="st">&quot;BBB vs liver conservation — final corrected values&quot;</span>)</span>
+<span id="cb38-305"><a href="#cb38-305" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-306"><a href="#cb38-306" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-307"><a href="#cb38-307" aria-hidden="true" tabindex="-1"></a><span class="in">```{r v2-pid-plot, fig.cap=&quot;Distribution of % nucleotide identity&quot;}</span></span>
+<span id="cb38-308"><a href="#cb38-308" aria-hidden="true" tabindex="-1"></a>df_long <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb38-309"><a href="#cb38-309" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_Set, PctId_Human_Mouse, PctId_Human_Macaque) <span class="sc">|&gt;</span></span>
+<span id="cb38-310"><a href="#cb38-310" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Gene_Set, <span class="at">names_to =</span> <span class="st">&quot;Comparison&quot;</span>,</span>
+<span id="cb38-311"><a href="#cb38-311" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">&quot;PctIdentity&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-312"><a href="#cb38-312" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(PctIdentity)) <span class="sc">|&gt;</span></span>
+<span id="cb38-313"><a href="#cb38-313" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">Comparison =</span> <span class="fu">sub</span>(<span class="st">&quot;PctId_&quot;</span>, <span class="st">&quot;&quot;</span>, Comparison),</span>
+<span id="cb38-314"><a href="#cb38-314" aria-hidden="true" tabindex="-1"></a>         <span class="at">Comparison =</span> <span class="fu">sub</span>(<span class="st">&quot;_&quot;</span>, <span class="st">&quot; vs &quot;</span>, Comparison))</span>
+<span id="cb38-315"><a href="#cb38-315" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-316"><a href="#cb38-316" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_long, <span class="fu">aes</span>(<span class="at">x =</span> PctIdentity, <span class="at">fill =</span> Gene_Set)) <span class="sc">+</span></span>
+<span id="cb38-317"><a href="#cb38-317" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb38-318"><a href="#cb38-318" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Comparison) <span class="sc">+</span></span>
+<span id="cb38-319"><a href="#cb38-319" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;BBB&quot;</span> <span class="ot">=</span> <span class="st">&quot;#d62728&quot;</span>, <span class="st">&quot;Liver_Control&quot;</span> <span class="ot">=</span> <span class="st">&quot;#1f77b4&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb38-320"><a href="#cb38-320" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;% nucleotide identity&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>,</span>
+<span id="cb38-321"><a href="#cb38-321" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;BBB vs Liver: distribution of % identity&quot;</span>,</span>
+<span id="cb38-322"><a href="#cb38-322" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Gene set&quot;</span>) <span class="sc">+</span></span>
+<span id="cb38-323"><a href="#cb38-323" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb38-324"><a href="#cb38-324" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-325"><a href="#cb38-325" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-326"><a href="#cb38-326" aria-hidden="true" tabindex="-1"></a><span class="in">```{r v2-dnds-plot, fig.cap=&quot;Distribution of dN/dS (codon-aligned)&quot;}</span></span>
+<span id="cb38-327"><a href="#cb38-327" aria-hidden="true" tabindex="-1"></a>df_dnds <span class="ot">&lt;-</span> df <span class="sc">|&gt;</span></span>
+<span id="cb38-328"><a href="#cb38-328" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(Gene_Set, dNdS_Human_Mouse_v2, dNdS_Human_Macaque_v2) <span class="sc">|&gt;</span></span>
+<span id="cb38-329"><a href="#cb38-329" aria-hidden="true" tabindex="-1"></a>  tidyr<span class="sc">::</span><span class="fu">pivot_longer</span>(<span class="at">cols =</span> <span class="sc">-</span>Gene_Set, <span class="at">names_to =</span> <span class="st">&quot;Comparison&quot;</span>,</span>
+<span id="cb38-330"><a href="#cb38-330" aria-hidden="true" tabindex="-1"></a>                       <span class="at">values_to =</span> <span class="st">&quot;dNdS&quot;</span>) <span class="sc">|&gt;</span></span>
+<span id="cb38-331"><a href="#cb38-331" aria-hidden="true" tabindex="-1"></a>  <span class="fu">filter</span>(<span class="sc">!</span><span class="fu">is.na</span>(dNdS), dNdS <span class="sc">&lt;</span> <span class="dv">2</span>)  <span class="co"># cap extreme values for readability</span></span>
+<span id="cb38-332"><a href="#cb38-332" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-333"><a href="#cb38-333" aria-hidden="true" tabindex="-1"></a><span class="fu">ggplot</span>(df_dnds, <span class="fu">aes</span>(<span class="at">x =</span> dNdS, <span class="at">fill =</span> Gene_Set)) <span class="sc">+</span></span>
+<span id="cb38-334"><a href="#cb38-334" aria-hidden="true" tabindex="-1"></a>  <span class="fu">geom_density</span>(<span class="at">alpha =</span> <span class="fl">0.5</span>) <span class="sc">+</span></span>
+<span id="cb38-335"><a href="#cb38-335" aria-hidden="true" tabindex="-1"></a>  <span class="fu">facet_wrap</span>(<span class="sc">~</span> Comparison) <span class="sc">+</span></span>
+<span id="cb38-336"><a href="#cb38-336" aria-hidden="true" tabindex="-1"></a>  <span class="fu">scale_fill_manual</span>(<span class="at">values =</span> <span class="fu">c</span>(<span class="st">&quot;BBB&quot;</span> <span class="ot">=</span> <span class="st">&quot;#d62728&quot;</span>, <span class="st">&quot;Liver_Control&quot;</span> <span class="ot">=</span> <span class="st">&quot;#1f77b4&quot;</span>)) <span class="sc">+</span></span>
+<span id="cb38-337"><a href="#cb38-337" aria-hidden="true" tabindex="-1"></a>  <span class="fu">labs</span>(<span class="at">x =</span> <span class="st">&quot;dN/dS (codon-aligned)&quot;</span>, <span class="at">y =</span> <span class="st">&quot;Density&quot;</span>,</span>
+<span id="cb38-338"><a href="#cb38-338" aria-hidden="true" tabindex="-1"></a>       <span class="at">title =</span> <span class="st">&quot;BBB vs Liver: distribution of dN/dS&quot;</span>,</span>
+<span id="cb38-339"><a href="#cb38-339" aria-hidden="true" tabindex="-1"></a>       <span class="at">fill =</span> <span class="st">&quot;Gene set&quot;</span>) <span class="sc">+</span></span>
+<span id="cb38-340"><a href="#cb38-340" aria-hidden="true" tabindex="-1"></a>  <span class="fu">theme_minimal</span>()</span>
+<span id="cb38-341"><a href="#cb38-341" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-342"><a href="#cb38-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-343"><a href="#cb38-343" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-344"><a href="#cb38-344" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-345"><a href="#cb38-345" aria-hidden="true" tabindex="-1"></a><span class="fu"># Step 5h: The Three-Species Triangle</span></span>
+<span id="cb38-346"><a href="#cb38-346" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-347"><a href="#cb38-347" aria-hidden="true" tabindex="-1"></a>Earlier comparisons all used human as the reference. To answer the original question — *how similar are the three species across BBB genes?* — we needed the third side of the triangle: mouse vs macaque directly.</span>
+<span id="cb38-348"><a href="#cb38-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-349"><a href="#cb38-349" aria-hidden="true" tabindex="-1"></a><span class="in">```{r triangle}</span></span>
+<span id="cb38-350"><a href="#cb38-350" aria-hidden="true" tabindex="-1"></a>mm <span class="ot">&lt;-</span> <span class="fu">read_csv</span>(<span class="st">&quot;processed/conservation_scores_mouse_macaque.csv&quot;</span>,</span>
+<span id="cb38-351"><a href="#cb38-351" aria-hidden="true" tabindex="-1"></a>               <span class="at">show_col_types =</span> <span class="cn">FALSE</span>)</span>
+<span id="cb38-352"><a href="#cb38-352" aria-hidden="true" tabindex="-1"></a>mm_bbb <span class="ot">&lt;-</span> mm[mm<span class="sc">$</span>Gene_Set <span class="sc">==</span> <span class="st">&quot;BBB&quot;</span>, ]</span>
+<span id="cb38-353"><a href="#cb38-353" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-354"><a href="#cb38-354" aria-hidden="true" tabindex="-1"></a>triangle <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(</span>
+<span id="cb38-355"><a href="#cb38-355" aria-hidden="true" tabindex="-1"></a>  <span class="at">Comparison =</span> <span class="fu">c</span>(<span class="st">&quot;Human  vs Mouse&quot;</span>,</span>
+<span id="cb38-356"><a href="#cb38-356" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Human  vs Macaque&quot;</span>,</span>
+<span id="cb38-357"><a href="#cb38-357" aria-hidden="true" tabindex="-1"></a>                  <span class="st">&quot;Mouse  vs Macaque&quot;</span>),</span>
+<span id="cb38-358"><a href="#cb38-358" aria-hidden="true" tabindex="-1"></a>  <span class="st">`</span><span class="at">Median % identity (BBB genes)</span><span class="st">`</span> <span class="ot">=</span> <span class="fu">c</span>(</span>
+<span id="cb38-359"><a href="#cb38-359" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Mouse, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
+<span id="cb38-360"><a href="#cb38-360" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(bbb<span class="sc">$</span>PctId_Human_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="dv">1</span>),</span>
+<span id="cb38-361"><a href="#cb38-361" aria-hidden="true" tabindex="-1"></a>    <span class="fu">round</span>(<span class="fu">median</span>(mm_bbb<span class="sc">$</span>PctId_Mouse_Macaque, <span class="at">na.rm=</span><span class="cn">TRUE</span>), <span class="dv">1</span>)</span>
+<span id="cb38-362"><a href="#cb38-362" aria-hidden="true" tabindex="-1"></a>  ),</span>
+<span id="cb38-363"><a href="#cb38-363" aria-hidden="true" tabindex="-1"></a>  <span class="at">check.names =</span> <span class="cn">FALSE</span></span>
+<span id="cb38-364"><a href="#cb38-364" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb38-365"><a href="#cb38-365" aria-hidden="true" tabindex="-1"></a><span class="fu">kable</span>(triangle)</span>
+<span id="cb38-366"><a href="#cb38-366" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-367"><a href="#cb38-367" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-368"><a href="#cb38-368" aria-hidden="true" tabindex="-1"></a>This gives the complete picture of evolutionary distance for BBB genes across the three species:</span>
+<span id="cb38-369"><a href="#cb38-369" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-370"><a href="#cb38-370" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-371"><a href="#cb38-371" aria-hidden="true" tabindex="-1"></a><span class="in">                Human</span></span>
+<span id="cb38-372"><a href="#cb38-372" aria-hidden="true" tabindex="-1"></a><span class="in">              /        \</span></span>
+<span id="cb38-373"><a href="#cb38-373" aria-hidden="true" tabindex="-1"></a><span class="in">          84.1%        96.8%</span></span>
+<span id="cb38-374"><a href="#cb38-374" aria-hidden="true" tabindex="-1"></a><span class="in">            /              \</span></span>
+<span id="cb38-375"><a href="#cb38-375" aria-hidden="true" tabindex="-1"></a><span class="in">        Mouse  ── 82.6% ── Macaque</span></span>
+<span id="cb38-376"><a href="#cb38-376" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb38-377"><a href="#cb38-377" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-378"><a href="#cb38-378" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-379"><a href="#cb38-379" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-380"><a href="#cb38-380" aria-hidden="true" tabindex="-1"></a><span class="fu"># Results and Interpretation</span></span>
+<span id="cb38-381"><a href="#cb38-381" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-382"><a href="#cb38-382" aria-hidden="true" tabindex="-1"></a><span class="fu">## Headline findings</span></span>
+<span id="cb38-383"><a href="#cb38-383" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-384"><a href="#cb38-384" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Macaque is the closest model to human BBB.** 96.8% nucleotide identity at the coding-sequence level. Strong support for using macaque as a translational model.</span>
+<span id="cb38-385"><a href="#cb38-385" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-386"><a href="#cb38-386" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Mouse is more divergent (84.1%) but still highly conserved.** Mouse models remain biologically defensible, but expect ~16% sequence divergence. Where mouse and human BBB phenotypes differ in a clinical setting, this divergence is one possible explanation.</span>
+<span id="cb38-387"><a href="#cb38-387" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-388"><a href="#cb38-388" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**BBB genes are under stronger purifying selection than liver genes** — but only visibly so in the human-macaque comparison (BBB dN/dS 0.152 vs Liver 0.196, p &lt; 10⁻⁶ after Bonferroni correction). The signal washes out in mouse-human comparisons because all genes have accumulated extensive change at that distance.</span>
+<span id="cb38-389"><a href="#cb38-389" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-390"><a href="#cb38-390" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Gene duplication produces dramatic divergence.** Paralogous mouse genes (e.g. Abcb1a + Abcb1b for human ABCB1) are only 47% identical to their human counterpart, vs 85% for one-to-one orthologues. Effect size is huge (rank-biserial r = 0.72). Both paralogue rows are reported and flagged.</span>
+<span id="cb38-391"><a href="#cb38-391" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-392"><a href="#cb38-392" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Conservation and human BBB expression are independent.** A gene&#39;s <span class="in">`Human_BBB_Datasets_N`</span> score (0–3) does not predict how conserved it is. These are two different aspects of gene importance.</span>
+<span id="cb38-393"><a href="#cb38-393" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-394"><a href="#cb38-394" aria-hidden="true" tabindex="-1"></a><span class="fu">## Biological interpretation</span></span>
+<span id="cb38-395"><a href="#cb38-395" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-396"><a href="#cb38-396" aria-hidden="true" tabindex="-1"></a>The strong purifying selection on BBB genes makes biological sense. The BBB controls what enters and exits the brain — broken transporters or tight junctions would let toxins in or block essential nutrients. Evolution actively removes protein-changing mutations from these genes, more aggressively than for liver genes (which can tolerate more variation because the liver as a system is more redundant and regenerative).</span>
+<span id="cb38-397"><a href="#cb38-397" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-398"><a href="#cb38-398" aria-hidden="true" tabindex="-1"></a>The fact that this signal is most visible in the human-macaque comparison rather than the deeper human-mouse comparison reflects evolutionary timescale: subtle differential selection pressure is detectable when species are close enough that not all genes have saturated their substitutions. At greater distances (~80 million years for human-mouse), this fine-grained signal is lost.</span>
+<span id="cb38-399"><a href="#cb38-399" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-400"><a href="#cb38-400" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-401"><a href="#cb38-401" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-402"><a href="#cb38-402" aria-hidden="true" tabindex="-1"></a><span class="fu"># Limitations and Future Work</span></span>
+<span id="cb38-403"><a href="#cb38-403" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-404"><a href="#cb38-404" aria-hidden="true" tabindex="-1"></a><span class="fu">## Methodological caveats</span></span>
+<span id="cb38-405"><a href="#cb38-405" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-406"><a href="#cb38-406" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pairwise dN/dS, not phylogenetic.** A more rigorous analysis would use PAML codeml on a multi-species alignment to model the phylogenetic tree explicitly. Discuss with supervisor before publication.</span>
+<span id="cb38-407"><a href="#cb38-407" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Longest-transcript heuristic.** MANE Select / Ensembl Canonical (see <span class="in">`step5b_alt_canonical_transcripts.R`</span>) is the cleaner choice for publication-grade work. Same compute cost, more standard.</span>
+<span id="cb38-408"><a href="#cb38-408" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, etc.) should be treated as exploratory.</span>
+<span id="cb38-409"><a href="#cb38-409" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-410"><a href="#cb38-410" aria-hidden="true" tabindex="-1"></a><span class="fu">## Biological caveats</span></span>
+<span id="cb38-411"><a href="#cb38-411" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-412"><a href="#cb38-412" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The starting gene list is enrichment-based.** Daneman and Munji built their lists by comparing brain ECs to other endothelia. CLDN5 (the canonical BBB tight junction protein) is missing because it failed the differential cutoff — it&#39;s expressed in all endothelia. Other broadly endothelial BBB-relevant genes may be similarly absent.</span>
+<span id="cb38-413"><a href="#cb38-413" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Liver is one specific control choice.** A different control (brain non-BBB genes, or genes matched on protein domain) could give a different picture.</span>
+<span id="cb38-414"><a href="#cb38-414" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most expression-level cross-species differences live — were deliberately excluded.</span>
+<span id="cb38-415"><a href="#cb38-415" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-416"><a href="#cb38-416" aria-hidden="true" tabindex="-1"></a><span class="fu">## Future extensions</span></span>
+<span id="cb38-417"><a href="#cb38-417" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-418"><a href="#cb38-418" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**PAML codeml** for proper phylogenetic dN/dS.</span>
+<span id="cb38-419"><a href="#cb38-419" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Promoter sequence comparison** (~2 kb upstream of TSS) to test regulatory divergence.</span>
+<span id="cb38-420"><a href="#cb38-420" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**MANE Select transcripts** (the alternative path is already scripted).</span>
+<span id="cb38-421"><a href="#cb38-421" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Brain non-BBB genes** as a complementary control set.</span>
+<span id="cb38-422"><a href="#cb38-422" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Bring in the Giger macaque dataset** to ask whether the most-conserved BBB genes are also the most highly expressed in macaque endothelium.</span>
+<span id="cb38-423"><a href="#cb38-423" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-424"><a href="#cb38-424" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-425"><a href="#cb38-425" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-426"><a href="#cb38-426" aria-hidden="true" tabindex="-1"></a><span class="fu"># AI Transparency</span></span>
+<span id="cb38-427"><a href="#cb38-427" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-428"><a href="#cb38-428" aria-hidden="true" tabindex="-1"></a>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.</span>
+<span id="cb38-429"><a href="#cb38-429" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-430"><a href="#cb38-430" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-431"><a href="#cb38-431" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-432"><a href="#cb38-432" aria-hidden="true" tabindex="-1"></a><span class="fu"># References</span></span>
+<span id="cb38-433"><a href="#cb38-433" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-434"><a href="#cb38-434" aria-hidden="true" tabindex="-1"></a>Datasets:</span>
+<span id="cb38-435"><a href="#cb38-435" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-436"><a href="#cb38-436" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Daneman R, et al. (2010). The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.</span>
+<span id="cb38-437"><a href="#cb38-437" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Munji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892-1902.</span>
+<span id="cb38-438"><a href="#cb38-438" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. *Nature* 614: 945-954.</span>
+<span id="cb38-439"><a href="#cb38-439" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Yang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer&#39;s risk. *Nature* 603: 885-892.</span>
+<span id="cb38-440"><a href="#cb38-440" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Winkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.</span>
+<span id="cb38-441"><a href="#cb38-441" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-442"><a href="#cb38-442" aria-hidden="true" tabindex="-1"></a>Tools:</span>
+<span id="cb38-443"><a href="#cb38-443" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-444"><a href="#cb38-444" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensembl release 113. https://www.ensembl.org</span>
+<span id="cb38-445"><a href="#cb38-445" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>BioMart (<span class="in">`biomaRt`</span> R package).</span>
+<span id="cb38-446"><a href="#cb38-446" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human Protein Atlas. https://www.proteinatlas.org</span>
+<span id="cb38-447"><a href="#cb38-447" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bioconductor: <span class="in">`Biostrings`</span>, <span class="in">`pwalign`</span>, <span class="in">`seqinr`</span>.</span>
+<span id="cb38-448"><a href="#cb38-448" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-449"><a href="#cb38-449" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb38-450"><a href="#cb38-450" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb38-451"><a href="#cb38-451" aria-hidden="true" tabindex="-1"></a>*Render this document with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root. Outputs an HTML file you can open in any browser.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

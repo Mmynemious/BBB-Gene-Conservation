@@ -10,6 +10,7 @@ format:
     code-tools: true
     theme: cosmo
     embed-resources: true
+    output-file: index.html
   pdf:
     toc: true
 execute:
