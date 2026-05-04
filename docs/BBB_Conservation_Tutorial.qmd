@@ -1,6 +1,6 @@
 ---
 title: "Blood-Brain Barrier Gene Conservation Across Human, Mouse, and Macaque"
-author: "Yara Shamshoum"
+author: "Yara Ismail"
 date: today
 format:
   html:
@@ -424,7 +424,7 @@ The fact that this signal is most visible in the human-macaque comparison rather
 
 # AI Transparency
 
-This pipeline was developed by Yara Shamshoum with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.
+This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.
 
 ---
 

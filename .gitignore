@@ -26,3 +26,7 @@ genomes/
 
 # Large HPA files — keep .zip for reproducibility, ignore extracted .tsv
 raw_data/hpa_liver/*.tsv
+
+# Quarto build artifacts
+docs/*_cache/
+docs/*_files/
