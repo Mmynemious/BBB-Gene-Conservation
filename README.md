@@ -71,16 +71,6 @@ BBB-Gene-Conservation/
 - NCBI genome assemblies for sequence-level comparisons (very large files, downloaded when needed)
 - Control gene set (to be defined after Dr. Clelland input)
 
----
-
-## Status
-- [x] Literature compiled
-- [x] Raw datasets downloaded and organized
-- [ ] BBB gene list standardization
-- [ ] Wälchli RDS processing (R/Seurat)
-- [ ] Cross-species gene ID mapping (BioMart)
-- [ ] Sequence extraction and alignment
-- [ ] Conservation analysis and statistics
 
 ---
 
