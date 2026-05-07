@@ -150,6 +150,10 @@ BBB-Gene-Conservation/
 
 ## Step 1 — Gene List
 
+### Why did we do Step 1?
+
+Before we can measure anything, we need to know *which genes* to measure. The BBB does not have one official gene list — different research groups have profiled brain endothelial cells at different times using different technologies. Step 1 builds a single, well-annotated master list from the two most-cited published datasets, tags each gene by how stringently it was identified, and converts mouse gene symbols to human ones so the whole pipeline can work in human gene space.
+
 ::: {.callout-note}
 ## Data flow
 **Full script:** `scripts/step1_extract_BBB_genelist.R`
@@ -195,6 +199,10 @@ master |>
 
 ## Step 2 — Wälchli
 
+### Why did we do Step 2?
+
+The BBB gene list from Step 1 was built entirely from **mouse** data. Before trusting it as a human BBB gene list, we need to check: are these genes actually expressed in human brain endothelial cells? The Wälchli 2024 dataset is the largest and most recent single-cell atlas of the human brain vasculature, making it the best available source for that validation. Step 2 collapses the 30,000+ individual cells into per-cell-type average expression values — a format we can easily query for any gene.
+
 ::: {.callout-note}
 ## Data flow
 **Full script:** `scripts/step2_process_walchli_seurat.R`
@@ -230,6 +238,10 @@ The **Mitochondrial** cluster was excluded from downstream analysis — cells wi
 ---
 
 ## Steps 3 & 3b — Mapping
+
+### Why did we do Steps 3 & 3b?
+
+To compare DNA sequences across species, we need a stable, species-specific identifier for each gene — not the gene symbol (which changes between species, e.g. human *SLC2A1* vs mouse *Slc2a1*), but a permanent database ID. Ensembl gene IDs (`ENSG...` for human, `ENSMUSG...` for mouse, `ENSMMUG...` for macaque) serve this purpose. This step also retrieves orthologue relationships: which mouse gene corresponds to which human gene, and whether it is a clean one-to-one match or a more complex one-to-many (gene duplication) case. That distinction matters a lot for interpreting conservation scores.
 
 ::: {.callout-note}
 ## Data flow
@@ -282,6 +294,14 @@ The 1,724 rows (vs 1,526 input genes) reflects **one-to-many** orthologues — e
 ---
 
 ## Steps 4b & 4c — Validation
+
+### Why did we do Steps 4b & 4c?
+
+Two separate questions are answered here:
+
+**Step 4b** — The gene list comes from mouse studies, but we are ultimately interested in the *human* BBB. Before running thousands of alignments, we want to flag which genes have cross-species expression evidence in human brain endothelium (using three independent human EC datasets). This does not remove any genes — it gives each gene a confidence score (0–3) that can be used for sensitivity analysis later.
+
+**Step 4c** — The core scientific question is whether BBB genes are *unusually* conserved, not just conserved. To answer that, we need something to compare against. A liver control set provides a biologically meaningful baseline: liver is a highly expressed, well-studied tissue, so if BBB genes are more conserved than liver genes, that difference is real and not just a property of all expressed genes.
 
 ::: {.callout-warning}
 ## What went wrong — and why Step 4 was removed
@@ -344,6 +364,10 @@ Landmark liver genes confirmed present: ALB (198,523 nTPM), CYP3A4, APOB, TTR.
 
 ## Steps 5a-b — CDS
 
+### Why did we do Steps 5a-b?
+
+Conservation analysis works at the DNA sequence level — we need the actual nucleotide letters for each gene in each species. The full genome of a mammal is ~3 billion base pairs, but most of that is non-coding (introns, regulatory regions, intergenic space). We only want the **coding sequence (CDS)** — the stretch of DNA that actually gets translated into protein. Ensembl provides pre-extracted CDS files for every annotated transcript, which are ~150× smaller than the full genome files and much faster to work with. Step 5b then extracts just the CDS sequences for our specific BBB and liver gene lists, ready for alignment.
+
 ::: {.callout-note}
 ## Data flow
 **Full scripts:** `scripts/step5a_download_cds_fastas.R`, `scripts/step5b_extract_cds_sequences.R`
@@ -372,6 +396,10 @@ cat("        mean   =", as.integer(mean(width(bbb_human))), "bp\n")
 ---
 
 ## Steps 5c-d — Scoring
+
+### Why did we do Steps 5c-d?
+
+This is the core of the project — the step that actually measures conservation. For each BBB gene (and each liver control gene), we align its coding sequence between species and compute two numbers: how similar the DNA letters are (% identity), and whether evolution is actively protecting the gene from protein-changing mutations (dN/dS). Running this for both BBB genes and liver genes separately sets up the statistical comparison in Step 5e: are BBB genes more conserved than a typical expressed gene?
 
 ::: {.callout-note}
 ## Data flow
@@ -406,6 +434,10 @@ pct_identity <- pwalign::pid(aln, type = "PID1")
 ---
 
 ## Steps 5e-g — Statistics
+
+### Why did we do Steps 5e-g?
+
+Having conservation scores for ~4,500 gene pairs is not enough on its own — we need to know whether the differences between BBB and liver genes are statistically meaningful or just random variation. Step 5e runs the formal tests. Steps 5f and 5g were added specifically because the initial dN/dS values were wrong (see the bug callout below): Step 5f recomputes them correctly using a codon-aware alignment pipeline, and Step 5g re-runs the statistics on the corrected values with proper multiple testing correction applied.
 
 ::: {.callout-note}
 ## Data flow
@@ -548,6 +580,10 @@ ggplot(purify_df, aes(x = Comparison, y = Pct, fill = Gene_Set)) +
 ---
 
 ## Step 5h — Triangle
+
+### Why did we do Step 5h?
+
+Steps 5c–g compared every species against **human** as the reference point. But the translational pipeline runs Mouse → Macaque → Human, which means the Mouse–Macaque leg is just as important as the others. If mouse and macaque are very different from each other, a drug validated in mouse might fail in macaque for reasons unrelated to human biology. Step 5h closes the triangle by computing mouse vs macaque conservation directly, giving us the complete three-way picture needed to evaluate the full translational ladder.
 
 ::: {.callout-note}
 ## Data flow
