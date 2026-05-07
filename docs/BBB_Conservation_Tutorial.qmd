@@ -4,11 +4,7 @@ author: "Yara Ismail"
 date: today
 format:
   html:
-    toc: true
-    toc-depth: 2
-    toc-location: left
-    toc-title: "Steps"
-    toc-expand: true
+    toc: false
     smooth-scroll: true
     code-fold: show
     code-tools: true
@@ -23,7 +19,9 @@ execute:
   cache: true
 ---
 
-# Introduction
+::: {.panel-tabset}
+
+## Introduction
 
 The standard preclinical pipeline for drugs targeting the brain looks like this:
 
@@ -42,7 +40,7 @@ We quantify this using two complementary metrics:
 
 The analysis covers three pairwise comparisons: Human vs Mouse, Human vs Macaque, and Mouse vs Macaque. BBB genes are compared against a liver control set to establish whether any conservation signal is BBB-specific or just a property of all expressed genes.
 
-## What are "canonical BBB genes"?
+### What are "canonical BBB genes"?
 
 The BBB is formed by brain endothelial cells (ECs) — the cells lining the brain's blood vessels. "Canonical BBB genes" refers to genes that are *consistently identified across multiple independent transcriptomic studies* as highly expressed and functionally important in these cells. This includes:
 
@@ -52,19 +50,52 @@ The BBB is formed by brain endothelial cells (ECs) — the cells lining the brai
 
 "Canonical" does not mean "the only important BBB genes" — it means well-validated across datasets.
 
+### Pipeline overview
+
+```
+Step 1    Build master BBB gene list (Daneman + Munji)
+Step 2    Process Wälchli single-cell EC expression
+Step 3    Map gene symbols → Ensembl IDs  [HomoloGene attempt — superseded]
+Step 3b   Re-run mapping via BioMart + add orthology metadata
+Step 4    Download GTF genome annotations  [removed — unnecessary]
+Step 4b   Cross-reference against human EC datasets
+Step 4c   Build liver control set from Human Protein Atlas
+Step 5a   Download CDS (coding sequence) FASTAs
+Step 5b   Extract one CDS per gene (longest transcript)
+Step 5b*  Alternative: Ensembl Canonical / MANE Select transcripts
+Step 5c   Pairwise alignment + % identity + dN/dS for BBB genes
+Step 5d   Same for liver control genes
+Step 5e   Statistical comparison (Wilcoxon)
+Step 5f   Recompute dN/dS with codon-aware alignment  [bug fix]
+Step 5g   Multiple testing correction
+Step 5h   Direct mouse vs macaque comparison
+```
+
+> **Note on step numbering:** Steps jump from 3 to 3b and from 4 to 4b — these reflect the revision history. See the relevant tabs for details.
+
 ---
 
-# How to Use This Tutorial
+## Prerequisites
 
 ::: {.callout-note}
 ## Read-only vs reproducible
 
 This HTML document is **read-only** — you can read the code and results but cannot run it here. To reproduce the analysis from scratch, open the scripts in RStudio (or VS Code with the R extension) and run each `scripts/step*.R` file in order.
 
-Each section below describes what a step does, shows the code that reads and displays its results, and points to the full computation script. The heavy computation (genome alignments, BioMart queries) was already run; this tutorial reads those saved outputs.
+The heavy computation (genome alignments, BioMart queries) was already run; this tutorial reads those saved outputs.
 :::
 
-## Prerequisites — R packages
+```{r setup}
+suppressPackageStartupMessages({
+  library(readr)
+  library(dplyr)
+  library(ggplot2)
+  library(knitr)
+})
+knitr::opts_knit$set(root.dir = "..")
+```
+
+### R packages
 
 Install all required packages before running any scripts:
 
@@ -89,9 +120,7 @@ BiocManager::install(c(
 install.packages("Seurat")
 ```
 
-## Prerequisites — raw data files
-
-The table below lists every raw data file the pipeline requires, where to get it, and where to place it. Files marked **auto-downloaded** are fetched by the script itself.
+### Raw data files
 
 | File | Where to get it | Place it at |
 |---|---|---|
@@ -100,12 +129,10 @@ The table below lists every raw data file the pipeline requires, where to get it
 | Daneman 2010 S5 | Same paper → Supplementary S5 | `raw_data/daneman_2010/Daneman2010_S5_BrainEC_vs_LungEC_Enriched.xls` |
 | Munji 2019 S5 | [Nat. Neurosci. paper](https://doi.org/10.1038/s41593-019-0468-z) → Supplementary S5 | `raw_data/munji_2019/Munji2019_S5_BBBEnrichedGenes.xlsx` |
 | Wälchli 2024 Seurat object | [Nature paper](https://doi.org/10.1038/s41586-024-07069-2) → repository | `raw_data/walchli_2024/Walchli2024_AdultBrain_TemporalLobe_SortedEndothelial_SeuratObject.rds.gz` |
-| HPA RNA consensus | **Auto-downloaded** by `step4c` from proteinatlas.org | `raw_data/hpa_liver/rna_tissue_consensus.tsv.zip` |
-| Ensembl CDS FASTAs (×3) | **Auto-downloaded** by `step5a` from Ensembl FTP | `genomes/Homo_sapiens.GRCh38.113.cds.all.fa.gz` etc. |
+| HPA RNA consensus | **Auto-downloaded** by `step4c` | `raw_data/hpa_liver/rna_tissue_consensus.tsv.zip` |
+| Ensembl CDS FASTAs (×3) | **Auto-downloaded** by `step5a` | `genomes/Homo_sapiens.GRCh38.113.cds.all.fa.gz` etc. |
 
-## Directory structure
-
-After setup, the project folder should look like this:
+### Directory structure
 
 ```
 BBB-Gene-Conservation/
@@ -117,63 +144,11 @@ BBB-Gene-Conservation/
 ├── genomes/                ← CDS FASTAs (auto-downloaded; not tracked by git)
 ├── processed/              ← All pipeline outputs (CSVs)
 └── scripts/                ← All computation scripts
-    ├── step1_extract_BBB_genelist.R
-    ├── step2_process_walchli_seurat.R
-    ├── step3_map_ensembl_crossspecies.R
-    ├── step3b_biomart_orthology_confidence.R
-    ├── step4b_human_validation.R
-    ├── step4c_liver_control_geneset.R
-    ├── step5a_download_cds_fastas.R
-    ├── step5b_extract_cds_sequences.R
-    ├── step5c_align_and_score.R
-    ├── step5d_liver_scoring.R
-    ├── step5e_statistics.R
-    ├── step5f_recompute_dnds.R
-    ├── step5g_stats_v2.R
-    └── step5h_mouse_vs_macaque.R
-```
-
-## Pipeline at a glance
-
-```
-Step 1    Build master BBB gene list (Daneman + Munji)
-Step 2    Process Wälchli single-cell EC expression
-Step 3    Map gene symbols → Ensembl IDs  [HomoloGene attempt — superseded]
-Step 3b   Re-run mapping via BioMart + add orthology metadata
-Step 4    Download GTF genome annotations  [removed — unnecessary]
-Step 4b   Cross-reference against human EC datasets
-Step 4c   Build liver control set from Human Protein Atlas
-Step 5a   Download CDS (coding sequence) FASTAs
-Step 5b   Extract one CDS per gene (longest transcript)
-Step 5b*  Alternative: Ensembl Canonical / MANE Select transcripts
-Step 5c   Pairwise alignment + % identity + dN/dS for BBB genes
-Step 5d   Same for liver control genes
-Step 5e   Statistical comparison (Wilcoxon)
-Step 5f   Recompute dN/dS with codon-aware alignment  [bug fix]
-Step 5g   Multiple testing correction
-Step 5h   Direct mouse vs macaque comparison
-```
-
-> **Note on step numbering:** Steps jump from 3 to 3b (no 3a) and from 4 to 4b (no 4a). This reflects the pipeline's revision history — see the relevant sections below.
-
-## Setup
-
-```{r setup}
-suppressPackageStartupMessages({
-  library(readr)
-  library(dplyr)
-  library(ggplot2)
-  library(knitr)
-})
-
-# Set the working directory to project root
-# Adjust this path if running from a different location
-knitr::opts_knit$set(root.dir = "..")
 ```
 
 ---
 
-# Step 1: Master BBB Gene List
+## Step 1 — Gene List
 
 ::: {.callout-note}
 ## Data flow
@@ -183,20 +158,20 @@ knitr::opts_knit$set(root.dir = "..")
 **Packages:** `readxl`, `dplyr`, `readr`, `homologene`
 :::
 
-## Why Daneman + Munji
+### Why Daneman + Munji
 
 Two foundational papers each profiled brain endothelial cells in mouse:
 
 - **Daneman et al. 2010** — compared brain ECs to peripheral, liver, and lung ECs (supplementary tables S3, S4, S5). The S3 list is the strictest (genes enriched vs both liver AND lung).
 - **Munji et al. 2019** — top CNS endothelial-enriched genes (supplementary table S5).
 
-Mouse gene symbols from both papers were converted to human HGNC symbols using the `homologene` R package (an offline NCBI orthologue database). Each gene was tagged by its source paper and which Daneman filter it passed (`liver_and_lung`, `liver_only`, or `lung_only`).
+Mouse gene symbols from both papers were converted to human HGNC symbols using the `homologene` R package. Each gene was tagged by source paper and which Daneman filter it passed (`liver_and_lung`, `liver_only`, or `lung_only`).
 
-## Why we expanded to S3+S4+S5
+### Why we expanded to S3+S4+S5
 
-Initial work used only the strict S3 list (~545 genes). When we checked the output, canonical BBB genes like **SLC2A1** (GLUT1, the main brain glucose transporter) were missing. The reason: S3 demands enrichment vs liver AND lung simultaneously, and SLC2A1 is also expressed in liver endothelium. Including S4 and S5 with stringency tags captured these missing genes while preserving the ability to filter back to S3 for sensitivity analysis.
+Initial work used only the strict S3 list (~545 genes). Canonical BBB genes like **SLC2A1** (GLUT1, the main brain glucose transporter) were missing — S3 demands enrichment vs liver AND lung simultaneously, and SLC2A1 is also expressed in liver endothelium. Including S4 and S5 with stringency tags captured these missing genes while preserving the ability to filter back to S3 for sensitivity analysis.
 
-## Result
+### Result
 
 ```{r master-list}
 master <- read_csv("processed/master_BBB_genelist.csv", show_col_types = FALSE)
@@ -218,12 +193,12 @@ master |>
 
 ---
 
-# Step 2: Wälchli Single-Cell Expression
+## Step 2 — Wälchli
 
 ::: {.callout-note}
 ## Data flow
 **Full script:** `scripts/step2_process_walchli_seurat.R`
-**Reads:** `raw_data/walchli_2024/Walchli2024_AdultBrain_TemporalLobe_SortedEndothelial_SeuratObject.rds.gz`
+**Reads:** `raw_data/walchli_2024/Walchli2024_..._SeuratObject.rds.gz`
 **Writes:** `processed/Walchli2024_AverageExpression.csv`
 **Packages:** `Seurat`, `dplyr`, `readr`
 **Note:** Loading the Seurat object requires ~8 GB RAM and several minutes.
@@ -231,13 +206,13 @@ master |>
 
 The Wälchli 2024 dataset is a Seurat object containing 30,000+ human brain endothelial cells annotated by EC subtype (capillary, arteriole, venule, etc.).
 
-## What we did
+### What we did
 
 Used Seurat's `AverageExpression()` to collapse all cells into per-cell-type mean expression values, producing a gene × cell-type matrix.
 
 The trickiest part: Seurat's default cell identities in this object were patient ages (15, 19 years), not cell types. Running `AverageExpression()` without overriding this would have averaged across patients, not cell types. Fix: `group.by = "ECclusters"`.
 
-## Result
+### Result
 
 ```{r walchli}
 walchli <- read_csv("processed/Walchli2024_AverageExpression.csv",
@@ -254,41 +229,36 @@ The **Mitochondrial** cluster was excluded from downstream analysis — cells wi
 
 ---
 
-# Step 3 & 3b: Cross-Species Mapping
+## Steps 3 & 3b — Mapping
 
 ::: {.callout-note}
 ## Data flow
 **Full scripts:** `scripts/step3_map_ensembl_crossspecies.R` (superseded), `scripts/step3b_biomart_orthology_confidence.R`
-**Reads:** `processed/master_BBB_genelist.csv` (Step 3), then `processed/master_BBB_genelist_validated.csv` + `processed/BBB_genes_crossspecies_ensembl.csv` (Step 3b)
+**Reads:** `processed/master_BBB_genelist.csv` → `processed/master_BBB_genelist_validated.csv` + `processed/BBB_genes_crossspecies_ensembl.csv`
 **Writes:** `processed/master_BBB_genelist_complete.csv`
 **Packages:** `biomaRt`, `dplyr`, `readr`
-**Note:** BioMart queries require internet and can take 5–15 minutes. Results are cached — re-running uses the cached CSV unless you delete it.
+**Note:** BioMart queries require internet and take 5–15 minutes. Results are cached.
 :::
-
-For DNA conservation analysis, we need a permanent identifier per gene per species — the Ensembl gene ID.
 
 ::: {.callout-warning}
 ## What went wrong — and why there is no Step 3a
 
 The first attempt used the `homologene` R package — an offline NCBI orthologue database — to map all three species simultaneously. This worked for human → mouse but **returned no results for macaque**: HomoloGene does not include rhesus macaque (*Macaca mulatta*).
 
-Step 3b scrapped this and re-ran everything via **Ensembl BioMart**, which supports all three species and additionally returns orthologue type and pre-computed % sequence identity. This is why the pipeline skips from Step 3 to Step 3b.
+Step 3b re-ran everything via **Ensembl BioMart**, which supports all three species and additionally returns orthologue type and pre-computed % sequence identity. This is why the pipeline skips from Step 3 to Step 3b.
 :::
 
-## What we did
+### What we did
 
-Three queries to Ensembl BioMart (each uses a different attribute page in BioMart's data model, so they cannot be combined in one call):
+Three queries to Ensembl BioMart (each uses a different attribute page, so they cannot be combined):
 
 1. Human gene symbol → human Ensembl gene ID (`ENSG...`)
-2. Human Ensembl ID → mouse orthologue Ensembl ID (`ENSMUSG...`)
-3. Human Ensembl ID → macaque orthologue Ensembl ID (`ENSMMUG...`)
+2. Human Ensembl ID → mouse orthologue (`ENSMUSG...`)
+3. Human Ensembl ID → macaque orthologue (`ENSMMUG...`)
 
-Step 3b added two extra fields per orthologue:
+Step 3b added `orthology_type` and `perc_id` per orthologue.
 
-- `orthology_type`: `ortholog_one2one`, `ortholog_one2many`, or `ortholog_many2many`
-- `perc_id`: pre-computed % sequence identity from Ensembl's own alignments
-
-## Result
+### Result
 
 ```{r ensembl-map}
 combined <- read_csv("processed/master_BBB_genelist_complete.csv",
@@ -307,39 +277,35 @@ combined |>
   kable(caption = "Mouse orthologue type distribution")
 ```
 
-The table has 1,724 rows (vs 1,526 input genes) because of **one-to-many** orthologues — for example, human ABCB1 maps to both mouse *Abcb1a* and *Abcb1b*. Both rows are kept and flagged for downstream sensitivity analysis.
+The 1,724 rows (vs 1,526 input genes) reflects **one-to-many** orthologues — e.g. human ABCB1 maps to both mouse *Abcb1a* and *Abcb1b*. Both rows are kept and flagged.
 
 ---
 
-# Step 4b: Human EC Validation
-
-::: {.callout-note}
-## Data flow
-**Full script:** `scripts/step4b_human_validation.R`
-**Reads:** `processed/master_BBB_genelist.csv`, `processed/Walchli2024_AverageExpression.csv` (+ Yang 2022 and Winkler 2022 gene lists, hardcoded in script)
-**Writes:** `processed/master_BBB_genelist_validated.csv`
-**Packages:** `dplyr`, `readr`
-:::
+## Steps 4b & 4c — Validation
 
 ::: {.callout-warning}
 ## What went wrong — and why Step 4 was removed
 
-Step 4 downloaded full **GTF genome annotation files** (~1.5 GB per species, ×3 = ~4.5 GB) with the intention of extracting CDS coordinates manually. After downloading all three, we found that Ensembl already provides **pre-extracted CDS FASTA files** (~20 MB per species) — the exact same information at a fraction of the size. Step 4 was removed entirely. This is why the numbering jumps from Step 3b directly to Step 4b.
+Step 4 downloaded full **GTF genome annotation files** (~1.5 GB per species, ×3 = ~4.5 GB total) with the intention of extracting CDS coordinates manually. After downloading all three we found that Ensembl already provides **pre-extracted CDS FASTA files** (~20 MB per species) — the same information at a fraction of the size. Step 4 was removed entirely, which is why the numbering jumps from Step 3b to Step 4b.
 :::
 
-The master BBB gene list was built from **mouse** studies. Step 4b checks which of those genes are also expressed in **human** brain endothelium, using three independent datasets.
+### Step 4b — Human EC Validation
 
-## What we did
+::: {.callout-note}
+## Data flow
+**Full script:** `scripts/step4b_human_validation.R`
+**Reads:** `processed/master_BBB_genelist.csv`, `processed/Walchli2024_AverageExpression.csv` (+ Yang 2022 and Winkler 2022 gene lists, hardcoded)
+**Writes:** `processed/master_BBB_genelist_validated.csv`
+**Packages:** `dplyr`, `readr`
+:::
 
-Three independent human EC datasets:
+The master BBB gene list was built from **mouse** studies. Step 4b checks which genes are also expressed in **human** brain endothelium using three independent datasets:
 
-- **Wälchli 2024** — gene "validated" if expressed > 0 in any EC cluster
-- **Yang 2022** — 112-gene endothelial subtype marker list from a human brain vascular atlas
-- **Winkler 2022** — EC marker list from a large human brain vascular single-cell atlas
+- **Wälchli 2024** — expressed > 0 in any EC cluster
+- **Yang 2022** — 112-gene endothelial subtype marker list
+- **Winkler 2022** — EC marker list from a large human brain vascular atlas
 
-Each gene receives binary flags for each dataset plus a count (0–3) of how many datasets confirm it.
-
-## Result
+Each gene receives a count (0–3) of how many datasets confirm it.
 
 ```{r validation}
 combined <- read_csv("processed/master_BBB_genelist_complete.csv",
@@ -351,30 +317,19 @@ combined |>
   kable(caption = "Human EC validation score distribution")
 ```
 
-74 genes have zero human EC evidence — these came purely from mouse data. They are kept in the analysis but flagged. Any gene with a score of 3 is confirmed in all three independent human EC datasets — the highest-confidence BBB genes.
+74 genes have zero human EC evidence — they came purely from mouse data and are flagged in downstream analysis.
 
----
-
-# Step 4c: Liver Control Gene Set
+### Step 4c — Liver Control Gene Set
 
 ::: {.callout-note}
 ## Data flow
 **Full script:** `scripts/step4c_liver_control_geneset.R`
-**Reads:** `processed/master_BBB_genelist_complete.csv`, `raw_data/hpa_liver/rna_tissue_consensus.tsv` (auto-downloaded from proteinatlas.org)
+**Reads:** `processed/master_BBB_genelist_complete.csv`, `raw_data/hpa_liver/rna_tissue_consensus.tsv` (auto-downloaded)
 **Writes:** `processed/liver_control_genelist.csv`
 **Packages:** `dplyr`, `readr`
 :::
 
-A control gene set is needed to test whether BBB genes are *unusually* conserved, or just as conserved as any expressed gene. Liver was chosen as it is a metabolically active, highly conserved organ — a meaningful baseline.
-
-## What we did
-
-Downloaded the Human Protein Atlas RNA tissue consensus expression file (auto-downloaded by the script from proteinatlas.org). Filtered for:
-
-1. Genes with liver nTPM ≥ 10 (meaningfully expressed in liver)
-2. NOT already in the BBB master list
-
-## Result
+Liver was chosen as the control tissue — metabolically active and highly conserved, providing a meaningful non-BBB baseline. Filtered for genes with liver nTPM ≥ 10 that are NOT in the BBB master list.
 
 ```{r liver}
 liver_ctl <- read_csv("processed/liver_control_genelist.csv", show_col_types = FALSE)
@@ -383,38 +338,28 @@ cat("Liver nTPM — median:", round(median(liver_ctl$Liver_nTPM), 1),
     " mean:", round(mean(liver_ctl$Liver_nTPM), 1), "\n")
 ```
 
-Landmark liver genes all confirmed present: ALB (albumin, 198,523 nTPM — the most liver-specific gene), CYP3A4, APOB, TTR.
+Landmark liver genes confirmed present: ALB (198,523 nTPM), CYP3A4, APOB, TTR.
 
 ---
 
-# Step 5a-b: Coding Sequence Extraction
+## Steps 5a-b — CDS
 
 ::: {.callout-note}
 ## Data flow
 **Full scripts:** `scripts/step5a_download_cds_fastas.R`, `scripts/step5b_extract_cds_sequences.R`
-**Step 5a** downloads from Ensembl FTP → `genomes/Homo_sapiens.GRCh38.113.cds.all.fa.gz`, `genomes/Mus_musculus.GRCm39.113.cds.all.fa.gz`, `genomes/Macaca_mulatta.Mmul_10.113.cds.all.fa.gz`
-**Step 5b reads:** the three genome FASTAs above + `processed/master_BBB_genelist_complete.csv` + `processed/liver_control_genelist.csv`
-**Step 5b writes:** `genomes/cds_BBB_human.fa`, `genomes/cds_BBB_mouse.fa`, `genomes/cds_BBB_macaque.fa`, `genomes/cds_liver_human.fa`, `genomes/cds_liver_mouse.fa`, `genomes/cds_liver_macaque.fa`
+**Step 5a** downloads Ensembl CDS FASTAs → `genomes/*.cds.all.fa.gz` (×3 species)
+**Step 5b reads:** genome FASTAs + gene lists → **Writes:** `genomes/cds_BBB_*.fa` and `genomes/cds_liver_*.fa` (×3 species each)
 **Packages:** `Biostrings`, `dplyr`, `readr`
-**Note:** The `genomes/` folder is excluded from git (files are too large). You must run Step 5a to populate it before Step 5b will work.
+**Note:** `genomes/` is excluded from git (too large). Run Step 5a to populate it before Step 5b.
 :::
 
-To compare DNA sequences between species, we need the coding sequence (CDS) per gene — the portion of DNA that actually encodes a protein.
+### What we did
 
-## What we did
+Ensembl provides pre-extracted CDS FASTA files for every annotated transcript. For each gene with multiple transcripts (alternative splicing), we kept the **longest CDS** as a heuristic for the full open reading frame.
 
-Ensembl provides pre-extracted CDS FASTA files for every annotated transcript. Each entry looks like:
+> **Alternative:** `scripts/step5b_alt_canonical_transcripts.R` uses **Ensembl Canonical / MANE Select** transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. More standard for publication-grade work. The FASTAs are already generated in `genomes/cds_canonical_*.fa`.
 
-```
->ENST00000390473.1 cds chromosome:GRCh38:... gene:ENSG00000196549.12 ...
-ATGCAGCTTGAGCTTCTG...
-```
-
-For each gene with multiple transcripts (alternative splicing), we kept only the **longest CDS** — a common heuristic for capturing the full open reading frame.
-
-> **Alternative:** `scripts/step5b_alt_canonical_transcripts.R` uses **Ensembl Canonical / MANE Select** transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. This is more standard for publication-grade work and the FASTAs are already generated in `genomes/cds_canonical_*.fa`.
-
-## Result
+### Result
 
 ```{r cds-stats}
 library(Biostrings)
@@ -426,7 +371,7 @@ cat("        mean   =", as.integer(mean(width(bbb_human))), "bp\n")
 
 ---
 
-# Step 5c-d: Conservation Scoring
+## Steps 5c-d — Scoring
 
 ::: {.callout-note}
 ## Data flow
@@ -434,20 +379,18 @@ cat("        mean   =", as.integer(mean(width(bbb_human))), "bp\n")
 **Reads:** `genomes/cds_BBB_*.fa` or `genomes/cds_liver_*.fa`, `processed/master_BBB_genelist_complete.csv`
 **Writes:** `processed/conservation_scores_BBB.csv`, `processed/conservation_scores_liver.csv`, `processed/conservation_scores_combined.csv`
 **Packages:** `Biostrings`, `pwalign`, `seqinr`, `dplyr`, `readr`
-**Note:** Step 5c runs ~1,500 pairwise alignments and takes 20–40 minutes. Step 5d runs ~3,000 and takes 60–90 minutes.
+**Note:** Step 5c takes 20–40 min (~1,500 alignments). Step 5d takes 60–90 min (~3,000 alignments).
 :::
 
-For each BBB gene (and separately, each liver control gene), we aligned its CDS from each species pair and computed two conservation metrics.
+### Pairwise global alignment
 
-## Pairwise global alignment (Needleman-Wunsch)
+For each gene we ran a **Needleman-Wunsch global alignment** between species pairs, then computed % identity and dN/dS:
 
 ```r
 aln <- pwalign::pairwiseAlignment(
-  seq1, seq2,
-  type = "global",
+  seq1, seq2, type = "global",
   substitutionMatrix = nucleotideSubstitutionMatrix(match=1, mismatch=-1),
-  gapOpening = -5,
-  gapExtension = -2
+  gapOpening = -5, gapExtension = -2
 )
 pct_identity <- pwalign::pid(aln, type = "PID1")
 # PID1 = matches / alignment_length (including gaps)
@@ -455,69 +398,57 @@ pct_identity <- pwalign::pid(aln, type = "PID1")
 
 **Why global, not local?** These are orthologous genes — they should align end-to-end. Local alignment would only find the most similar segment, over-estimating similarity for genes that diverge at the edges.
 
-## dN/dS (first attempt — later corrected in Step 5f)
+### Why % identity AND dN/dS
 
-```r
-# First attempt — had bugs, corrected in Step 5f
-res  <- seqinr::kaks(aln_object)
-dN   <- as.numeric(res$ka)   # non-synonymous substitution rate
-dS   <- as.numeric(res$ks)   # synonymous substitution rate
-dNdS <- dN / dS
-```
-
-**Why % identity AND dN/dS?** % identity is the simple "how similar are the letters" measure. dN/dS adds evolutionary context: a gene under strong purifying selection will have dN/dS << 1 even if % identity is moderate, because most substitutions that did occur were synonymous (they changed DNA but not protein).
+- **% identity** — how similar are the letters, simple and interpretable
+- **dN/dS** — how often do mutations *change the protein* (non-synonymous, dN) vs leave it unchanged (synonymous, dS). dN/dS << 1 means evolution is removing protein-changing mutations (purifying selection).
 
 ---
 
-# Step 5e-g: Statistics + dN/dS Corrections
+## Steps 5e-g — Statistics
 
 ::: {.callout-note}
 ## Data flow
 **Full scripts:** `scripts/step5e_statistics.R`, `scripts/step5f_recompute_dnds.R`, `scripts/step5g_stats_v2.R`
-**Step 5e reads:** `processed/conservation_scores_combined.csv` → writes `processed/conservation_summary.txt`
-**Step 5f reads:** `processed/conservation_scores_combined.csv` + `genomes/cds_BBB_*.fa` + `genomes/cds_liver_human.fa` → writes `processed/conservation_scores_combined_v2.csv`
-**Step 5g reads:** `processed/conservation_scores_combined_v2.csv` → writes `processed/conservation_summary_v2.txt`
+**Step 5e** reads `conservation_scores_combined.csv` → writes `conservation_summary.txt`
+**Step 5f** reads combined scores + CDS FASTAs → **writes** `conservation_scores_combined_v2.csv`
+**Step 5g** reads v2 scores → writes `conservation_summary_v2.txt`
 **Packages:** `Biostrings`, `pwalign`, `seqinr`, `dplyr`, `readr`
 :::
 
-## Step 5e: First-pass statistics
+### Step 5e: First-pass statistics
 
-Wilcoxon rank-sum tests comparing BBB vs liver conservation scores. Non-parametric tests were chosen because % identity is bounded (0–100) and often left-skewed. Stratified analyses by Daneman filter, validation score, and orthologue type.
+Wilcoxon rank-sum tests comparing BBB vs liver (non-parametric, because % identity is bounded and skewed). Stratified analyses by Daneman filter, validation score, and orthologue type.
 
-## Step 5f: dN/dS recomputation
+### Step 5f: dN/dS recomputation
 
 ::: {.callout-warning}
 ## What went wrong — three separate dN/dS bugs
 
-**Bug 1 — all NA values:** The very first run returned all `NA`. Cause: the `ape` package (a phylogenetics package) was loaded alongside `seqinr`, and `ape` has its own `kaks()` function with a completely different interface. R was silently calling `ape::kaks()` instead of `seqinr::kaks()`. Fix: explicit namespace — `seqinr::kaks()`.
+**Bug 1 — all NA values:** The `ape` package (loaded alongside `seqinr`) has its own `kaks()` function and silently overrode `seqinr::kaks()`. Fix: explicit namespace.
 
-**Bug 2 — values computed but systematically inflated:** `seqinr::kaks()` assumes the two input sequences are already *codon-aligned* — same length, with each position corresponding to the same codon in both sequences. We were passing trimmed but unaligned sequences. The codons handed to `kaks()` were not in positional correspondence, inflating the non-synonymous substitution count. The effect is especially large for human vs mouse (~80 million year divergence).
+**Bug 2 — values inflated:** `seqinr::kaks()` assumes codon-aligned input — same length, same reading frame positions in both sequences. We were passing unaligned sequences, inflating the non-synonymous count. Especially large effect for human vs mouse (~80 million year divergence).
 
-**Bug 3 — wrong translation function:** During the codon-alignment fix, `Biostrings::translate()` was being silently replaced by `dplyr`'s `translate()` (a completely different function for SQL translation). Fix: explicit namespace — `Biostrings::translate(DNAString(seq), if.fuzzy.codon = "X")`.
+**Bug 3 — wrong translation function:** `dplyr`'s `translate()` (an SQL function) was silently overriding `Biostrings::translate()`. Fix: `Biostrings::translate(DNAString(seq), if.fuzzy.codon = "X")`.
 :::
 
-**The full fix:** translate both sequences to amino acids → align proteins using BLOSUM62 → use protein alignment to back-map codons → strip gap-containing codon columns → pass codon-aligned pair to `seqinr::kaks()`:
+**The fix:** translate both sequences to amino acids → align proteins with BLOSUM62 → back-map codons using protein alignment → strip gap columns → pass codon-aligned pair to `seqinr::kaks()`:
 
 ```r
-# Simplified version of the codon-aware alignment pipeline (see step5f_recompute_dnds.R)
 aa1 <- Biostrings::translate(DNAString(nt1), if.fuzzy.codon = "X")
 aa2 <- Biostrings::translate(DNAString(nt2), if.fuzzy.codon = "X")
-
-protein_aln <- pwalign::pairwiseAlignment(
-  aa1, aa2, type = "global",
-  substitutionMatrix = "BLOSUM62",
-  gapOpening = 10, gapExtension = 4
-)
-# Back-map aligned amino acids → codons, strip gap columns, run kaks()
+protein_aln <- pwalign::pairwiseAlignment(aa1, aa2, type = "global",
+                 substitutionMatrix = "BLOSUM62",
+                 gapOpening = 10, gapExtension = 4)
+# back-map to codons, strip gaps, run seqinr::kaks()
+# full implementation: scripts/step5f_recompute_dnds.R
 ```
 
-The corrected dN/dS values are systematically lower (the bug inflated both BBB and liver equally), but the relative pattern between gene sets is preserved and cleaner.
+### Step 5g: Multiple testing correction
 
-## Step 5g: Multiple testing correction
+Bonferroni and FDR (Benjamini-Hochberg) applied to the four primary BBB-vs-liver comparisons. Stratified tests are flagged as exploratory.
 
-Bonferroni and FDR (Benjamini-Hochberg) applied to the four primary BBB-vs-liver comparisons. Stratified subgroup tests are flagged as exploratory.
-
-## Final results
+### Final results
 
 ```{r v2-results}
 df <- read_csv("processed/conservation_scores_combined_v2.csv",
@@ -561,16 +492,14 @@ ggplot(df_long, aes(x = PctIdentity, fill = Gene_Set)) +
   facet_wrap(~ Comparison) +
   scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
   labs(x = "% nucleotide identity", y = "Density",
-       title = "BBB vs Liver: distribution of % identity",
-       fill = "Gene set") +
+       title = "BBB vs Liver: distribution of % identity", fill = "Gene set") +
   theme_minimal()
 ```
 
 ```{r v2-dnds-plot, fig.cap="Distribution of dN/dS (codon-aligned)"}
 df_dnds <- df |>
   select(Gene_Set, dNdS_Human_Mouse_v2, dNdS_Human_Macaque_v2) |>
-  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison",
-                       values_to = "dNdS") |>
+  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison", values_to = "dNdS") |>
   filter(!is.na(dNdS), dNdS < 2)
 
 ggplot(df_dnds, aes(x = dNdS, fill = Gene_Set)) +
@@ -578,27 +507,22 @@ ggplot(df_dnds, aes(x = dNdS, fill = Gene_Set)) +
   facet_wrap(~ Comparison) +
   scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
   labs(x = "dN/dS (codon-aligned)", y = "Density",
-       title = "BBB vs Liver: distribution of dN/dS",
-       fill = "Gene set") +
+       title = "BBB vs Liver: distribution of dN/dS", fill = "Gene set") +
   theme_minimal()
 ```
 
 ```{r pid-vs-dnds-plot, fig.cap="% identity vs dN/dS — both metrics tell the same story"}
 bbb_scatter <- bbb |>
-  filter(!is.na(PctId_Human_Mouse), !is.na(dNdS_Human_Mouse_v2),
-         dNdS_Human_Mouse_v2 < 2)
+  filter(!is.na(PctId_Human_Mouse), !is.na(dNdS_Human_Mouse_v2), dNdS_Human_Mouse_v2 < 2)
 
 ggplot(bbb_scatter, aes(x = PctId_Human_Mouse, y = dNdS_Human_Mouse_v2)) +
   geom_point(alpha = 0.25, color = "#d62728", size = 1.2) +
   geom_smooth(method = "loess", se = TRUE, color = "black", linewidth = 0.8) +
-  labs(x = "% nucleotide identity (Human vs Mouse)",
-       y = "dN/dS (codon-aligned)",
+  labs(x = "% nucleotide identity (Human vs Mouse)", y = "dN/dS (codon-aligned)",
        title = "% identity and dN/dS are correlated but capture different signal",
        subtitle = "BBB genes only — Human vs Mouse") +
   theme_minimal()
 ```
-
-The negative correlation confirms both metrics measure the same underlying conservation. dN/dS adds extra information: a gene can have moderate % identity but very low dN/dS if most substitutions are synonymous.
 
 ```{r purifying-selection-bar, fig.cap="Proportion of genes under strong purifying selection (dN/dS < 0.3)"}
 purify_df <- df |>
@@ -614,8 +538,7 @@ purify_df <- df |>
 ggplot(purify_df, aes(x = Comparison, y = Pct, fill = Gene_Set)) +
   geom_col(position = "dodge") +
   scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
-  labs(x = NULL,
-       y = "% of genes with dN/dS < 0.3",
+  labs(x = NULL, y = "% of genes with dN/dS < 0.3",
        title = "Proportion of genes under strong purifying selection",
        subtitle = "dN/dS < 0.3 = conventional threshold for strong constraint",
        fill = "Gene set") +
@@ -624,18 +547,17 @@ ggplot(purify_df, aes(x = Comparison, y = Pct, fill = Gene_Set)) +
 
 ---
 
-# Step 5h: The Three-Species Triangle
+## Step 5h — Triangle
 
 ::: {.callout-note}
 ## Data flow
 **Full script:** `scripts/step5h_mouse_vs_macaque.R`
 **Reads:** `genomes/cds_BBB_mouse.fa`, `genomes/cds_BBB_macaque.fa`, full genome FASTAs, `processed/conservation_scores_combined_v2.csv`
 **Writes:** `processed/conservation_scores_mouse_macaque.csv`
-**Packages:** `Biostrings`, `pwalign`, `seqinr`, `dplyr`, `readr`
-**Note:** Runs ~1,500 alignments, takes ~30 minutes.
+**Note:** ~1,500 alignments, ~30 minutes.
 :::
 
-Earlier steps all used human as the reference. To complete the picture we needed the third side: mouse vs macaque directly.
+Earlier steps used human as the reference. To complete the picture we computed the third side: mouse vs macaque directly.
 
 ```{r triangle}
 mm     <- read_csv("processed/conservation_scores_mouse_macaque.csv",
@@ -643,13 +565,11 @@ mm     <- read_csv("processed/conservation_scores_mouse_macaque.csv",
 mm_bbb <- mm[mm$Gene_Set == "BBB", ]
 
 triangle <- data.frame(
-  Comparison = c("Human  vs Mouse",
-                  "Human  vs Macaque",
-                  "Mouse  vs Macaque"),
+  Comparison = c("Human  vs Mouse", "Human  vs Macaque", "Mouse  vs Macaque"),
   `Median % identity (BBB genes)` = c(
-    round(median(bbb$PctId_Human_Mouse,       na.rm = TRUE), 1),
-    round(median(bbb$PctId_Human_Macaque,     na.rm = TRUE), 1),
-    round(median(mm_bbb$PctId_Mouse_Macaque,  na.rm = TRUE), 1)
+    round(median(bbb$PctId_Human_Mouse,      na.rm = TRUE), 1),
+    round(median(bbb$PctId_Human_Macaque,    na.rm = TRUE), 1),
+    round(median(mm_bbb$PctId_Mouse_Macaque, na.rm = TRUE), 1)
   ),
   check.names = FALSE
 )
@@ -668,14 +588,13 @@ ggplot(bbb_both, aes(x = PctId_Human_Mouse, y = PctId_Human_Macaque)) +
            color = "grey30", size = 3.5, hjust = 0) +
   annotate("text", x = 85, y = 72, label = "Mouse closer to human",
            color = "grey30", size = 3.5, hjust = 0) +
-  labs(x = "Human vs Mouse % identity",
-       y = "Human vs Macaque % identity",
+  labs(x = "Human vs Mouse % identity", y = "Human vs Macaque % identity",
        title = "For almost every BBB gene, macaque is more similar to human than mouse is",
        subtitle = "Points above the dashed diagonal = macaque is the closer model") +
   theme_minimal()
 ```
 
-The near-complete shift of points above the diagonal directly visualises the case for macaque as the more faithful model. The complete evolutionary distance picture:
+The complete evolutionary distance picture:
 
 ```
                 Human
@@ -687,46 +606,46 @@ The near-complete shift of points above the diagonal directly visualises the cas
 
 ---
 
-# Results and Interpretation
+## Results
 
-## Headline findings
+### Headline findings
 
-1. **Macaque is the closest model to human BBB.** 96.8% nucleotide identity at the coding-sequence level. For almost every individual gene, macaque sits above the diagonal — more similar to human than mouse is.
+1. **Macaque is the closest model to human BBB.** 96.8% nucleotide identity at the coding-sequence level. For almost every gene, macaque sits above the diagonal — more similar to human than mouse.
 
-2. **Mouse is more divergent (84.1%) but still highly conserved.** Mouse models remain biologically defensible, but expect ~16% sequence divergence. Where mouse and human BBB phenotypes differ in a clinical setting, this sequence divergence is one possible explanation.
+2. **Mouse is more divergent (84.1%) but still highly conserved.** Mouse models remain biologically defensible, but ~16% sequence divergence is present. Where mouse and human BBB phenotypes differ clinically, this divergence is one possible explanation.
 
-3. **BBB genes are under stronger purifying selection than liver genes** — most visibly in the human-macaque comparison (BBB dN/dS 0.152 vs Liver 0.196, p < 10⁻⁶ after Bonferroni correction). The signal is weaker in the human-mouse comparison because at ~80 million years of divergence, all genes have accumulated extensive change and the fine-grained differential signal is lost.
+3. **BBB genes are under stronger purifying selection than liver genes** — most visibly in the human-macaque comparison (BBB dN/dS 0.152 vs Liver 0.196, p < 10⁻⁶ after Bonferroni correction). The signal is weaker in human-mouse because at ~80 million years, all genes have accumulated extensive change.
 
-4. **Gene duplication produces dramatic divergence.** Paralogous mouse genes (e.g. *Abcb1a* + *Abcb1b* for human ABCB1) are only ~47% identical to their human counterpart, vs ~85% for one-to-one orthologues. Effect size is large (rank-biserial r = 0.72). Both paralogue rows are reported and flagged.
+4. **Gene duplication produces dramatic divergence.** Paralogous mouse genes (e.g. *Abcb1a* + *Abcb1b* for human ABCB1) are only ~47% identical to human, vs ~85% for one-to-one orthologues. Effect size is large (rank-biserial r = 0.72).
 
-5. **Conservation and human BBB expression are independent.** A gene's `Human_BBB_Datasets_N` score (0–3) does not predict how conserved it is at the sequence level. These are two different aspects of biological importance.
+5. **Conservation and human BBB expression are independent.** A gene's validation score (0–3 datasets) does not predict how conserved it is at the sequence level.
 
-## Biological interpretation
+### Biological interpretation
 
-Strong purifying selection on BBB genes makes biological sense. The BBB controls what enters and exits the brain — broken transporters or tight junctions would let toxins in or block essential nutrients. Evolution actively removes protein-changing mutations from these genes, more aggressively than for liver genes (which can tolerate more variation because the liver is more redundant and regenerative).
+Strong purifying selection on BBB genes makes biological sense. The BBB controls what enters and exits the brain — broken transporters or tight junctions would let toxins in or block essential nutrients. Evolution actively removes protein-changing mutations from these genes, more aggressively than for liver genes.
 
-The fact that this signal is most visible in the human-macaque comparison — not human-mouse — reflects evolutionary timescale. Subtle differential selection pressure is detectable when species are close enough that not all genes have saturated their substitutions. At ~80 million years for human-mouse, this fine-grained signal is lost in the noise.
+The fact that this signal is most visible in the human-macaque comparison — not human-mouse — reflects evolutionary timescale. Subtle differential selection is detectable when species are close enough that not all genes have saturated their substitutions. At ~80 million years for human-mouse, this signal is lost in the noise.
 
 ---
 
-# Limitations and Future Work
+## Limitations
 
-## Methodological caveats
+### Methodological caveats
 
 - **Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML `codeml` on a multi-species alignment with an explicit phylogenetic tree. Discuss with supervisor before publication.
 - **Longest-transcript heuristic.** MANE Select / Ensembl Canonical (`step5b_alt_canonical_transcripts.R`) are more standard. The canonical FASTAs are already generated.
 - **Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.
 
-## Biological caveats
+### Biological caveats
 
-- **The starting gene list is enrichment-based.** CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia. Other broadly endothelial BBB-relevant genes may be similarly missing.
-- **Liver is one specific control choice.** A different control (brain non-BBB genes, or genes matched by protein domain) could give a different picture.
+- **The starting gene list is enrichment-based.** CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.
+- **Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.
 - **Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.
 
-## Future extensions
+### Future extensions
 
 1. **PAML codeml** for proper phylogenetic dN/dS.
-2. **Promoter sequence comparison** (~2 kb upstream of transcription start site) to test regulatory divergence.
+2. **Promoter sequence comparison** (~2 kb upstream of TSS) to test regulatory divergence.
 3. **MANE Select transcripts** (already scripted — swap in `genomes/cds_canonical_*.fa`).
 4. **Brain non-BBB genes** as a complementary control set.
 5. **Giger macaque dataset** — are the most conserved BBB genes also the most highly expressed in macaque endothelium?
@@ -734,15 +653,9 @@ The fact that this signal is most visible in the human-macaque comparison — no
 
 ---
 
-# AI Transparency
+## References
 
-This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland. The AI did not contribute to dataset selection, biological interpretation, or scientific conclusions.
-
----
-
-# References
-
-Datasets:
+### Datasets
 
 - Daneman R, et al. (2010). The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.
 - Munji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892-1902.
@@ -750,13 +663,19 @@ Datasets:
 - Yang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer's risk. *Nature* 603: 885-892.
 - Winkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.
 
-Tools:
+### Tools
 
 - Ensembl release 113. https://www.ensembl.org
 - BioMart (`biomaRt` R package).
 - Human Protein Atlas. https://www.proteinatlas.org
 - Bioconductor: `Biostrings`, `pwalign`, `seqinr`.
 
+### AI Transparency
+
+This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Rachel Clelland.
+
 ---
 
-*Render this document with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*
+:::
+
+*Render with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*
