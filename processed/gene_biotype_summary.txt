@@ -1,0 +1,24 @@
+=== Gene Biotype Audit ===
+
+Total genes in master list: 1724
+
+── Human biotype breakdown ──────────────────────────────
+protein_coding 
+          1631 
+
+── Mouse biotype breakdown ──────────────────────────────
+protein_coding 
+          1539 
+
+── Macaque biotype breakdown ────────────────────────────
+protein_coding 
+          1474 
+
+── Noncoding flags ──────────────────────────────────────
+Human genes not protein_coding:   0
+Mouse genes not protein_coding:   0
+Macaque genes not protein_coding: 0
+Any species noncoding:            0
+
+RESULT: All genes in the master list are protein_coding in all three species.
+        No annotation gap detected.

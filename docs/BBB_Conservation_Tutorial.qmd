@@ -291,6 +291,60 @@ combined |>
 
 The 1,724 rows (vs 1,526 input genes) reflects **one-to-many** orthologues — e.g. human ABCB1 maps to both mouse *Abcb1a* and *Abcb1b*. Both rows are kept and flagged.
 
+### Step 3c — Biotype audit
+
+::: {.callout-note}
+## Data flow
+**Full script:** `scripts/step3c_biotype_check.R`
+**Reads:** `genomes/*.cds.all.fa.gz` (×3 species, already downloaded), `processed/master_BBB_genelist_complete.csv`
+**Writes:** `processed/gene_biotype_check.csv`, `processed/gene_biotype_summary.txt`
+**Packages:** `Biostrings`, `dplyr`, `readr`
+**Note:** Biotypes are parsed directly from the `gene_biotype:` field in Ensembl FASTA headers — no BioMart query needed.
+:::
+
+#### Why did we do Step 3c?
+
+Before writing up results, we need to confirm that every gene that entered the CDS alignment pipeline is actually **protein-coding**. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the paper's framing — "we measured conservation of BBB coding sequences" — would be wrong. This step audits every Ensembl ID in the master list against the `gene_biotype` annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.
+
+#### Result
+
+```{r biotype-audit}
+biotype_check <- read_csv("processed/gene_biotype_check.csv",
+                          show_col_types = FALSE)
+
+# Biotype breakdown for human
+bt_human <- biotype_check |>
+  filter(!is.na(Human_Biotype)) |>
+  count(Human_Biotype, name = "Genes") |>
+  arrange(desc(Genes))
+
+kable(bt_human, caption = "Human gene biotype distribution in BBB master list")
+```
+
+```{r biotype-flag}
+n_noncoding <- sum(biotype_check$Any_NonCoding, na.rm = TRUE)
+n_total     <- nrow(biotype_check)
+
+cat(sprintf("Genes with any noncoding annotation: %d / %d\n", n_noncoding, n_total))
+
+if (n_noncoding == 0) {
+  cat("\nAll mapped genes are protein_coding in all three species.\n")
+  cat("Pipeline integrity: CONFIRMED — no noncoding genes entered the CDS alignment.\n")
+} else {
+  biotype_check |>
+    filter(Any_NonCoding) |>
+    select(GeneSymbol_Human, HumanEnsembl, Human_Biotype,
+           Mouse_Biotype, Macaque_Biotype) |>
+    kable(caption = "Noncoding genes flagged in BBB master list")
+}
+```
+
+::: {.callout-note}
+## Audit outcome
+
+Every gene successfully mapped to an Ensembl ID is annotated as **`protein_coding`** in all three species. Genes with no Ensembl ID (93 human, 185 mouse, 250 macaque) were already excluded from the alignment steps because they had no CDS entries in the Ensembl FASTA files. **No noncoding genes entered the conservation scoring pipeline.**
+:::
+
 ---
 
 ## Steps 4b & 4c — Validation
