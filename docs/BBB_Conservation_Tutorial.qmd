@@ -576,10 +576,16 @@ df_long <- df |>
 ggplot(df_long, aes(x = PctIdentity, fill = Gene_Set)) +
   geom_density(alpha = 0.5) +
   facet_wrap(~ Comparison) +
-  scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
+  scale_fill_manual(
+    values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4"),
+    labels = c("BBB" = "BBB (red)", "Liver_Control" = "Liver (blue)")
+  ) +
   labs(x = "% nucleotide identity", y = "Density",
-       title = "BBB vs Liver: distribution of % identity", fill = "Gene set") +
-  theme_minimal()
+       title = "BBB vs Liver: distribution of % identity",
+       fill = "Gene set",
+       caption = "Purple = region where BBB and Liver distributions overlap (red + blue at 50% transparency)") +
+  theme_minimal() +
+  theme(plot.caption = element_text(colour = "#7b4f6e", face = "italic", size = 9))
 ```
 
 ```{r v2-dnds-plot, fig.cap="Distribution of dN/dS (codon-aligned)"}
@@ -591,10 +597,16 @@ df_dnds <- df |>
 ggplot(df_dnds, aes(x = dNdS, fill = Gene_Set)) +
   geom_density(alpha = 0.5) +
   facet_wrap(~ Comparison) +
-  scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
+  scale_fill_manual(
+    values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4"),
+    labels = c("BBB" = "BBB (red)", "Liver_Control" = "Liver (blue)")
+  ) +
   labs(x = "dN/dS (codon-aligned)", y = "Density",
-       title = "BBB vs Liver: distribution of dN/dS", fill = "Gene set") +
-  theme_minimal()
+       title = "BBB vs Liver: distribution of dN/dS",
+       fill = "Gene set",
+       caption = "Purple = region where BBB and Liver distributions overlap (red + blue at 50% transparency)") +
+  theme_minimal() +
+  theme(plot.caption = element_text(colour = "#7b4f6e", face = "italic", size = 9))
 ```
 
 ```{r pid-vs-dnds-plot, fig.cap="% identity vs dN/dS — both metrics tell the same story"}
