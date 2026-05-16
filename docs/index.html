@@ -2715,7 +2715,7 @@ Step 5h   Direct mouse vs macaque comparison</code></pre>
 </div>
 <section id="why-did-we-do-step-3c" class="level4">
 <h4 class="anchored" data-anchor-id="why-did-we-do-step-3c">Why did we do Step 3c?</h4>
-<p>Before writing up results, we need to confirm that every gene that entered the CDS alignment pipeline is actually <strong>protein-coding</strong>. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the paper’s framing — “we measured conservation of BBB coding sequences” — would be wrong. This step audits every Ensembl ID in the master list against the <code>gene_biotype</code> annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.</p>
+<p>We need to confirm that every gene that entered the CDS alignment pipeline is actually <strong>protein-coding</strong>. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the analysis would not correctly reflect conservation of BBB coding sequences. This step audits every Ensembl ID in the master list against the <code>gene_biotype</code> annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.</p>
 </section>
 <section id="result-3" class="level4">
 <h4 class="anchored" data-anchor-id="result-3">Result</h4>
@@ -2943,7 +2943,7 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <h3 class="anchored" data-anchor-id="what-we-did-2">What we did</h3>
 <p>Ensembl provides pre-extracted CDS FASTA files for every annotated transcript. For each gene with multiple transcripts (alternative splicing), we kept the <strong>longest CDS</strong> as a heuristic for the full open reading frame.</p>
 <blockquote class="blockquote">
-<p><strong>Alternative:</strong> <code>scripts/step5b_alt_canonical_transcripts.R</code> uses <strong>Ensembl Canonical / MANE Select</strong> transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. More standard for publication-grade work. The FASTAs are already generated in <code>genomes/cds_canonical_*.fa</code>.</p>
+<p><strong>Alternative:</strong> <code>scripts/step5b_alt_canonical_transcripts.R</code> uses <strong>Ensembl Canonical / MANE Select</strong> transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. The FASTAs are already generated in <code>genomes/cds_canonical_*.fa</code>.</p>
 </blockquote>
 </section>
 <section id="result-4" class="level3">
@@ -3375,7 +3375,7 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <section id="methodological-caveats" class="level3">
 <h3 class="anchored" data-anchor-id="methodological-caveats">Methodological caveats</h3>
 <ul>
-<li><strong>Pairwise dN/dS, not phylogenetic.</strong> A more rigorous analysis uses PAML <code>codeml</code> on a multi-species alignment with an explicit phylogenetic tree. Discuss with supervisor before publication.</li>
+<li><strong>Pairwise dN/dS, not phylogenetic.</strong> A more rigorous analysis uses PAML <code>codeml</code> on a multi-species alignment with an explicit phylogenetic tree.</li>
 <li><strong>Longest-transcript heuristic.</strong> MANE Select / Ensembl Canonical (<code>step5b_alt_canonical_transcripts.R</code>) are more standard. The canonical FASTAs are already generated.</li>
 <li><strong>Multiple testing correction was applied to primary tests only.</strong> Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.</li>
 </ul>
@@ -3387,17 +3387,6 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <li><strong>Liver is one specific control choice.</strong> A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.</li>
 <li><strong>Coding sequence only.</strong> Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.</li>
 </ul>
-</section>
-<section id="future-extensions" class="level3">
-<h3 class="anchored" data-anchor-id="future-extensions">Future extensions</h3>
-<ol type="1">
-<li><strong>PAML codeml</strong> for proper phylogenetic dN/dS.</li>
-<li><strong>Promoter sequence comparison</strong> (~2 kb upstream of TSS) to test regulatory divergence.</li>
-<li><strong>MANE Select transcripts</strong> (already scripted — swap in <code>genomes/cds_canonical_*.fa</code>).</li>
-<li><strong>Brain non-BBB genes</strong> as a complementary control set.</li>
-<li><strong>Giger macaque dataset</strong> — are the most conserved BBB genes also the most highly expressed in macaque endothelium?</li>
-<li><strong>Functional category breakdown</strong> — are tight junction proteins more conserved than transporters? Are drug efflux pumps the most protected class?</li>
-</ol>
 <hr>
 </section>
 </div>
@@ -4192,7 +4181,7 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <span id="cb50-304"><a href="#cb50-304" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-305"><a href="#cb50-305" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Why did we do Step 3c?</span></span>
 <span id="cb50-306"><a href="#cb50-306" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-307"><a href="#cb50-307" aria-hidden="true" tabindex="-1"></a>Before writing up results, we need to confirm that every gene that entered the CDS alignment pipeline is actually **protein-coding**. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the paper&#39;s framing — &quot;we measured conservation of BBB coding sequences&quot; — would be wrong. This step audits every Ensembl ID in the master list against the <span class="in">`gene_biotype`</span> annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.</span>
+<span id="cb50-307"><a href="#cb50-307" aria-hidden="true" tabindex="-1"></a>We need to confirm that every gene that entered the CDS alignment pipeline is actually **protein-coding**. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the analysis would not correctly reflect conservation of BBB coding sequences. This step audits every Ensembl ID in the master list against the <span class="in">`gene_biotype`</span> annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.</span>
 <span id="cb50-308"><a href="#cb50-308" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-309"><a href="#cb50-309" aria-hidden="true" tabindex="-1"></a><span class="fu">#### Result</span></span>
 <span id="cb50-310"><a href="#cb50-310" aria-hidden="true" tabindex="-1"></a></span>
@@ -4323,7 +4312,7 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <span id="cb50-435"><a href="#cb50-435" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-436"><a href="#cb50-436" aria-hidden="true" tabindex="-1"></a>Ensembl provides pre-extracted CDS FASTA files for every annotated transcript. For each gene with multiple transcripts (alternative splicing), we kept the **longest CDS** as a heuristic for the full open reading frame.</span>
 <span id="cb50-437"><a href="#cb50-437" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-438"><a href="#cb50-438" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Alternative:** `scripts/step5b_alt_canonical_transcripts.R` uses **Ensembl Canonical / MANE Select** transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. More standard for publication-grade work. The FASTAs are already generated in </span><span class="in">`genomes/cds_canonical_*.fa`</span><span class="at">.</span></span>
+<span id="cb50-438"><a href="#cb50-438" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; **Alternative:** `scripts/step5b_alt_canonical_transcripts.R` uses **Ensembl Canonical / MANE Select** transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. The FASTAs are already generated in </span><span class="in">`genomes/cds_canonical_*.fa`</span><span class="at">.</span></span>
 <span id="cb50-439"><a href="#cb50-439" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-440"><a href="#cb50-440" aria-hidden="true" tabindex="-1"></a><span class="fu">### Result</span></span>
 <span id="cb50-441"><a href="#cb50-441" aria-hidden="true" tabindex="-1"></a></span>
@@ -4622,7 +4611,7 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <span id="cb50-734"><a href="#cb50-734" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-735"><a href="#cb50-735" aria-hidden="true" tabindex="-1"></a><span class="fu">### Methodological caveats</span></span>
 <span id="cb50-736"><a href="#cb50-736" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-737"><a href="#cb50-737" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML <span class="in">`codeml`</span> on a multi-species alignment with an explicit phylogenetic tree. Discuss with supervisor before publication.</span>
+<span id="cb50-737"><a href="#cb50-737" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML <span class="in">`codeml`</span> on a multi-species alignment with an explicit phylogenetic tree.</span>
 <span id="cb50-738"><a href="#cb50-738" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Longest-transcript heuristic.** MANE Select / Ensembl Canonical (<span class="in">`step5b_alt_canonical_transcripts.R`</span>) are more standard. The canonical FASTAs are already generated.</span>
 <span id="cb50-739"><a href="#cb50-739" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.</span>
 <span id="cb50-740"><a href="#cb50-740" aria-hidden="true" tabindex="-1"></a></span>
@@ -4632,43 +4621,34 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <span id="cb50-744"><a href="#cb50-744" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.</span>
 <span id="cb50-745"><a href="#cb50-745" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.</span>
 <span id="cb50-746"><a href="#cb50-746" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-747"><a href="#cb50-747" aria-hidden="true" tabindex="-1"></a><span class="fu">### Future extensions</span></span>
+<span id="cb50-747"><a href="#cb50-747" aria-hidden="true" tabindex="-1"></a>---</span>
 <span id="cb50-748"><a href="#cb50-748" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-749"><a href="#cb50-749" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**PAML codeml** for proper phylogenetic dN/dS.</span>
-<span id="cb50-750"><a href="#cb50-750" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Promoter sequence comparison** (~2 kb upstream of TSS) to test regulatory divergence.</span>
-<span id="cb50-751"><a href="#cb50-751" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**MANE Select transcripts** (already scripted — swap in <span class="in">`genomes/cds_canonical_*.fa`</span>).</span>
-<span id="cb50-752"><a href="#cb50-752" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Brain non-BBB genes** as a complementary control set.</span>
-<span id="cb50-753"><a href="#cb50-753" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Giger macaque dataset** — are the most conserved BBB genes also the most highly expressed in macaque endothelium?</span>
-<span id="cb50-754"><a href="#cb50-754" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**Functional category breakdown** — are tight junction proteins more conserved than transporters? Are drug efflux pumps the most protected class?</span>
-<span id="cb50-755"><a href="#cb50-755" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-756"><a href="#cb50-756" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb50-757"><a href="#cb50-757" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-758"><a href="#cb50-758" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
-<span id="cb50-759"><a href="#cb50-759" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-760"><a href="#cb50-760" aria-hidden="true" tabindex="-1"></a><span class="fu">### Datasets</span></span>
-<span id="cb50-761"><a href="#cb50-761" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-762"><a href="#cb50-762" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Daneman R, et al. (2010). The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.</span>
-<span id="cb50-763"><a href="#cb50-763" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Munji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892-1902.</span>
-<span id="cb50-764"><a href="#cb50-764" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. *Nature* 614: 945-954.</span>
-<span id="cb50-765"><a href="#cb50-765" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Yang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer&#39;s risk. *Nature* 603: 885-892.</span>
-<span id="cb50-766"><a href="#cb50-766" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Winkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.</span>
+<span id="cb50-749"><a href="#cb50-749" aria-hidden="true" tabindex="-1"></a><span class="fu">## References</span></span>
+<span id="cb50-750"><a href="#cb50-750" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-751"><a href="#cb50-751" aria-hidden="true" tabindex="-1"></a><span class="fu">### Datasets</span></span>
+<span id="cb50-752"><a href="#cb50-752" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-753"><a href="#cb50-753" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Daneman R, et al. (2010). The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.</span>
+<span id="cb50-754"><a href="#cb50-754" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Munji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892-1902.</span>
+<span id="cb50-755"><a href="#cb50-755" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Wälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. *Nature* 614: 945-954.</span>
+<span id="cb50-756"><a href="#cb50-756" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Yang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer&#39;s risk. *Nature* 603: 885-892.</span>
+<span id="cb50-757"><a href="#cb50-757" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Winkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.</span>
+<span id="cb50-758"><a href="#cb50-758" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-759"><a href="#cb50-759" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tools</span></span>
+<span id="cb50-760"><a href="#cb50-760" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-761"><a href="#cb50-761" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensembl release 113. https://www.ensembl.org</span>
+<span id="cb50-762"><a href="#cb50-762" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>BioMart (<span class="in">`biomaRt`</span> R package).</span>
+<span id="cb50-763"><a href="#cb50-763" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human Protein Atlas. https://www.proteinatlas.org</span>
+<span id="cb50-764"><a href="#cb50-764" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bioconductor: <span class="in">`Biostrings`</span>, <span class="in">`pwalign`</span>, <span class="in">`seqinr`</span>.</span>
+<span id="cb50-765"><a href="#cb50-765" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-766"><a href="#cb50-766" aria-hidden="true" tabindex="-1"></a><span class="fu">### AI Transparency</span></span>
 <span id="cb50-767"><a href="#cb50-767" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-768"><a href="#cb50-768" aria-hidden="true" tabindex="-1"></a><span class="fu">### Tools</span></span>
+<span id="cb50-768"><a href="#cb50-768" aria-hidden="true" tabindex="-1"></a>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Claire Clelland.</span>
 <span id="cb50-769"><a href="#cb50-769" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-770"><a href="#cb50-770" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensembl release 113. https://www.ensembl.org</span>
-<span id="cb50-771"><a href="#cb50-771" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>BioMart (<span class="in">`biomaRt`</span> R package).</span>
-<span id="cb50-772"><a href="#cb50-772" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human Protein Atlas. https://www.proteinatlas.org</span>
-<span id="cb50-773"><a href="#cb50-773" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bioconductor: <span class="in">`Biostrings`</span>, <span class="in">`pwalign`</span>, <span class="in">`seqinr`</span>.</span>
-<span id="cb50-774"><a href="#cb50-774" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-775"><a href="#cb50-775" aria-hidden="true" tabindex="-1"></a><span class="fu">### AI Transparency</span></span>
-<span id="cb50-776"><a href="#cb50-776" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-777"><a href="#cb50-777" aria-hidden="true" tabindex="-1"></a>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Claire Clelland.</span>
-<span id="cb50-778"><a href="#cb50-778" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-779"><a href="#cb50-779" aria-hidden="true" tabindex="-1"></a>---</span>
-<span id="cb50-780"><a href="#cb50-780" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-781"><a href="#cb50-781" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb50-782"><a href="#cb50-782" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-783"><a href="#cb50-783" aria-hidden="true" tabindex="-1"></a>*Render with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
+<span id="cb50-770"><a href="#cb50-770" aria-hidden="true" tabindex="-1"></a>---</span>
+<span id="cb50-771"><a href="#cb50-771" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-772"><a href="#cb50-772" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb50-773"><a href="#cb50-773" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-774"><a href="#cb50-774" aria-hidden="true" tabindex="-1"></a>*Render with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

@@ -304,7 +304,7 @@ The 1,724 rows (vs 1,526 input genes) reflects **one-to-many** orthologues — e
 
 #### Why did we do Step 3c?
 
-Before writing up results, we need to confirm that every gene that entered the CDS alignment pipeline is actually **protein-coding**. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the paper's framing — "we measured conservation of BBB coding sequences" — would be wrong. This step audits every Ensembl ID in the master list against the `gene_biotype` annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.
+We need to confirm that every gene that entered the CDS alignment pipeline is actually **protein-coding**. If any noncoding genes (lncRNAs, pseudogenes, T-cell receptor segments, etc.) were in the master list and somehow extracted a sequence, the analysis would not correctly reflect conservation of BBB coding sequences. This step audits every Ensembl ID in the master list against the `gene_biotype` annotation embedded in the FASTA headers and checks whether any flagged genes appear in the BBB CDS files.
 
 #### Result
 
@@ -435,7 +435,7 @@ Conservation analysis works at the DNA sequence level — we need the actual nuc
 
 Ensembl provides pre-extracted CDS FASTA files for every annotated transcript. For each gene with multiple transcripts (alternative splicing), we kept the **longest CDS** as a heuristic for the full open reading frame.
 
-> **Alternative:** `scripts/step5b_alt_canonical_transcripts.R` uses **Ensembl Canonical / MANE Select** transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. More standard for publication-grade work. The FASTAs are already generated in `genomes/cds_canonical_*.fa`.
+> **Alternative:** `scripts/step5b_alt_canonical_transcripts.R` uses **Ensembl Canonical / MANE Select** transcripts instead — one curated transcript per gene, jointly designated by NCBI + EMBL-EBI. The FASTAs are already generated in `genomes/cds_canonical_*.fa`.
 
 ### Result
 
@@ -734,7 +734,7 @@ The fact that this signal is most visible in the human-macaque comparison — no
 
 ### Methodological caveats
 
-- **Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML `codeml` on a multi-species alignment with an explicit phylogenetic tree. Discuss with supervisor before publication.
+- **Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML `codeml` on a multi-species alignment with an explicit phylogenetic tree.
 - **Longest-transcript heuristic.** MANE Select / Ensembl Canonical (`step5b_alt_canonical_transcripts.R`) are more standard. The canonical FASTAs are already generated.
 - **Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.
 
@@ -743,15 +743,6 @@ The fact that this signal is most visible in the human-macaque comparison — no
 - **The starting gene list is enrichment-based.** CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.
 - **Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.
 - **Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.
-
-### Future extensions
-
-1. **PAML codeml** for proper phylogenetic dN/dS.
-2. **Promoter sequence comparison** (~2 kb upstream of TSS) to test regulatory divergence.
-3. **MANE Select transcripts** (already scripted — swap in `genomes/cds_canonical_*.fa`).
-4. **Brain non-BBB genes** as a complementary control set.
-5. **Giger macaque dataset** — are the most conserved BBB genes also the most highly expressed in macaque endothelium?
-6. **Functional category breakdown** — are tight junction proteins more conserved than transporters? Are drug efflux pumps the most protected class?
 
 ---
 
