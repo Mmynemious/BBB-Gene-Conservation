@@ -1,6 +1,22 @@
 # Project Handover: BBB Gene Conservation Analysis
 *This file was written to bring Claude Code fully up to speed. Read this before doing anything.*
 
+> ## ⚠️ Dataset inventory below contains errors — see `docs/data_audit_and_weaknesses.md`
+>
+> The Daneman 2010 file descriptions in this document are wrong. Verified against the
+> paper's own supplementary legends:
+>
+> | File in `raw_data/` | Described here as | Actually contains |
+> |---|---|---|
+> | `..._S3_CoreBBBGenes_BrainEC_Enriched.xls` | "THE KEY FILE: core BBB genes" | **Pericyte-specific genes** |
+> | `..._S4_BrainEC_vs_LiverEC_Enriched.xls` | "Brain EC vs liver EC only" | **Developmentally up-regulated vascular genes** |
+> | `..._S5_BrainEC_vs_LungEC_Enriched.xls` | "Brain EC vs lung EC only" | **Developmentally down-regulated vascular genes** |
+> | `..._S6_PostnatalBrainEC_Enriched.xls` | "Postnatal-specific BBB genes" | **The actual BBB-enriched gene list** |
+> | `..._S7_AdultBrainEC_Enriched.xls` | "Adult-specific BBB genes" | **Peripheral endothelial enriched (inverse of BBB)** |
+>
+> Step 1 of the pipeline followed the descriptions above rather than the paper.
+> Run `scripts/audit_source_tables.R` to reproduce the check.
+
 ---
 
 ## Who You're Working With

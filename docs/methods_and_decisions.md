@@ -1,6 +1,23 @@
 # Methods, Decisions, and Assumptions
 *This document explains the scientific reasoning behind every major decision in this pipeline. It is not a code guide — the scripts and step notes cover that. This is about why we did things the way we did, where the uncertainties lie, and what still needs external validation.*
 
+> ## ⚠️ Superseded in part — read `docs/data_audit_and_weaknesses.md` first
+>
+> A source-data audit (2026-09-01) found that the Daneman gene list was built from the
+> wrong supplementary tables and that the liver control's brain-exclusion filter never
+> executed. The following sections of this document are affected and should not be
+> relied on until the pipeline is re-run:
+>
+> - **Assumption 3** (`Daneman_Filter` stringency) — withdrawn; the tables are not nested filters
+> - **Assumption 4** (liver control) — the control set is not liver-specific
+> - **Decision 1** (adding S4 and S5) — correct anomaly, wrong diagnosis
+> - **Assumption 2** (Step 3b recovering dropped genes) — 92 genes remain unmapped
+> - **The "HPA brain is whole brain" caveat** — the filter matched zero rows; it did not run
+> - **All headline results** — the human-vs-mouse comparison changes direction once
+>   orthologue handling is made symmetric between the BBB and control sets
+>
+> **Decision 6 (CLDN5) is unaffected and stands as written.**
+
 ---
 
 ## The Central Scientific Question
