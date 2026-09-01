@@ -19,6 +19,31 @@ execute:
   cache: true
 ---
 
+::: {.callout-important}
+## This page is being updated — results are under revision
+
+A source-data audit on **1 September 2026** found two errors that invalidate the results
+below:
+
+1. **The gene list was built from the wrong Daneman supplementary tables.** The files used
+   contain pericyte-specific genes and developmentally regulated vascular genes. Daneman's
+   actual BBB-enriched list was never opened.
+2. **The liver control's brain-exclusion filter never executed** — it matched a tissue label
+   that does not exist in the source file, so it removed nothing. The control set is not
+   liver-specific.
+
+A third issue — the BBB and control gene sets were scored under different orthologue rules —
+reverses the direction of the human-versus-mouse finding on its own.
+
+**The five figures in the results section have been withdrawn.** The tables and headline
+findings still shown below are affected by the same defects and are retained only as a
+record of what was run; **they should not be cited.** The pipeline itself is sound and is
+being re-run against a corrected gene list.
+
+Full audit: `docs/data_audit_and_weaknesses.md` · Reproduce the checks:
+`scripts/audit_source_tables.R`
+:::
+
 ::: {.panel-tabset}
 
 ## Introduction
@@ -564,84 +589,39 @@ results <- data.frame(
 kable(results, caption = "BBB vs liver conservation — final corrected values")
 ```
 
-```{r v2-pid-plot, fig.cap="Distribution of % nucleotide identity — BBB vs Liver"}
-df_long <- df |>
-  select(Gene_Set, PctId_Human_Mouse, PctId_Human_Macaque) |>
-  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison",
-                       values_to = "PctIdentity") |>
-  filter(!is.na(PctIdentity)) |>
-  mutate(Comparison = sub("PctId_", "", Comparison),
-         Comparison = sub("_", " vs ", Comparison))
+::: {.callout-warning}
+## Figure withdrawn — % identity distributions, BBB vs Liver
 
-ggplot(df_long, aes(x = PctIdentity, fill = Gene_Set)) +
-  geom_density(alpha = 0.5) +
-  facet_wrap(~ Comparison) +
-  scale_fill_manual(
-    values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4"),
-    labels = c("BBB" = "BBB (red)", "Liver_Control" = "Liver (blue)")
-  ) +
-  labs(x = "% nucleotide identity", y = "Density",
-       title = "BBB vs Liver: distribution of % identity",
-       fill = "Gene set",
-       caption = "Purple = region where the BBB and Liver distributions overlap") +
-  theme_minimal() +
-  theme(plot.caption = element_text(colour = "#7b4f6e", face = "italic", size = 9))
-```
+This density plot compared the BBB and liver % identity distributions. Both inputs are
+invalid: the BBB set is built from the wrong Daneman tables (audit Finding 1) and the
+liver control is not liver-specific because its brain filter never ran (Finding 2). The
+two sets were also scored under different orthologue rules (Finding 3), which is enough
+on its own to reverse the human–mouse comparison this figure showed.
+:::
 
-```{r v2-dnds-plot, fig.cap="Distribution of dN/dS (codon-aligned)"}
-df_dnds <- df |>
-  select(Gene_Set, dNdS_Human_Mouse_v2, dNdS_Human_Macaque_v2) |>
-  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison", values_to = "dNdS") |>
-  filter(!is.na(dNdS), dNdS < 2)
+::: {.callout-warning}
+## Figure withdrawn — dN/dS distributions, BBB vs Liver
 
-ggplot(df_dnds, aes(x = dNdS, fill = Gene_Set)) +
-  geom_density(alpha = 0.5) +
-  facet_wrap(~ Comparison) +
-  scale_fill_manual(
-    values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4"),
-    labels = c("BBB" = "BBB (red)", "Liver_Control" = "Liver (blue)")
-  ) +
-  labs(x = "dN/dS (codon-aligned)", y = "Density",
-       title = "BBB vs Liver: distribution of dN/dS",
-       fill = "Gene set",
-       caption = "Purple = region where the BBB and Liver distributions overlap") +
-  theme_minimal() +
-  theme(plot.caption = element_text(colour = "#7b4f6e", face = "italic", size = 9))
-```
+Same two gene sets as above, so the same three defects apply. The dN/dS values themselves
+are correctly computed — the codon-aware method in Step 5f is sound — it is the membership
+of the two groups being compared that is wrong.
+:::
 
-```{r pid-vs-dnds-plot, fig.cap="% identity vs dN/dS — both metrics tell the same story"}
-bbb_scatter <- bbb |>
-  filter(!is.na(PctId_Human_Mouse), !is.na(dNdS_Human_Mouse_v2), dNdS_Human_Mouse_v2 < 2)
+::: {.callout-warning}
+## Figure withdrawn — % identity vs dN/dS, BBB genes
 
-ggplot(bbb_scatter, aes(x = PctId_Human_Mouse, y = dNdS_Human_Mouse_v2)) +
-  geom_point(alpha = 0.25, color = "#d62728", size = 1.2) +
-  geom_smooth(method = "loess", se = TRUE, color = "black", linewidth = 0.8) +
-  labs(x = "% nucleotide identity (Human vs Mouse)", y = "dN/dS (codon-aligned)",
-       title = "% identity and dN/dS are correlated but capture different signal",
-       subtitle = "BBB genes only — Human vs Mouse") +
-  theme_minimal()
-```
+A scatter of the two metrics across BBB genes. Beyond the gene-list problem, the x-axis
+uses `PID1` values that were never recomputed in the v2 pass and are sensitive to
+isoform-length mismatch under the longest-transcript heuristic (Finding 8).
+:::
 
-```{r purifying-selection-bar, fig.cap="Proportion of genes under strong purifying selection (dN/dS < 0.3)"}
-purify_df <- df |>
-  filter(!is.na(dNdS_Human_Mouse_v2) | !is.na(dNdS_Human_Macaque_v2)) |>
-  group_by(Gene_Set) |>
-  summarise(
-    `Human vs Mouse`   = mean(dNdS_Human_Mouse_v2   < 0.3, na.rm = TRUE) * 100,
-    `Human vs Macaque` = mean(dNdS_Human_Macaque_v2 < 0.3, na.rm = TRUE) * 100,
-    .groups = "drop"
-  ) |>
-  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison", values_to = "Pct")
+::: {.callout-warning}
+## Figure withdrawn — Proportion of genes under strong purifying selection
 
-ggplot(purify_df, aes(x = Comparison, y = Pct, fill = Gene_Set)) +
-  geom_col(position = "dodge") +
-  scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
-  labs(x = NULL, y = "% of genes with dN/dS < 0.3",
-       title = "Proportion of genes under strong purifying selection",
-       subtitle = "dN/dS < 0.3 = conventional threshold for strong constraint",
-       fill = "Gene set") +
-  theme_minimal()
-```
+This bar chart contrasted BBB and liver genes at the dN/dS < 0.3 threshold. It inherits
+both critical findings, and the control group it compares against is a broadly expressed,
+housekeeping-dominated set rather than a liver-specific one.
+:::
 
 ---
 
@@ -678,23 +658,13 @@ triangle <- data.frame(
 kable(triangle)
 ```
 
-```{r translational-ladder-plot, fig.cap="Human vs Mouse and Human vs Macaque % identity per BBB gene"}
-bbb_both <- bbb |>
-  filter(!is.na(PctId_Human_Mouse), !is.na(PctId_Human_Macaque))
+::: {.callout-warning}
+## Figure withdrawn — Human–mouse vs human–macaque identity per gene
 
-ggplot(bbb_both, aes(x = PctId_Human_Mouse, y = PctId_Human_Macaque)) +
-  geom_point(alpha = 0.25, color = "#d62728", size = 1.2) +
-  geom_abline(slope = 1, intercept = 0, linetype = "dashed",
-              color = "grey40", linewidth = 0.8) +
-  annotate("text", x = 60, y = 98, label = "Macaque closer to human",
-           color = "grey30", size = 3.5, hjust = 0) +
-  annotate("text", x = 85, y = 72, label = "Mouse closer to human",
-           color = "grey30", size = 3.5, hjust = 0) +
-  labs(x = "Human vs Mouse % identity", y = "Human vs Macaque % identity",
-       title = "For almost every BBB gene, macaque is more similar to human than mouse is",
-       subtitle = "Points above the dashed diagonal = macaque is the closer model") +
-  theme_minimal()
-```
+Every point is a gene from the master list, so the figure is only as valid as that list.
+The qualitative claim it illustrated — macaque sits closer to human than mouse does — is
+not in doubt, but the per-gene positions are not trustworthy until Step 1 is corrected.
+:::
 
 The complete evolutionary distance picture:
 

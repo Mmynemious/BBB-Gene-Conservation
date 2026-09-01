@@ -1,6 +1,26 @@
 # Methods, Decisions, and Assumptions
 *This document explains the scientific reasoning behind every major decision in this pipeline. It is not a code guide — the scripts and step notes cover that. This is about why we did things the way we did, where the uncertainties lie, and what still needs external validation.*
 
+> ## ⚠️ Superseded in part — read `docs/data_audit_and_weaknesses.md` first
+>
+> A source-data audit (2026-09-01) found that the Daneman gene list was built from the
+> wrong supplementary tables and that the liver control's brain-exclusion filter never
+> executed. The following sections of this document are affected and should not be
+> relied on until the pipeline is re-run:
+>
+> - **Assumption 3** (`Daneman_Filter` stringency) — withdrawn; the tables are not nested filters
+> - **Assumption 4** (liver control) — the control set is not liver-specific
+> - **Decision 1** (adding S4 and S5) — correct anomaly, wrong diagnosis
+> - **Assumption 2** (Step 3b recovering dropped genes) — 92 genes remain unmapped
+> - **The "HPA brain is whole brain" caveat** — the filter matched zero rows; it did not run
+> - **All headline results** — the human-vs-mouse comparison changes direction once
+>   orthologue handling is made symmetric between the BBB and control sets
+>
+> - **The Giger 2010 role and the macaque-expression extension** — that file is human-only
+>   and is not a BBB gene list; both entries have been corrected in place
+>
+> **Decision 6 (CLDN5) is unaffected and stands as written.**
+
 ---
 
 ## The Central Scientific Question
@@ -140,7 +160,7 @@ Specifically: are BBB genes more conserved across these three species than rando
 | Yang 2022 | Human | Human EC validation (endothelial subtype markers, Step 4b) |
 | Winkler 2022 | Human | Human EC validation (EC marker genes, Step 4b) |
 | Human Protein Atlas | Human | Liver control gene set (Step 4c) |
-| Giger 2010 | Human/Macaque | Future extension — expression in macaque endothelium |
+| Giger 2010 | **Human only** | Not used. Contains no macaque data and is not a BBB gene list — see audit Finding 7. The macaque-expression extension listed below is not achievable with this file. |
 
 Macaque does not contribute a gene list — it contributes a genome. The macaque orthologue of each BBB gene is identified via BioMart and its DNA sequence will be compared in Step 5.
 
@@ -243,7 +263,7 @@ These are honest limitations of the current pipeline. They do not invalidate the
 2. **Add promoter sequence comparison** (2 kb upstream of TSS) to test whether regulatory regions diverge more than coding regions, as expected.
 3. **Re-run with MANE Select transcripts** instead of longest-transcript heuristic.
 4. **Extend to additional control sets** — brain non-BBB genes; genes matched on domain composition or expression level.
-5. **Bring the Giger macaque dataset back in** to ask whether the most-conserved BBB genes are also the most expressed in macaque endothelium.
+5. ~~**Bring the Giger macaque dataset back in**~~ — **withdrawn.** Giger GSE12293 is human-only; it has no macaque samples and is not a BBB gene list. To ask whether the most-conserved BBB genes are also the most expressed in macaque endothelium, the project needs a real macaque dataset. The candidate already identified in `CONTEXT.md` is the rhesus macaque brain single-cell atlas (Science Advances 2023, ~1M nuclei, 28 brain regions, on CellxGene). Adding it widens scope and needs Dr. Clelland's approval.
 6. **Compare different BBB cell types** (capillary vs arteriole vs venule) using the Wälchli per-cluster expression to ask whether conservation correlates with cell-type expression specificity.
 
 ---
