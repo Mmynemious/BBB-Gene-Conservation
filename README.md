@@ -1,6 +1,17 @@
 # BBB Gene Conservation Analysis
 **Clelland Lab Collaboration — Yara**
 
+> ### ⚠️ Pipeline under revision
+>
+> A source-data audit (1 Sep 2026) found that the gene list was built from the wrong Daneman
+> supplementary tables and that the liver control's brain filter never executed. **Results
+> currently published from this repo should not be cited.** The dataset descriptions below
+> have been corrected; the analysis has not yet been re-run.
+>
+> - Full audit: [`docs/data_audit_and_weaknesses.md`](docs/data_audit_and_weaknesses.md)
+> - Reproduce the checks: `scripts/audit_source_tables.R`
+> - The published tutorial page is **being updated** — its results section is mid-revision.
+
 ## Project Goal
 How similar are the genomes of human, non-human primate (rhesus macaque), and mouse across blood-brain barrier (BBB) genes? This project compares BBB coding regions, non-coding regions, and regulatory regions across three species to assess evolutionary conservation.
 
@@ -29,7 +40,8 @@ BBB-Gene-Conservation/
 ### Daneman et al. (2010) — Mouse BBB Gene Reference
 - **Species:** Mouse (*Mus musculus*)
 - **Method:** Microarray — FACS-sorted brain, liver, lung endothelial cells
-- **Key file:** `Daneman2010_S3_CoreBBBGenes_BrainEC_Enriched.xls` — 213 core BBB genes enriched in brain ECs vs both liver and lung ECs
+- **Key file:** `Daneman2010_S6_PostnatalBrainEC_Enriched.xls` — **this is the actual BBB-enriched gene list** (411 genes; Brain/Liver > 2 AND Brain/Lung > 2). Despite its filename suffix, it is the paper's Table S6.
+- **Do not use:** the file named `..._S3_CoreBBBGenes_BrainEC_Enriched.xls` is the paper's Table S3 — **pericyte-specific genes**, not BBB genes. The files named S4 and S5 are developmentally up- and down-regulated vascular genes. Steps 1–5h were built on these three by mistake; see `docs/data_audit_and_weaknesses.md`, Finding 1.
 - **Why it matters:** The foundational mouse BBB gene list; >1000 citations
 
 ### Munji et al. (2019) — Updated Mouse BBB Transcriptome
@@ -58,10 +70,10 @@ BBB-Gene-Conservation/
 - **Note:** Large file — requires R + Seurat to process
 
 ### Giger et al. (2010) — Primate Neuronal vs Endothelial Transcriptome Evolution
-- **Species:** Human, Chimpanzee, Rhesus Macaque (*Homo sapiens, Pan troglodytes, Macaca mulatta*)
+- **Species:** **Human only** (13 samples, all taxid 9606). The paper discusses chimpanzee and macaque, but that data belongs to Khaitovich et al. 2005/2006 under separate accessions and is not in this file.
 - **Method:** Microarray (Affymetrix HG-U133 Plus 2.0) — laser-capture microdissected neurons and endothelial cells
-- **Key file:** `Giger2010_GSE12293_Human_NeuronEndothelial_ExpressionMatrix.txt` — GEO series matrix
-- **Why it matters:** Shows endothelial genes are more conserved across primates than neuronal genes; provides baseline conservation rates
+- **Key file:** `Giger2010_GSE12293_Human_NeuronEndothelial_ExpressionMatrix.txt` — GEO series matrix, 13 samples × 54,613 probes
+- **Why it matters:** Thematic background only. It contrasts neurons vs endothelium, **not brain EC vs peripheral EC**, so it is not a BBB gene list and cannot supply macaque data. Not used in the pipeline — see `docs/data_audit_and_weaknesses.md`, Finding 7.
 
 ---
 

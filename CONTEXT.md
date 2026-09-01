@@ -16,6 +16,9 @@
 >
 > Step 1 of the pipeline followed the descriptions above rather than the paper.
 > Run `scripts/audit_source_tables.R` to reproduce the check.
+>
+> The **Giger 2010** entry further down was also wrong: that file is human-only and is
+> not a BBB gene list. It has been corrected in place.
 
 ---
 
@@ -167,9 +170,13 @@ write.csv(avg, "processed/Walchli2024_AverageExpression.csv")
 
 ### Giger et al. 2010 — Primate Neuronal vs Endothelial Transcriptome Evolution
 **Folder:** `raw_data/giger_2010/`
-**Species:** Human, Chimpanzee, Rhesus Macaque
+**Species:** **Human only** — verified from the file's own GEO metadata (13 samples, all
+`Sample_taxid_ch1 = 9606`). The *paper* discusses human, chimpanzee and rhesus macaque, but
+the chimpanzee and macaque data are not Giger's — they come from Khaitovich et al. 2005/2006
+under separate accessions that were never downloaded. No macaque (9544) appears anywhere in
+GSE12293.
 **Method:** Affymetrix microarray (GPL570) — laser-capture microdissected neurons and endothelial cells
-**File:** `Giger2010_GSE12293_Human_NeuronEndothelial_ExpressionMatrix.txt`
+**File:** `Giger2010_GSE12293_Human_NeuronEndothelial_ExpressionMatrix.txt` (13 samples × 54,613 probes)
 
 This is a GEO series matrix file. Format:
 - Lines starting with `!` = metadata headers (skip these)
@@ -177,7 +184,18 @@ This is a GEO series matrix file. Format:
 - Columns = samples (brain_endothelial_cells_rep1, rep2, rep3...)
 - Rows = Affymetrix probe IDs (need to map to gene symbols using GPL570 annotation)
 
-**Key insight from this paper:** Endothelial genes are significantly more conserved across primates than neuronal genes. This supports the hypothesis that BBB genes will be conserved.
+**What this dataset is — and is not.** The contrast is *neurons vs endothelial cells* in
+human cortex, which defines the paper's NEX and ENDEX gene sets. That is not the same as
+*brain EC vs peripheral EC*, which is what makes a gene BBB-specific — so **this is not a
+BBB gene list and cannot supply one, for macaque or any other species.**
+
+**Key insight from this paper — with the caveat that matters here:** endothelial genes
+diverge less across primates than neuronal genes. But in the one dataset that includes
+macaque (Khaitovich BA46), the effect is null for the comparison this project cares about:
+P human–rhesus = 0.63 (the significant result is human–chimpanzee in BA9, p = 0.02). It is
+also a result about *expression* conservation, not *sequence* conservation. Treat it as
+thematic background, not as support for a specific hypothesis. See
+`docs/data_audit_and_weaknesses.md`, Finding 7.
 
 ---
 
@@ -305,7 +323,7 @@ Save this as `scripts/eval_step1.R` and run it after Step 1 is done. All PASS = 
 - **Munji S5** is the secondary/updated mouse BBB gene list to merge with Daneman
 - **Winkler S10** and **Yang S4** are the primary human reference datasets
 - **Wälchli RDS** needs to be processed first before it's usable
-- **Giger** provides the evolutionary conservation baseline — not a gene list source
+- **Giger** is human-only and is neither a gene list source nor a macaque data source; it is thematic background only (see audit Finding 7)
 - **Large .rds.gz files** are excluded from git via .gitignore — they stay local only
 - **Control group** requires Dr. Clelland approval before analysis proceeds
 

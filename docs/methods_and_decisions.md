@@ -16,6 +16,9 @@
 > - **All headline results** — the human-vs-mouse comparison changes direction once
 >   orthologue handling is made symmetric between the BBB and control sets
 >
+> - **The Giger 2010 role and the macaque-expression extension** — that file is human-only
+>   and is not a BBB gene list; both entries have been corrected in place
+>
 > **Decision 6 (CLDN5) is unaffected and stands as written.**
 
 ---
@@ -157,7 +160,7 @@ Specifically: are BBB genes more conserved across these three species than rando
 | Yang 2022 | Human | Human EC validation (endothelial subtype markers, Step 4b) |
 | Winkler 2022 | Human | Human EC validation (EC marker genes, Step 4b) |
 | Human Protein Atlas | Human | Liver control gene set (Step 4c) |
-| Giger 2010 | Human/Macaque | Future extension — expression in macaque endothelium |
+| Giger 2010 | **Human only** | Not used. Contains no macaque data and is not a BBB gene list — see audit Finding 7. The macaque-expression extension listed below is not achievable with this file. |
 
 Macaque does not contribute a gene list — it contributes a genome. The macaque orthologue of each BBB gene is identified via BioMart and its DNA sequence will be compared in Step 5.
 
@@ -260,7 +263,7 @@ These are honest limitations of the current pipeline. They do not invalidate the
 2. **Add promoter sequence comparison** (2 kb upstream of TSS) to test whether regulatory regions diverge more than coding regions, as expected.
 3. **Re-run with MANE Select transcripts** instead of longest-transcript heuristic.
 4. **Extend to additional control sets** — brain non-BBB genes; genes matched on domain composition or expression level.
-5. **Bring the Giger macaque dataset back in** to ask whether the most-conserved BBB genes are also the most expressed in macaque endothelium.
+5. ~~**Bring the Giger macaque dataset back in**~~ — **withdrawn.** Giger GSE12293 is human-only; it has no macaque samples and is not a BBB gene list. To ask whether the most-conserved BBB genes are also the most expressed in macaque endothelium, the project needs a real macaque dataset. The candidate already identified in `CONTEXT.md` is the rhesus macaque brain single-cell atlas (Science Advances 2023, ~1M nuclei, 28 brain regions, on CellxGene). Adding it widens scope and needs Dr. Clelland's approval.
 6. **Compare different BBB cell types** (capillary vs arteriole vs venule) using the Wälchli per-cluster expression to ask whether conservation correlates with cell-type expression specificity.
 
 ---

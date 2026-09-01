@@ -28,11 +28,16 @@ Two findings change the results and need fixing before any further analysis:
    expressed in brain at nTPM >= 10. The control set is not liver-specific; it is a
    broad, housekeeping-dominated gene set.
 
-Four further issues materially affect the numbers (orthologue-handling asymmetry
-between the BBB and control sets, which flips the sign of the human-vs-mouse result;
-a sheet-reading bug in the Yang validation; a near-vacuous Wälchli validation
-criterion; and 92 genes lost to gene-symbol formatting). The remainder are ordinary
-methodological limitations.
+Five further issues materially affect the numbers or the record: orthologue-handling
+asymmetry between the BBB and control sets, which flips the sign of the human-vs-mouse
+result; a sheet-reading bug in the Yang validation; a near-vacuous Wälchli validation
+criterion; 92 genes lost to gene-symbol formatting; and a Giger dataset documented as a
+macaque resource that contains no macaque data. The remainder are ordinary methodological
+limitations.
+
+**One pattern accounts for three of these findings.** In Findings 1, 4 and 7 the project's
+own inventory describes *the paper* rather than *the file that was downloaded*, and a script
+trusted the inventory. That is the single recurring defect in this project's data intake.
 
 The codon-aware dN/dS implementation (Steps 5f/5h), the statistical framework, and
 the macaque conservation result all survive scrutiny.
@@ -65,7 +70,7 @@ the macaque conservation result all survive scrutiny.
 - **Munji:** S3 (present only as a dangling Git LFS pointer, 134 bytes), S7
 - **Winkler:** S1, S3–S10 (including S10, listed in `CONTEXT.md` as a key file)
 - **Yang:** S1–S5, S7, S8 (including S4, listed in `CONTEXT.md` as a key file)
-- **Giger 2010:** the entire dataset
+- **Giger 2010:** the entire dataset — correctly skipped; it is human-only and is not a BBB gene list (Finding 7)
 
 ---
 
@@ -279,7 +284,66 @@ Munji's Ensembl IDs directly where available.
 
 ---
 
-### FINDING 7 (methodological) — Smaller issues
+### FINDING 7 (material) — Giger 2010 contains no macaque data, and is not a BBB gene list
+
+The dataset inventory describes this file as covering *"Human, Chimpanzee, Rhesus Macaque"*
+and `methods_and_decisions.md` lists it as a *"Future extension — expression in macaque
+endothelium."* Neither is possible with the file that was downloaded.
+
+**What the file actually contains**, from its own GEO metadata:
+
+```
+!Series_title          "Evolution of neuronal and endothelial transcriptomes in primates"
+!Sample_organism_ch1   "Homo sapiens" x13
+!Sample_taxid_ch1      "9606" x13
+!Sample_title          brain_endothelial_cells_rep1-rep7, brain_neurons_rep1-rep6
+```
+
+13 samples, all human, 54,613 probes on GPL570. No macaque (taxid 9544) and no chimpanzee
+(9598) anywhere in the file. The series-level taxids are 9606 and 10090 — human and *mouse*
+— so a second platform (GPL81) exists that was not downloaded, but macaque does not appear
+in GSE12293 at all.
+
+**Two independent reasons it could never have served as the macaque BBB gene list:**
+
+1. **It is not a BBB gene list.** The contrast is neurons vs endothelial cells in human
+   dorsolateral prefrontal cortex, which yields the paper's NEX (neuron-expressed) and
+   ENDEX (endothelium-expressed) sets. That is "endothelial vs neuronal", not "brain EC vs
+   peripheral EC" — the comparison that makes a gene BBB-specific. Every ENDEX gene is
+   simply broadly endothelial.
+2. **The macaque in the paper is not Giger's data.** Giger et al. generated the human
+   neuron/endothelium contrast, then applied those gene sets to previously published
+   datasets — Khaitovich et al. 2005 (BA9: 6 human, 5 chimpanzee) and Khaitovich et al.
+   2006 (BA46: 10 human, 6 chimpanzee, 6 rhesus macaque). The macaque comparison lives in
+   BA46, under a separate accession that was never downloaded.
+
+**The supporting-prior claim is also overstated.** `CONTEXT.md` records the takeaway as
+*"endothelial genes are significantly more conserved across primates than neuronal genes.
+This supports the hypothesis that BBB genes will be conserved."* Directionally that is the
+paper's headline, but in the one dataset that includes macaque (BA46) the effect is null:
+
+> P human–chimpanzee BA46 = 0.06; **P human–rhesus BA46 = 0.63**; P chimpanzee–rhesus BA46 = 0.84
+
+The significant result is human–chimpanzee in BA9 (p = 0.02). For human vs rhesus —
+this project's actual comparison — Giger finds no difference between endothelial and
+neuronal divergence. It is also a result about *expression* conservation, whereas this
+project measures *sequence* conservation, so it was never a directly transferable prior.
+
+**Conclusion.** Not using Giger was the correct decision; the recorded reason for not using
+it was wrong, and the promised future extension is unachievable with this file. This is the
+same failure mode as Findings 1 and 4: **the inventory describes the paper, not the file
+that was downloaded.** Third instance.
+
+**Fix:** correct the Giger entries in `README.md`, `CONTEXT.md` and
+`methods_and_decisions.md` to state that the file is human-only and is not a BBB gene list;
+withdraw the macaque-extension item. The project genuinely has **no macaque input dataset**,
+and the right candidate is the one already named in `CONTEXT.md` as a future enhancement —
+the rhesus macaque brain single-cell atlas (Science Advances 2023, ~1M nuclei, 28 regions,
+on CellxGene), which needs Dr. Clelland's approval because it widens scope.
+
+---
+
+### FINDING 8 (methodological) — Smaller issues
 
 - **`PID1` is length-sensitive.** `pid(type = "PID1")` is matches ÷ *alignment length*.
   Combined with the longest-transcript heuristic, a gene whose mouse longest isoform is
@@ -342,7 +406,8 @@ Munji's Ensembl IDs directly where available.
 | 4 | Yang: read all three EC sheets. Wälchli: use a real expression threshold | Numbers, not direction |
 | 5 | Remove blanket `toupper()`; add synonym fallback; use Munji Ensembl IDs | Numbers, not direction |
 | 6 | Switch to `PID2`, pin one Ensembl release, use MANE Select transcripts (`step5b_alt` already exists) | Numbers, not direction |
-| 7 | Re-run Steps 5c–5h; rewrite the results section | — |
+| 7 | Correct the Giger entries in all three docs; withdraw the macaque-extension item; decide with Dr. Clelland whether to add a real macaque dataset | Adds a species of evidence |
+| 8 | Re-run Steps 5c–5h; rewrite the results section | — |
 
 Items 1–3 must be done before any result is presented or written up.
 
@@ -365,9 +430,9 @@ above rationalisations are recorded in that document as scientific reasoning, an
 are wrong. Anomalies that a proposed explanation makes disappear should receive more
 scrutiny than others, not less.
 
-**Suggested standing check for future data intake:** before any supplementary file is
-read by a script, confirm its identity against the paper's own table legend *and*
-against a numeric signature in the data (a defining ratio column, or the presence of
+**Suggested standing check for future data intake** (this would have caught Findings 1, 4
+and 7): before any supplementary file is read by a script, confirm its identity against the
+paper's own table legend *and* against a numeric signature in the data (a defining ratio column, or the presence of
 2–3 landmark genes the table must contain). Filenames and inventory documents are not
 evidence.
 
