@@ -1299,3 +1299,21 @@ This pipeline was developed by Yara Ismail with the assistance of Claude (Anthro
 :::
 
 *Render with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*
+
+```{=html}
+<script>
+// Open a tab from the URL hash, so other pages can deep-link into a section:
+//   index.html#audit   → "Audit — what's wrong"
+//   index.html#results → "Results — provisional"
+document.addEventListener('DOMContentLoaded', function () {
+  var want = (location.hash || '').replace('#', '').toLowerCase();
+  if (!want) return;
+  var tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+  for (var i = 0; i < tabs.length; i++) {
+    var slug = tabs[i].textContent.trim().toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (slug.indexOf(want) === 0) { tabs[i].click(); break; }
+  }
+});
+</script>
+```

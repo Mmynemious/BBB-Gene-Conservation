@@ -3805,6 +3805,21 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 </div>
 </div>
 <p><em>Render with <code>quarto render docs/BBB_Conservation_Tutorial.qmd</code> from the project root.</em></p>
+<script>
+// Open a tab from the URL hash, so other pages can deep-link into a section:
+//   index.html#audit   → "Audit — what's wrong"
+//   index.html#results → "Results — provisional"
+document.addEventListener('DOMContentLoaded', function () {
+  var want = (location.hash || '').replace('#', '').toLowerCase();
+  if (!want) return;
+  var tabs = document.querySelectorAll('[data-bs-toggle="tab"]');
+  for (var i = 0; i < tabs.length; i++) {
+    var slug = tabs[i].textContent.trim().toLowerCase()
+      .replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+    if (slug.indexOf(want) === 0) { tabs[i].click(); break; }
+  }
+});
+</script>
 <!-- -->
 
 
@@ -5561,7 +5576,25 @@ Pipeline integrity: CONFIRMED &lt;U+2014&gt; no noncoding genes entered the CDS 
 <span id="cb50-1298"><a href="#cb50-1298" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb50-1299"><a href="#cb50-1299" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb50-1300"><a href="#cb50-1300" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb50-1301"><a href="#cb50-1301" aria-hidden="true" tabindex="-1"></a>*Render with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
+<span id="cb50-1301"><a href="#cb50-1301" aria-hidden="true" tabindex="-1"></a>*Render with `quarto render docs/BBB_Conservation_Tutorial.qmd` from the project root.*</span>
+<span id="cb50-1302"><a href="#cb50-1302" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-1303"><a href="#cb50-1303" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb50-1304"><a href="#cb50-1304" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;script&gt;</span></span>
+<span id="cb50-1305"><a href="#cb50-1305" aria-hidden="true" tabindex="-1"></a><span class="in">// Open a tab from the URL hash, so other pages can deep-link into a section:</span></span>
+<span id="cb50-1306"><a href="#cb50-1306" aria-hidden="true" tabindex="-1"></a><span class="in">//   index.html#audit   → &quot;Audit — what&#39;s wrong&quot;</span></span>
+<span id="cb50-1307"><a href="#cb50-1307" aria-hidden="true" tabindex="-1"></a><span class="in">//   index.html#results → &quot;Results — provisional&quot;</span></span>
+<span id="cb50-1308"><a href="#cb50-1308" aria-hidden="true" tabindex="-1"></a><span class="in">document.addEventListener(&#39;DOMContentLoaded&#39;, function () {</span></span>
+<span id="cb50-1309"><a href="#cb50-1309" aria-hidden="true" tabindex="-1"></a><span class="in">  var want = (location.hash || &#39;&#39;).replace(&#39;#&#39;, &#39;&#39;).toLowerCase();</span></span>
+<span id="cb50-1310"><a href="#cb50-1310" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!want) return;</span></span>
+<span id="cb50-1311"><a href="#cb50-1311" aria-hidden="true" tabindex="-1"></a><span class="in">  var tabs = document.querySelectorAll(&#39;[data-bs-toggle=&quot;tab&quot;]&#39;);</span></span>
+<span id="cb50-1312"><a href="#cb50-1312" aria-hidden="true" tabindex="-1"></a><span class="in">  for (var i = 0; i &lt; tabs.length; i++) {</span></span>
+<span id="cb50-1313"><a href="#cb50-1313" aria-hidden="true" tabindex="-1"></a><span class="in">    var slug = tabs[i].textContent.trim().toLowerCase()</span></span>
+<span id="cb50-1314"><a href="#cb50-1314" aria-hidden="true" tabindex="-1"></a><span class="in">      .replace(/[^a-z0-9]+/g, &#39;-&#39;).replace(/^-|-$/g, &#39;&#39;);</span></span>
+<span id="cb50-1315"><a href="#cb50-1315" aria-hidden="true" tabindex="-1"></a><span class="in">    if (slug.indexOf(want) === 0) { tabs[i].click(); break; }</span></span>
+<span id="cb50-1316"><a href="#cb50-1316" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb50-1317"><a href="#cb50-1317" aria-hidden="true" tabindex="-1"></a><span class="in">});</span></span>
+<span id="cb50-1318"><a href="#cb50-1318" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
+<span id="cb50-1319"><a href="#cb50-1319" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 

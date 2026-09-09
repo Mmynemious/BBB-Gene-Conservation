@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Blood-Brain Barrier Gene Conservation</title>
+<meta name="description" content="Gene conservation across human, mouse and macaque — and an open audit of where the pipeline breaks.">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=Poppins:wght@300;400;500;600&display=swap">
+
+<style>
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+
+:root{
+  --ink:#175A67;
+  --ink-soft:#2A707C;
+  --cream:#EAE3DE;
+  --max:1440px;
+  --fs-nav:clamp(.9rem, .55vw + .75rem, 1.02rem);
+}
+
+html,body{background:var(--cream)}
+body{
+  margin:0;
+  font-family:"Poppins","Helvetica Neue",Arial,sans-serif;
+  font-weight:300;
+  color:var(--ink);
+}
+
+/* ── stage ──────────────────────────────────────────────────── */
+.stage{
+  position:relative;
+  isolation:isolate;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+  min-height:100svh;
+  overflow:hidden;
+  overflow-wrap:break-word;
+  background:var(--cream);
+  padding:
+    clamp(2.25rem,4.5vh,4rem)
+    max(clamp(1.25rem,4vw,4.5rem), env(safe-area-inset-right))
+    max(clamp(1.5rem,3vh,2.75rem), env(safe-area-inset-bottom))
+    max(clamp(1.25rem,4vw,4.5rem), env(safe-area-inset-left));
+}
+
+.stage-media{
+  position:absolute;
+  inset:0;
+  z-index:-2;
+  pointer-events:none;
+}
+.stage-bg{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  object-position:center bottom;
+  pointer-events:none;
+  animation:fade-in 1.35s ease both;
+}
+
+.stage-inner{
+  position:relative;
+  width:100%;
+  max-width:var(--max);
+  margin:0 auto;
+  flex:1;
+  display:flex;
+  flex-direction:column;
+}
+
+/* ── type ───────────────────────────────────────────────────── */
+.wordmark{
+  font-family:"Cormorant Garamond",Georgia,serif;
+  font-weight:500;
+  font-size:clamp(2.6rem,7vw,6.2rem);
+  line-height:.98;
+  letter-spacing:-.015em;
+  margin:0;
+  max-width:14ch;
+  text-wrap:balance;
+  animation:rise-in .72s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:.04s;
+}
+.blurb{
+  margin:clamp(1.15rem,2.4vh,1.9rem) 0 0;
+  max-width:44ch;
+  font-size:clamp(1rem,.6vw + .85rem,1.2rem);
+  line-height:1.62;
+  animation:rise-in .72s cubic-bezier(.22,1,.36,1) both;
+  animation-delay:.16s;
+}
+
+.enter{
+  margin-top:auto;
+  padding-top:clamp(2.5rem,6vh,4.5rem);
+  display:flex;
+  flex-wrap:wrap;
+  gap:1rem 2.25rem;
+  align-items:baseline;
+}
+.enter a{
+  color:var(--ink);
+  text-decoration:none;
+  font-size:var(--fs-nav);
+  font-weight:500;
+  letter-spacing:.055em;
+  text-transform:uppercase;
+  display:inline-flex;
+  align-items:center;
+  gap:.6rem;
+  padding-bottom:.3rem;
+  border-bottom:1px solid var(--ink);
+  transition:opacity .2s ease, transform .2s ease;
+  animation:rise-in .72s cubic-bezier(.22,1,.36,1) both;
+}
+.enter a:hover{opacity:.62;transform:translateX(2px)}
+.enter a:focus-visible{outline:2px solid var(--ink);outline-offset:4px}
+.enter a svg{width:20px;height:20px;flex:none}
+.enter a:nth-child(1){animation-delay:.34s}
+.enter a:nth-child(2){animation-delay:.42s}
+
+/* ── motion ─────────────────────────────────────────────────── */
+@keyframes rise-in{
+  from{opacity:0;transform:translate3d(0,14px,0)}
+  to{opacity:1;transform:translate3d(0,0,0)}
+}
+@keyframes fade-in{ from{opacity:0} to{opacity:1} }
+
+/* ── portrait: video becomes a flow item, never cover-cropped ── */
+@media (max-width:1100px){
+  .stage{
+    height:auto;
+    min-height:100svh;
+    padding-right:0;
+    padding-bottom:0;
+    padding-left:0;
+    overflow-x:hidden;
+    overflow-y:visible;
+  }
+  .stage-inner{
+    order:0;
+    padding-right:max(clamp(1.25rem,4vw,4.5rem), env(safe-area-inset-right));
+    padding-left:max(clamp(1.25rem,4vw,4.5rem), env(safe-area-inset-left));
+    padding-bottom:clamp(1.25rem,3vh,2rem);
+  }
+  .stage-media{
+    position:relative;
+    inset:auto;
+    order:1;
+    flex-shrink:0;
+    width:100%;
+    height:auto;
+    margin-top:auto;
+    z-index:0;
+  }
+  .stage-bg{
+    position:relative;
+    inset:auto;
+    width:100%;
+    height:auto;
+    max-width:100%;
+    object-fit:contain;
+    object-position:center bottom;
+    transform:none;
+    display:block;
+  }
+  /* soft seam — blends the top edge of the clip into the page.
+     This is not a scrim over the art. */
+  .stage-media::after{
+    content:"";
+    position:absolute;
+    left:0;
+    right:0;
+    top:0;
+    height:clamp(52px,16vw,120px);
+    pointer-events:none;
+    z-index:1;
+    background:linear-gradient(to bottom,
+      #EAE3DE 0%,
+      rgba(234,227,222,.65) 38%,
+      rgba(234,227,222,0) 100%);
+  }
+  .enter{padding-top:clamp(2rem,7vh,3rem);padding-bottom:clamp(1.25rem,3vh,2rem)}
+  .enter a{padding-top:.35rem;padding-bottom:.5rem}
+}
+
+@media (max-width:440px){
+  :root{--fs-nav:.92rem}
+  .wordmark{max-width:none}
+  .blurb{max-width:none}
+  .enter{flex-direction:column;align-items:flex-start;gap:1.1rem}
+}
+
+/* ── reduced motion ─────────────────────────────────────────── */
+@media (prefers-reduced-motion:reduce){
+  .stage-bg{display:none;animation:none}
+  .stage{
+    background-color:#EAE3DE;
+    background-image:url("https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/4f690bd1-881a-4192-82f2-d714d34c8fb9.png");
+    background-position:center bottom;
+    background-size:cover;
+    background-repeat:no-repeat;
+  }
+  @media (max-width:1100px){
+    .stage{background-size:100% auto}
+  }
+  .stage-media::after{content:none}
+  .wordmark,.blurb,.enter a{animation:none}
+  .enter a:hover{transform:none}
+}
+</style>
+</head>
+
+<body>
+<main class="stage">
+
+  <div class="stage-media" aria-hidden="true">
+    <video class="stage-bg" autoplay muted loop playsinline preload="auto"
+           poster="https://d2ol7oe51mr4n9.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/4f690bd1-881a-4192-82f2-d714d34c8fb9.png">
+      <source src="https://d8j0ntlcm91z4.cloudfront.net/user_38xzZboKViGWJOttwIXH07lWA1P/hf_20260901_122529_931c22c8-8d2d-47c0-ad51-b97f56a91e42.mp4" type="video/mp4">
+    </video>
+  </div>
+
+  <div class="stage-inner">
+    <h1 class="wordmark">Blood-Brain Barrier</h1>
+    <p class="blurb">
+      Gene conservation across human, mouse and macaque — and an open account of
+      where the pipeline breaks, pinned to the steps that broke it.
+    </p>
+
+    <nav class="enter" aria-label="Enter the project">
+      <a href="index.html">
+        The walkthrough
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 12h15M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+      <a href="index.html#audit">
+        What's wrong
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M4 12h15M13 6l6 6-6 6"></path>
+        </svg>
+      </a>
+    </nav>
+  </div>
+
+</main>
+</body>
+</html>
