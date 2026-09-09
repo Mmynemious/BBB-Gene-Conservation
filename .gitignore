@@ -27,6 +27,9 @@ genomes/
 # Large HPA files — keep .zip for reproducibility, ignore extracted .tsv
 raw_data/hpa_liver/*.tsv
 
-# Quarto build artifacts
-docs/*_cache/
-docs/*_files/
+# Quarto build artifacts (source-side only — docs/ is the deployed output)
+site/_cache/
+site/*_cache/
+site/.quarto/
+docs/BBB_Conservation_Tutorial_cache/
+site/*_files/

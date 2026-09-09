@@ -1,0 +1,203 @@
+---
+title: "Audit — what's wrong"
+subtitle: "Every defect, pinned to the numbered script step it lives in"
+---
+
+Every defect below is pinned to the **numbered script step** it lives in, using the
+script's own filename. The step names here and the step names in the pipeline are
+the same names — the ambiguity in the tab labels (which bundle several steps
+together) is not carried into the audit.
+
+### The count
+
+```{=html}
+<div class="audit-tally">
+  <div class="t-breaks"><span class="k">Breaks results</span><span class="n">3</span><span class="d">Fix these and a stated conclusion changes. Steps 1, 4c, 5d.</span></div>
+  <div class="t-shifts"><span class="k">Numbers move</span><span class="n">6</span><span class="d">Real defects that shift figures without reversing a claim.</span></div>
+  <div class="t-clean"><span class="k">Clean</span><span class="n">6</span><span class="d">No defect in the step itself, including both hard parts.</span></div>
+  <div class="t-open"><span class="k">Open questions</span><span class="n">6</span><span class="d">Not bugs — decisions, or data the project does not have.</span></div>
+</div>
+```
+
+### Register — all 15 numbered steps
+
+`Run` is the order the scripts actually execute in, which is **not** the order the
+step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
+
+```{=html}
+<div class="audit-reg-wrap">
+<table class="audit-reg">
+<thead><tr>
+  <th>Step</th><th>Run</th><th>What it does &middot; what's wrong</th><th>Verdict</th>
+</tr></thead>
+<tbody>
+
+<tr class="breaks"><td class="s-id">step1</td><td class="s-ord">1</td><td class="s-what">
+  <b>Build the master BBB gene list.</b> Three of the four Daneman tables are the wrong
+  tables &mdash; S3 is the pericyte-specific list (<code>Pdgfrb</code>, <code>Kcnj8</code>,
+  <code>Vtn</code>, <code>Zic1</code>), S4 and S5 are developmentally up- and down-regulated
+  CNS vascular genes. <b>S6, the real BBB-enriched table, was never opened.</b> A further
+  92 genes were lost silently: 18 to <code>toupper()</code> mangling the lowercase
+  <code>orf</code> convention, 74 to HomoloGene's 2014 gene names.
+</td><td class="s-v"><span class="audit-chip" style="background:#A02D21;color:#fff">Wrong sources</span></td></tr>
+
+<tr class="clean"><td class="s-id">step2</td><td class="s-ord">2</td><td class="s-what">
+  <b>Process the W&auml;lchli Seurat object.</b> Method correct &mdash; grouped by
+  <code>ECclusters</code> rather than the default. Two things to know rather than fix: the
+  input is gitignored so the step cannot re-run from a clean clone, and the
+  <code>Mitochondrial</code> cluster (dying cells, not a cell type) is still in the output.
+</td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step3</td><td class="s-ord">3</td><td class="s-what">
+  <b>Map to Ensembl IDs across three species.</b> The 92 names broken in step 1 return
+  nothing from BioMart and drop out of every downstream calculation with no error raised.
+  The step is doing what it was asked; it inherits the damage.
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">92 genes lost</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step4b</td><td class="s-ord">4</td><td class="s-what">
+  <b>Cross-reference against human EC datasets.</b> Yang S6 was read without naming a
+  sheet, so only the <em>first</em> sheet loaded &mdash; the column means "is an arterial
+  marker" (36 hits) and the capillary sheet, the most BBB-relevant one, was never opened.
+  W&auml;lchli's test was "expression above zero in any cell type", which
+  <b>88.5% of all genes pass</b>; that alone is why 1,131 of 1,526 genes score exactly 1.
+  Winkler's parse is correct.
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Two reading bugs</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step3b</td><td class="s-ord">5</td><td class="s-what">
+  <b>Add orthology confidence.</b> The script header says it recovers the genes step 1
+  dropped. It does not &mdash; it re-queries the same out-of-date names and recovers none
+  of the 92. It is also where 196 one-to-many pairs enter the BBB set at only
+  <b>25.8% protein identity</b>, which step 5d then excludes from the control set but not
+  from the BBB set.
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Overstated fix</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step3c</td><td class="s-ord">6</td><td class="s-what">
+  <b>Gene biotype audit.</b> The check cannot fail. A CDS FASTA contains only
+  protein-coding genes by definition, so a non-coding gene has no entry, comes back blank,
+  and blank was not counted as a failure. 250 rows have no macaque label at all and were
+  invisible to it. The reassuring answer was guaranteed by the method.
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Circular check</span></td></tr>
+
+<tr class="breaks"><td class="s-id">step4c</td><td class="s-ord">7</td><td class="s-what">
+  <b>Build the liver control gene set.</b> The third filter looked for a tissue called
+  <code>"brain"</code>; the Human Protein Atlas has no such label, only regions (cerebral
+  cortex, hippocampal formation, cerebellum&hellip;). Zero rows matched, the missing values
+  became zeros, everything passed. The tell is in the saved file: every
+  <code>Brain_nTPM</code> value is exactly <code>0.0</code>. Recomputed properly,
+  <b>86.6% of the "liver control" is brain-expressed</b>, median brain 31.3 against median
+  liver 31.2. It is a housekeeping set &mdash; among the most conserved genes in the genome.
+</td><td class="s-v"><span class="audit-chip" style="background:#A02D21;color:#fff">Filter never ran</span></td></tr>
+
+<tr class="clean"><td class="s-id">step5a</td><td class="s-ord">8</td><td class="s-what">
+  <b>Download CDS FASTAs.</b> Ensembl release 113 for all three species &mdash; GRCh38,
+  GRCm39, Mmul_10. Straight downloads, nothing to get wrong.
+</td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step5b</td><td class="s-ord">9</td><td class="s-what">
+  <b>Extract one CDS per gene.</b> Takes the <em>longest</em> isoform. Longest is not
+  necessarily equivalent: human and mouse can land on non-corresponding versions of the
+  same gene, which makes them look more different than they are. This is the origin of the
+  224 impossible macaque scores visible in step 5c.
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Rough heuristic</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step5b_alt</td><td class="s-ord">&mdash;</td><td class="s-what">
+  <b>MANE Select / Ensembl Canonical transcripts.</b> The standard alternative to the
+  longest-isoform heuristic. It was written, it runs, and the canonical FASTAs already sit
+  in <code>genomes/</code>. <b>It was never switched in.</b>
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Written, unused</span></td></tr>
+
+<tr class="shifts"><td class="s-id">step5c</td><td class="s-ord">10</td><td class="s-what">
+  <b>Align and score the BBB genes.</b> dN/dS was computed on sequences that were trimmed
+  but never aligned &mdash; genuinely wrong, and correctly fixed later in step 5f. But the
+  <b>% identity was never recomputed</b>, so every identity figure in the results still
+  comes from here. Two numbers show the damage: <b>38% of genes came out with dS pinned at
+  the 10.0 ceiling</b> (2% after the 5f fix), and <b>224 one-to-one macaque pairs score
+  under 85%</b> &mdash; <code>SLC2A1</code> at 71.4%, which is biologically impossible.
+</td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Partly superseded</span></td></tr>
+
+<tr class="breaks"><td class="s-id">step5d</td><td class="s-ord">11</td><td class="s-what">
+  <b>Score the liver control.</b> Described as "the same measurements", but it kept only
+  the <em>single best-matching</em> orthologue per gene while the BBB set kept every match
+  including the bad ones. Different rules on the two sides of the comparison &mdash; and
+  that alone reverses the headline direction.
+</td><td class="s-v"><span class="audit-chip" style="background:#A02D21;color:#fff">Asymmetric rules</span></td></tr>
+
+<tr class="clean"><td class="s-id">step5e</td><td class="s-ord">12</td><td class="s-what">
+  <b>First-pass statistics.</b> Wilcoxon rank-sum (correct &mdash; these data are not
+  normal) with rank-biserial effect sizes. Superseded by 5g, but not wrong.
+</td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
+
+<tr class="clean"><td class="s-id">step5f</td><td class="s-ord">13</td><td class="s-what">
+  <b>Recompute dN/dS, codon-aware.</b> Translate to protein, align the proteins, map back
+  onto codons, discard gapped codons, then score. <b>This is the fix</b>, and it mattered:
+  one-to-many mouse dN/dS moved from 0.14 to 0.354. The only gap is scope &mdash; it fixed
+  dN/dS and left % identity untouched.
+</td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">This is the fix</span></td></tr>
+
+<tr class="clean"><td class="s-id">step5g</td><td class="s-ord">14</td><td class="s-what">
+  <b>Multiple testing correction.</b> Bonferroni and FDR across the four primary
+  comparisons, with subgroup analyses honestly labelled exploratory. Correct. What is wrong
+  is what went <em>into</em> it &mdash; steps 1, 4c and 5d.
+</td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
+
+<tr class="clean"><td class="s-id">step5h</td><td class="s-ord">15</td><td class="s-what">
+  <b>Mouse vs macaque.</b> Same codon-aware pipeline with no human reference. No defect of
+  its own &mdash; but it inherits the step 1 gene list, so its numbers move when step 1 is
+  fixed.
+</td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
+
+</tbody>
+</table>
+</div>
+```
+
+### Three fixes change the conclusions
+
+1. **`step1`** — point it at Daneman **S6**, drop S3/S4/S5, retire the `Daneman_Filter`
+   column. Replace `toupper()` with a real ortholog mapping so the 92 lost genes come back.
+2. **`step4c`** — one line, so the brain filter matches the Atlas's real region names.
+   Then a separate decision about what the control should actually be.
+3. **`step5d`** — one orthologue rule applied to both groups.
+
+Then re-run `step5c` through `step5h`. Everything else is numbers moving, not conclusions
+changing.
+
+### What we still need to figure out
+
+These are not defects. They need a decision, a dataset, or both — and this is the section
+that grows as the literature review continues.
+
+```{=html}
+<div class="oq">
+  <div>
+    <p class="q">What should the control actually be?</p>
+    <p class="w">Fixing the <code>step4c</code> filter gives a genuine liver set, but liver may not be the right comparator at all. Brain non-BBB genes, or genes matched on protein domain, would each test a different claim.</p>
+    <p class="n">Needs — Dr. Clelland</p>
+  </div>
+  <div>
+    <p class="q">Can the macaque arm rest on mouse-defined biology?</p>
+    <p class="w">Every gene earned its place from a <em>mouse</em> study. Real macaque DNA is used throughout steps 5a–5h, but no macaque study tells us which genes macaque brain vessels actually switch on. The rhesus brain single-cell atlas (Science Advances 2023, ~1M nuclei, 28 regions, on CellxGene) would close this — and widens project scope.</p>
+    <p class="n">Needs — a dataset and sign-off</p>
+  </div>
+  <div>
+    <p class="q">Should % identity be recomputed the way dN/dS was?</p>
+    <p class="w">Step 5f fixed dN/dS with codon-aware alignment and left identity alone. Switching <code>step5b</code> to MANE Select and re-running identity would likely remove the 224 impossible macaque scores. The canonical FASTAs already exist.</p>
+    <p class="n">Needs — a decision, then compute time</p>
+  </div>
+  <div>
+    <p class="q">Why did we never use Wälchli's 12 EC subtypes?</p>
+    <p class="w">The dataset resolves capillary from arterial from venous endothelium. Step 4b collapsed all of it to a single above-zero test. The most valuable thing about the dataset is the one thing the pipeline never asked it.</p>
+    <p class="n">Needs — a new analysis</p>
+  </div>
+  <div>
+    <p class="q">Where did Giger 2010 come from, and what replaces it?</p>
+    <p class="w">Logged as the macaque dataset. Its 13 samples are all human (<code>taxid 9606</code>) — the macaque in that paper belongs to Khaitovich et al. under a separate accession that was never downloaded. It also compares neurons to endothelium rather than brain to peripheral endothelium, so it is not a BBB gene list for any species.</p>
+    <p class="n">Needs — literature review</p>
+  </div>
+  <div>
+    <p class="q">Should step 2 be reproducible from a clean clone?</p>
+    <p class="w">The Seurat input is gitignored and exists on one machine. The <code>Mitochondrial</code> cluster is also still sitting in the output matrix.</p>
+    <p class="n">Needs — a housekeeping decision</p>
+  </div>
+</div>
+```

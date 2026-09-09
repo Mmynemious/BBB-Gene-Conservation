@@ -1,0 +1,61 @@
+project:
+  type: website
+  output-dir: ../docs
+  render:
+    - "*.qmd"
+
+website:
+  title: "BBB Gene Conservation"
+  description: "Coding-sequence conservation and selection pressure in blood-brain barrier genes across human, mouse and macaque."
+  site-url: "https://bbb-gene-conservation.vercel.app"
+  navbar:
+    background: light
+    left:
+      - href: index.qmd
+        text: "Overview"
+      - href: pipeline.qmd
+        text: "Pipeline & Methods"
+      - href: results.qmd
+        text: "Results"
+      - href: audit.qmd
+        text: "Audit"
+      - href: literature-review.qmd
+        text: "Literature"
+      - href: data-code.qmd
+        text: "Data & Code"
+    right:
+      - icon: github
+        href: https://github.com/Mmynemious/BBB-Gene-Conservation
+        aria-label: "GitHub repository"
+  page-footer:
+    background: light
+    left: "Yara Ismail · Clelland Lab"
+    center: "Built with Quarto and R"
+    right: "[Repository](https://github.com/Mmynemious/BBB-Gene-Conservation)"
+
+format:
+  html:
+    theme: cosmo
+    css: styles.css
+    toc: true
+    toc-depth: 3
+    toc-title: "On this page"
+    code-fold: show
+    code-tools: true
+    smooth-scroll: true
+    anchor-sections: true
+    link-external-newwindow: true
+
+execute:
+  warning: false
+  message: false
+  cache: true
+
+# Chunks read data with repo-root-relative paths ("processed/...").
+# Set here rather than inside a chunk, so it survives knitr's cache.
+knitr:
+  opts_knit:
+    root.dir: ".."
+
+author: "Yara Ismail"
+date: today

@@ -1,0 +1,213 @@
+---
+title: "Results — provisional"
+subtitle: "Conservation distributions, BBB vs liver, and the three fixes that change them"
+---
+
+```{r setup}
+#| include: false
+suppressPackageStartupMessages({
+  library(readr)
+  library(dplyr)
+  library(ggplot2)
+  library(knitr)
+})
+knitr::opts_knit$set(root.dir = "..")
+```
+
+```{=html}
+<div class="prov-banner">
+  <h4>These findings are provisional pending three fixes</h4>
+  <p>Steps <strong>1</strong>, <strong>4c</strong> and <strong>5d</strong> feed everything below.
+     Until they are corrected and steps 5c&ndash;5h re-run, no figure on this page should be
+     cited. Each finding carries its own verdict underneath. One comparison already reverses
+     direction once the orthologue rule is applied symmetrically:</p>
+  <div class="prov-flip">
+    <div><span class="fl">As published &mdash; every match kept on the BBB side only</span><span class="fv">BBB 84.12 &middot; liver 84.32</span><span class="fd down">BBB less conserved</span></div>
+    <div><span class="fl">Same rule applied to both sides</span><span class="fv">BBB 85.04 &middot; liver 84.47</span><span class="fd up">BBB more conserved</span></div>
+  </div>
+</div>
+```
+
+## Key figures
+
+```{r v2-results}
+df <- read_csv("processed/conservation_scores_combined_v2.csv",
+               show_col_types = FALSE)
+
+bbb   <- df[df$Gene_Set == "BBB", ]
+liver <- df[df$Gene_Set == "Liver_Control", ]
+
+results <- data.frame(
+  Comparison = c("Human vs Mouse — % identity",
+                  "Human vs Macaque — % identity",
+                  "Human vs Mouse — dN/dS (corrected)",
+                  "Human vs Macaque — dN/dS (corrected)"),
+  BBB_median = c(
+    round(median(bbb$PctId_Human_Mouse,      na.rm = TRUE), 2),
+    round(median(bbb$PctId_Human_Macaque,    na.rm = TRUE), 2),
+    round(median(bbb$dNdS_Human_Mouse_v2,    na.rm = TRUE), 3),
+    round(median(bbb$dNdS_Human_Macaque_v2,  na.rm = TRUE), 3)
+  ),
+  Liver_median = c(
+    round(median(liver$PctId_Human_Mouse,      na.rm = TRUE), 2),
+    round(median(liver$PctId_Human_Macaque,    na.rm = TRUE), 2),
+    round(median(liver$dNdS_Human_Mouse_v2,    na.rm = TRUE), 3),
+    round(median(liver$dNdS_Human_Macaque_v2,  na.rm = TRUE), 3)
+  )
+)
+kable(results, caption = "BBB vs liver conservation — final corrected values")
+```
+
+```{r v2-pid-plot, fig.cap="Distribution of % nucleotide identity — BBB vs Liver"}
+df_long <- df |>
+  select(Gene_Set, PctId_Human_Mouse, PctId_Human_Macaque) |>
+  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison",
+                       values_to = "PctIdentity") |>
+  filter(!is.na(PctIdentity)) |>
+  mutate(Comparison = sub("PctId_", "", Comparison),
+         Comparison = sub("_", " vs ", Comparison))
+
+ggplot(df_long, aes(x = PctIdentity, fill = Gene_Set)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ Comparison) +
+  scale_fill_manual(
+    values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4"),
+    labels = c("BBB" = "BBB (red)", "Liver_Control" = "Liver (blue)")
+  ) +
+  labs(x = "% nucleotide identity", y = "Density",
+       title = "BBB vs Liver: distribution of % identity",
+       fill = "Gene set",
+       caption = "Purple = region where the BBB and Liver distributions overlap") +
+  theme_minimal() +
+  theme(plot.caption = element_text(colour = "#7b4f6e", face = "italic", size = 9))
+```
+
+```{r v2-dnds-plot, fig.cap="Distribution of dN/dS (codon-aligned)"}
+df_dnds <- df |>
+  select(Gene_Set, dNdS_Human_Mouse_v2, dNdS_Human_Macaque_v2) |>
+  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison", values_to = "dNdS") |>
+  filter(!is.na(dNdS), dNdS < 2)
+
+ggplot(df_dnds, aes(x = dNdS, fill = Gene_Set)) +
+  geom_density(alpha = 0.5) +
+  facet_wrap(~ Comparison) +
+  scale_fill_manual(
+    values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4"),
+    labels = c("BBB" = "BBB (red)", "Liver_Control" = "Liver (blue)")
+  ) +
+  labs(x = "dN/dS (codon-aligned)", y = "Density",
+       title = "BBB vs Liver: distribution of dN/dS",
+       fill = "Gene set",
+       caption = "Purple = region where the BBB and Liver distributions overlap") +
+  theme_minimal() +
+  theme(plot.caption = element_text(colour = "#7b4f6e", face = "italic", size = 9))
+```
+
+```{r pid-vs-dnds-plot, fig.cap="% identity vs dN/dS — both metrics tell the same story"}
+bbb_scatter <- bbb |>
+  filter(!is.na(PctId_Human_Mouse), !is.na(dNdS_Human_Mouse_v2), dNdS_Human_Mouse_v2 < 2)
+
+ggplot(bbb_scatter, aes(x = PctId_Human_Mouse, y = dNdS_Human_Mouse_v2)) +
+  geom_point(alpha = 0.25, color = "#d62728", size = 1.2) +
+  geom_smooth(method = "loess", se = TRUE, color = "black", linewidth = 0.8) +
+  labs(x = "% nucleotide identity (Human vs Mouse)", y = "dN/dS (codon-aligned)",
+       title = "% identity and dN/dS are correlated but capture different signal",
+       subtitle = "BBB genes only — Human vs Mouse") +
+  theme_minimal()
+```
+
+```{r purifying-selection-bar, fig.cap="Proportion of genes under strong purifying selection (dN/dS < 0.3)"}
+purify_df <- df |>
+  filter(!is.na(dNdS_Human_Mouse_v2) | !is.na(dNdS_Human_Macaque_v2)) |>
+  group_by(Gene_Set) |>
+  summarise(
+    `Human vs Mouse`   = mean(dNdS_Human_Mouse_v2   < 0.3, na.rm = TRUE) * 100,
+    `Human vs Macaque` = mean(dNdS_Human_Macaque_v2 < 0.3, na.rm = TRUE) * 100,
+    .groups = "drop"
+  ) |>
+  tidyr::pivot_longer(cols = -Gene_Set, names_to = "Comparison", values_to = "Pct")
+
+ggplot(purify_df, aes(x = Comparison, y = Pct, fill = Gene_Set)) +
+  geom_col(position = "dodge") +
+  scale_fill_manual(values = c("BBB" = "#d62728", "Liver_Control" = "#1f77b4")) +
+  labs(x = NULL, y = "% of genes with dN/dS < 0.3",
+       title = "Proportion of genes under strong purifying selection",
+       subtitle = "dN/dS < 0.3 = conventional threshold for strong constraint",
+       fill = "Gene set") +
+  theme_minimal()
+```
+
+---
+
+## Headline findings
+
+1. **Macaque is the closest model to human BBB.** 96.8% nucleotide identity at the coding-sequence level. For almost every gene, macaque sits above the diagonal — more similar to human than mouse.
+
+2. **Mouse is more divergent (84.1%) but still highly conserved.** Mouse models remain biologically defensible, but ~16% sequence divergence is present. Where mouse and human BBB phenotypes differ clinically, this divergence is one possible explanation.
+
+3. **BBB genes are under stronger purifying selection than liver genes** — most visibly in the human-macaque comparison (BBB dN/dS 0.152 vs Liver 0.196, p < 10⁻⁶ after Bonferroni correction). The signal is weaker in human-mouse because at ~80 million years, all genes have accumulated extensive change.
+
+4. **Gene duplication produces dramatic divergence.** Paralogous mouse genes (e.g. *Abcb1a* + *Abcb1b* for human ABCB1) are only ~47% identical to human, vs ~85% for one-to-one orthologues. Effect size is large (rank-biserial r = 0.72).
+
+5. **Conservation and human BBB expression are independent.** A gene's validation score (0–3 datasets) does not predict how conserved it is at the sequence level.
+
+## Biological interpretation
+
+Strong purifying selection on BBB genes makes biological sense. The BBB controls what enters and exits the brain — broken transporters or tight junctions would let toxins in or block essential nutrients. Evolution actively removes protein-changing mutations from these genes, more aggressively than for liver genes.
+
+The fact that this signal is most visible in the human-macaque comparison — not human-mouse — reflects evolutionary timescale. Subtle differential selection is detectable when species are close enough that not all genes have saturated their substitutions. At ~80 million years for human-mouse, this signal is lost in the noise.
+
+---
+
+## Findings, re-graded against the audit
+
+The five findings above are stated as originally written. This is what the audit does to
+each of them.
+
+```{=html}
+<div class="regrade shifts">
+  <h4>1. Macaque is the closest model to human BBB <span class="audit-chip">Direction holds, number unreliable</span></h4>
+  <p class="as-stated">As stated: 96.8% nucleotide identity; macaque sits above the diagonal for almost every gene.</p>
+  <p class="verdict">% identity was computed in <code>step5c</code> and <strong>never recomputed</strong> after the codon-aware fix. <strong>224 one-to-one macaque pairs score under 85%</strong>, which is biologically impossible — <code>SLC2A1</code> comes out at 71.4%. That is the longest-transcript heuristic comparing non-corresponding isoforms. Macaque being closer to human than mouse is safe; the figure 96.8% is not.</p>
+</div>
+
+<div class="regrade shifts">
+  <h4>2. Mouse is more divergent (84.1%) but still highly conserved <span class="audit-chip">Number unreliable</span></h4>
+  <p class="as-stated">As stated: ~16% sequence divergence; mouse models remain biologically defensible.</p>
+  <p class="verdict">The same % identity problem, plus the gene list itself is wrong. This figure describes a set that is largely <strong>pericyte and developmental-timing genes</strong>, not BBB-enriched ones. The claim is not disproven — it has not yet been tested on the right genes.</p>
+</div>
+
+<div class="regrade breaks">
+  <h4>3. BBB genes are under stronger purifying selection than liver genes <span class="audit-chip">Withdrawn</span></h4>
+  <p class="as-stated">As stated: BBB dN/dS 0.152 vs liver 0.196, p &lt; 10⁻⁶ after Bonferroni correction.</p>
+  <p class="verdict">The comparator is not a liver control. <strong>86.6% of it is brain-expressed</strong>, with brain and liver medians effectively identical (31.3 vs 31.2). It is a housekeeping set — and housekeeping genes are unusually conserved — so the test compared BBB genes against one of the most conserved groups in the genome and read the result as tissue-specific selection. <strong>The statistics are correct; the contrast is not.</strong> This claim cannot be made until the control is rebuilt, and step 5d's asymmetric orthologue rule has to be fixed at the same time.</p>
+</div>
+
+<div class="regrade clean">
+  <h4>4. Gene duplication produces dramatic divergence <span class="audit-chip">Survives</span></h4>
+  <p class="as-stated">As stated: paralogous mouse genes ~47% identical vs ~85% for one-to-one orthologues; rank-biserial r = 0.72.</p>
+  <p class="verdict">This is a contrast <strong>within</strong> the BBB set, so it does not depend on the liver control, and the effect is far too large to be an artefact of the % identity problem. It is the strongest surviving result in the project — worth stating plainly, because a page about mistakes that reports nothing left standing is its own kind of distortion.</p>
+</div>
+
+<div class="regrade breaks">
+  <h4>5. Conservation and human BBB expression are independent <span class="audit-chip">Uninformative</span></h4>
+  <p class="as-stated">As stated: a gene's 0–3 validation score does not predict how conserved it is.</p>
+  <p class="verdict">The validation score barely carries information. One of its three components read <strong>only Yang's arterial sheet</strong>; another asked whether a gene was detected at all, which <strong>88.5% of genes pass</strong> — and that component alone is why 1,131 of 1,526 genes score exactly 1. A null result against a near-constant variable says nothing in either direction.</p>
+</div>
+```
+
+## Limitations
+
+### Methodological caveats
+
+- **Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML `codeml` on a multi-species alignment with an explicit phylogenetic tree.
+- **Longest-transcript heuristic.** MANE Select / Ensembl Canonical (`step5b_alt_canonical_transcripts.R`) are more standard. The canonical FASTAs are already generated.
+- **Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.
+
+### Biological caveats
+
+- **The starting gene list is enrichment-based.** CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.
+- **Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.
+- **Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.
+
+---

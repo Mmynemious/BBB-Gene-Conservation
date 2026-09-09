@@ -1,0 +1,156 @@
+---
+title: "Literature Review"
+subtitle: "What is already known about BBB gene conservation, translational models, and comparative genomics of brain barriers"
+---
+
+::: {.callout-note appearance="simple"}
+## In progress
+
+This review is being written as the papers are read. Each source below has a status, and
+sources that bear on a specific pipeline step say which one — so the review and
+[the audit](audit.qmd) stay wired together in both directions.
+
+**To add a paper:** create a section under the relevant theme, using the pattern shown for
+Daneman 2010. Scanned annotations go in `site/images/annotations/` and are referenced with
+a normal markdown image.
+:::
+
+## Why this review exists
+
+The project measures conservation. It does not, on its own, establish what conservation
+*means* for translational validity — whether a gene being 84% identical between mouse and
+human predicts that a drug acting on it will behave the same way in both. That question
+belongs to the literature, and this review is where the answer, or the absence of one, gets
+recorded.
+
+A second job: the audit found that **three of the four Daneman source tables were the wrong
+tables** and that a paper logged as the macaque dataset contains no macaque samples. Both
+were reading errors, not analysis errors. Re-reading the sources carefully, on the record,
+is the correction.
+
+## Theme 1 — Defining the blood–brain barrier transcriptome
+
+How the field decided which genes "are" BBB genes, and how much that definition varies
+between studies.
+
+### Daneman et al. 2010 {#daneman2010}
+
+> Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010). The mouse
+> blood–brain barrier transcriptome: a new resource for understanding the development and
+> function of brain endothelial cells. *PLOS ONE* 5(10): e13741.
+
+**Bears on:** [`step1`](audit.qmd) — this is the source of the master gene list.
+**Status:** re-read, error found and characterised.
+
+The supplementary tables are not interchangeable, and the pipeline treated them as if they
+were. **S3** is a pericyte-specific gene list — `Pdgfrb`, `Kcnj8`, `Vtn`, `Zic1` — not core
+BBB genes. **S4** and **S5** are developmentally up- and down-regulated CNS vascular genes,
+not the brain-vs-liver and brain-vs-lung endothelial contrasts the pipeline assumed. **S6 is
+the BBB-enriched table**: `Slc2a1` (GLUT1), `Slco1a4`, `Slc7a5`, `Ocln`, `Abcb1a`.
+
+The tell was a 1-gene overlap with Munji, which was the correct alarm and the wrong
+diagnosis — S3 was not too restrictive, it was a different cell type. Using S6 gives **151
+of 411 genes overlapping Munji**, which is what two studies of the same tissue should look
+like.
+
+*Annotations: to add.*
+
+### Munji et al. 2019
+
+> Munji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and
+> disease. *Nature Neuroscience* 22(11): 1892–1902.
+
+**Bears on:** [`step1`](audit.qmd). **Status:** read, parsed correctly.
+
+518 BBB-enriched mouse genes from sheet `BBB-enriched` of S5. This is the one source table
+in step 1 that was read as intended.
+
+*Annotations: to add.*
+
+## Theme 2 — Human brain vascular atlases
+
+Single-cell work that makes it possible to ask whether a mouse-derived gene list holds in
+human tissue.
+
+### Wälchli et al. 2024
+
+> Wälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. *Nature* 614:
+> 945–954.
+
+**Bears on:** [`step2`, `step4b`](audit.qmd). **Status:** read.
+
+76,125 sorted human brain vascular cells resolving 12 endothelial subtypes. Processed
+correctly, then reduced by `step4b` to a single "expressed above zero" test that 88.5% of all
+genes pass. **The subtype resolution — the most valuable thing about the dataset — was never
+used.** Whether a gene is capillary-specific rather than merely present is the question this
+atlas can answer and the pipeline never asked.
+
+*Annotations: to add.*
+
+### Yang et al. 2022
+
+> Yang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of
+> Alzheimer's risk. *Nature* 603: 885–892.
+
+**Bears on:** [`step4b`](audit.qmd). **Status:** re-read needed — only one sheet was used.
+
+The supplementary file has seven sheets: Arterial, Capillary, Venous, SMC, Pericyte,
+Fibroblast, Astrocyte. It was read without naming a sheet, so only the first loaded. The
+column labelled as human validation actually means "is an arterial marker".
+
+*Annotations: to add.*
+
+### Winkler et al. 2022
+
+> Winkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain
+> vasculature. *Science* 375(6584): eabi7377.
+
+**Bears on:** [`step4b`](audit.qmd). **Status:** read, parsed correctly.
+
+*Annotations: to add.*
+
+## Theme 3 — Translational models and cross-species validity
+
+The literature this project most needs and currently has least of: what is known about
+whether sequence conservation predicts pharmacological transferability between species.
+
+### Giger et al. 2010 — withdrawn from the dataset list
+
+> Giger T, et al. (2010). *Evolution of neuronal and endothelial transcriptomes in primates.*
+
+**Bears on:** the macaque arm. **Status:** withdrawn — it is not what it was logged as.
+
+Recorded as the macaque dataset. Its 13 samples are **all human** (`taxid 9606`); the macaque
+data in that line of work belongs to Khaitovich et al. under a separate accession that was
+never downloaded. It also compares neurons to endothelium rather than brain to peripheral
+endothelium, so it is not a BBB gene list for any species.
+
+**Consequence for the project:** there is currently *no* macaque expression evidence. Real
+macaque DNA is used throughout steps 5a–5h, but every gene earned its place on the list from
+a mouse study. The macaque arm rests on mouse-defined biology, and that assumption has never
+been tested.
+
+### Candidate replacement — rhesus macaque brain atlas
+
+> *Science Advances* (2023). Single-nucleus atlas of the rhesus macaque brain, ~1M nuclei
+> across 28 regions. Available via CellxGene.
+
+**Status:** identified, not yet obtained. Adding it widens the project's scope and needs
+Dr. Clelland's sign-off.
+
+## Theme 4 — Methods for measuring selection
+
+### To add
+
+Background on dN/dS estimation, saturation at long divergence times, and the case for
+phylogenetic methods (PAML `codeml`) over pairwise estimates — which is a named
+[limitation](results.qmd#limitations) of this project.
+
+## How this project fits in
+
+Once the three breaking defects are fixed, this project contributes a **three-species
+coding-sequence comparison of a defined BBB gene set against a tissue control**, with the
+mouse–macaque leg included so the triangle closes. What it will not contribute, without new
+data, is any statement about macaque BBB *expression*, or about regulatory sequence — the
+analysis is coding-sequence only, and regulatory regions are where most cross-species
+expression differences are thought to live.

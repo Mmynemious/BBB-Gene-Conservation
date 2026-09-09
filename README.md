@@ -29,7 +29,8 @@ BBB-Gene-Conservation/
 ### Daneman et al. (2010) — Mouse BBB Gene Reference
 - **Species:** Mouse (*Mus musculus*)
 - **Method:** Microarray — FACS-sorted brain, liver, lung endothelial cells
-- **Key file:** `Daneman2010_S3_CoreBBBGenes_BrainEC_Enriched.xls` — 213 core BBB genes enriched in brain ECs vs both liver and lung ECs
+- **Key file:** `Daneman2010_S6` — the BBB-enriched gene list (`Slc2a1`, `Slco1a4`, `Slc7a5`, `Ocln`, `Abcb1a`)
+- **⚠️ Correction:** the file named `Daneman2010_S3_CoreBBBGenes_BrainEC_Enriched.xls` is **not** core BBB genes — it is Daneman's pericyte-specific list. S4 and S5 are developmentally up-/down-regulated CNS vascular genes, not tissue contrasts. The pipeline used S3/S4/S5 in error; see the [audit](https://bbb-gene-conservation.vercel.app/audit.html).
 - **Why it matters:** The foundational mouse BBB gene list; >1000 citations
 
 ### Munji et al. (2019) — Updated Mouse BBB Transcriptome

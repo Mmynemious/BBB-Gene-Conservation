@@ -9,7 +9,7 @@
 <meta name="author" content="Yara Ismail">
 <meta name="dcterms.date" content="2026-09-09">
 
-<title>Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque – BBB Gene Conservation</title>
+<title>Extensions – BBB Gene Conservation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
@@ -172,14 +172,35 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#before-anything-else-the-three-fixes" id="toc-before-anything-else-the-three-fixes" class="nav-link active" data-scroll-target="#before-anything-else-the-three-fixes">Before anything else — the three fixes</a></li>
+  <li><a href="#method-extensions" id="toc-method-extensions" class="nav-link" data-scroll-target="#method-extensions">Method extensions</a>
+  <ul class="collapse">
+  <li><a href="#phylogenetic-dnds-with-paml" id="toc-phylogenetic-dnds-with-paml" class="nav-link" data-scroll-target="#phylogenetic-dnds-with-paml">Phylogenetic dN/dS with PAML</a></li>
+  <li><a href="#mane-select-transcripts-and-re-running-identity" id="toc-mane-select-transcripts-and-re-running-identity" class="nav-link" data-scroll-target="#mane-select-transcripts-and-re-running-identity">MANE Select transcripts, and re-running % identity</a></li>
+  <li><a href="#regulatory-and-non-coding-sequence" id="toc-regulatory-and-non-coding-sequence" class="nav-link" data-scroll-target="#regulatory-and-non-coding-sequence">Regulatory and non-coding sequence</a></li>
+  </ul></li>
+  <li><a href="#data-extensions" id="toc-data-extensions" class="nav-link" data-scroll-target="#data-extensions">Data extensions</a>
+  <ul class="collapse">
+  <li><a href="#a-macaque-expression-atlas" id="toc-a-macaque-expression-atlas" class="nav-link" data-scroll-target="#a-macaque-expression-atlas">A macaque expression atlas</a></li>
+  <li><a href="#wälchlis-endothelial-subtypes" id="toc-wälchlis-endothelial-subtypes" class="nav-link" data-scroll-target="#wälchlis-endothelial-subtypes">Wälchli’s endothelial subtypes</a></li>
+  <li><a href="#a-better-control-or-several" id="toc-a-better-control-or-several" class="nav-link" data-scroll-target="#a-better-control-or-several">A better control, or several</a></li>
+  </ul></li>
+  <li><a href="#housekeeping" id="toc-housekeeping" class="nav-link" data-scroll-target="#housekeeping">Housekeeping</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs.&nbsp;liver controls.</p>
+<div class="quarto-title-block"><div><h1 class="title">Extensions</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">Planned and ongoing follow-ups</p>
 </div>
 
 
@@ -208,78 +229,61 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="hub-summary">
-<p>Drugs for the brain are tested in mice, then macaques, then people — and every arrow in that chain is a translational leap. This project asks how well that chain holds at the DNA level: <strong>how conserved are blood–brain barrier genes across the three species?</strong> Each gene is measured two ways — <strong>% nucleotide identity</strong>, how many DNA letters match, and <strong>dN/dS</strong>, whether evolution is actively removing protein-changing mutations — against a control set of genes from a tissue that is not the brain.</p>
-<p>The headline is a method result rather than a biological one. <strong>Macaque coding sequence is far closer to human than mouse is, and gene duplication is what drives real divergence</strong>: where mouse has two copies of a gene humans have once (<em>Abcb1a</em> and <em>Abcb1b</em> for human <em>ABCB1</em>), identity collapses to ~47% against ~85% for clean one-to-one pairs — a large, robust effect. The tissue-level claim that would have been the headline — that BBB genes are under stronger purifying selection than liver genes — <strong>does not currently stand</strong>, and <a href="./audit.html">the audit</a> explains exactly why: the liver control was never filtered, so 86.6% of it is brain-expressed too.</p>
-</div>
-<section id="whats-in-this-project" class="level2">
-<h2 class="anchored" data-anchor-id="whats-in-this-project">What’s in this project</h2>
-<div class="hub-grid">
-<section id="pipeline-methods" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="pipeline-methods">Pipeline &amp; Methods</h3>
-<p>How the analysis was built, step by step: gene lists from mouse transcriptomics, orthologue mapping across three species, coding-sequence extraction, pairwise alignment, % identity and dN/dS. Each step carries its own audit flag.</p>
-<p><a href="./pipeline.html">Read more →</a></p>
+<p>Nothing on this page has been done yet. It is a record of what the project would need next, kept separate from the <a href="./audit.html">audit</a> because these are not defects — a defect has a fix, and these need a decision, a dataset, or a method the project does not currently use.</p>
+<section id="before-anything-else-the-three-fixes" class="level2">
+<h2 class="anchored" data-anchor-id="before-anything-else-the-three-fixes">Before anything else — the three fixes</h2>
+<p>The extensions below are only worth doing on corrected inputs. In priority order:</p>
+<ol type="1">
+<li><strong><code>step1</code></strong> — point it at Daneman <strong>S6</strong>, drop S3/S4/S5, retire the <code>Daneman_Filter</code> column, and replace <code>toupper()</code> with a real orthologue mapping so the 92 silently dropped genes return.</li>
+<li><strong><code>step4c</code></strong> — one line, so the brain filter matches the Human Protein Atlas’s real region names. Then decide what the control should actually be.</li>
+<li><strong><code>step5d</code></strong> — one orthologue rule applied to both groups.</li>
+</ol>
+<p>Then re-run <code>step5c</code> through <code>step5h</code>.</p>
 </section>
-<section id="results" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="results">Results</h3>
-<p>Conservation distributions, BBB against the liver control, and the three pairwise species comparisons. Every headline finding is graded for whether it survives the audit.</p>
-<p><a href="./results.html">Read more →</a></p>
+<section id="method-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="method-extensions">Method extensions</h2>
+<section id="phylogenetic-dnds-with-paml" class="level3">
+<h3 class="anchored" data-anchor-id="phylogenetic-dnds-with-paml">Phylogenetic dN/dS with PAML</h3>
+<p>The current estimate is <strong>pairwise</strong>: each species pair scored independently. The rigorous approach runs <code>codeml</code> on a multi-species alignment with an explicit tree, which separates lineage-specific selection from shared ancestral signal and handles saturation properly. At ~80 My of human–mouse divergence, saturation is the specific worry — 38% of genes hit the dS ceiling before the codon-aware fix, and 2% still do.</p>
+<p><strong>Needs:</strong> PAML, a three-species alignment per gene, and considerably more compute.</p>
 </section>
-<section id="audit-whats-wrong" class="level3 hub-card hub-card-flag">
-<h3 class="anchored" data-anchor-id="audit-whats-wrong">Audit — what’s wrong</h3>
-<p>All 15 numbered steps with a verdict each, the real execution order, the three fixes that change conclusions, and the open questions. <strong>3 steps break results, 6 move numbers, 6 are clean.</strong></p>
-<p><a href="./audit.html">Read more →</a></p>
+<section id="mane-select-transcripts-and-re-running-identity" class="level3">
+<h3 class="anchored" data-anchor-id="mane-select-transcripts-and-re-running-identity">MANE Select transcripts, and re-running % identity</h3>
+<p><a href="./data-code.html"><code>step5b_alt_canonical_transcripts.R</code></a> already generates canonical FASTAs and was never switched in. Doing so, then recomputing % identity the way <code>step5f</code> recomputed dN/dS, should remove the <strong>224 one-to-one macaque pairs scoring under 85%</strong> — figures that are currently reporting isoform length mismatch as evolutionary distance.</p>
+<p>This is the cheapest high-value extension: the code exists and the sequences are already downloaded.</p>
 </section>
-<section id="literature-review" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="literature-review">Literature Review</h3>
-<p>What is already known about BBB gene conservation, translational models and comparative genomics of brain barriers — and where this project sits among it. Growing as the review proceeds.</p>
-<p><a href="./literature-review.html">Read more →</a></p>
+<section id="regulatory-and-non-coding-sequence" class="level3">
+<h3 class="anchored" data-anchor-id="regulatory-and-non-coding-sequence">Regulatory and non-coding sequence</h3>
+<p>The analysis is <strong>coding sequence only</strong>. Promoters, enhancers and UTRs were deliberately excluded — and they are where most cross-species differences in <em>expression level</em> are thought to live. A gene can be 95% identical in its coding sequence and regulated completely differently. Extending to regulatory regions would test whether BBB conservation at the protein level is matched by conservation in how the genes are switched on.</p>
+<p><strong>Needs:</strong> a definition of the regulatory region per gene, and an alignment strategy that tolerates far lower conservation than CDS.</p>
 </section>
-<section id="data-code" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="data-code">Data &amp; Code</h3>
-<p>Processed datasets, the R scripts for every step, source papers, and instructions to reproduce the analysis from a clean clone.</p>
-<p><a href="./data-code.html">Read more →</a></p>
 </section>
-<section id="extensions" class="level3 hub-card hub-card-muted">
-<h3 class="anchored" data-anchor-id="extensions">Extensions</h3>
-<p>Planned and ongoing follow-ups: promoter and UTR analysis, phylogenetic dN/dS with PAML, MANE Select transcripts, and a macaque expression atlas.</p>
-<p><a href="./extensions.html">Read more →</a></p>
+<section id="data-extensions" class="level2">
+<h2 class="anchored" data-anchor-id="data-extensions">Data extensions</h2>
+<section id="a-macaque-expression-atlas" class="level3">
+<h3 class="anchored" data-anchor-id="a-macaque-expression-atlas">A macaque expression atlas</h3>
+<p>The project’s largest structural gap. Real macaque DNA is used throughout, but <strong>no macaque study tells us which genes macaque brain vessels actually express</strong> — every gene earned its place from a mouse study, and the paper logged as the macaque dataset (<a href="./literature-review.html">Giger 2010</a>) contains no macaque samples.</p>
+<p>The candidate is the rhesus macaque single-nucleus brain atlas (<em>Science Advances</em> 2023, ~1M nuclei, 28 regions, on CellxGene).</p>
+<p><strong>Needs:</strong> the dataset, and Dr.&nbsp;Clelland’s sign-off — this widens the project’s scope.</p>
 </section>
-</div>
+<section id="wälchlis-endothelial-subtypes" class="level3">
+<h3 class="anchored" data-anchor-id="wälchlis-endothelial-subtypes">Wälchli’s endothelial subtypes</h3>
+<p>The atlas resolves 12 endothelial subtypes; <code>step4b</code> collapsed all of it to one above-zero test. Asking whether a gene is <strong>capillary-specific</strong> rather than merely detected is the question this dataset exists to answer, and would turn the validation score from a near-constant into something informative.</p>
+<p><strong>Needs:</strong> nothing new — the matrix is already in <code>processed/</code>.</p>
 </section>
-<section id="key-results" class="level2">
-<h2 class="anchored" data-anchor-id="key-results">Key results</h2>
-<div class="hub-figs">
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/translational-ladder.png" class="img-fluid figure-img" data-group="key"></p>
-<figcaption><strong>Macaque sits closer to human than mouse, gene for gene.</strong> Each point is one BBB gene, plotted by its human–mouse identity against its human–macaque identity. Note the 224 one-to-one macaque pairs falling below 85% — those are an artefact of the longest-transcript heuristic, not biology.</figcaption>
-</figure>
-</div>
-<div class="quarto-figure quarto-figure-center">
-<figure class="figure">
-<p><img src="images/pid-density.png" class="img-fluid figure-img" data-group="key"></p>
-<figcaption><strong>Distribution of % nucleotide identity, BBB genes against the liver control.</strong> The two distributions sit almost on top of one another. Under the orthologue rule actually used, BBB scored <em>below</em> the control (84.12 vs 84.32); applying one rule to both sides reverses it (85.04 vs 84.47). The comparison is not currently trustworthy in either direction.</figcaption>
-</figure>
-</div>
-</div>
-<div class="callout callout-style-simple callout-important callout-titled">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-<span class="screen-reader-only">Important</span>These figures are provisional
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>Three upstream steps — <code>step1</code> (wrong source tables), <code>step4c</code> (the liver filter never ran) and <code>step5d</code> (different orthologue rules on the two sides) — feed everything shown here. No figure on this site should be cited until they are fixed and steps 5c–5h re-run. <a href="./audit.html">What’s wrong, in full →</a></p>
-</div>
-</div>
+<section id="a-better-control-or-several" class="level3">
+<h3 class="anchored" data-anchor-id="a-better-control-or-several">A better control, or several</h3>
+<p>Liver was one choice. Brain non-BBB genes would test whether the signal is specific to the barrier rather than to the brain; genes matched on protein domain would control for the fact that transporters and tight-junction proteins are structurally unusual. Running more than one control would say more than fixing the single one.</p>
+<p><strong>Needs:</strong> Dr.&nbsp;Clelland’s decision on what claim the control is meant to support.</p>
 </section>
-<section id="about-this-project" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-project">About this project</h2>
-<p>Undergraduate research project by <strong>Yara Ismail</strong>, under the supervision of <strong>Dr.&nbsp;Claire Clelland</strong>. The pipeline is written in R against Ensembl release 113, the Human Protein Atlas, and five published transcriptomic datasets. Everything — data, scripts, and this site — is in the <a href="https://github.com/Mmynemious/BBB-Gene-Conservation">GitHub repository</a>.</p>
+</section>
+<section id="housekeeping" class="level2">
+<h2 class="anchored" data-anchor-id="housekeeping">Housekeeping</h2>
+<ul>
+<li>Make <code>step2</code> reproducible from a clean clone, or document the exact supplementary file to fetch.</li>
+<li>Drop the <code>Mitochondrial</code> cluster — dying cells, not a cell type — from the Wälchli output matrix.</li>
+<li>Correct the <code>step3c</code> biotype check so it can actually fail, or remove it.</li>
+</ul>
 
 
 <!-- -->
@@ -744,115 +748,99 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls."</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> article</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>::: {.hub-summary}</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Extensions"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Planned and ongoing follow-ups"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>Nothing on this page has been done yet. It is a record of what the project would need next,</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>kept separate from the <span class="co">[</span><span class="ot">audit</span><span class="co">](audit.qmd)</span> because these are not defects — a defect has a</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>fix, and these need a decision, a dataset, or a method the project does not currently use.</span>
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>Drugs for the brain are tested in mice, then macaques, then people — and every arrow in</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>that chain is a translational leap. This project asks how well that chain holds at the DNA</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>level: **how conserved are blood–brain barrier genes across the three species?** Each gene</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>is measured two ways — **% nucleotide identity**, how many DNA letters match, and</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>**dN/dS**, whether evolution is actively removing protein-changing mutations — against a</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>control set of genes from a tissue that is not the brain.</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>The headline is a method result rather than a biological one. **Macaque coding sequence is</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>far closer to human than mouse is, and gene duplication is what drives real divergence**:</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>where mouse has two copies of a gene humans have once (*Abcb1a* and *Abcb1b* for human</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>*ABCB1*), identity collapses to ~47% against ~85% for clean one-to-one pairs — a large,</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>robust effect. The tissue-level claim that would have been the headline — that BBB genes</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>are under stronger purifying selection than liver genes — **does not currently stand**, and</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">the audit</span><span class="co">](audit.qmd)</span> explains exactly why: the liver control was never filtered, so 86.6%</span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>of it is brain-expressed too.</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">## What's in this project</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>::: {.hub-grid}</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pipeline &amp; Methods</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>How the analysis was built, step by step: gene lists from mouse transcriptomics, orthologue</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>mapping across three species, coding-sequence extraction, pairwise alignment, % identity and</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>dN/dS. Each step carries its own audit flag.</span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](pipeline.qmd)</span></span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="fu">### Results</span></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>Conservation distributions, BBB against the liver control, and the three pairwise species</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a>comparisons. Every headline finding is graded for whether it survives the audit.</span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](results.qmd)</span></span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>::: {.hub-card .hub-card-flag}</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a><span class="fu">### Audit — what's wrong</span></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>All 15 numbered steps with a verdict each, the real execution order, the three fixes that</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a>change conclusions, and the open questions. **3 steps break results, 6 move numbers, 6 are</span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>clean.**</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](audit.qmd)</span></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="fu">## Before anything else — the three fixes</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>The extensions below are only worth doing on corrected inputs. In priority order:</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**`step1`** — point it at Daneman **S6**, drop S3/S4/S5, retire the <span class="in">`Daneman_Filter`</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>   column, and replace <span class="in">`toupper()`</span> with a real orthologue mapping so the 92 silently dropped</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>   genes return.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**`step4c`** — one line, so the brain filter matches the Human Protein Atlas's real</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>   region names. Then decide what the control should actually be.</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**`step5d`** — one orthologue rule applied to both groups.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>Then re-run <span class="in">`step5c`</span> through <span class="in">`step5h`</span>.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## Method extensions</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a><span class="fu">### Phylogenetic dN/dS with PAML</span></span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>The current estimate is **pairwise**: each species pair scored independently. The rigorous</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>approach runs <span class="in">`codeml`</span> on a multi-species alignment with an explicit tree, which separates</span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>lineage-specific selection from shared ancestral signal and handles saturation properly. At</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>~80 My of human–mouse divergence, saturation is the specific worry — 38% of genes hit the dS</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>ceiling before the codon-aware fix, and 2% still do.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>**Needs:** PAML, a three-species alignment per gene, and considerably more compute.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="fu">### MANE Select transcripts, and re-running % identity</span></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">`step5b_alt_canonical_transcripts.R`</span><span class="co">](data-code.qmd)</span> already generates canonical FASTAs and</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>was never switched in. Doing so, then recomputing % identity the way <span class="in">`step5f`</span> recomputed</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>dN/dS, should remove the **224 one-to-one macaque pairs scoring under 85%** — figures that</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>are currently reporting isoform length mismatch as evolutionary distance.</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a>This is the cheapest high-value extension: the code exists and the sequences are already</span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>downloaded.</span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="fu">### Regulatory and non-coding sequence</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>The analysis is **coding sequence only**. Promoters, enhancers and UTRs were deliberately</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a>excluded — and they are where most cross-species differences in *expression level* are</span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>thought to live. A gene can be 95% identical in its coding sequence and regulated completely</span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>differently. Extending to regulatory regions would test whether BBB conservation at the</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>protein level is matched by conservation in how the genes are switched on.</span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>**Needs:** a definition of the regulatory region per gene, and an alignment strategy that</span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>tolerates far lower conservation than CDS.</span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data extensions</span></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a><span class="fu">### Literature Review</span></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>What is already known about BBB gene conservation, translational models and comparative</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>genomics of brain barriers — and where this project sits among it. Growing as the review</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>proceeds.</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](literature-review.qmd)</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data &amp; Code</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>Processed datasets, the R scripts for every step, source papers, and instructions to</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>reproduce the analysis from a clean clone.</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### A macaque expression atlas</span></span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>The project's largest structural gap. Real macaque DNA is used throughout, but **no macaque</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>study tells us which genes macaque brain vessels actually express** — every gene earned its</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>place from a mouse study, and the paper logged as the macaque dataset</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>(<span class="co">[</span><span class="ot">Giger 2010</span><span class="co">](literature-review.qmd)</span>) contains no macaque samples.</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>The candidate is the rhesus macaque single-nucleus brain atlas (*Science Advances* 2023,</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>~1M nuclei, 28 regions, on CellxGene).</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>**Needs:** the dataset, and Dr. Clelland's sign-off — this widens the project's scope.</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### Wälchli's endothelial subtypes</span></span>
 <span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](data-code.qmd)</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>::: {.hub-card .hub-card-muted}</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensions</span></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>Planned and ongoing follow-ups: promoter and UTR analysis, phylogenetic dN/dS with PAML,</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>MANE Select transcripts, and a macaque expression atlas.</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](extensions.qmd)</span></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a><span class="fu">## Key results</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>::: {.hub-figs}</span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="al">![**Macaque sits closer to human than mouse, gene for gene.** Each point is one BBB gene, plotted by its human–mouse identity against its human–macaque identity. Note the 224 one-to-one macaque pairs falling below 85% — those are an artefact of the longest-transcript heuristic, not biology.](images/translational-ladder.png)</span>{group="key"}</span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="al">![**Distribution of % nucleotide identity, BBB genes against the liver control.** The two distributions sit almost on top of one another. Under the orthologue rule actually used, BBB scored *below* the control (84.12 vs 84.32); applying one rule to both sides reverses it (85.04 vs 84.47). The comparison is not currently trustworthy in either direction.](images/pid-density.png)</span>{group="key"}</span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>::: {.callout-important appearance="simple"}</span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a><span class="fu">## These figures are provisional</span></span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>Three upstream steps — <span class="in">`step1`</span> (wrong source tables), <span class="in">`step4c`</span> (the liver filter never ran)</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a>and <span class="in">`step5d`</span> (different orthologue rules on the two sides) — feed everything shown here. No</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>figure on this site should be cited until they are fixed and steps 5c–5h re-run.</span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">What's wrong, in full →</span><span class="co">](audit.qmd)</span></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="fu">## About this project</span></span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>Undergraduate research project by **Yara Ismail**, under the supervision of</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>**Dr. Claire Clelland**. The pipeline is written in R against Ensembl release 113, the Human</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>Protein Atlas, and five published transcriptomic datasets. Everything — data, scripts, and</span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>this site — is in the</span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>The atlas resolves 12 endothelial subtypes; <span class="in">`step4b`</span> collapsed all of it to one above-zero</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>test. Asking whether a gene is **capillary-specific** rather than merely detected is the</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>question this dataset exists to answer, and would turn the validation score from a</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>near-constant into something informative.</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>**Needs:** nothing new — the matrix is already in <span class="in">`processed/`</span>.</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### A better control, or several</span></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>Liver was one choice. Brain non-BBB genes would test whether the signal is specific to the</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>barrier rather than to the brain; genes matched on protein domain would control for the fact</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>that transporters and tight-junction proteins are structurally unusual. Running more than one</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>control would say more than fixing the single one.</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>**Needs:** Dr. Clelland's decision on what claim the control is meant to support.</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Housekeeping</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make <span class="in">`step2`</span> reproducible from a clean clone, or document the exact supplementary file to</span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>  fetch.</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Drop the <span class="in">`Mitochondrial`</span> cluster — dying cells, not a cell type — from the Wälchli output</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  matrix.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Correct the <span class="in">`step3c`</span> biotype check so it can actually fail, or remove it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
