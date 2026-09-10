@@ -9,7 +9,7 @@
 <meta name="author" content="Yara Ismail">
 <meta name="dcterms.date" content="2026-09-10">
 
-<title>Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque – BBB Gene Conservation</title>
+<title>Resources – BBB Gene Conservation</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -113,7 +113,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -131,7 +131,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <div class="collapse navbar-collapse" id="navbarCollapse">
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
-    <a class="nav-link active" href="./index.html" aria-current="page"> 
+    <a class="nav-link" href="./index.html"> 
 <span class="menu-text">Overview</span></a>
   </li>  
   <li class="nav-item">
@@ -155,7 +155,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Data &amp; Code</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./resources.html"> 
+    <a class="nav-link active" href="./resources.html" aria-current="page"> 
 <span class="menu-text">Resources</span></a>
   </li>  
 </ul>
@@ -176,14 +176,26 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
-    
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#datasets-papers-used-in-the-pipeline" id="toc-datasets-papers-used-in-the-pipeline" class="nav-link active" data-scroll-target="#datasets-papers-used-in-the-pipeline">Datasets — papers used in the pipeline</a></li>
+  <li><a href="#consulted-not-used" id="toc-consulted-not-used" class="nav-link" data-scroll-target="#consulted-not-used">Consulted, not used</a></li>
+  <li><a href="#databases" id="toc-databases" class="nav-link" data-scroll-target="#databases">Databases</a></li>
+  <li><a href="#software" id="toc-software" class="nav-link" data-scroll-target="#software">Software</a></li>
+  <li><a href="#ai-transparency" id="toc-ai-transparency" class="nav-link" data-scroll-target="#ai-transparency">AI transparency</a></li>
+  </ul>
+</nav>
+    </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<div class="quarto-title-block"><div><h1 class="title">Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs.&nbsp;liver controls.</p>
+<div class="quarto-title-block"><div><h1 class="title">Resources</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
+<p class="subtitle lead">The papers, databases and tools this project is built on</p>
 </div>
 
 
@@ -212,53 +224,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<div class="hub-summary">
-<p>This project has been my way of learning bioinformatics and the biology of the blood–brain barrier at the same time. It is a quantitative analysis of <strong>coding-sequence conservation and selection pressure in blood–brain barrier genes</strong> across human, mouse and macaque, using liver genes as a control group.</p>
-<p>The site documents the whole thing: <strong>the steps I took, the materials I used, the audit I did afterwards, and what has to be fixed first</strong> before this data can be reused. The bioinformatics pipeline is a rough structure — usable, but it needs polishing. Alongside it is a literature review, currently in progress, where I will add and comment on the papers I read.</p>
-</div>
-<section id="whats-in-this-project" class="level2">
-<h2 class="anchored" data-anchor-id="whats-in-this-project">What’s in this project</h2>
-<div class="hub-grid">
-<section id="pipeline-methods" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="pipeline-methods">Pipeline &amp; Methods</h3>
-<p>How the analysis was built, step by step: gene lists, orthologues across three species, coding-sequence alignment, % identity and dN/dS. Each step carries its own audit flag.</p>
-<p><a href="./pipeline.html">Read more →</a></p>
+<section id="datasets-papers-used-in-the-pipeline" class="level2">
+<h2 class="anchored" data-anchor-id="datasets-papers-used-in-the-pipeline">Datasets — papers used in the pipeline</h2>
+<p>Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010). The mouse blood–brain barrier transcriptome: a new resource for understanding the development and function of brain endothelial cells. <em>PLOS ONE</em> 5(10): e13741. : Mouse BBB gene list — <code>step1</code>. Supplementary tables S3–S5 were used in error; S6 is the BBB-enriched table. See the <a href="./audit.html">audit</a>.</p>
+<p>Munji RN, et al.&nbsp;(2019). Profiling the mouse brain endothelial transcriptome in health and disease. <em>Nature Neuroscience</em> 22(11): 1892–1902. : Mouse BBB-enriched genes (518) — <code>step1</code>.</p>
+<p>Wälchli T, et al.&nbsp;(2024). Single-cell atlas of the human brain vasculature. <em>Nature</em> 614: 945–954. : Human brain endothelial single-cell expression — <code>step2</code>, <code>step4b</code>.</p>
+<p>Yang AC, et al.&nbsp;(2022). A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk. <em>Nature</em> 603: 885–892. : Human endothelial subtype markers — <code>step4b</code>. Only the first (arterial) sheet was read.</p>
+<p>Winkler EA, et al.&nbsp;(2022). A single-cell atlas of the normal and malformed human brain vasculature. <em>Science</em> 375(6584): eabi7377. : Human endothelial markers — <code>step4b</code>.</p>
 </section>
-<section id="results" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="results">Results</h3>
-<p>Conservation distributions, BBB genes against the liver control, and the three pairwise species comparisons — each finding graded for whether it survives the audit.</p>
-<p><a href="./results.html">Read more →</a></p>
+<section id="consulted-not-used" class="level2">
+<h2 class="anchored" data-anchor-id="consulted-not-used">Consulted, not used</h2>
+<p>Giger T, Khaitovich P, Somel M, Lorenc A, Lizano E, Harris LW, Ryan MM, Lan M, Wayland MT, Bahn S, Pääbo S (2010). Evolution of neuronal and endothelial transcriptomes in primates. <em>Genome Biology and Evolution</em>. GEO: GSE12293. : Originally logged as the macaque dataset. The downloaded samples are all human, so it does not supply macaque expression data. See the <a href="./audit.html">audit</a>.</p>
 </section>
-<section id="audit-what-went-wrong" class="level3 hub-card hub-card-flag">
-<h3 class="anchored" data-anchor-id="audit-what-went-wrong">Audit — what went wrong</h3>
-<p>All 15 pipeline steps with a verdict each, and the three fixes that have to happen before the results can be trusted. <strong>3 steps break results, 6 move numbers, 6 are clean.</strong></p>
-<p><a href="./audit.html">Read more →</a></p>
+<section id="databases" class="level2">
+<h2 class="anchored" data-anchor-id="databases">Databases</h2>
+<dl>
+<dt>Ensembl, release 113 — <a href="https://www.ensembl.org" class="uri">https://www.ensembl.org</a></dt>
+<dd>
+Gene IDs, orthologues (via BioMart) and coding sequences for GRCh38 (human), GRCm39 (mouse) and Mmul_10 (macaque) — <code>step3</code>, <code>step3b</code>, <code>step5a</code>.
+</dd>
+<dt>Human Protein Atlas, tissue RNA consensus — <a href="https://www.proteinatlas.org" class="uri">https://www.proteinatlas.org</a></dt>
+<dd>
+Tissue expression used to build the liver control set — <code>step4c</code>.
+</dd>
+</dl>
 </section>
-<section id="literature-review" class="level3 hub-card hub-card-muted">
-<h3 class="anchored" data-anchor-id="literature-review">Literature Review</h3>
-<p>Papers on BBB gene conservation, translational models and comparative genomics, with my comments. <strong>In progress.</strong></p>
-<p><a href="./literature-review.html">Read more →</a></p>
+<section id="software" class="level2">
+<h2 class="anchored" data-anchor-id="software">Software</h2>
+<ul>
+<li><strong>R</strong> with <code>readr</code>, <code>dplyr</code>, <code>ggplot2</code>, <code>readxl</code>, <code>knitr</code></li>
+<li><strong>Bioconductor:</strong> <code>biomaRt</code>, <code>Biostrings</code>, <code>pwalign</code></li>
+<li><strong><code>seqinr</code></strong> — dN/dS (<code>kaks</code>)</li>
+<li><strong>Seurat</strong> — processing the Wälchli single-cell object (<code>step2</code>)</li>
+<li><strong>Quarto</strong> — this website</li>
+</ul>
 </section>
-<section id="data-code" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="data-code">Data &amp; Code</h3>
-<p>Processed datasets, the R script for every step, and instructions to reproduce the analysis.</p>
-<p><a href="./data-code.html">Read more →</a></p>
-</section>
-<section id="extensions" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="extensions">Extensions</h3>
-<p>What comes after the fixes: MANE Select transcripts, phylogenetic dN/dS, regulatory sequence, and a macaque expression atlas.</p>
-<p><a href="./extensions.html">Read more →</a></p>
-</section>
-<section id="resources" class="level3 hub-card">
-<h3 class="anchored" data-anchor-id="resources">Resources</h3>
-<p>The papers, databases and tools this project is built on, with full citations.</p>
-<p><a href="./resources.html">Read more →</a></p>
-</section>
-</div>
-</section>
-<section id="about-this-project" class="level2">
-<h2 class="anchored" data-anchor-id="about-this-project">About this project</h2>
-<p>Research project by <strong>Yara Ismail</strong>, under the supervision of <strong>Dr.&nbsp;Claire Clelland</strong>. Everything — data, scripts, and this site — is in the <a href="https://github.com/Mmynemious/BBB-Gene-Conservation">GitHub repository</a>.</p>
+<section id="ai-transparency" class="level2">
+<h2 class="anchored" data-anchor-id="ai-transparency">AI transparency</h2>
+<p>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr.&nbsp;Claire Clelland.</p>
 
 
 <!-- -->
@@ -723,93 +726,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls."</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
-<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> article</span></span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Resources"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "The papers, databases and tools this project is built on"</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Datasets — papers used in the pipeline</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>::: {.hub-summary}</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>This project has been my way of learning bioinformatics and the biology of the blood–brain</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>barrier at the same time. It is a quantitative analysis of **coding-sequence conservation and</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>selection pressure in blood–brain barrier genes** across human, mouse and macaque, using</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>liver genes as a control group.</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>The site documents the whole thing: **the steps I took, the materials I used, the audit I</span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>did afterwards, and what has to be fixed first** before this data can be reused. The</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>bioinformatics pipeline is a rough structure — usable, but it needs polishing. Alongside it</span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>is a literature review, currently in progress, where I will add and comment on the papers I</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>read.</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="fu">## What's in this project</span></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>::: {.hub-grid}</span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Pipeline &amp; Methods</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>How the analysis was built, step by step: gene lists, orthologues across three species,</span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>coding-sequence alignment, % identity and dN/dS. Each step carries its own audit flag.</span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](pipeline.qmd)</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a><span class="fu">### Results</span></span>
-<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Conservation distributions, BBB genes against the liver control, and the three pairwise</span>
-<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>species comparisons — each finding graded for whether it survives the audit.</span>
-<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](results.qmd)</span></span>
-<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010).</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>The mouse blood–brain barrier transcriptome: a new resource for understanding the development</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>and function of brain endothelial cells. *PLOS ONE* 5(10): e13741.</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>: Mouse BBB gene list — <span class="in">`step1`</span>. Supplementary tables S3–S5 were used in error; S6 is the</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>BBB-enriched table. See the <span class="co">[</span><span class="ot">audit</span><span class="co">](audit.qmd)</span>.</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Munji RN, et al. (2019).</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>Profiling the mouse brain endothelial transcriptome in health and disease.</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>*Nature Neuroscience* 22(11): 1892–1902.</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>: Mouse BBB-enriched genes (518) — <span class="in">`step1`</span>.</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>Wälchli T, et al. (2024).</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>Single-cell atlas of the human brain vasculature.</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>*Nature* 614: 945–954.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>: Human brain endothelial single-cell expression — <span class="in">`step2`</span>, <span class="in">`step4b`</span>.</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>Yang AC, et al. (2022).</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>A human brain vascular atlas reveals diverse mediators of Alzheimer's risk.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>*Nature* 603: 885–892.</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>: Human endothelial subtype markers — <span class="in">`step4b`</span>. Only the first (arterial) sheet was read.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>Winkler EA, et al. (2022).</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>A single-cell atlas of the normal and malformed human brain vasculature.</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>*Science* 375(6584): eabi7377.</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>: Human endothelial markers — <span class="in">`step4b`</span>.</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="fu">## Consulted, not used</span></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a>Giger T, Khaitovich P, Somel M, Lorenc A, Lizano E, Harris LW, Ryan MM, Lan M, Wayland MT,</span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>Bahn S, Pääbo S (2010).</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a>Evolution of neuronal and endothelial transcriptomes in primates.</span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a>*Genome Biology and Evolution*. GEO: GSE12293.</span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a>: Originally logged as the macaque dataset. The downloaded samples are all human, so it does</span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a>not supply macaque expression data. See the <span class="co">[</span><span class="ot">audit</span><span class="co">](audit.qmd)</span>.</span>
 <span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a>::: {.hub-card .hub-card-flag}</span>
-<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="fu">### Audit — what went wrong</span></span>
-<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>All 15 pipeline steps with a verdict each, and the three fixes that have to happen before</span>
-<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>the results can be trusted. **3 steps break results, 6 move numbers, 6 are clean.**</span>
-<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](audit.qmd)</span></span>
-<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a>::: {.hub-card .hub-card-muted}</span>
-<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">### Literature Review</span></span>
-<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a>Papers on BBB gene conservation, translational models and comparative genomics, with my</span>
-<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a>comments. **In progress.**</span>
-<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](literature-review.qmd)</span></span>
-<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">### Data &amp; Code</span></span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>Processed datasets, the R script for every step, and instructions to reproduce the</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>analysis.</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](data-code.qmd)</span></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a><span class="fu">### Extensions</span></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>What comes after the fixes: MANE Select transcripts, phylogenetic dN/dS, regulatory</span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>sequence, and a macaque expression atlas.</span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](extensions.qmd)</span></span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>::: {.hub-card}</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="fu">### Resources</span></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>The papers, databases and tools this project is built on, with full citations.</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Read more →</span><span class="co">](resources.qmd)</span></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## About this project</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>Research project by **Yara Ismail**, under the supervision of **Dr. Claire Clelland**.</span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>Everything — data, scripts, and this site — is in the</span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="fu">## Databases</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a>Ensembl, release 113 — <span class="ot">&lt;https://www.ensembl.org&gt;</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a>: Gene IDs, orthologues (via BioMart) and coding sequences for GRCh38 (human), GRCm39 (mouse)</span>
+<span id="cb1-47"><a href="#cb1-47" aria-hidden="true" tabindex="-1"></a>and Mmul_10 (macaque) — <span class="in">`step3`</span>, <span class="in">`step3b`</span>, <span class="in">`step5a`</span>.</span>
+<span id="cb1-48"><a href="#cb1-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-49"><a href="#cb1-49" aria-hidden="true" tabindex="-1"></a>Human Protein Atlas, tissue RNA consensus — <span class="ot">&lt;https://www.proteinatlas.org&gt;</span></span>
+<span id="cb1-50"><a href="#cb1-50" aria-hidden="true" tabindex="-1"></a>: Tissue expression used to build the liver control set — <span class="in">`step4c`</span>.</span>
+<span id="cb1-51"><a href="#cb1-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-52"><a href="#cb1-52" aria-hidden="true" tabindex="-1"></a><span class="fu">## Software</span></span>
+<span id="cb1-53"><a href="#cb1-53" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-54"><a href="#cb1-54" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**R** with <span class="in">`readr`</span>, <span class="in">`dplyr`</span>, <span class="in">`ggplot2`</span>, <span class="in">`readxl`</span>, <span class="in">`knitr`</span></span>
+<span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Bioconductor:** <span class="in">`biomaRt`</span>, <span class="in">`Biostrings`</span>, <span class="in">`pwalign`</span></span>
+<span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**`seqinr`** — dN/dS (<span class="in">`kaks`</span>)</span>
+<span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Seurat** — processing the Wälchli single-cell object (<span class="in">`step2`</span>)</span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Quarto** — this website</span>
+<span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a><span class="fu">## AI transparency</span></span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R</span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>script writing and debugging. All scientific decisions, interpretation, and research design</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>were made by the author under supervision of Dr. Claire Clelland.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

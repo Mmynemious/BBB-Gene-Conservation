@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-09-09">
+<meta name="dcterms.date" content="2026-09-10">
 
 <title>Data &amp; Code – BBB Gene Conservation</title>
 <style>
@@ -154,6 +154,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link active" href="./data-code.html" aria-current="page"> 
 <span class="menu-text">Data &amp; Code</span></a>
   </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./resources.html"> 
+<span class="menu-text">Resources</span></a>
+  </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
@@ -186,9 +190,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#rebuilding-this-website" id="toc-rebuilding-this-website" class="nav-link" data-scroll-target="#rebuilding-this-website">Rebuilding this website</a></li>
   </ul></li>
   <li><a href="#processed-data" id="toc-processed-data" class="nav-link" data-scroll-target="#processed-data">Processed data</a></li>
-  <li><a href="#source-datasets" id="toc-source-datasets" class="nav-link" data-scroll-target="#source-datasets">Source datasets</a></li>
-  <li><a href="#tools" id="toc-tools" class="nav-link" data-scroll-target="#tools">Tools</a></li>
-  <li><a href="#ai-transparency" id="toc-ai-transparency" class="nav-link" data-scroll-target="#ai-transparency">AI transparency</a></li>
+  <li><a href="#sources" id="toc-sources" class="nav-link" data-scroll-target="#sources">Sources</a></li>
   </ul>
 </nav>
     </div>
@@ -198,7 +200,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
 <div class="quarto-title-block"><div><h1 class="title">Data &amp; Code</h1><button type="button" class="btn code-tools-button" id="quarto-code-tools-source"><i class="bi"></i> Code</button></div></div>
-<p class="subtitle lead">Processed datasets, scripts, source papers, and how to reproduce the analysis</p>
+<p class="subtitle lead">Processed datasets, scripts, and how to reproduce the analysis</p>
 </div>
 
 
@@ -215,7 +217,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 9, 2026</p>
+      <p class="date">September 10, 2026</p>
     </div>
   </div>
   
@@ -442,29 +444,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </tbody>
 </table>
 </section>
-<section id="source-datasets" class="level2">
-<h2 class="anchored" data-anchor-id="source-datasets">Source datasets</h2>
-<ul>
-<li><strong>Daneman R, et al.&nbsp;(2010).</strong> The mouse blood-brain barrier transcriptome. <em>PLOS ONE</em> 5(10): e13741.</li>
-<li><strong>Munji RN, et al.&nbsp;(2019).</strong> Profiling the mouse brain endothelial transcriptome in health and disease. <em>Nature Neuroscience</em> 22(11): 1892–1902.</li>
-<li><strong>Wälchli T, et al.&nbsp;(2024).</strong> Single-cell atlas of the human brain vasculature. <em>Nature</em> 614: 945–954.</li>
-<li><strong>Yang AC, et al.&nbsp;(2022).</strong> A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk. <em>Nature</em> 603: 885–892.</li>
-<li><strong>Winkler EA, et al.&nbsp;(2022).</strong> A single-cell atlas of the normal and malformed human brain vasculature. <em>Science</em> 375(6584): eabi7377.</li>
-</ul>
-<p>See the <a href="./literature-review.html">literature review</a> for how each source is actually used, and which were misread.</p>
-</section>
-<section id="tools" class="level2">
-<h2 class="anchored" data-anchor-id="tools">Tools</h2>
-<ul>
-<li>Ensembl release 113 — <a href="https://www.ensembl.org" class="uri">https://www.ensembl.org</a></li>
-<li>BioMart, via the <code>biomaRt</code> R package</li>
-<li>Human Protein Atlas — <a href="https://www.proteinatlas.org" class="uri">https://www.proteinatlas.org</a></li>
-<li>Bioconductor: <code>Biostrings</code>, <code>pwalign</code>, <code>seqinr</code></li>
-</ul>
-</section>
-<section id="ai-transparency" class="level2">
-<h2 class="anchored" data-anchor-id="ai-transparency">AI transparency</h2>
-<p>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr.&nbsp;Claire Clelland.</p>
+<section id="sources" class="level2">
+<h2 class="anchored" data-anchor-id="sources">Sources</h2>
+<p>The papers, databases and tools behind every step are cited on the <a href="./resources.html">Resources</a> page.</p>
 
 
 <!-- -->
@@ -930,7 +912,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb5" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Data &amp; Code"</span></span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Processed datasets, scripts, source papers, and how to reproduce the analysis"</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "Processed datasets, scripts, and how to reproduce the analysis"</span></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
 <span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>Everything in this project lives in one repository:</span>
@@ -1056,29 +1038,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb5-126"><a href="#cb5-126" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-127"><a href="#cb5-127" aria-hidden="true" tabindex="-1"></a>: {tbl-colwidths="<span class="co">[</span><span class="ot">45,55</span><span class="co">]</span>"}</span>
 <span id="cb5-128"><a href="#cb5-128" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Source datasets</span></span>
+<span id="cb5-129"><a href="#cb5-129" aria-hidden="true" tabindex="-1"></a><span class="fu">## Sources</span></span>
 <span id="cb5-130"><a href="#cb5-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Daneman R, et al. (2010).** The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.</span>
-<span id="cb5-132"><a href="#cb5-132" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Munji RN, et al. (2019).** Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892–1902.</span>
-<span id="cb5-133"><a href="#cb5-133" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Wälchli T, et al. (2024).** Single-cell atlas of the human brain vasculature. *Nature* 614: 945–954.</span>
-<span id="cb5-134"><a href="#cb5-134" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Yang AC, et al. (2022).** A human brain vascular atlas reveals diverse mediators of Alzheimer's risk. *Nature* 603: 885–892.</span>
-<span id="cb5-135"><a href="#cb5-135" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Winkler EA, et al. (2022).** A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.</span>
-<span id="cb5-136"><a href="#cb5-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-137"><a href="#cb5-137" aria-hidden="true" tabindex="-1"></a>See the <span class="co">[</span><span class="ot">literature review</span><span class="co">](literature-review.qmd)</span> for how each source is actually used, and</span>
-<span id="cb5-138"><a href="#cb5-138" aria-hidden="true" tabindex="-1"></a>which were misread.</span>
-<span id="cb5-139"><a href="#cb5-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-140"><a href="#cb5-140" aria-hidden="true" tabindex="-1"></a><span class="fu">## Tools</span></span>
-<span id="cb5-141"><a href="#cb5-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-142"><a href="#cb5-142" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Ensembl release 113 — <span class="ot">&lt;https://www.ensembl.org&gt;</span></span>
-<span id="cb5-143"><a href="#cb5-143" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>BioMart, via the <span class="in">`biomaRt`</span> R package</span>
-<span id="cb5-144"><a href="#cb5-144" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human Protein Atlas — <span class="ot">&lt;https://www.proteinatlas.org&gt;</span></span>
-<span id="cb5-145"><a href="#cb5-145" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Bioconductor: <span class="in">`Biostrings`</span>, <span class="in">`pwalign`</span>, <span class="in">`seqinr`</span></span>
-<span id="cb5-146"><a href="#cb5-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-147"><a href="#cb5-147" aria-hidden="true" tabindex="-1"></a><span class="fu">## AI transparency</span></span>
-<span id="cb5-148"><a href="#cb5-148" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-149"><a href="#cb5-149" aria-hidden="true" tabindex="-1"></a>This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R</span>
-<span id="cb5-150"><a href="#cb5-150" aria-hidden="true" tabindex="-1"></a>script writing and debugging. All scientific decisions, interpretation, and research design</span>
-<span id="cb5-151"><a href="#cb5-151" aria-hidden="true" tabindex="-1"></a>were made by the author under supervision of Dr. Claire Clelland.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb5-131"><a href="#cb5-131" aria-hidden="true" tabindex="-1"></a>The papers, databases and tools behind every step are cited on the <span class="co">[</span><span class="ot">Resources</span><span class="co">](resources.qmd)</span> page.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

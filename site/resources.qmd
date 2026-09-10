@@ -1,0 +1,64 @@
+---
+title: "Resources"
+subtitle: "The papers, databases and tools this project is built on"
+---
+
+## Datasets — papers used in the pipeline
+
+Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010).
+The mouse blood–brain barrier transcriptome: a new resource for understanding the development
+and function of brain endothelial cells. *PLOS ONE* 5(10): e13741.
+: Mouse BBB gene list — `step1`. Supplementary tables S3–S5 were used in error; S6 is the
+BBB-enriched table. See the [audit](audit.qmd).
+
+Munji RN, et al. (2019).
+Profiling the mouse brain endothelial transcriptome in health and disease.
+*Nature Neuroscience* 22(11): 1892–1902.
+: Mouse BBB-enriched genes (518) — `step1`.
+
+Wälchli T, et al. (2024).
+Single-cell atlas of the human brain vasculature.
+*Nature* 614: 945–954.
+: Human brain endothelial single-cell expression — `step2`, `step4b`.
+
+Yang AC, et al. (2022).
+A human brain vascular atlas reveals diverse mediators of Alzheimer's risk.
+*Nature* 603: 885–892.
+: Human endothelial subtype markers — `step4b`. Only the first (arterial) sheet was read.
+
+Winkler EA, et al. (2022).
+A single-cell atlas of the normal and malformed human brain vasculature.
+*Science* 375(6584): eabi7377.
+: Human endothelial markers — `step4b`.
+
+## Consulted, not used
+
+Giger T, Khaitovich P, Somel M, Lorenc A, Lizano E, Harris LW, Ryan MM, Lan M, Wayland MT,
+Bahn S, Pääbo S (2010).
+Evolution of neuronal and endothelial transcriptomes in primates.
+*Genome Biology and Evolution*. GEO: GSE12293.
+: Originally logged as the macaque dataset. The downloaded samples are all human, so it does
+not supply macaque expression data. See the [audit](audit.qmd).
+
+## Databases
+
+Ensembl, release 113 — <https://www.ensembl.org>
+: Gene IDs, orthologues (via BioMart) and coding sequences for GRCh38 (human), GRCm39 (mouse)
+and Mmul_10 (macaque) — `step3`, `step3b`, `step5a`.
+
+Human Protein Atlas, tissue RNA consensus — <https://www.proteinatlas.org>
+: Tissue expression used to build the liver control set — `step4c`.
+
+## Software
+
+- **R** with `readr`, `dplyr`, `ggplot2`, `readxl`, `knitr`
+- **Bioconductor:** `biomaRt`, `Biostrings`, `pwalign`
+- **`seqinr`** — dN/dS (`kaks`)
+- **Seurat** — processing the Wälchli single-cell object (`step2`)
+- **Quarto** — this website
+
+## AI transparency
+
+This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R
+script writing and debugging. All scientific decisions, interpretation, and research design
+were made by the author under supervision of Dr. Claire Clelland.

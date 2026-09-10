@@ -1,6 +1,6 @@
 ---
 title: "Data & Code"
-subtitle: "Processed datasets, scripts, source papers, and how to reproduce the analysis"
+subtitle: "Processed datasets, scripts, and how to reproduce the analysis"
 ---
 
 Everything in this project lives in one repository:
@@ -126,26 +126,6 @@ anything.
 
 : {tbl-colwidths="[45,55]"}
 
-## Source datasets
+## Sources
 
-- **Daneman R, et al. (2010).** The mouse blood-brain barrier transcriptome. *PLOS ONE* 5(10): e13741.
-- **Munji RN, et al. (2019).** Profiling the mouse brain endothelial transcriptome in health and disease. *Nature Neuroscience* 22(11): 1892–1902.
-- **Wälchli T, et al. (2024).** Single-cell atlas of the human brain vasculature. *Nature* 614: 945–954.
-- **Yang AC, et al. (2022).** A human brain vascular atlas reveals diverse mediators of Alzheimer's risk. *Nature* 603: 885–892.
-- **Winkler EA, et al. (2022).** A single-cell atlas of the normal and malformed human brain vasculature. *Science* 375(6584): eabi7377.
-
-See the [literature review](literature-review.qmd) for how each source is actually used, and
-which were misread.
-
-## Tools
-
-- Ensembl release 113 — <https://www.ensembl.org>
-- BioMart, via the `biomaRt` R package
-- Human Protein Atlas — <https://www.proteinatlas.org>
-- Bioconductor: `Biostrings`, `pwalign`, `seqinr`
-
-## AI transparency
-
-This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R
-script writing and debugging. All scientific decisions, interpretation, and research design
-were made by the author under supervision of Dr. Claire Clelland.
+The papers, databases and tools behind every step are cited on the [Resources](resources.qmd) page.

@@ -60,7 +60,7 @@ tolerates far lower conservation than CDS.
 The project's largest structural gap. Real macaque DNA is used throughout, but **no macaque
 study tells us which genes macaque brain vessels actually express** — every gene earned its
 place from a mouse study, and the paper logged as the macaque dataset
-([Giger 2010](literature-review.qmd)) contains no macaque samples.
+([Giger 2010](resources.qmd)) contains no macaque samples.
 
 The candidate is the rhesus macaque single-nucleus brain atlas (*Science Advances* 2023,
 ~1M nuclei, 28 regions, on CellxGene).

@@ -7,21 +7,16 @@ page-layout: article
 
 ::: {.hub-summary}
 
-Drugs for the brain are tested in mice, then macaques, then people — and every arrow in
-that chain is a translational leap. This project asks how well that chain holds at the DNA
-level: **how conserved are blood–brain barrier genes across the three species?** Each gene
-is measured two ways — **% nucleotide identity**, how many DNA letters match, and
-**dN/dS**, whether evolution is actively removing protein-changing mutations — against a
-control set of genes from a tissue that is not the brain.
+This project has been my way of learning bioinformatics and the biology of the blood–brain
+barrier at the same time. It is a quantitative analysis of **coding-sequence conservation and
+selection pressure in blood–brain barrier genes** across human, mouse and macaque, using
+liver genes as a control group.
 
-The headline is a method result rather than a biological one. **Macaque coding sequence is
-far closer to human than mouse is, and gene duplication is what drives real divergence**:
-where mouse has two copies of a gene humans have once (*Abcb1a* and *Abcb1b* for human
-*ABCB1*), identity collapses to ~47% against ~85% for clean one-to-one pairs — a large,
-robust effect. The tissue-level claim that would have been the headline — that BBB genes
-are under stronger purifying selection than liver genes — **does not currently stand**, and
-[the audit](audit.qmd) explains exactly why: the liver control was never filtered, so 86.6%
-of it is brain-expressed too.
+The site documents the whole thing: **the steps I took, the materials I used, the audit I
+did afterwards, and what has to be fixed first** before this data can be reused. The
+bioinformatics pipeline is a rough structure — usable, but it needs polishing. Alongside it
+is a literature review, currently in progress, where I will add and comment on the papers I
+read.
 
 :::
 
@@ -31,80 +26,63 @@ of it is brain-expressed too.
 
 ::: {.hub-card}
 ### Pipeline & Methods
-How the analysis was built, step by step: gene lists from mouse transcriptomics, orthologue
-mapping across three species, coding-sequence extraction, pairwise alignment, % identity and
-dN/dS. Each step carries its own audit flag.
+How the analysis was built, step by step: gene lists, orthologues across three species,
+coding-sequence alignment, % identity and dN/dS. Each step carries its own audit flag.
 
 [Read more →](pipeline.qmd)
 :::
 
 ::: {.hub-card}
 ### Results
-Conservation distributions, BBB against the liver control, and the three pairwise species
-comparisons. Every headline finding is graded for whether it survives the audit.
+Conservation distributions, BBB genes against the liver control, and the three pairwise
+species comparisons — each finding graded for whether it survives the audit.
 
 [Read more →](results.qmd)
 :::
 
 ::: {.hub-card .hub-card-flag}
-### Audit — what's wrong
-All 15 numbered steps with a verdict each, the real execution order, the three fixes that
-change conclusions, and the open questions. **3 steps break results, 6 move numbers, 6 are
-clean.**
+### Audit — what went wrong
+All 15 pipeline steps with a verdict each, and the three fixes that have to happen before
+the results can be trusted. **3 steps break results, 6 move numbers, 6 are clean.**
 
 [Read more →](audit.qmd)
 :::
 
-::: {.hub-card}
+::: {.hub-card .hub-card-muted}
 ### Literature Review
-What is already known about BBB gene conservation, translational models and comparative
-genomics of brain barriers — and where this project sits among it. Growing as the review
-proceeds.
+Papers on BBB gene conservation, translational models and comparative genomics, with my
+comments. **In progress.**
 
 [Read more →](literature-review.qmd)
 :::
 
 ::: {.hub-card}
 ### Data & Code
-Processed datasets, the R scripts for every step, source papers, and instructions to
-reproduce the analysis from a clean clone.
+Processed datasets, the R script for every step, and instructions to reproduce the
+analysis.
 
 [Read more →](data-code.qmd)
 :::
 
-::: {.hub-card .hub-card-muted}
+::: {.hub-card}
 ### Extensions
-Planned and ongoing follow-ups: promoter and UTR analysis, phylogenetic dN/dS with PAML,
-MANE Select transcripts, and a macaque expression atlas.
+What comes after the fixes: MANE Select transcripts, phylogenetic dN/dS, regulatory
+sequence, and a macaque expression atlas.
 
 [Read more →](extensions.qmd)
 :::
 
+::: {.hub-card}
+### Resources
+The papers, databases and tools this project is built on, with full citations.
+
+[Read more →](resources.qmd)
 :::
 
-## Key results
-
-::: {.hub-figs}
-
-![**Macaque sits closer to human than mouse, gene for gene.** Each point is one BBB gene, plotted by its human–mouse identity against its human–macaque identity. Note the 224 one-to-one macaque pairs falling below 85% — those are an artefact of the longest-transcript heuristic, not biology.](images/translational-ladder.png){group="key"}
-
-![**Distribution of % nucleotide identity, BBB genes against the liver control.** The two distributions sit almost on top of one another. Under the orthologue rule actually used, BBB scored *below* the control (84.12 vs 84.32); applying one rule to both sides reverses it (85.04 vs 84.47). The comparison is not currently trustworthy in either direction.](images/pid-density.png){group="key"}
-
-:::
-
-::: {.callout-important appearance="simple"}
-## These figures are provisional
-
-Three upstream steps — `step1` (wrong source tables), `step4c` (the liver filter never ran)
-and `step5d` (different orthologue rules on the two sides) — feed everything shown here. No
-figure on this site should be cited until they are fixed and steps 5c–5h re-run.
-[What's wrong, in full →](audit.qmd)
 :::
 
 ## About this project
 
-Undergraduate research project by **Yara Ismail**, under the supervision of
-**Dr. Claire Clelland**. The pipeline is written in R against Ensembl release 113, the Human
-Protein Atlas, and five published transcriptomic datasets. Everything — data, scripts, and
-this site — is in the
+Research project by **Yara Ismail**, under the supervision of **Dr. Claire Clelland**.
+Everything — data, scripts, and this site — is in the
 [GitHub repository](https://github.com/Mmynemious/BBB-Gene-Conservation).

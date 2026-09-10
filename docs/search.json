@@ -42,181 +42,6 @@
     "text": "Limitations\n\nMethodological caveats\n\nPairwise dN/dS, not phylogenetic. A more rigorous analysis uses PAML codeml on a multi-species alignment with an explicit phylogenetic tree.\nLongest-transcript heuristic. MANE Select / Ensembl Canonical (step5b_alt_canonical_transcripts.R) are more standard. The canonical FASTAs are already generated.\nMultiple testing correction was applied to primary tests only. Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.\n\n\n\nBiological caveats\n\nThe starting gene list is enrichment-based. CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.\nLiver is one specific control choice. A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.\nCoding sequence only. Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded."
   },
   {
-    "objectID": "literature-review.html",
-    "href": "literature-review.html",
-    "title": "Literature Review",
-    "section": "",
-    "text": "NoteIn progress\n\n\n\nThis review is being written as the papers are read. Each source below has a status, and sources that bear on a specific pipeline step say which one — so the review and the audit stay wired together in both directions.\nTo add a paper: create a section under the relevant theme, using the pattern shown for Daneman 2010. Scanned annotations go in site/images/annotations/ and are referenced with a normal markdown image."
-  },
-  {
-    "objectID": "literature-review.html#why-this-review-exists",
-    "href": "literature-review.html#why-this-review-exists",
-    "title": "Literature Review",
-    "section": "Why this review exists",
-    "text": "Why this review exists\nThe project measures conservation. It does not, on its own, establish what conservation means for translational validity — whether a gene being 84% identical between mouse and human predicts that a drug acting on it will behave the same way in both. That question belongs to the literature, and this review is where the answer, or the absence of one, gets recorded.\nA second job: the audit found that three of the four Daneman source tables were the wrong tables and that a paper logged as the macaque dataset contains no macaque samples. Both were reading errors, not analysis errors. Re-reading the sources carefully, on the record, is the correction."
-  },
-  {
-    "objectID": "literature-review.html#theme-1-defining-the-bloodbrain-barrier-transcriptome",
-    "href": "literature-review.html#theme-1-defining-the-bloodbrain-barrier-transcriptome",
-    "title": "Literature Review",
-    "section": "Theme 1 — Defining the blood–brain barrier transcriptome",
-    "text": "Theme 1 — Defining the blood–brain barrier transcriptome\nHow the field decided which genes “are” BBB genes, and how much that definition varies between studies.\n\nDaneman et al. 2010\n\nDaneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010). The mouse blood–brain barrier transcriptome: a new resource for understanding the development and function of brain endothelial cells. PLOS ONE 5(10): e13741.\n\nBears on: step1 — this is the source of the master gene list. Status: re-read, error found and characterised.\nThe supplementary tables are not interchangeable, and the pipeline treated them as if they were. S3 is a pericyte-specific gene list — Pdgfrb, Kcnj8, Vtn, Zic1 — not core BBB genes. S4 and S5 are developmentally up- and down-regulated CNS vascular genes, not the brain-vs-liver and brain-vs-lung endothelial contrasts the pipeline assumed. S6 is the BBB-enriched table: Slc2a1 (GLUT1), Slco1a4, Slc7a5, Ocln, Abcb1a.\nThe tell was a 1-gene overlap with Munji, which was the correct alarm and the wrong diagnosis — S3 was not too restrictive, it was a different cell type. Using S6 gives 151 of 411 genes overlapping Munji, which is what two studies of the same tissue should look like.\nAnnotations: to add.\n\n\nMunji et al. 2019\n\nMunji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. Nature Neuroscience 22(11): 1892–1902.\n\nBears on: step1. Status: read, parsed correctly.\n518 BBB-enriched mouse genes from sheet BBB-enriched of S5. This is the one source table in step 1 that was read as intended.\nAnnotations: to add."
-  },
-  {
-    "objectID": "literature-review.html#theme-2-human-brain-vascular-atlases",
-    "href": "literature-review.html#theme-2-human-brain-vascular-atlases",
-    "title": "Literature Review",
-    "section": "Theme 2 — Human brain vascular atlases",
-    "text": "Theme 2 — Human brain vascular atlases\nSingle-cell work that makes it possible to ask whether a mouse-derived gene list holds in human tissue.\n\nWälchli et al. 2024\n\nWälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. Nature 614: 945–954.\n\nBears on: step2, step4b. Status: read.\n76,125 sorted human brain vascular cells resolving 12 endothelial subtypes. Processed correctly, then reduced by step4b to a single “expressed above zero” test that 88.5% of all genes pass. The subtype resolution — the most valuable thing about the dataset — was never used. Whether a gene is capillary-specific rather than merely present is the question this atlas can answer and the pipeline never asked.\nAnnotations: to add.\n\n\nYang et al. 2022\n\nYang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk. Nature 603: 885–892.\n\nBears on: step4b. Status: re-read needed — only one sheet was used.\nThe supplementary file has seven sheets: Arterial, Capillary, Venous, SMC, Pericyte, Fibroblast, Astrocyte. It was read without naming a sheet, so only the first loaded. The column labelled as human validation actually means “is an arterial marker”.\nAnnotations: to add.\n\n\nWinkler et al. 2022\n\nWinkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. Science 375(6584): eabi7377.\n\nBears on: step4b. Status: read, parsed correctly.\nAnnotations: to add."
-  },
-  {
-    "objectID": "literature-review.html#theme-3-translational-models-and-cross-species-validity",
-    "href": "literature-review.html#theme-3-translational-models-and-cross-species-validity",
-    "title": "Literature Review",
-    "section": "Theme 3 — Translational models and cross-species validity",
-    "text": "Theme 3 — Translational models and cross-species validity\nThe literature this project most needs and currently has least of: what is known about whether sequence conservation predicts pharmacological transferability between species.\n\nGiger et al. 2010 — withdrawn from the dataset list\n\nGiger T, et al. (2010). Evolution of neuronal and endothelial transcriptomes in primates.\n\nBears on: the macaque arm. Status: withdrawn — it is not what it was logged as.\nRecorded as the macaque dataset. Its 13 samples are all human (taxid 9606); the macaque data in that line of work belongs to Khaitovich et al. under a separate accession that was never downloaded. It also compares neurons to endothelium rather than brain to peripheral endothelium, so it is not a BBB gene list for any species.\nConsequence for the project: there is currently no macaque expression evidence. Real macaque DNA is used throughout steps 5a–5h, but every gene earned its place on the list from a mouse study. The macaque arm rests on mouse-defined biology, and that assumption has never been tested.\n\n\nCandidate replacement — rhesus macaque brain atlas\n\nScience Advances (2023). Single-nucleus atlas of the rhesus macaque brain, ~1M nuclei across 28 regions. Available via CellxGene.\n\nStatus: identified, not yet obtained. Adding it widens the project’s scope and needs Dr. Clelland’s sign-off."
-  },
-  {
-    "objectID": "literature-review.html#theme-4-methods-for-measuring-selection",
-    "href": "literature-review.html#theme-4-methods-for-measuring-selection",
-    "title": "Literature Review",
-    "section": "Theme 4 — Methods for measuring selection",
-    "text": "Theme 4 — Methods for measuring selection\n\nTo add\nBackground on dN/dS estimation, saturation at long divergence times, and the case for phylogenetic methods (PAML codeml) over pairwise estimates — which is a named limitation of this project."
-  },
-  {
-    "objectID": "literature-review.html#how-this-project-fits-in",
-    "href": "literature-review.html#how-this-project-fits-in",
-    "title": "Literature Review",
-    "section": "How this project fits in",
-    "text": "How this project fits in\nOnce the three breaking defects are fixed, this project contributes a three-species coding-sequence comparison of a defined BBB gene set against a tissue control, with the mouse–macaque leg included so the triangle closes. What it will not contribute, without new data, is any statement about macaque BBB expression, or about regulatory sequence — the analysis is coding-sequence only, and regulatory regions are where most cross-species expression differences are thought to live."
-  },
-  {
-    "objectID": "extensions.html",
-    "href": "extensions.html",
-    "title": "Extensions",
-    "section": "",
-    "text": "Nothing on this page has been done yet. It is a record of what the project would need next, kept separate from the audit because these are not defects — a defect has a fix, and these need a decision, a dataset, or a method the project does not currently use."
-  },
-  {
-    "objectID": "extensions.html#before-anything-else-the-three-fixes",
-    "href": "extensions.html#before-anything-else-the-three-fixes",
-    "title": "Extensions",
-    "section": "Before anything else — the three fixes",
-    "text": "Before anything else — the three fixes\nThe extensions below are only worth doing on corrected inputs. In priority order:\n\nstep1 — point it at Daneman S6, drop S3/S4/S5, retire the Daneman_Filter column, and replace toupper() with a real orthologue mapping so the 92 silently dropped genes return.\nstep4c — one line, so the brain filter matches the Human Protein Atlas’s real region names. Then decide what the control should actually be.\nstep5d — one orthologue rule applied to both groups.\n\nThen re-run step5c through step5h."
-  },
-  {
-    "objectID": "extensions.html#method-extensions",
-    "href": "extensions.html#method-extensions",
-    "title": "Extensions",
-    "section": "Method extensions",
-    "text": "Method extensions\n\nPhylogenetic dN/dS with PAML\nThe current estimate is pairwise: each species pair scored independently. The rigorous approach runs codeml on a multi-species alignment with an explicit tree, which separates lineage-specific selection from shared ancestral signal and handles saturation properly. At ~80 My of human–mouse divergence, saturation is the specific worry — 38% of genes hit the dS ceiling before the codon-aware fix, and 2% still do.\nNeeds: PAML, a three-species alignment per gene, and considerably more compute.\n\n\nMANE Select transcripts, and re-running % identity\nstep5b_alt_canonical_transcripts.R already generates canonical FASTAs and was never switched in. Doing so, then recomputing % identity the way step5f recomputed dN/dS, should remove the 224 one-to-one macaque pairs scoring under 85% — figures that are currently reporting isoform length mismatch as evolutionary distance.\nThis is the cheapest high-value extension: the code exists and the sequences are already downloaded.\n\n\nRegulatory and non-coding sequence\nThe analysis is coding sequence only. Promoters, enhancers and UTRs were deliberately excluded — and they are where most cross-species differences in expression level are thought to live. A gene can be 95% identical in its coding sequence and regulated completely differently. Extending to regulatory regions would test whether BBB conservation at the protein level is matched by conservation in how the genes are switched on.\nNeeds: a definition of the regulatory region per gene, and an alignment strategy that tolerates far lower conservation than CDS."
-  },
-  {
-    "objectID": "extensions.html#data-extensions",
-    "href": "extensions.html#data-extensions",
-    "title": "Extensions",
-    "section": "Data extensions",
-    "text": "Data extensions\n\nA macaque expression atlas\nThe project’s largest structural gap. Real macaque DNA is used throughout, but no macaque study tells us which genes macaque brain vessels actually express — every gene earned its place from a mouse study, and the paper logged as the macaque dataset (Giger 2010) contains no macaque samples.\nThe candidate is the rhesus macaque single-nucleus brain atlas (Science Advances 2023, ~1M nuclei, 28 regions, on CellxGene).\nNeeds: the dataset, and Dr. Clelland’s sign-off — this widens the project’s scope.\n\n\nWälchli’s endothelial subtypes\nThe atlas resolves 12 endothelial subtypes; step4b collapsed all of it to one above-zero test. Asking whether a gene is capillary-specific rather than merely detected is the question this dataset exists to answer, and would turn the validation score from a near-constant into something informative.\nNeeds: nothing new — the matrix is already in processed/.\n\n\nA better control, or several\nLiver was one choice. Brain non-BBB genes would test whether the signal is specific to the barrier rather than to the brain; genes matched on protein domain would control for the fact that transporters and tight-junction proteins are structurally unusual. Running more than one control would say more than fixing the single one.\nNeeds: Dr. Clelland’s decision on what claim the control is meant to support."
-  },
-  {
-    "objectID": "extensions.html#housekeeping",
-    "href": "extensions.html#housekeeping",
-    "title": "Extensions",
-    "section": "Housekeeping",
-    "text": "Housekeeping\n\nMake step2 reproducible from a clean clone, or document the exact supplementary file to fetch.\nDrop the Mitochondrial cluster — dying cells, not a cell type — from the Wälchli output matrix.\nCorrect the step3c biotype check so it can actually fail, or remove it."
-  },
-  {
-    "objectID": "audit.html",
-    "href": "audit.html",
-    "title": "Audit — what’s wrong",
-    "section": "",
-    "text": "Every defect below is pinned to the numbered script step it lives in, using the script’s own filename. The step names here and the step names in the pipeline are the same names — the ambiguity in the tab labels (which bundle several steps together) is not carried into the audit.\n\nThe count\n\n  Breaks results3Fix these and a stated conclusion changes. Steps 1, 4c, 5d.\n  Numbers move6Real defects that shift figures without reversing a claim.\n  Clean6No defect in the step itself, including both hard parts.\n  Open questions6Not bugs — decisions, or data the project does not have.\n\n\n\nRegister — all 15 numbered steps\nRun is the order the scripts actually execute in, which is not the order the step names imply: step4b writes the file step3b reads, so 4b runs before 3b.\n\n\n\n\n\nStep\nRun\nWhat it does · what's wrong\nVerdict\n\n\n\n\nstep1\n1\nBuild the master BBB gene list. Three of the four Daneman tables are the wrong tables — S3 is the pericyte-specific list (Pdgfrb, Kcnj8, Vtn, Zic1), S4 and S5 are developmentally up- and down-regulated CNS vascular genes. S6, the real BBB-enriched table, was never opened. A further 92 genes were lost silently: 18 to toupper() mangling the lowercase orf convention, 74 to HomoloGene's 2014 gene names.\nWrong sources\n\n\nstep2\n2\nProcess the Wälchli Seurat object. Method correct — grouped by ECclusters rather than the default. Two things to know rather than fix: the input is gitignored so the step cannot re-run from a clean clone, and the Mitochondrial cluster (dying cells, not a cell type) is still in the output.\nClean\n\n\nstep3\n3\nMap to Ensembl IDs across three species. The 92 names broken in step 1 return nothing from BioMart and drop out of every downstream calculation with no error raised. The step is doing what it was asked; it inherits the damage.\n92 genes lost\n\n\nstep4b\n4\nCross-reference against human EC datasets. Yang S6 was read without naming a sheet, so only the first sheet loaded — the column means \"is an arterial marker\" (36 hits) and the capillary sheet, the most BBB-relevant one, was never opened. Wälchli's test was \"expression above zero in any cell type\", which 88.5% of all genes pass; that alone is why 1,131 of 1,526 genes score exactly 1. Winkler's parse is correct.\nTwo reading bugs\n\n\nstep3b\n5\nAdd orthology confidence. The script header says it recovers the genes step 1 dropped. It does not — it re-queries the same out-of-date names and recovers none of the 92. It is also where 196 one-to-many pairs enter the BBB set at only 25.8% protein identity, which step 5d then excludes from the control set but not from the BBB set.\nOverstated fix\n\n\nstep3c\n6\nGene biotype audit. The check cannot fail. A CDS FASTA contains only protein-coding genes by definition, so a non-coding gene has no entry, comes back blank, and blank was not counted as a failure. 250 rows have no macaque label at all and were invisible to it. The reassuring answer was guaranteed by the method.\nCircular check\n\n\nstep4c\n7\nBuild the liver control gene set. The third filter looked for a tissue called \"brain\"; the Human Protein Atlas has no such label, only regions (cerebral cortex, hippocampal formation, cerebellum…). Zero rows matched, the missing values became zeros, everything passed. The tell is in the saved file: every Brain_nTPM value is exactly 0.0. Recomputed properly, 86.6% of the \"liver control\" is brain-expressed, median brain 31.3 against median liver 31.2. It is a housekeeping set — among the most conserved genes in the genome.\nFilter never ran\n\n\nstep5a\n8\nDownload CDS FASTAs. Ensembl release 113 for all three species — GRCh38, GRCm39, Mmul_10. Straight downloads, nothing to get wrong.\nClean\n\n\nstep5b\n9\nExtract one CDS per gene. Takes the longest isoform. Longest is not necessarily equivalent: human and mouse can land on non-corresponding versions of the same gene, which makes them look more different than they are. This is the origin of the 224 impossible macaque scores visible in step 5c.\nRough heuristic\n\n\nstep5b_alt\n—\nMANE Select / Ensembl Canonical transcripts. The standard alternative to the longest-isoform heuristic. It was written, it runs, and the canonical FASTAs already sit in genomes/. It was never switched in.\nWritten, unused\n\n\nstep5c\n10\nAlign and score the BBB genes. dN/dS was computed on sequences that were trimmed but never aligned — genuinely wrong, and correctly fixed later in step 5f. But the % identity was never recomputed, so every identity figure in the results still comes from here. Two numbers show the damage: 38% of genes came out with dS pinned at the 10.0 ceiling (2% after the 5f fix), and 224 one-to-one macaque pairs score under 85% — SLC2A1 at 71.4%, which is biologically impossible.\nPartly superseded\n\n\nstep5d\n11\nScore the liver control. Described as \"the same measurements\", but it kept only the single best-matching orthologue per gene while the BBB set kept every match including the bad ones. Different rules on the two sides of the comparison — and that alone reverses the headline direction.\nAsymmetric rules\n\n\nstep5e\n12\nFirst-pass statistics. Wilcoxon rank-sum (correct — these data are not normal) with rank-biserial effect sizes. Superseded by 5g, but not wrong.\nClean\n\n\nstep5f\n13\nRecompute dN/dS, codon-aware. Translate to protein, align the proteins, map back onto codons, discard gapped codons, then score. This is the fix, and it mattered: one-to-many mouse dN/dS moved from 0.14 to 0.354. The only gap is scope — it fixed dN/dS and left % identity untouched.\nThis is the fix\n\n\nstep5g\n14\nMultiple testing correction. Bonferroni and FDR across the four primary comparisons, with subgroup analyses honestly labelled exploratory. Correct. What is wrong is what went into it — steps 1, 4c and 5d.\nClean\n\n\nstep5h\n15\nMouse vs macaque. Same codon-aware pipeline with no human reference. No defect of its own — but it inherits the step 1 gene list, so its numbers move when step 1 is fixed.\nClean\n\n\n\n\n\n\n\nThree fixes change the conclusions\n\nstep1 — point it at Daneman S6, drop S3/S4/S5, retire the Daneman_Filter column. Replace toupper() with a real ortholog mapping so the 92 lost genes come back.\nstep4c — one line, so the brain filter matches the Atlas’s real region names. Then a separate decision about what the control should actually be.\nstep5d — one orthologue rule applied to both groups.\n\nThen re-run step5c through step5h. Everything else is numbers moving, not conclusions changing.\n\n\nWhat we still need to figure out\nThese are not defects. They need a decision, a dataset, or both — and this is the section that grows as the literature review continues.\n\n  \n    What should the control actually be?\n    Fixing the step4c filter gives a genuine liver set, but liver may not be the right comparator at all. Brain non-BBB genes, or genes matched on protein domain, would each test a different claim.\n    Needs — Dr. Clelland\n  \n  \n    Can the macaque arm rest on mouse-defined biology?\n    Every gene earned its place from a mouse study. Real macaque DNA is used throughout steps 5a–5h, but no macaque study tells us which genes macaque brain vessels actually switch on. The rhesus brain single-cell atlas (Science Advances 2023, ~1M nuclei, 28 regions, on CellxGene) would close this — and widens project scope.\n    Needs — a dataset and sign-off\n  \n  \n    Should % identity be recomputed the way dN/dS was?\n    Step 5f fixed dN/dS with codon-aware alignment and left identity alone. Switching step5b to MANE Select and re-running identity would likely remove the 224 impossible macaque scores. The canonical FASTAs already exist.\n    Needs — a decision, then compute time\n  \n  \n    Why did we never use Wälchli's 12 EC subtypes?\n    The dataset resolves capillary from arterial from venous endothelium. Step 4b collapsed all of it to a single above-zero test. The most valuable thing about the dataset is the one thing the pipeline never asked it.\n    Needs — a new analysis\n  \n  \n    Where did Giger 2010 come from, and what replaces it?\n    Logged as the macaque dataset. Its 13 samples are all human (taxid 9606) — the macaque in that paper belongs to Khaitovich et al. under a separate accession that was never downloaded. It also compares neurons to endothelium rather than brain to peripheral endothelium, so it is not a BBB gene list for any species.\n    Needs — literature review\n  \n  \n    Should step 2 be reproducible from a clean clone?\n    The Seurat input is gitignored and exists on one machine. The Mitochondrial cluster is also still sitting in the output matrix.\n    Needs — a housekeeping decision"
-  },
-  {
-    "objectID": "data-code.html",
-    "href": "data-code.html",
-    "title": "Data & Code",
-    "section": "",
-    "text": "Everything in this project lives in one repository: Mmynemious/BBB-Gene-Conservation."
-  },
-  {
-    "objectID": "data-code.html#repository-layout",
-    "href": "data-code.html#repository-layout",
-    "title": "Data & Code",
-    "section": "Repository layout",
-    "text": "Repository layout\nBBB-Gene-Conservation/\n├── raw_data/     original unmodified datasets from each paper\n├── processed/    cleaned outputs — one CSV per pipeline step\n├── genomes/      CDS FASTAs (gitignored — regenerated by step5a)\n├── scripts/      one R script per numbered step, plus eval_* checks\n├── site/         source for this website (.qmd + styles.css)\n└── docs/         rendered site + the source papers as PDFs"
-  },
-  {
-    "objectID": "data-code.html#scripts-one-per-numbered-step",
-    "href": "data-code.html#scripts-one-per-numbered-step",
-    "title": "Data & Code",
-    "section": "Scripts — one per numbered step",
-    "text": "Scripts — one per numbered step\nEach script writes into processed/ and is named for its step. The audit gives a verdict for every one of them.\n\n\n\n\n\n\n\n\nScript\nWrites\nVerdict\n\n\n\n\nstep1_extract_BBB_genelist.R\nmaster_BBB_genelist.csv\nBreaks results\n\n\nstep2_process_walchli_seurat.R\nWalchli2024_AverageExpression.csv\nClean\n\n\nstep3_map_ensembl_crossspecies.R\nBBB_genes_crossspecies_ensembl.csv\n92 genes lost\n\n\nstep4b_human_validation.R\nmaster_BBB_genelist_validated.csv\nTwo reading bugs\n\n\nstep3b_biomart_orthology_confidence.R\nmaster_BBB_genelist_complete.csv\nOverstated fix\n\n\nstep3c_biotype_check.R\ngene_biotype_check.csv\nCircular check\n\n\nstep4c_liver_control_geneset.R\nliver_control_genelist.csv\nBreaks results\n\n\nstep5a_download_cds_fastas.R\ngenomes/*.cds.all.fa.gz\nClean\n\n\nstep5b_extract_cds_sequences.R\ngenomes/cds_BBB_*.fa\nRough heuristic\n\n\nstep5b_alt_canonical_transcripts.R\ngenomes/cds_canonical_*.fa\nWritten, unused\n\n\nstep5c_align_and_score.R\nconservation_scores_BBB.csv\nPartly superseded\n\n\nstep5d_liver_scoring.R\nconservation_scores_liver.csv\nBreaks results\n\n\nstep5e_statistics.R\nconservation_summary.txt\nClean\n\n\nstep5f_recompute_dnds.R\nconservation_scores_combined_v2.csv\nClean — this is the fix\n\n\nstep5g_stats_v2.R\nconservation_summary_v2.txt\nClean\n\n\nstep5h_mouse_vs_macaque.R\nconservation_scores_mouse_macaque.csv\nClean\n\n\n\nNote the run order. step4b writes the file step3b reads, so the scripts execute 1 → 2 → 3 → 4b → 3b → 3c → 4c → 5a…, not in the order their names imply."
-  },
-  {
-    "objectID": "data-code.html#reproducing-the-analysis",
-    "href": "data-code.html#reproducing-the-analysis",
-    "title": "Data & Code",
-    "section": "Reproducing the analysis",
-    "text": "Reproducing the analysis\n\n\n\n\n\n\nWarningOne step cannot be reproduced from a clean clone\n\n\n\nstep2 reads a Seurat object (Walchli2024_…SeuratObject.rds.gz) that is gitignored for size and exists only on the author’s machine. Its output, processed/Walchli2024_AverageExpression.csv, is committed, so every later step runs — but step 2 itself cannot be re-executed without obtaining the source object from the Wälchli supplementary data.\n\n\n\nRequirements\n# CRAN\ninstall.packages(c(\"readr\", \"dplyr\", \"ggplot2\", \"knitr\", \"seqinr\", \"readxl\"))\n\n# Bioconductor\nif (!require(\"BiocManager\")) install.packages(\"BiocManager\")\nBiocManager::install(c(\"biomaRt\", \"Biostrings\", \"pwalign\"))\n\n# Seurat — required for step 2 only\ninstall.packages(\"Seurat\")\nEnsembl release 113 is queried live through biomaRt, so results can shift as Ensembl updates. The CDS FASTAs are downloaded by step5a rather than committed — genomes/ is gitignored.\n\n\nRunning it\n# from the repository root, in order\nRscript scripts/step1_extract_BBB_genelist.R\nRscript scripts/step2_process_walchli_seurat.R      # needs the Seurat object\nRscript scripts/step3_map_ensembl_crossspecies.R\nRscript scripts/step4b_human_validation.R           # note: before 3b\nRscript scripts/step3b_biomart_orthology_confidence.R\nRscript scripts/step3c_biotype_check.R\nRscript scripts/step4c_liver_control_geneset.R\nRscript scripts/step5a_download_cds_fastas.R        # large downloads\nRscript scripts/step5b_extract_cds_sequences.R\nRscript scripts/step5c_align_and_score.R            # slow — hours\nRscript scripts/step5d_liver_scoring.R              # slow — hours\nRscript scripts/step5e_statistics.R\nRscript scripts/step5f_recompute_dnds.R\nRscript scripts/step5g_stats_v2.R\nRscript scripts/step5h_mouse_vs_macaque.R\n\n\nRebuilding this website\nquarto render site\nSources live in site/; the rendered site is written to docs/, which is what the deployment serves. The single-file predecessor is kept at site/_legacy-tutorial.qmd — the leading underscore stops Quarto from rendering it."
-  },
-  {
-    "objectID": "data-code.html#processed-data",
-    "href": "data-code.html#processed-data",
-    "title": "Data & Code",
-    "section": "Processed data",
-    "text": "Processed data\nEvery file in processed/ is committed, so the analysis can be inspected without re-running anything.\n\n\n\n\n\n\n\nFile\nContents\n\n\n\n\nmaster_BBB_genelist.csv\n1,526 genes from step 1\n\n\nmaster_BBB_genelist_validated.csv\n+ human validation score 0–3\n\n\nmaster_BBB_genelist_complete.csv\n+ orthology type and % identity\n\n\nliver_control_genelist.csv\n7,131 control genes\n\n\nconservation_scores_BBB.csv\n1,632 rows × 18 columns\n\n\nconservation_scores_liver.csv\n7,091 rows\n\n\nconservation_scores_combined_v2.csv\n8,723 rows, codon-aware dN/dS\n\n\nconservation_scores_mouse_macaque.csv\n4,578 rows"
-  },
-  {
-    "objectID": "data-code.html#source-datasets",
-    "href": "data-code.html#source-datasets",
-    "title": "Data & Code",
-    "section": "Source datasets",
-    "text": "Source datasets\n\nDaneman R, et al. (2010). The mouse blood-brain barrier transcriptome. PLOS ONE 5(10): e13741.\nMunji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. Nature Neuroscience 22(11): 1892–1902.\nWälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. Nature 614: 945–954.\nYang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk. Nature 603: 885–892.\nWinkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. Science 375(6584): eabi7377.\n\nSee the literature review for how each source is actually used, and which were misread."
-  },
-  {
-    "objectID": "data-code.html#tools",
-    "href": "data-code.html#tools",
-    "title": "Data & Code",
-    "section": "Tools",
-    "text": "Tools\n\nEnsembl release 113 — https://www.ensembl.org\nBioMart, via the biomaRt R package\nHuman Protein Atlas — https://www.proteinatlas.org\nBioconductor: Biostrings, pwalign, seqinr"
-  },
-  {
-    "objectID": "data-code.html#ai-transparency",
-    "href": "data-code.html#ai-transparency",
-    "title": "Data & Code",
-    "section": "AI transparency",
-    "text": "AI transparency\nThis pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Claire Clelland."
-  },
-  {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
-    "section": "",
-    "text": "Drugs for the brain are tested in mice, then macaques, then people — and every arrow in that chain is a translational leap. This project asks how well that chain holds at the DNA level: how conserved are blood–brain barrier genes across the three species? Each gene is measured two ways — % nucleotide identity, how many DNA letters match, and dN/dS, whether evolution is actively removing protein-changing mutations — against a control set of genes from a tissue that is not the brain.\nThe headline is a method result rather than a biological one. Macaque coding sequence is far closer to human than mouse is, and gene duplication is what drives real divergence: where mouse has two copies of a gene humans have once (Abcb1a and Abcb1b for human ABCB1), identity collapses to ~47% against ~85% for clean one-to-one pairs — a large, robust effect. The tissue-level claim that would have been the headline — that BBB genes are under stronger purifying selection than liver genes — does not currently stand, and the audit explains exactly why: the liver control was never filtered, so 86.6% of it is brain-expressed too."
-  },
-  {
-    "objectID": "index.html#whats-in-this-project",
-    "href": "index.html#whats-in-this-project",
-    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
-    "section": "What’s in this project",
-    "text": "What’s in this project\n\n\nPipeline & Methods\nHow the analysis was built, step by step: gene lists from mouse transcriptomics, orthologue mapping across three species, coding-sequence extraction, pairwise alignment, % identity and dN/dS. Each step carries its own audit flag.\nRead more →\n\n\nResults\nConservation distributions, BBB against the liver control, and the three pairwise species comparisons. Every headline finding is graded for whether it survives the audit.\nRead more →\n\n\nAudit — what’s wrong\nAll 15 numbered steps with a verdict each, the real execution order, the three fixes that change conclusions, and the open questions. 3 steps break results, 6 move numbers, 6 are clean.\nRead more →\n\n\nLiterature Review\nWhat is already known about BBB gene conservation, translational models and comparative genomics of brain barriers — and where this project sits among it. Growing as the review proceeds.\nRead more →\n\n\nData & Code\nProcessed datasets, the R scripts for every step, source papers, and instructions to reproduce the analysis from a clean clone.\nRead more →\n\n\nExtensions\nPlanned and ongoing follow-ups: promoter and UTR analysis, phylogenetic dN/dS with PAML, MANE Select transcripts, and a macaque expression atlas.\nRead more →"
-  },
-  {
-    "objectID": "index.html#key-results",
-    "href": "index.html#key-results",
-    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
-    "section": "Key results",
-    "text": "Key results\n\n\n\n\nMacaque sits closer to human than mouse, gene for gene. Each point is one BBB gene, plotted by its human–mouse identity against its human–macaque identity. Note the 224 one-to-one macaque pairs falling below 85% — those are an artefact of the longest-transcript heuristic, not biology.\n\n\n\n\n\nDistribution of % nucleotide identity, BBB genes against the liver control. The two distributions sit almost on top of one another. Under the orthologue rule actually used, BBB scored below the control (84.12 vs 84.32); applying one rule to both sides reverses it (85.04 vs 84.47). The comparison is not currently trustworthy in either direction.\n\n\n\n\n\n\n\n\n\nImportantThese figures are provisional\n\n\n\nThree upstream steps — step1 (wrong source tables), step4c (the liver filter never ran) and step5d (different orthologue rules on the two sides) — feed everything shown here. No figure on this site should be cited until they are fixed and steps 5c–5h re-run. What’s wrong, in full →"
-  },
-  {
-    "objectID": "index.html#about-this-project",
-    "href": "index.html#about-this-project",
-    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
-    "section": "About this project",
-    "text": "About this project\nUndergraduate research project by Yara Ismail, under the supervision of Dr. Claire Clelland. The pipeline is written in R against Ensembl release 113, the Human Protein Atlas, and five published transcriptomic datasets. Everything — data, scripts, and this site — is in the GitHub repository."
-  },
-  {
     "objectID": "pipeline.html",
     "href": "pipeline.html",
     "title": "Pipeline & Methods",
@@ -285,5 +110,159 @@
     "title": "Pipeline & Methods",
     "section": "Step 5h — Triangle",
     "text": "Step 5h — Triangle\n\nClean step5h_mouse_vs_macaque.R — no defect of its own.\nSame codon-aware pipeline, no human reference. It inherits the step 1 gene list, so its numbers move when step 1 is fixed — but the method is sound and the triangle is a genuine sanity check.\n\n\nWhy did we do Step 5h?\nSteps 5c–g compared every species against human as the reference point. But the translational pipeline runs Mouse → Macaque → Human, which means the Mouse–Macaque leg is just as important as the others. If mouse and macaque are very different from each other, a drug validated in mouse might fail in macaque for reasons unrelated to human biology. Step 5h closes the triangle by computing mouse vs macaque conservation directly, giving us the complete three-way picture needed to evaluate the full translational ladder.\n\n\n\n\n\n\nNoteData flow\n\n\n\nFull script: scripts/step5h_mouse_vs_macaque.R Reads: genomes/cds_BBB_mouse.fa, genomes/cds_BBB_macaque.fa, full genome FASTAs, processed/conservation_scores_combined_v2.csv Writes: processed/conservation_scores_mouse_macaque.csv Note: ~1,500 alignments, ~30 minutes.\n\n\nEarlier steps used human as the reference. To complete the picture we computed the third side: mouse vs macaque directly.\n\n\nCode\nmm     &lt;- read_csv(\"processed/conservation_scores_mouse_macaque.csv\",\n                   show_col_types = FALSE)\nmm_bbb &lt;- mm[mm$Gene_Set == \"BBB\", ]\n\ntriangle &lt;- data.frame(\n  Comparison = c(\"Human  vs Mouse\", \"Human  vs Macaque\", \"Mouse  vs Macaque\"),\n  `Median % identity (BBB genes)` = c(\n    round(median(bbb$PctId_Human_Mouse,      na.rm = TRUE), 1),\n    round(median(bbb$PctId_Human_Macaque,    na.rm = TRUE), 1),\n    round(median(mm_bbb$PctId_Mouse_Macaque, na.rm = TRUE), 1)\n  ),\n  check.names = FALSE\n)\nkable(triangle)\n\n\n\n\n\nComparison\nMedian % identity (BBB genes)\n\n\n\n\nHuman vs Mouse\n84.1\n\n\nHuman vs Macaque\n96.8\n\n\nMouse vs Macaque\n82.6\n\n\n\n\n\n\n\nCode\nbbb_both &lt;- bbb |&gt;\n  filter(!is.na(PctId_Human_Mouse), !is.na(PctId_Human_Macaque))\n\nggplot(bbb_both, aes(x = PctId_Human_Mouse, y = PctId_Human_Macaque)) +\n  geom_point(alpha = 0.25, color = \"#d62728\", size = 1.2) +\n  geom_abline(slope = 1, intercept = 0, linetype = \"dashed\",\n              color = \"grey40\", linewidth = 0.8) +\n  annotate(\"text\", x = 60, y = 98, label = \"Macaque closer to human\",\n           color = \"grey30\", size = 3.5, hjust = 0) +\n  annotate(\"text\", x = 85, y = 72, label = \"Mouse closer to human\",\n           color = \"grey30\", size = 3.5, hjust = 0) +\n  labs(x = \"Human vs Mouse % identity\", y = \"Human vs Macaque % identity\",\n       title = \"For almost every BBB gene, macaque is more similar to human than mouse is\",\n       subtitle = \"Points above the dashed diagonal = macaque is the closer model\") +\n  theme_minimal()\n\n\n\n\n\nHuman vs Mouse and Human vs Macaque % identity per BBB gene\n\n\n\n\nThe complete evolutionary distance picture:\n                Human\n              /        \\\n          84.1%        96.8%\n            /              \\\n        Mouse  ── 82.6% ── Macaque"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
+    "section": "",
+    "text": "This project has been my way of learning bioinformatics and the biology of the blood–brain barrier at the same time. It is a quantitative analysis of coding-sequence conservation and selection pressure in blood–brain barrier genes across human, mouse and macaque, using liver genes as a control group.\nThe site documents the whole thing: the steps I took, the materials I used, the audit I did afterwards, and what has to be fixed first before this data can be reused. The bioinformatics pipeline is a rough structure — usable, but it needs polishing. Alongside it is a literature review, currently in progress, where I will add and comment on the papers I read."
+  },
+  {
+    "objectID": "index.html#whats-in-this-project",
+    "href": "index.html#whats-in-this-project",
+    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
+    "section": "What’s in this project",
+    "text": "What’s in this project\n\n\nPipeline & Methods\nHow the analysis was built, step by step: gene lists, orthologues across three species, coding-sequence alignment, % identity and dN/dS. Each step carries its own audit flag.\nRead more →\n\n\nResults\nConservation distributions, BBB genes against the liver control, and the three pairwise species comparisons — each finding graded for whether it survives the audit.\nRead more →\n\n\nAudit — what went wrong\nAll 15 pipeline steps with a verdict each, and the three fixes that have to happen before the results can be trusted. 3 steps break results, 6 move numbers, 6 are clean.\nRead more →\n\n\nLiterature Review\nPapers on BBB gene conservation, translational models and comparative genomics, with my comments. In progress.\nRead more →\n\n\nData & Code\nProcessed datasets, the R script for every step, and instructions to reproduce the analysis.\nRead more →\n\n\nExtensions\nWhat comes after the fixes: MANE Select transcripts, phylogenetic dN/dS, regulatory sequence, and a macaque expression atlas.\nRead more →\n\n\nResources\nThe papers, databases and tools this project is built on, with full citations.\nRead more →"
+  },
+  {
+    "objectID": "index.html#about-this-project",
+    "href": "index.html#about-this-project",
+    "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
+    "section": "About this project",
+    "text": "About this project\nResearch project by Yara Ismail, under the supervision of Dr. Claire Clelland. Everything — data, scripts, and this site — is in the GitHub repository."
+  },
+  {
+    "objectID": "data-code.html",
+    "href": "data-code.html",
+    "title": "Data & Code",
+    "section": "",
+    "text": "Everything in this project lives in one repository: Mmynemious/BBB-Gene-Conservation."
+  },
+  {
+    "objectID": "data-code.html#repository-layout",
+    "href": "data-code.html#repository-layout",
+    "title": "Data & Code",
+    "section": "Repository layout",
+    "text": "Repository layout\nBBB-Gene-Conservation/\n├── raw_data/     original unmodified datasets from each paper\n├── processed/    cleaned outputs — one CSV per pipeline step\n├── genomes/      CDS FASTAs (gitignored — regenerated by step5a)\n├── scripts/      one R script per numbered step, plus eval_* checks\n├── site/         source for this website (.qmd + styles.css)\n└── docs/         rendered site + the source papers as PDFs"
+  },
+  {
+    "objectID": "data-code.html#scripts-one-per-numbered-step",
+    "href": "data-code.html#scripts-one-per-numbered-step",
+    "title": "Data & Code",
+    "section": "Scripts — one per numbered step",
+    "text": "Scripts — one per numbered step\nEach script writes into processed/ and is named for its step. The audit gives a verdict for every one of them.\n\n\n\n\n\n\n\n\nScript\nWrites\nVerdict\n\n\n\n\nstep1_extract_BBB_genelist.R\nmaster_BBB_genelist.csv\nBreaks results\n\n\nstep2_process_walchli_seurat.R\nWalchli2024_AverageExpression.csv\nClean\n\n\nstep3_map_ensembl_crossspecies.R\nBBB_genes_crossspecies_ensembl.csv\n92 genes lost\n\n\nstep4b_human_validation.R\nmaster_BBB_genelist_validated.csv\nTwo reading bugs\n\n\nstep3b_biomart_orthology_confidence.R\nmaster_BBB_genelist_complete.csv\nOverstated fix\n\n\nstep3c_biotype_check.R\ngene_biotype_check.csv\nCircular check\n\n\nstep4c_liver_control_geneset.R\nliver_control_genelist.csv\nBreaks results\n\n\nstep5a_download_cds_fastas.R\ngenomes/*.cds.all.fa.gz\nClean\n\n\nstep5b_extract_cds_sequences.R\ngenomes/cds_BBB_*.fa\nRough heuristic\n\n\nstep5b_alt_canonical_transcripts.R\ngenomes/cds_canonical_*.fa\nWritten, unused\n\n\nstep5c_align_and_score.R\nconservation_scores_BBB.csv\nPartly superseded\n\n\nstep5d_liver_scoring.R\nconservation_scores_liver.csv\nBreaks results\n\n\nstep5e_statistics.R\nconservation_summary.txt\nClean\n\n\nstep5f_recompute_dnds.R\nconservation_scores_combined_v2.csv\nClean — this is the fix\n\n\nstep5g_stats_v2.R\nconservation_summary_v2.txt\nClean\n\n\nstep5h_mouse_vs_macaque.R\nconservation_scores_mouse_macaque.csv\nClean\n\n\n\nNote the run order. step4b writes the file step3b reads, so the scripts execute 1 → 2 → 3 → 4b → 3b → 3c → 4c → 5a…, not in the order their names imply."
+  },
+  {
+    "objectID": "data-code.html#reproducing-the-analysis",
+    "href": "data-code.html#reproducing-the-analysis",
+    "title": "Data & Code",
+    "section": "Reproducing the analysis",
+    "text": "Reproducing the analysis\n\n\n\n\n\n\nWarningOne step cannot be reproduced from a clean clone\n\n\n\nstep2 reads a Seurat object (Walchli2024_…SeuratObject.rds.gz) that is gitignored for size and exists only on the author’s machine. Its output, processed/Walchli2024_AverageExpression.csv, is committed, so every later step runs — but step 2 itself cannot be re-executed without obtaining the source object from the Wälchli supplementary data.\n\n\n\nRequirements\n# CRAN\ninstall.packages(c(\"readr\", \"dplyr\", \"ggplot2\", \"knitr\", \"seqinr\", \"readxl\"))\n\n# Bioconductor\nif (!require(\"BiocManager\")) install.packages(\"BiocManager\")\nBiocManager::install(c(\"biomaRt\", \"Biostrings\", \"pwalign\"))\n\n# Seurat — required for step 2 only\ninstall.packages(\"Seurat\")\nEnsembl release 113 is queried live through biomaRt, so results can shift as Ensembl updates. The CDS FASTAs are downloaded by step5a rather than committed — genomes/ is gitignored.\n\n\nRunning it\n# from the repository root, in order\nRscript scripts/step1_extract_BBB_genelist.R\nRscript scripts/step2_process_walchli_seurat.R      # needs the Seurat object\nRscript scripts/step3_map_ensembl_crossspecies.R\nRscript scripts/step4b_human_validation.R           # note: before 3b\nRscript scripts/step3b_biomart_orthology_confidence.R\nRscript scripts/step3c_biotype_check.R\nRscript scripts/step4c_liver_control_geneset.R\nRscript scripts/step5a_download_cds_fastas.R        # large downloads\nRscript scripts/step5b_extract_cds_sequences.R\nRscript scripts/step5c_align_and_score.R            # slow — hours\nRscript scripts/step5d_liver_scoring.R              # slow — hours\nRscript scripts/step5e_statistics.R\nRscript scripts/step5f_recompute_dnds.R\nRscript scripts/step5g_stats_v2.R\nRscript scripts/step5h_mouse_vs_macaque.R\n\n\nRebuilding this website\nquarto render site\nSources live in site/; the rendered site is written to docs/, which is what the deployment serves. The single-file predecessor is kept at site/_legacy-tutorial.qmd — the leading underscore stops Quarto from rendering it."
+  },
+  {
+    "objectID": "data-code.html#processed-data",
+    "href": "data-code.html#processed-data",
+    "title": "Data & Code",
+    "section": "Processed data",
+    "text": "Processed data\nEvery file in processed/ is committed, so the analysis can be inspected without re-running anything.\n\n\n\n\n\n\n\nFile\nContents\n\n\n\n\nmaster_BBB_genelist.csv\n1,526 genes from step 1\n\n\nmaster_BBB_genelist_validated.csv\n+ human validation score 0–3\n\n\nmaster_BBB_genelist_complete.csv\n+ orthology type and % identity\n\n\nliver_control_genelist.csv\n7,131 control genes\n\n\nconservation_scores_BBB.csv\n1,632 rows × 18 columns\n\n\nconservation_scores_liver.csv\n7,091 rows\n\n\nconservation_scores_combined_v2.csv\n8,723 rows, codon-aware dN/dS\n\n\nconservation_scores_mouse_macaque.csv\n4,578 rows"
+  },
+  {
+    "objectID": "data-code.html#sources",
+    "href": "data-code.html#sources",
+    "title": "Data & Code",
+    "section": "Sources",
+    "text": "Sources\nThe papers, databases and tools behind every step are cited on the Resources page."
+  },
+  {
+    "objectID": "audit.html",
+    "href": "audit.html",
+    "title": "Audit — what’s wrong",
+    "section": "",
+    "text": "Every defect below is pinned to the numbered script step it lives in, using the script’s own filename. The step names here and the step names in the pipeline are the same names — the ambiguity in the tab labels (which bundle several steps together) is not carried into the audit.\n\nThe count\n\n  Breaks results3Fix these and a stated conclusion changes. Steps 1, 4c, 5d.\n  Numbers move6Real defects that shift figures without reversing a claim.\n  Clean6No defect in the step itself, including both hard parts.\n  Open questions6Not bugs — decisions, or data the project does not have.\n\n\n\nRegister — all 15 numbered steps\nRun is the order the scripts actually execute in, which is not the order the step names imply: step4b writes the file step3b reads, so 4b runs before 3b.\n\n\n\n\n\nStep\nRun\nWhat it does · what's wrong\nVerdict\n\n\n\n\nstep1\n1\nBuild the master BBB gene list. Three of the four Daneman tables are the wrong tables — S3 is the pericyte-specific list (Pdgfrb, Kcnj8, Vtn, Zic1), S4 and S5 are developmentally up- and down-regulated CNS vascular genes. S6, the real BBB-enriched table, was never opened. A further 92 genes were lost silently: 18 to toupper() mangling the lowercase orf convention, 74 to HomoloGene's 2014 gene names.\nWrong sources\n\n\nstep2\n2\nProcess the Wälchli Seurat object. Method correct — grouped by ECclusters rather than the default. Two things to know rather than fix: the input is gitignored so the step cannot re-run from a clean clone, and the Mitochondrial cluster (dying cells, not a cell type) is still in the output.\nClean\n\n\nstep3\n3\nMap to Ensembl IDs across three species. The 92 names broken in step 1 return nothing from BioMart and drop out of every downstream calculation with no error raised. The step is doing what it was asked; it inherits the damage.\n92 genes lost\n\n\nstep4b\n4\nCross-reference against human EC datasets. Yang S6 was read without naming a sheet, so only the first sheet loaded — the column means \"is an arterial marker\" (36 hits) and the capillary sheet, the most BBB-relevant one, was never opened. Wälchli's test was \"expression above zero in any cell type\", which 88.5% of all genes pass; that alone is why 1,131 of 1,526 genes score exactly 1. Winkler's parse is correct.\nTwo reading bugs\n\n\nstep3b\n5\nAdd orthology confidence. The script header says it recovers the genes step 1 dropped. It does not — it re-queries the same out-of-date names and recovers none of the 92. It is also where 196 one-to-many pairs enter the BBB set at only 25.8% protein identity, which step 5d then excludes from the control set but not from the BBB set.\nOverstated fix\n\n\nstep3c\n6\nGene biotype audit. The check cannot fail. A CDS FASTA contains only protein-coding genes by definition, so a non-coding gene has no entry, comes back blank, and blank was not counted as a failure. 250 rows have no macaque label at all and were invisible to it. The reassuring answer was guaranteed by the method.\nCircular check\n\n\nstep4c\n7\nBuild the liver control gene set. The third filter looked for a tissue called \"brain\"; the Human Protein Atlas has no such label, only regions (cerebral cortex, hippocampal formation, cerebellum…). Zero rows matched, the missing values became zeros, everything passed. The tell is in the saved file: every Brain_nTPM value is exactly 0.0. Recomputed properly, 86.6% of the \"liver control\" is brain-expressed, median brain 31.3 against median liver 31.2. It is a housekeeping set — among the most conserved genes in the genome.\nFilter never ran\n\n\nstep5a\n8\nDownload CDS FASTAs. Ensembl release 113 for all three species — GRCh38, GRCm39, Mmul_10. Straight downloads, nothing to get wrong.\nClean\n\n\nstep5b\n9\nExtract one CDS per gene. Takes the longest isoform. Longest is not necessarily equivalent: human and mouse can land on non-corresponding versions of the same gene, which makes them look more different than they are. This is the origin of the 224 impossible macaque scores visible in step 5c.\nRough heuristic\n\n\nstep5b_alt\n—\nMANE Select / Ensembl Canonical transcripts. The standard alternative to the longest-isoform heuristic. It was written, it runs, and the canonical FASTAs already sit in genomes/. It was never switched in.\nWritten, unused\n\n\nstep5c\n10\nAlign and score the BBB genes. dN/dS was computed on sequences that were trimmed but never aligned — genuinely wrong, and correctly fixed later in step 5f. But the % identity was never recomputed, so every identity figure in the results still comes from here. Two numbers show the damage: 38% of genes came out with dS pinned at the 10.0 ceiling (2% after the 5f fix), and 224 one-to-one macaque pairs score under 85% — SLC2A1 at 71.4%, which is biologically impossible.\nPartly superseded\n\n\nstep5d\n11\nScore the liver control. Described as \"the same measurements\", but it kept only the single best-matching orthologue per gene while the BBB set kept every match including the bad ones. Different rules on the two sides of the comparison — and that alone reverses the headline direction.\nAsymmetric rules\n\n\nstep5e\n12\nFirst-pass statistics. Wilcoxon rank-sum (correct — these data are not normal) with rank-biserial effect sizes. Superseded by 5g, but not wrong.\nClean\n\n\nstep5f\n13\nRecompute dN/dS, codon-aware. Translate to protein, align the proteins, map back onto codons, discard gapped codons, then score. This is the fix, and it mattered: one-to-many mouse dN/dS moved from 0.14 to 0.354. The only gap is scope — it fixed dN/dS and left % identity untouched.\nThis is the fix\n\n\nstep5g\n14\nMultiple testing correction. Bonferroni and FDR across the four primary comparisons, with subgroup analyses honestly labelled exploratory. Correct. What is wrong is what went into it — steps 1, 4c and 5d.\nClean\n\n\nstep5h\n15\nMouse vs macaque. Same codon-aware pipeline with no human reference. No defect of its own — but it inherits the step 1 gene list, so its numbers move when step 1 is fixed.\nClean\n\n\n\n\n\n\n\nThree fixes change the conclusions\n\nstep1 — point it at Daneman S6, drop S3/S4/S5, retire the Daneman_Filter column. Replace toupper() with a real ortholog mapping so the 92 lost genes come back.\nstep4c — one line, so the brain filter matches the Atlas’s real region names. Then a separate decision about what the control should actually be.\nstep5d — one orthologue rule applied to both groups.\n\nThen re-run step5c through step5h. Everything else is numbers moving, not conclusions changing.\n\n\nWhat we still need to figure out\nThese are not defects. They need a decision, a dataset, or both — and this is the section that grows as the literature review continues.\n\n  \n    What should the control actually be?\n    Fixing the step4c filter gives a genuine liver set, but liver may not be the right comparator at all. Brain non-BBB genes, or genes matched on protein domain, would each test a different claim.\n    Needs — Dr. Clelland\n  \n  \n    Can the macaque arm rest on mouse-defined biology?\n    Every gene earned its place from a mouse study. Real macaque DNA is used throughout steps 5a–5h, but no macaque study tells us which genes macaque brain vessels actually switch on. The rhesus brain single-cell atlas (Science Advances 2023, ~1M nuclei, 28 regions, on CellxGene) would close this — and widens project scope.\n    Needs — a dataset and sign-off\n  \n  \n    Should % identity be recomputed the way dN/dS was?\n    Step 5f fixed dN/dS with codon-aware alignment and left identity alone. Switching step5b to MANE Select and re-running identity would likely remove the 224 impossible macaque scores. The canonical FASTAs already exist.\n    Needs — a decision, then compute time\n  \n  \n    Why did we never use Wälchli's 12 EC subtypes?\n    The dataset resolves capillary from arterial from venous endothelium. Step 4b collapsed all of it to a single above-zero test. The most valuable thing about the dataset is the one thing the pipeline never asked it.\n    Needs — a new analysis\n  \n  \n    Where did Giger 2010 come from, and what replaces it?\n    Logged as the macaque dataset. Its 13 samples are all human (taxid 9606) — the macaque in that paper belongs to Khaitovich et al. under a separate accession that was never downloaded. It also compares neurons to endothelium rather than brain to peripheral endothelium, so it is not a BBB gene list for any species.\n    Needs — literature review\n  \n  \n    Should step 2 be reproducible from a clean clone?\n    The Seurat input is gitignored and exists on one machine. The Mitochondrial cluster is also still sitting in the output matrix.\n    Needs — a housekeeping decision"
+  },
+  {
+    "objectID": "extensions.html",
+    "href": "extensions.html",
+    "title": "Extensions",
+    "section": "",
+    "text": "Nothing on this page has been done yet. It is a record of what the project would need next, kept separate from the audit because these are not defects — a defect has a fix, and these need a decision, a dataset, or a method the project does not currently use."
+  },
+  {
+    "objectID": "extensions.html#before-anything-else-the-three-fixes",
+    "href": "extensions.html#before-anything-else-the-three-fixes",
+    "title": "Extensions",
+    "section": "Before anything else — the three fixes",
+    "text": "Before anything else — the three fixes\nThe extensions below are only worth doing on corrected inputs. In priority order:\n\nstep1 — point it at Daneman S6, drop S3/S4/S5, retire the Daneman_Filter column, and replace toupper() with a real orthologue mapping so the 92 silently dropped genes return.\nstep4c — one line, so the brain filter matches the Human Protein Atlas’s real region names. Then decide what the control should actually be.\nstep5d — one orthologue rule applied to both groups.\n\nThen re-run step5c through step5h."
+  },
+  {
+    "objectID": "extensions.html#method-extensions",
+    "href": "extensions.html#method-extensions",
+    "title": "Extensions",
+    "section": "Method extensions",
+    "text": "Method extensions\n\nPhylogenetic dN/dS with PAML\nThe current estimate is pairwise: each species pair scored independently. The rigorous approach runs codeml on a multi-species alignment with an explicit tree, which separates lineage-specific selection from shared ancestral signal and handles saturation properly. At ~80 My of human–mouse divergence, saturation is the specific worry — 38% of genes hit the dS ceiling before the codon-aware fix, and 2% still do.\nNeeds: PAML, a three-species alignment per gene, and considerably more compute.\n\n\nMANE Select transcripts, and re-running % identity\nstep5b_alt_canonical_transcripts.R already generates canonical FASTAs and was never switched in. Doing so, then recomputing % identity the way step5f recomputed dN/dS, should remove the 224 one-to-one macaque pairs scoring under 85% — figures that are currently reporting isoform length mismatch as evolutionary distance.\nThis is the cheapest high-value extension: the code exists and the sequences are already downloaded.\n\n\nRegulatory and non-coding sequence\nThe analysis is coding sequence only. Promoters, enhancers and UTRs were deliberately excluded — and they are where most cross-species differences in expression level are thought to live. A gene can be 95% identical in its coding sequence and regulated completely differently. Extending to regulatory regions would test whether BBB conservation at the protein level is matched by conservation in how the genes are switched on.\nNeeds: a definition of the regulatory region per gene, and an alignment strategy that tolerates far lower conservation than CDS."
+  },
+  {
+    "objectID": "extensions.html#data-extensions",
+    "href": "extensions.html#data-extensions",
+    "title": "Extensions",
+    "section": "Data extensions",
+    "text": "Data extensions\n\nA macaque expression atlas\nThe project’s largest structural gap. Real macaque DNA is used throughout, but no macaque study tells us which genes macaque brain vessels actually express — every gene earned its place from a mouse study, and the paper logged as the macaque dataset (Giger 2010) contains no macaque samples.\nThe candidate is the rhesus macaque single-nucleus brain atlas (Science Advances 2023, ~1M nuclei, 28 regions, on CellxGene).\nNeeds: the dataset, and Dr. Clelland’s sign-off — this widens the project’s scope.\n\n\nWälchli’s endothelial subtypes\nThe atlas resolves 12 endothelial subtypes; step4b collapsed all of it to one above-zero test. Asking whether a gene is capillary-specific rather than merely detected is the question this dataset exists to answer, and would turn the validation score from a near-constant into something informative.\nNeeds: nothing new — the matrix is already in processed/.\n\n\nA better control, or several\nLiver was one choice. Brain non-BBB genes would test whether the signal is specific to the barrier rather than to the brain; genes matched on protein domain would control for the fact that transporters and tight-junction proteins are structurally unusual. Running more than one control would say more than fixing the single one.\nNeeds: Dr. Clelland’s decision on what claim the control is meant to support."
+  },
+  {
+    "objectID": "extensions.html#housekeeping",
+    "href": "extensions.html#housekeeping",
+    "title": "Extensions",
+    "section": "Housekeeping",
+    "text": "Housekeeping\n\nMake step2 reproducible from a clean clone, or document the exact supplementary file to fetch.\nDrop the Mitochondrial cluster — dying cells, not a cell type — from the Wälchli output matrix.\nCorrect the step3c biotype check so it can actually fail, or remove it."
+  },
+  {
+    "objectID": "literature-review.html",
+    "href": "literature-review.html",
+    "title": "Literature Review",
+    "section": "",
+    "text": "NoteIn progress\n\n\n\nNo papers have been added yet. This page will fill in as the review goes on.\nThe papers the pipeline itself is built on are cited on the Resources page."
+  },
+  {
+    "objectID": "resources.html",
+    "href": "resources.html",
+    "title": "Resources",
+    "section": "",
+    "text": "Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010). The mouse blood–brain barrier transcriptome: a new resource for understanding the development and function of brain endothelial cells. PLOS ONE 5(10): e13741. : Mouse BBB gene list — step1. Supplementary tables S3–S5 were used in error; S6 is the BBB-enriched table. See the audit.\nMunji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. Nature Neuroscience 22(11): 1892–1902. : Mouse BBB-enriched genes (518) — step1.\nWälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. Nature 614: 945–954. : Human brain endothelial single-cell expression — step2, step4b.\nYang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk. Nature 603: 885–892. : Human endothelial subtype markers — step4b. Only the first (arterial) sheet was read.\nWinkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. Science 375(6584): eabi7377. : Human endothelial markers — step4b."
+  },
+  {
+    "objectID": "resources.html#datasets-papers-used-in-the-pipeline",
+    "href": "resources.html#datasets-papers-used-in-the-pipeline",
+    "title": "Resources",
+    "section": "",
+    "text": "Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010). The mouse blood–brain barrier transcriptome: a new resource for understanding the development and function of brain endothelial cells. PLOS ONE 5(10): e13741. : Mouse BBB gene list — step1. Supplementary tables S3–S5 were used in error; S6 is the BBB-enriched table. See the audit.\nMunji RN, et al. (2019). Profiling the mouse brain endothelial transcriptome in health and disease. Nature Neuroscience 22(11): 1892–1902. : Mouse BBB-enriched genes (518) — step1.\nWälchli T, et al. (2024). Single-cell atlas of the human brain vasculature. Nature 614: 945–954. : Human brain endothelial single-cell expression — step2, step4b.\nYang AC, et al. (2022). A human brain vascular atlas reveals diverse mediators of Alzheimer’s risk. Nature 603: 885–892. : Human endothelial subtype markers — step4b. Only the first (arterial) sheet was read.\nWinkler EA, et al. (2022). A single-cell atlas of the normal and malformed human brain vasculature. Science 375(6584): eabi7377. : Human endothelial markers — step4b."
+  },
+  {
+    "objectID": "resources.html#consulted-not-used",
+    "href": "resources.html#consulted-not-used",
+    "title": "Resources",
+    "section": "Consulted, not used",
+    "text": "Consulted, not used\nGiger T, Khaitovich P, Somel M, Lorenc A, Lizano E, Harris LW, Ryan MM, Lan M, Wayland MT, Bahn S, Pääbo S (2010). Evolution of neuronal and endothelial transcriptomes in primates. Genome Biology and Evolution. GEO: GSE12293. : Originally logged as the macaque dataset. The downloaded samples are all human, so it does not supply macaque expression data. See the audit."
+  },
+  {
+    "objectID": "resources.html#databases",
+    "href": "resources.html#databases",
+    "title": "Resources",
+    "section": "Databases",
+    "text": "Databases\n\nEnsembl, release 113 — https://www.ensembl.org\n\nGene IDs, orthologues (via BioMart) and coding sequences for GRCh38 (human), GRCm39 (mouse) and Mmul_10 (macaque) — step3, step3b, step5a.\n\nHuman Protein Atlas, tissue RNA consensus — https://www.proteinatlas.org\n\nTissue expression used to build the liver control set — step4c."
+  },
+  {
+    "objectID": "resources.html#software",
+    "href": "resources.html#software",
+    "title": "Resources",
+    "section": "Software",
+    "text": "Software\n\nR with readr, dplyr, ggplot2, readxl, knitr\nBioconductor: biomaRt, Biostrings, pwalign\nseqinr — dN/dS (kaks)\nSeurat — processing the Wälchli single-cell object (step2)\nQuarto — this website"
+  },
+  {
+    "objectID": "resources.html#ai-transparency",
+    "href": "resources.html#ai-transparency",
+    "title": "Resources",
+    "section": "AI transparency",
+    "text": "AI transparency\nThis pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R script writing and debugging. All scientific decisions, interpretation, and research design were made by the author under supervision of Dr. Claire Clelland."
   }
 ]

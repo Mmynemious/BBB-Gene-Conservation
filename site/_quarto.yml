@@ -23,6 +23,8 @@ website:
         text: "Literature"
       - href: data-code.qmd
         text: "Data & Code"
+      - href: resources.qmd
+        text: "Resources"
     right:
       - icon: github
         href: https://github.com/Mmynemious/BBB-Gene-Conservation
