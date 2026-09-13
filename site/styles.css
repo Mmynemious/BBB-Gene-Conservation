@@ -362,3 +362,35 @@ main.content code:not(pre code){ color:var(--accent); background:transparent; fo
 
 /* glossary backlinks */
 main.content dd em a, main.content dd p em a{ font-weight:400; }
+
+/* ── annotated scan gallery ───────────────────────────────────── */
+.scan-gallery{
+  display:grid;
+  gap:1.25rem;
+  margin:1.25rem 0 0;
+}
+.scan-gallery img{
+  width:100%;
+  height:auto;
+  display:block;
+  border:1px solid var(--line);
+  border-radius:2px;
+  background:var(--page);
+}
+.scan-gallery figure{ margin:0; }
+.scan-gallery figcaption{
+  font-size:.78rem;
+  color:var(--text-3);
+  margin-top:.4rem;
+  font-variant-numeric:tabular-nums;
+}
+.scan-note{
+  font-size:.9rem;
+  color:var(--text-2);
+  border-left:2px solid var(--line-2);
+  padding-left:1rem;
+  margin:0 0 1.25rem;
+}
+@media (min-width:900px){
+  .scan-gallery{ grid-template-columns:1fr 1fr; }
+}
