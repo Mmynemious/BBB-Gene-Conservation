@@ -154,6 +154,13 @@
     "text": "Reference detail from the paper\nNumbers to cite from, checked against the text.\n\nDepth: 7,149 to 8,274 proteins per microvessel fraction; 6,657 to 7,534 in whole-brain lysate.\nOrthologues: 12,272 orthologous proteins total; 6,845 identified in all three species.\nMicrovessel-enriched (log₂ BMV/brain &gt; 2.5, adjusted p &lt; 0.05): 1,636 mouse, 1,166 monkey, 2,155 human; 528 shared across all three.\nMonkey database validation: protein intensities from the monkey and human reference databases correlate at r = 0.888 (p &lt; 0.0001); 75.6% of proteins within 1.5-fold. Human to monkey genomic difference taken as about 4%.\nSpecies differences in transporters: ABCB1/Abcb1a higher in mouse (human/mouse ratio 0.344); ABCG2/Abcg2 2.57-fold higher in monkey than human; SLC22A8/Slc22a8 and SLC22A6/Slc22a6 detected in mouse only; SLCO1A2 quantified in human where mouse expresses Slco1a4 and Slco1c1; SLC43A3/Slc43a3 is primate-specific, present in human and monkey microvessels, absent in mouse, confirmed by QTAP at 22.4-fold higher in hCMEC/D3 than MBEC4.\nIn vitro against in vivo: ABCC1 11.3-fold and SLC29A1 1.54-fold higher in hCMEC/D3 than in microvessels; SLC7A5 5.79-fold higher in microvessels; claudin-5 not detected at all in hCMEC/D3. Immortalised lines clustered closer to HUVEC than to primary cells. MFSD2A absent from cultured cells entirely.\nClaudins: total claudin family expression higher in microvessels in vivo; claudin-5 highest in microvessels, claudin-11 high in most cell lines, claudin-12 the major subtype in MBEC4."
   },
   {
+    "objectID": "papers/kumabe2025.html#annotated-scan",
+    "href": "papers/kumabe2025.html#annotated-scan",
+    "title": "Kumabe et al. 2025",
+    "section": "Annotated scan",
+    "text": "Annotated scan\n\nThese are my own printed and annotated pages, scanned back in. The printer cut off after page 13, so the annotations stop there; the notes for the remaining pages are written out at the end of My reading above.\n\n\n  \n    \n    Page 1\n  \n  \n    \n    Page 2\n  \n  \n    \n    Page 3\n  \n  \n    \n    Page 4\n  \n  \n    \n    Page 5\n  \n  \n    \n    Page 6\n  \n  \n    \n    Page 7\n  \n  \n    \n    Page 8\n  \n  \n    \n    Page 9\n  \n  \n    \n    Page 10\n  \n  \n    \n    Page 11\n  \n  \n    \n    Page 12\n  \n  \n    \n    Page 13\n  \n\n\nPages reproduced from Kumabe et al. 2025, Fluids and Barriers of the CNS 22:53, open access under CC BY-NC-ND 4.0. Handwriting and highlighting are mine. Original paper."
+  },
+  {
     "objectID": "index.html",
     "href": "index.html",
     "title": "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque",
@@ -334,6 +341,13 @@
     "title": "Park et al. 2019",
     "section": "Reference detail from the paper",
     "text": "Reference detail from the paper\n\nChip: 2-channel PDMS microfluidic device, porous PET membrane (2 µm pores) coated with collagen IV and fibronectin. Astrocytes and pericytes seeded 7:3 on the apical side, iPS-BMVECs on the vascular side. Flow at 100 µL/h giving 6 dyne/cm² shear, medium viscosity 3 to 4 cP.\nDifferentiation: iPSCs under 5% O2 from D0, retinoic acid at D6 to D8, seeded on chip at D9, then shifted to normoxia. Hypoxia raised mRNA for VE-cadherin, PECAM-1, GLUT-1, INSR, P-gp, BCRP, MRP1 and MRP4, and Wnt7a by over 25-fold.\nBarrier: impedance about 25,000 Ω under hypoxia differentiation against about 400 Ω for chips with primary human BMVECs. Papp about 10⁻⁸ to 10⁻⁹ cm/s, inversely correlated with tracer size.\nEfflux selectivity: verapamil (P-gp) raised rhodamine 123 and DiOC2 in the CNS channel; Ko143 (BCRP) affected DiOC2 but not rhodamine 123; MK571 (MRP1) affected rhodamine 123 only. Doxorubicin rose 2.7-fold with verapamil and was unchanged by MK571 or Ko143.\nCitalopram: permeability increased when P-gp was inhibited in the chip, matching in vivo animal studies. The paper notes that past in vitro BBB models failed to identify citalopram as a P-gp substrate, and the equivalent Transwell experiment showed no such effect.\nOsmotic opening: 485 mOsmol/L mannitol for 1 h. TEER fell about 50% within 2 h. 10 kDa dextran Papp rose from 3 to 32 × 10⁻⁸ cm/s and cetuximab from 2 to 5.1 × 10⁻⁸ cm/s. Both back to normal within 4 h.\nShuttling: Angiopep-2-conjugated Q-dots showed about 3.5-fold greater CNS penetration than scrambled-peptide Q-dots, with no change in barrier integrity. Anti-TfR MEM75 showed about threefold higher penetration than 13E4."
+  },
+  {
+    "objectID": "papers/park2019.html#annotated-scan",
+    "href": "papers/park2019.html#annotated-scan",
+    "title": "Park et al. 2019",
+    "section": "Annotated scan",
+    "text": "Annotated scan\n\nMy own printed and annotated pages, scanned back in. Highlighting follows the usual key: the claim, the method, numbers worth quoting, and anything that surprised me.\n\n\n  \n    \n    Page 1\n  \n  \n    \n    Page 2\n  \n  \n    \n    Page 3\n  \n  \n    \n    Page 4\n  \n  \n    \n    Page 5\n  \n  \n    \n    Page 6\n  \n  \n    \n    Page 7\n  \n  \n    \n    Page 8\n  \n  \n    \n    Page 9\n  \n\n\nPages reproduced from Park et al. 2019, Nature Communications 10:2621, open access under CC BY 4.0. Handwriting and highlighting are mine. Original paper."
   },
   {
     "objectID": "resources.html",

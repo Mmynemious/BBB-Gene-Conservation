@@ -221,3 +221,70 @@ Numbers to cite from, checked against the text.
 - **Claudins:** total claudin family expression higher in microvessels in vivo; claudin-5
   highest in microvessels, claudin-11 high in most cell lines, claudin-12 the major subtype
   in MBEC4.
+
+## Annotated scan
+
+::: {.scan-note}
+These are my own printed and annotated pages, scanned back in. The printer cut off after page 13, so the annotations stop there; the notes for the remaining pages are written out at the end of **My reading** above.
+:::
+
+```{=html}
+<div class="scan-gallery">
+  <figure>
+    <img src="scans/kumabe2025/p-01.jpg" alt="Annotated page 1 of the paper" loading="lazy">
+    <figcaption>Page 1</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-02.jpg" alt="Annotated page 2 of the paper" loading="lazy">
+    <figcaption>Page 2</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-03.jpg" alt="Annotated page 3 of the paper" loading="lazy">
+    <figcaption>Page 3</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-04.jpg" alt="Annotated page 4 of the paper" loading="lazy">
+    <figcaption>Page 4</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-05.jpg" alt="Annotated page 5 of the paper" loading="lazy">
+    <figcaption>Page 5</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-06.jpg" alt="Annotated page 6 of the paper" loading="lazy">
+    <figcaption>Page 6</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-07.jpg" alt="Annotated page 7 of the paper" loading="lazy">
+    <figcaption>Page 7</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-08.jpg" alt="Annotated page 8 of the paper" loading="lazy">
+    <figcaption>Page 8</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-09.jpg" alt="Annotated page 9 of the paper" loading="lazy">
+    <figcaption>Page 9</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-10.jpg" alt="Annotated page 10 of the paper" loading="lazy">
+    <figcaption>Page 10</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-11.jpg" alt="Annotated page 11 of the paper" loading="lazy">
+    <figcaption>Page 11</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-12.jpg" alt="Annotated page 12 of the paper" loading="lazy">
+    <figcaption>Page 12</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/kumabe2025/p-13.jpg" alt="Annotated page 13 of the paper" loading="lazy">
+    <figcaption>Page 13</figcaption>
+  </figure>
+</div>
+```
+
+::: {.scan-note}
+Pages reproduced from Kumabe et al. 2025, *Fluids and Barriers of the CNS* 22:53, open access under CC BY-NC-ND 4.0. Handwriting and highlighting are mine. [Original paper](https://doi.org/10.1186/s12987-025-00650-z).
+:::

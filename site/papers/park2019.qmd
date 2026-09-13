@@ -167,3 +167,54 @@ Small corrections and additions from reading the text alongside the notes.
 - **Shuttling:** Angiopep-2-conjugated Q-dots showed about 3.5-fold greater CNS penetration
   than scrambled-peptide Q-dots, with no change in barrier integrity. Anti-TfR MEM75 showed
   about threefold higher penetration than 13E4.
+
+## Annotated scan
+
+::: {.scan-note}
+My own printed and annotated pages, scanned back in. Highlighting follows the usual key: the claim, the method, numbers worth quoting, and anything that surprised me.
+:::
+
+```{=html}
+<div class="scan-gallery">
+  <figure>
+    <img src="scans/park2019/p-01.jpg" alt="Annotated page 1 of the paper" loading="lazy">
+    <figcaption>Page 1</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-02.jpg" alt="Annotated page 2 of the paper" loading="lazy">
+    <figcaption>Page 2</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-03.jpg" alt="Annotated page 3 of the paper" loading="lazy">
+    <figcaption>Page 3</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-04.jpg" alt="Annotated page 4 of the paper" loading="lazy">
+    <figcaption>Page 4</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-05.jpg" alt="Annotated page 5 of the paper" loading="lazy">
+    <figcaption>Page 5</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-06.jpg" alt="Annotated page 6 of the paper" loading="lazy">
+    <figcaption>Page 6</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-07.jpg" alt="Annotated page 7 of the paper" loading="lazy">
+    <figcaption>Page 7</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-08.jpg" alt="Annotated page 8 of the paper" loading="lazy">
+    <figcaption>Page 8</figcaption>
+  </figure>
+  <figure>
+    <img src="scans/park2019/p-09.jpg" alt="Annotated page 9 of the paper" loading="lazy">
+    <figcaption>Page 9</figcaption>
+  </figure>
+</div>
+```
+
+::: {.scan-note}
+Pages reproduced from Park et al. 2019, *Nature Communications* 10:2621, open access under CC BY 4.0. Handwriting and highlighting are mine. [Original paper](https://doi.org/10.1038/s41467-019-10588-0).
+:::
