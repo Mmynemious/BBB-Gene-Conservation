@@ -1,0 +1,109 @@
+---
+title: "Methods Glossary"
+subtitle: "Terms from the papers, explained once — each linked back to where it first came up"
+---
+
+Every entry says which paper it was first met in, so a term can be traced back to the
+reading that prompted it.
+
+**Immortalised cells**
+: A cell line engineered to divide indefinitely, usually by inserting a gene such as SV40 T
+antigen or telomerase. Ordinary primary cells taken from tissue divide a limited number of
+times and then stop, which makes them awkward to work with; immortalised lines are
+convenient, reproducible and cheap. The cost is that they drift away from the original
+tissue — which is precisely what Kumabe measures: hCMEC/D3 and HBMEC/ciβ resemble generic
+vein endothelium (HUVEC) more than they resemble real brain microvessels, and hCMEC/D3 has
+lost claudin-5 entirely.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**Western blot**
+: A method to check whether one specific protein is present, and roughly how much. Proteins
+are separated by size in a gel, transferred onto a membrane, and probed with an antibody that
+binds only the target. Here it is a quality control, not a result: claudin-5 present in the
+microvessel fraction shows the fraction contains endothelium; PSD95 absent shows it is not
+contaminated with neurons. β-actin is the loading control — it should be equal in every lane,
+confirming equal amounts of protein were loaded.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**DIA — data-independent acquisition**
+: A mass-spectrometry strategy. In the older data-*dependent* approach the instrument picks
+the most intense peptides to fragment and measure, so weakly abundant proteins are missed and
+different runs measure different things. DIA fragments *everything* in successive mass
+windows, so the same proteins are measured in every run. That is why this study can compare
+across species and samples with confidence, and why it reaches 7,000–8,000 proteins.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**QTAP — quantitative targeted absolute proteomics**
+: Instead of relative abundance, this measures the actual molar amount of a chosen protein,
+by spiking in a synthetic version of one of its peptides labelled with heavy isotopes. The
+known standard and the real peptide behave identically but differ in mass, so the ratio gives
+an absolute concentration. Used here to confirm the SLC43A3 result independently of DIA.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**BCA assay (bicinchoninic acid)**
+: A colour-change assay for total protein concentration in a sample. Used so that equal
+amounts of protein go into each analysis.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**Two-tailed Student's *t*-test**
+: Tests whether the means of **two** groups differ. "Two-tailed" means it tests for a
+difference in either direction — higher *or* lower — rather than predicting the direction in
+advance. Two-tailed is the conservative default.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**One-way ANOVA**
+: The extension of the *t*-test to **three or more** groups, with "one-way" meaning the groups
+differ along a single factor — here, species. It answers only "are these groups all the
+same?", not which pair differs. Running repeated *t*-tests between every pair instead would
+inflate the false-positive rate, which is the problem ANOVA exists to avoid.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**Tukey post-hoc test**
+: Run *after* a significant ANOVA to find *which* pairs actually differ, while correcting for
+the fact that you are making several comparisons at once.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**Benjamini–Hochberg adjustment**
+: A multiple-testing correction. Testing thousands of proteins at *p* < 0.05 produces many
+false positives by chance alone. BH controls the **false discovery rate** — the expected
+proportion of claimed hits that are wrong — and is less severe than Bonferroni, which is why
+it suits large screens. The corrected value is the "adjusted *p*-value". This project uses
+both, in `step5g`.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**PCA — principal component analysis**
+: Compresses thousands of measurements per sample into a few axes that capture most of the
+variation, so samples can be plotted and compared. When human and monkey sit near each other
+on PC1 and mouse sits apart, that is a statement about overall proteome similarity.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**Hierarchical clustering**
+: Repeatedly joins the two most similar samples until everything is in one tree. The
+branching order and branch heights show which samples group together and how strongly —
+independent confirmation of what the PCA shows.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**GO enrichment analysis**
+: Gene Ontology assigns standard functional labels to genes and proteins. Enrichment asks
+whether a list contains more of a given label than chance would give — here, showing that
+BMV-enriched proteins are disproportionately "transmembrane transporter activity" and
+"maintenance of blood-brain barrier". DAVID is the tool that performs this test.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**TPM — transcripts per million**
+: A normalised unit of RNA-seq expression, adjusted for both sequencing depth and transcript
+length so values can be compared between genes and samples.
+
+    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*

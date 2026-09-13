@@ -3,6 +3,7 @@ project:
   output-dir: ../docs
   render:
     - "*.qmd"
+    - "papers/*.qmd"
 
 website:
   title: "BBB Gene Conservation"
@@ -21,6 +22,8 @@ website:
         text: "Audit"
       - href: literature-review.qmd
         text: "Literature"
+      - href: glossary.qmd
+        text: "Glossary"
       - href: data-code.qmd
         text: "Data & Code"
       - href: resources.qmd

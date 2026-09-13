@@ -313,3 +313,52 @@ main.content code:not(pre code){ color:var(--accent); background:transparent; fo
   .hub-grid{ grid-template-columns:1fr; gap:1.1rem; }
   .hub-summary{ padding-left:1rem; }
 }
+
+/* ── literature: paper cards ──────────────────────────────────── */
+.paper-list{ display:grid; gap:1.25rem; margin:1.5rem 0 2rem; }
+.paper-card{
+  border:1px solid var(--line);
+  border-left:3px solid var(--accent);
+  border-radius:2px;
+  padding:1.4rem 1.6rem 1.25rem;
+  background:var(--page);
+  transition:border-color .18s ease;
+}
+.paper-card:hover{ border-color:var(--line-2); border-left-color:var(--accent); }
+.paper-card h3{
+  margin:0 0 .6rem;
+  font-size:1.12rem;
+  font-weight:500;
+  letter-spacing:-.005em;
+}
+.paper-card h3 a{ border-bottom:none; color:var(--text); }
+.paper-card h3 a:hover{ color:var(--accent); }
+.paper-card p{ font-size:.94rem; line-height:1.62; color:var(--text-2); margin:0 0 .9rem; }
+.paper-card p:last-child{
+  margin:0;
+  font-size:.8rem;
+  letter-spacing:.05em;
+  text-transform:uppercase;
+}
+.paper-card p:last-child a{
+  border-bottom:none;
+  font-weight:500;
+  display:inline-block;
+  transition:transform .18s ease;
+}
+.paper-card p:last-child a:hover{ transform:translateX(3px); }
+
+.paper-meta{
+  display:flex; flex-wrap:wrap; gap:.4rem .5rem;
+  margin:0 0 .85rem;
+}
+.paper-meta .pm{
+  font-size:.7rem; font-weight:500; letter-spacing:.04em;
+  color:var(--text-2); background:var(--tint);
+  border:1px solid var(--line);
+  border-radius:2px; padding:.2rem .5rem;
+  white-space:nowrap;
+}
+
+/* glossary backlinks */
+main.content dd em a, main.content dd p em a{ font-weight:400; }
