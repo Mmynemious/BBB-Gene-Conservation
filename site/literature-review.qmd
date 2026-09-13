@@ -3,79 +3,207 @@ title: "Literature Review"
 subtitle: "Papers on BBB gene conservation, translational models, and comparative genomics — with comments"
 ---
 
-::: {.callout-note appearance="simple"}
-## In progress
-
-No papers have been added yet. Each one will be read against the fields below, so entries
-stay comparable.
-
-The papers the pipeline itself is built on are cited on the [Resources](resources.qmd) page.
-:::
+Papers are read against six fields, in the order below, so entries stay comparable. The
+papers the pipeline itself is built on are cited on the [Resources](resources.qmd) page.
 
 ## How each paper is read
 
-Six fields, in this order.
-
 **1. Year published**
-: Establishes what was technically possible at the time. A 2010 microarray study and a 2024
-single-cell atlas are not making the same kind of claim, and should not be weighted as if
-they were.
+: Establishes what was technically possible at the time. A 2010 microarray study and a 2025
+deep-proteomics study are not making the same kind of claim.
 
 **2. Model(s) used**
-: Which species — human, mouse, macaque, other. Whether the comparison is within one species
-or across several, and whether the cross-species claim is made on the same tissue.
+: Which species, whether the comparison is within or across species, and whether the
+cross-species claim rests on the same tissue.
 
 **3. Brain region**
-: Recorded whenever the paper states it. This matters more than it first appears:
-**cerebrovascular endothelium differs substantially between brain regions**, and between
-arterial, capillary and venous segments of the same vessel tree. A gene called
-"BBB-enriched" in one region or one vessel segment may not be in another. Where a paper does
-not state the region, that is itself recorded — an unstated region is a limit on how far the
-result travels.
-
-    This project has already been bitten by exactly this distinction: `step4b` read only the
-    arterial sheet of a seven-sheet supplementary file and treated it as general human
-    validation. See the [audit](audit.qmd).
+: Recorded whenever stated. **Cerebrovascular endothelium differs between brain regions**,
+and between arterial, capillary and venous segments of the same vessel tree, so a gene
+"BBB-enriched" in one region or segment may not be in another. Where a paper does not state
+the region — or where regions are not matched between species — that is recorded too.
 
 **4. What is measured**
-: DNA, RNA, or protein. Sequence conservation (DNA) and expression (RNA) answer different
-questions, and protein-level evidence is rarer and usually stronger for function. A paper
-measuring RNA cannot, on its own, support a claim about conservation.
+: DNA, RNA, or protein. Sequence conservation and expression answer different questions, and
+a paper measuring RNA cannot on its own support a claim about conservation.
 
 **5. How it is measured**
-: The method, at the level of detail that changes interpretation — microarray, bulk RNA-seq,
-single-cell or single-nucleus RNA-seq, proteomics, sequencing of genomic DNA. For RNA-seq,
-**bulk or single-cell**, and if single-cell, whether cells were sorted or captured whole.
-Bulk brain tissue drowns endothelial signal in neurons; sorted endothelium does not.
+: Microarray, bulk RNA-seq, single-cell/nucleus RNA-seq, proteomics, genomic sequencing. For
+RNA-seq, **bulk or single-cell**, and whether cells were sorted. Bulk brain tissue drowns
+endothelial signal in neurons; isolated microvessels or sorted endothelium do not.
 
 **6. Statistical and modelling techniques**
-: What was actually done to compare across species — differential expression tests and their
-thresholds, orthologue assignment, alignment method, dN/dS or other selection estimates,
-phylogenetic versus pairwise comparison, and any multiple-testing correction.
-
-## Entry template
-
-```markdown
-### Author Year {#author-year}
-
-> Full citation.
-
-| Field | |
-|---|---|
-| **Year** | |
-| **Models** | |
-| **Brain region** | stated / not stated |
-| **Measures** | DNA / RNA / protein |
-| **Method** | |
-| **Cross-species stats** | |
-
-**What it shows.**
-
-**How it relates to this project.**
-
-**My comments.**
-```
+: What was done to compare across species — orthologue assignment, differential tests and
+thresholds, alignment, selection estimates, phylogenetic versus pairwise, multiple-testing
+correction.
 
 ## Papers
 
-*To be added.*
+### Kumabe et al. 2025 {#kumabe2025}
+
+> Kumabe H, Masuda T, Ito S, Furihata T, Toda A, Mogi M, Araki N, Ohtsuki S (2025).
+> Proteome profile differences among human, monkey, and mouse brain microvessels and cultured
+> brain microvascular endothelial cells. *Fluids and Barriers of the CNS* 22:53.
+> <https://doi.org/10.1186/s12987-025-00650-z>. Open Access.
+
+| Field | |
+|---|---|
+| **Year** | 2025 (published online 30 May 2025) |
+| **Models** | Human, cynomolgus monkey (*Macaca fascicularis*), mouse (C57BL/6N). Plus cultured cells: MBEC4 (immortalised mouse), hCMEC/D3 and HBMEC/ciβ (immortalised human), primary human BMECs, and HUVEC as a peripheral endothelial comparator |
+| **Brain region** | **Not matched between species.** Human and monkey: frozen *cerebral cortex*. Mouse: whole *cerebrum*. Sub-region and vessel segment not resolved — brain microvessels are isolated as a bulk fraction |
+| **Measures** | **Protein** (primary). **RNA** secondary — bulk RNA-seq, cultured cells only, not brain tissue |
+| **Method** | Brain microvessels (BMVs) isolated from frozen brain by homogenisation, dextran centrifugation and glass-bead filtration. Untargeted **DIA** LC-MS/MS (Orbitrap Fusion Tribrid, and ZenoTOF 7600 for monkey and mouse BMVs); library-free search in DIA-NN 1.8.1, MaxLFQ, 1% FDR. **QTAP** with isotope-labelled internal standards for SLC43A3. **Western blot** for enrichment control. Bulk RNA-seq via Galaxy 23.2.1, TPM > 1 |
+| **Cross-species stats** | Mouse→human orthologues via Alliance of Genome Resources v8.0.0, pseudogenes removed. Mean ± SD; two-tailed Student's *t*-test; one-way ANOVA with Tukey post-hoc; Benjamini–Hochberg adjusted *p*. PCA and hierarchical clustering (SIMCA14). GO enrichment (DAVID 2011). Cross-instrument normalisation by a fitted power equation |
+
+: {tbl-colwidths="[22,78]"}
+
+**What it shows.** A deep proteomic profile of isolated brain microvessels from three
+species — 7,149–8,274 proteins per BMV fraction against 6,657–7,534 in whole-brain lysate —
+plus profiles of five cultured BBB model cell types.
+
+Enrichment was verified before anything else: **claudin-5** (endothelial tight junction) was
+detected in BMV fractions of all species and barely in brain lysate, while **PSD95** (a
+neuronal marker) appeared in lysates and not in BMV fractions. This is the control that makes
+the rest interpretable — the fraction really is microvessel, not bulk brain.
+
+Of 12,272 orthologous proteins, **6,845 were identified in all three species**. Restricting
+to BMV-enriched proteins (log₂ BMV/brain > 2.5, adjusted *p* < 0.05) gives 1,636 in mouse,
+1,166 in monkey and 2,155 in human, with 528 shared.
+
+**The result that matters most here:** PCA and clustering of the BMV-enriched proteome put
+**human closest to monkey, and mouse furthest out**, on both the first principal component
+and clustering distance. The authors note this reproduces the phylogenetic tree.
+
+Species differences in specific transporters:
+
+- **ABCB1/Abcb1a** (P-gp efflux) higher in mouse than in primates — human/mouse ratio 0.344
+- **ABCG2/Abcg2** higher in monkey — 2.57-fold above human
+- **SLC22A8/Slc22a8** and **SLC22A6/Slc22a6** detected in mouse only, not in monkey or human
+- **SLCO1A2** quantified in human; mouse instead expresses Slco1a4 and Slco1c1
+- **SLC43A3/Slc43a3** is **primate-specific** — present in human and monkey BMVs, absent in
+  mouse. Confirmed by targeted QTAP: 22.4-fold higher in hCMEC/D3 than in mouse MBEC4
+
+In vitro against in vivo: **primary** cultured human BMECs sat closest to human BMVs, while
+the **immortalised** lines clustered nearer to HUVECs — peripheral endothelium — than to
+primary BMECs. Claudin-5 was not detected at all in hCMEC/D3. ABCC1 was 11.3-fold and SLC29A1
+1.54-fold higher in hCMEC/D3 than in BMVs; SLC7A5 was 5.79-fold higher in BMVs. Claudin-5
+dominated in vivo, claudin-11 in most cell lines, claudin-12 in MBEC4. MFSD2A (DHA transport)
+was absent from cultured cells entirely.
+
+**How it relates to this project.**
+
+1. **Independent, non-sequence support for the macaque result.** This project's clearest
+   finding is that macaque coding sequence sits closer to human than mouse does. Kumabe
+   reaches the same ordering from an entirely different modality — **protein expression in
+   isolated microvessels**. Two different measurements agreeing is stronger than either
+   alone, and it is worth saying explicitly that they are different claims: conservation of
+   *sequence* versus similarity of *expression*.
+
+2. **It is a primate BBB dataset, which this project does not have.** The
+   [audit](audit.qmd) records that there is currently no macaque expression evidence at all —
+   every gene on the list earned its place from a mouse study, and the paper logged as the
+   macaque dataset turned out to contain no macaque samples. Kumabe supplies exactly that
+   missing layer, at protein level.
+
+   **Caveat that has to be checked before using it:** this is **cynomolgus** macaque
+   (*Macaca fascicularis*). This project's macaque genome is **rhesus** (*Macaca mulatta*,
+   Mmul_10). They are different species. Close, but not interchangeable without saying so.
+
+3. **The brain-region field earns its place immediately.** Human and monkey samples are
+   cerebral cortex; mouse is whole cerebrum. Any mouse-versus-primate difference in this
+   paper is partly confounded with region. The authors are open about their other
+   confounders too — longer post-mortem interval in the human samples (2.5–4 h), and
+   perfusion performed in mice only — and they test the blood-contamination one by re-running
+   PCA with abundant blood proteins removed, which does not change the species grouping.
+
+4. **The same orthologue problem, named out loud.** The paper states plainly that human and
+   mouse orthologues *do not have one-to-one relationships* — SLCO1A2 in human against
+   Slco1a1/1a4/1a5/1a6 in mouse. That is the identical issue behind this project's
+   one-to-many pairs at 25.8% identity, and behind `step5d` applying different orthologue
+   rules to the BBB and control sets.
+
+5. **A better human validation set than the one currently used.** `step4b` validates the
+   gene list against a single arterial marker sheet. Kumabe's BMV-enriched protein lists
+   (2,155 human, 1,166 monkey) are a defined, thresholded, protein-level alternative — and
+   they exist for a primate as well as for human.
+
+**My comments.** *(to add)*
+
+## Methods glossary
+
+Terms from the papers, explained once.
+
+**Immortalised cells**
+: A cell line engineered to divide indefinitely, usually by inserting a gene such as SV40 T
+antigen or telomerase. Ordinary primary cells taken from tissue divide a limited number of
+times and then stop, which makes them awkward to work with; immortalised lines are
+convenient, reproducible and cheap. The cost is that they drift away from the original
+tissue — which is precisely what Kumabe measures: hCMEC/D3 and HBMEC/ciβ resemble generic
+vein endothelium (HUVEC) more than they resemble real brain microvessels, and hCMEC/D3 has
+lost claudin-5 entirely.
+
+**Western blot**
+: A method to check whether one specific protein is present, and roughly how much. Proteins
+are separated by size in a gel, transferred onto a membrane, and probed with an antibody that
+binds only the target. Here it is a quality control, not a result: claudin-5 present in the
+microvessel fraction shows the fraction contains endothelium; PSD95 absent shows it is not
+contaminated with neurons. β-actin is the loading control — it should be equal in every lane,
+confirming equal amounts of protein were loaded.
+
+**DIA — data-independent acquisition**
+: A mass-spectrometry strategy. In the older data-*dependent* approach the instrument picks
+the most intense peptides to fragment and measure, so weakly abundant proteins are missed and
+different runs measure different things. DIA fragments *everything* in successive mass
+windows, so the same proteins are measured in every run. That is why this study can compare
+across species and samples with confidence, and why it reaches 7,000–8,000 proteins.
+
+**QTAP — quantitative targeted absolute proteomics**
+: Instead of relative abundance, this measures the actual molar amount of a chosen protein,
+by spiking in a synthetic version of one of its peptides labelled with heavy isotopes. The
+known standard and the real peptide behave identically but differ in mass, so the ratio gives
+an absolute concentration. Used here to confirm the SLC43A3 result independently of DIA.
+
+**BCA assay (bicinchoninic acid)**
+: A colour-change assay for total protein concentration in a sample. Used so that equal
+amounts of protein go into each analysis.
+
+**Two-tailed Student's *t*-test**
+: Tests whether the means of **two** groups differ. "Two-tailed" means it tests for a
+difference in either direction — higher *or* lower — rather than predicting the direction in
+advance. Two-tailed is the conservative default.
+
+**One-way ANOVA**
+: The extension of the *t*-test to **three or more** groups, with "one-way" meaning the groups
+differ along a single factor — here, species. It answers only "are these groups all the
+same?", not which pair differs. Running repeated *t*-tests between every pair instead would
+inflate the false-positive rate, which is the problem ANOVA exists to avoid.
+
+**Tukey post-hoc test**
+: Run *after* a significant ANOVA to find *which* pairs actually differ, while correcting for
+the fact that you are making several comparisons at once.
+
+**Benjamini–Hochberg adjustment**
+: A multiple-testing correction. Testing thousands of proteins at *p* < 0.05 produces many
+false positives by chance alone. BH controls the **false discovery rate** — the expected
+proportion of claimed hits that are wrong — and is less severe than Bonferroni, which is why
+it suits large screens. The corrected value is the "adjusted *p*-value". This project uses
+both, in `step5g`.
+
+**PCA — principal component analysis**
+: Compresses thousands of measurements per sample into a few axes that capture most of the
+variation, so samples can be plotted and compared. When human and monkey sit near each other
+on PC1 and mouse sits apart, that is a statement about overall proteome similarity.
+
+**Hierarchical clustering**
+: Repeatedly joins the two most similar samples until everything is in one tree. The
+branching order and branch heights show which samples group together and how strongly —
+independent confirmation of what the PCA shows.
+
+**GO enrichment analysis**
+: Gene Ontology assigns standard functional labels to genes and proteins. Enrichment asks
+whether a list contains more of a given label than chance would give — here, showing that
+BMV-enriched proteins are disproportionately "transmembrane transporter activity" and
+"maintenance of blood-brain barrier". DAVID is the tool that performs this test.
+
+**TPM — transcripts per million**
+: A normalised unit of RNA-seq expression, adjusted for both sequencing depth and transcript
+length so values can be compared between genes and samples.
