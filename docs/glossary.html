@@ -285,6 +285,51 @@ Gene Ontology assigns standard functional labels to genes and proteins. Enrichme
 A normalised unit of RNA-seq expression, adjusted for both sequencing depth and transcript length so values can be compared between genes and samples.
 <em>First met in <a href="./papers/kumabe2025.html">Kumabe et al.&nbsp;2025</a>.</em>
 </dd>
+<dt><strong>Organ-on-a-chip</strong></dt>
+<dd>
+A small device, usually moulded in silicone, with hollow channels lined by living human cells and fluid flowing through them. The point is to reproduce the <em>mechanical</em> conditions of a tissue, flow, shear and a two-sided interface, which a flat dish cannot. In a BBB chip the endothelium lines one channel, brain cells sit in the other, and a porous membrane between them is the barrier being measured.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>iPSC, induced pluripotent stem cell</strong></dt>
+<dd>
+An adult cell, often a skin or blood cell, reprogrammed back into a stem-cell-like state from which it can be pushed to become almost any cell type. It gives an unlimited supply of human cells of a chosen type. The catch is that the result is a cell <em>differentiated towards</em> a type rather than one taken from tissue, so how well it matches the real thing has to be demonstrated, not assumed.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>TEER, transendothelial electrical resistance</strong></dt>
+<dd>
+A measure of how tight a cell barrier is, taken by passing a small current across it. A leaky layer conducts easily and reads low; a well-sealed layer with intact tight junctions resists and reads high. It is the standard quick check that a barrier model is behaving like a barrier, and it can be watched over days without disturbing the cells.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>Apparent permeability (<em>P</em><sub>app</sub>)</strong></dt>
+<dd>
+How fast a given molecule crosses the barrier, in cm/s. Measured by putting a tracer on one side and sampling the other. Unlike TEER, it is molecule-specific, so it can show that a barrier is tight to one compound and open to another, which is what makes it useful for testing transporters.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>Efflux pump</strong></dt>
+<dd>
+A transporter that actively pushes molecules <em>out</em> of a cell, using energy. At the BBB the major ones, P-gp (ABCB1), BCRP (ABCG2) and the MRPs, sit on the blood-facing surface of the endothelium and pump drugs back into the bloodstream. They are a large part of why so few drugs reach the brain. Their activity is demonstrated by blocking them with a specific inhibitor and showing that more of the drug then crosses.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>Transcytosis</strong></dt>
+<dd>
+Transport of a molecule <em>through</em> a cell rather than between cells: taken in on one side in a vesicle, carried across, released on the other. Large molecules such as antibodies cannot slip between tight junctions, so this is the route drug designers target, usually by attaching a ligand for a receptor the endothelium already uses, such as the transferrin receptor or LRP1.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>Hypoxia and normoxia</strong></dt>
+<dd>
+Low oxygen and normal oxygen. Standard cell culture runs at about 20% O<sub>2</sub>, which is far above what cells experience in a real tissue. The developing brain forms its vasculature at roughly 1 to 8% O<sub>2</sub>, which is the reasoning behind differentiating the cells at 5% O<sub>2</sub>.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>HIF1α and HIF1α mimetics</strong></dt>
+<dd>
+HIF1α is the transcription factor cells use to sense and respond to low oxygen. Under normal oxygen it is rapidly degraded; under hypoxia it is stabilised and switches on a programme of genes. A mimetic such as CoCl<sub>2</sub> or DMOG stabilises HIF1α chemically, producing the hypoxic response without needing a low-oxygen incubator.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
+<dt><strong>Two-way ANOVA</strong></dt>
+<dd>
+ANOVA where the groups differ along <strong>two</strong> factors at once, for example species and treatment, rather than one. It tests each factor separately and also whether they interact, meaning the effect of one depends on the level of the other.
+<em>First met in <a href="./papers/park2019.html">Park et al.&nbsp;2019</a>.</em>
+</dd>
 </dl>
 
 
@@ -856,7 +901,81 @@ A normalised unit of RNA-seq expression, adjusted for both sequencing depth and 
 <span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>: A normalised unit of RNA-seq expression, adjusted for both sequencing depth and transcript</span>
 <span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>length so values can be compared between genes and samples.</span>
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a>**Organ-on-a-chip**</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>: A small device, usually moulded in silicone, with hollow channels lined by living human</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>cells and fluid flowing through them. The point is to reproduce the *mechanical* conditions</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>of a tissue, flow, shear and a two-sided interface, which a flat dish cannot. In a BBB chip</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>the endothelium lines one channel, brain cells sit in the other, and a porous membrane</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>between them is the barrier being measured.</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>**iPSC, induced pluripotent stem cell**</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>: An adult cell, often a skin or blood cell, reprogrammed back into a stem-cell-like state</span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>from which it can be pushed to become almost any cell type. It gives an unlimited supply of</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>human cells of a chosen type. The catch is that the result is a cell *differentiated towards*</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>a type rather than one taken from tissue, so how well it matches the real thing has to be</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>demonstrated, not assumed.</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>**TEER, transendothelial electrical resistance**</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>: A measure of how tight a cell barrier is, taken by passing a small current across it. A</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>leaky layer conducts easily and reads low; a well-sealed layer with intact tight junctions</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>resists and reads high. It is the standard quick check that a barrier model is behaving like</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>a barrier, and it can be watched over days without disturbing the cells.</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>**Apparent permeability (*P*~app~)**</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>: How fast a given molecule crosses the barrier, in cm/s. Measured by putting a tracer on one</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>side and sampling the other. Unlike TEER, it is molecule-specific, so it can show that a</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>barrier is tight to one compound and open to another, which is what makes it useful for</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>testing transporters.</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>**Efflux pump**</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>: A transporter that actively pushes molecules *out* of a cell, using energy. At the BBB the</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>major ones, P-gp (ABCB1), BCRP (ABCG2) and the MRPs, sit on the blood-facing surface of the</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>endothelium and pump drugs back into the bloodstream. They are a large part of why so few</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>drugs reach the brain. Their activity is demonstrated by blocking them with a specific</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>inhibitor and showing that more of the drug then crosses.</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>**Transcytosis**</span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>: Transport of a molecule *through* a cell rather than between cells: taken in on one side in</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>a vesicle, carried across, released on the other. Large molecules such as antibodies cannot</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>slip between tight junctions, so this is the route drug designers target, usually by</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>attaching a ligand for a receptor the endothelium already uses, such as the transferrin</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>receptor or LRP1.</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>**Hypoxia and normoxia**</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>: Low oxygen and normal oxygen. Standard cell culture runs at about 20% O~2~, which is far</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>above what cells experience in a real tissue. The developing brain forms its vasculature at</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>roughly 1 to 8% O~2~, which is the reasoning behind differentiating the cells at 5% O~2~.</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>**HIF1α and HIF1α mimetics**</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>: HIF1α is the transcription factor cells use to sense and respond to low oxygen. Under</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>normal oxygen it is rapidly degraded; under hypoxia it is stabilised and switches on a</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>programme of genes. A mimetic such as CoCl~2~ or DMOG stabilises HIF1α chemically, producing</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>the hypoxic response without needing a low-oxygen incubator.</span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>**Two-way ANOVA**</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a>: ANOVA where the groups differ along **two** factors at once, for example species and</span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a>treatment, rather than one. It tests each factor separately and also whether they interact,</span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a>meaning the effect of one depends on the level of the other.</span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="in">    *First met in [Park et al. 2019](papers/park2019.qmd).*</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

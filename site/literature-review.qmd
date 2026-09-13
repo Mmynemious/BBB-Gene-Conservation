@@ -43,6 +43,23 @@ correction.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [Park et al. 2019](papers/park2019.qmd)
+
+::: {.paper-meta}
+[2019]{.pm} [Human only, in vitro]{.pm} [Barrier function]{.pm} [Organ-on-a-chip]{.pm}
+:::
+
+A human blood brain barrier built on a two channel microfluidic chip, from iPSC-derived
+endothelium differentiated under hypoxia and interfaced with primary human astrocytes and
+pericytes. It holds barrier function for a week, shows working efflux pumps rather than
+merely present ones, and delivers a clinically approved antibody across the barrier by
+reversible osmotic opening. No cross-species comparison at all, which is the point: it is an
+attempt to skip the species jump entirely.
+
+[Read the entry →](papers/park2019.qmd)
+:::
+
+::: {.paper-card}
 ### [Kumabe et al. 2025](papers/kumabe2025.qmd)
 
 ::: {.paper-meta}

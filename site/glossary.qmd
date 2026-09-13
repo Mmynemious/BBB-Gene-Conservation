@@ -107,3 +107,77 @@ BMV-enriched proteins are disproportionately "transmembrane transporter activity
 length so values can be compared between genes and samples.
 
     *First met in [Kumabe et al. 2025](papers/kumabe2025.qmd).*
+
+**Organ-on-a-chip**
+: A small device, usually moulded in silicone, with hollow channels lined by living human
+cells and fluid flowing through them. The point is to reproduce the *mechanical* conditions
+of a tissue, flow, shear and a two-sided interface, which a flat dish cannot. In a BBB chip
+the endothelium lines one channel, brain cells sit in the other, and a porous membrane
+between them is the barrier being measured.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**iPSC, induced pluripotent stem cell**
+: An adult cell, often a skin or blood cell, reprogrammed back into a stem-cell-like state
+from which it can be pushed to become almost any cell type. It gives an unlimited supply of
+human cells of a chosen type. The catch is that the result is a cell *differentiated towards*
+a type rather than one taken from tissue, so how well it matches the real thing has to be
+demonstrated, not assumed.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**TEER, transendothelial electrical resistance**
+: A measure of how tight a cell barrier is, taken by passing a small current across it. A
+leaky layer conducts easily and reads low; a well-sealed layer with intact tight junctions
+resists and reads high. It is the standard quick check that a barrier model is behaving like
+a barrier, and it can be watched over days without disturbing the cells.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**Apparent permeability (*P*~app~)**
+: How fast a given molecule crosses the barrier, in cm/s. Measured by putting a tracer on one
+side and sampling the other. Unlike TEER, it is molecule-specific, so it can show that a
+barrier is tight to one compound and open to another, which is what makes it useful for
+testing transporters.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**Efflux pump**
+: A transporter that actively pushes molecules *out* of a cell, using energy. At the BBB the
+major ones, P-gp (ABCB1), BCRP (ABCG2) and the MRPs, sit on the blood-facing surface of the
+endothelium and pump drugs back into the bloodstream. They are a large part of why so few
+drugs reach the brain. Their activity is demonstrated by blocking them with a specific
+inhibitor and showing that more of the drug then crosses.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**Transcytosis**
+: Transport of a molecule *through* a cell rather than between cells: taken in on one side in
+a vesicle, carried across, released on the other. Large molecules such as antibodies cannot
+slip between tight junctions, so this is the route drug designers target, usually by
+attaching a ligand for a receptor the endothelium already uses, such as the transferrin
+receptor or LRP1.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**Hypoxia and normoxia**
+: Low oxygen and normal oxygen. Standard cell culture runs at about 20% O~2~, which is far
+above what cells experience in a real tissue. The developing brain forms its vasculature at
+roughly 1 to 8% O~2~, which is the reasoning behind differentiating the cells at 5% O~2~.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**HIF1α and HIF1α mimetics**
+: HIF1α is the transcription factor cells use to sense and respond to low oxygen. Under
+normal oxygen it is rapidly degraded; under hypoxia it is stabilised and switches on a
+programme of genes. A mimetic such as CoCl~2~ or DMOG stabilises HIF1α chemically, producing
+the hypoxic response without needing a low-oxygen incubator.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
+
+**Two-way ANOVA**
+: ANOVA where the groups differ along **two** factors at once, for example species and
+treatment, rather than one. It tests each factor separately and also whether they interact,
+meaning the effect of one depends on the level of the other.
+
+    *First met in [Park et al. 2019](papers/park2019.qmd).*
