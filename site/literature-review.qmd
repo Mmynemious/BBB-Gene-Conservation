@@ -6,7 +6,76 @@ subtitle: "Papers on BBB gene conservation, translational models, and comparativ
 ::: {.callout-note appearance="simple"}
 ## In progress
 
-No papers have been added yet. This page will fill in as the review goes on.
+No papers have been added yet. Each one will be read against the fields below, so entries
+stay comparable.
 
 The papers the pipeline itself is built on are cited on the [Resources](resources.qmd) page.
 :::
+
+## How each paper is read
+
+Six fields, in this order.
+
+**1. Year published**
+: Establishes what was technically possible at the time. A 2010 microarray study and a 2024
+single-cell atlas are not making the same kind of claim, and should not be weighted as if
+they were.
+
+**2. Model(s) used**
+: Which species — human, mouse, macaque, other. Whether the comparison is within one species
+or across several, and whether the cross-species claim is made on the same tissue.
+
+**3. Brain region**
+: Recorded whenever the paper states it. This matters more than it first appears:
+**cerebrovascular endothelium differs substantially between brain regions**, and between
+arterial, capillary and venous segments of the same vessel tree. A gene called
+"BBB-enriched" in one region or one vessel segment may not be in another. Where a paper does
+not state the region, that is itself recorded — an unstated region is a limit on how far the
+result travels.
+
+    This project has already been bitten by exactly this distinction: `step4b` read only the
+    arterial sheet of a seven-sheet supplementary file and treated it as general human
+    validation. See the [audit](audit.qmd).
+
+**4. What is measured**
+: DNA, RNA, or protein. Sequence conservation (DNA) and expression (RNA) answer different
+questions, and protein-level evidence is rarer and usually stronger for function. A paper
+measuring RNA cannot, on its own, support a claim about conservation.
+
+**5. How it is measured**
+: The method, at the level of detail that changes interpretation — microarray, bulk RNA-seq,
+single-cell or single-nucleus RNA-seq, proteomics, sequencing of genomic DNA. For RNA-seq,
+**bulk or single-cell**, and if single-cell, whether cells were sorted or captured whole.
+Bulk brain tissue drowns endothelial signal in neurons; sorted endothelium does not.
+
+**6. Statistical and modelling techniques**
+: What was actually done to compare across species — differential expression tests and their
+thresholds, orthologue assignment, alignment method, dN/dS or other selection estimates,
+phylogenetic versus pairwise comparison, and any multiple-testing correction.
+
+## Entry template
+
+```markdown
+### Author Year {#author-year}
+
+> Full citation.
+
+| Field | |
+|---|---|
+| **Year** | |
+| **Models** | |
+| **Brain region** | stated / not stated |
+| **Measures** | DNA / RNA / protein |
+| **Method** | |
+| **Cross-species stats** | |
+
+**What it shows.**
+
+**How it relates to this project.**
+
+**My comments.**
+```
+
+## Papers
+
+*To be added.*
