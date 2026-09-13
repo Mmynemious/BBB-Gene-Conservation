@@ -1,0 +1,46 @@
+---
+title: "Author Year"
+subtitle: "Full paper title"
+---
+
+<!-- Copy this file to papers/<author><year>.qmd and fill it in.
+     The leading underscore keeps this template out of the rendered site.
+     Then add a card for it on literature-review.qmd. -->
+
+> Full citation. Authors (Year). Title. *Journal* volume:pages.
+> <https://doi.org/...>
+
+| Field | |
+|---|---|
+| **Year** | |
+| **Models** | which species, and whether the cross-species claim rests on the same tissue |
+| **Brain region** | stated / not stated / not matched between species |
+| **Measures** | DNA / RNA / protein |
+| **Method** | microarray, bulk RNA-seq, single-cell, proteomics; sorted or whole tissue |
+| **Cross-species stats** | orthologue assignment, tests and thresholds, correction |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+<!-- Your account, in your words. No dashes. Keep the uncertainties in;
+     they become Open questions below and feed the glossary. -->
+
+## What I take from it
+
+<!-- Your judgment. What is this paper really doing? What is it arguing for?
+     This is the part that cannot be read off the PDF. -->
+
+## Open questions from this read
+
+<!-- Terms to look up, sections skimmed, things that did not make sense.
+     Anything answered in the glossary gets a link. -->
+
+## How it relates to this project
+
+<!-- Numbered. Does it support, undercut, or supply something the pipeline
+     lacks? Link to audit.qmd where a defect is involved. -->
+
+## Reference detail from the paper
+
+<!-- Numbers to cite from, checked against the text. Kept last, as backing. -->
