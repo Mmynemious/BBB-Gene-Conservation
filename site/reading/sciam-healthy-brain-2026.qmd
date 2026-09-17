@@ -208,9 +208,11 @@ across a whole microvessel fraction is describing an average of two different th
 bears on [step 1](../audit.qmd) and on the brain region field in
 [how each paper is read](../literature-review.qmd).
 
-**The primary work behind Kaufer and Friedman.** Their magazine article is a summary of
-roughly twenty five years of their own research, so the papers behind it are the ones to read
-properly. To find and verify:
+**The primary work behind Kaufer and Friedman.** *Parked for now.* The article summarises
+roughly twenty five years of their own research and does so well enough for orientation, which
+is all this section is for. Worth returning to only if the reversibility result, or barrier
+breakdown in ageing, becomes something the project actually uses. In that case, to find and
+verify:
 
 - The original stress and pyridostigmine work in *Nature Medicine*, around 1996, which is the
   blue dye experiment described in the article.
@@ -221,8 +223,15 @@ properly. To find and verify:
   the water maze and IPW part of the article most closely, and the one most worth reading
   first, since it carries the reversibility result.
 
+**Note the distinction.** Kaufer and Friedman are about a barrier that **fails**, in disease
+and with age. The question this project ran into is different: whether the **healthy** barrier
+is uniformly tight along the vessel tree, or whether tight and leaky segments are being
+averaged together in a bulk microvessel fraction. That is regional and segmental heterogeneity,
+not pathology, and it is a separate literature.
+
 **Sweeney et al. 2018**, the review of blood brain barrier physiology and disease, is already
-downloaded and is a good way into the wider leaky barrier literature.
+downloaded and covers both, so it is the sensible single starting point if either thread is
+picked up.
 
 **On sleep and CSF clearance.** The glymphatic literature is the place to start, and the sound
 and frequency angle should trace back to work on CSF oscillations coupled to slow wave
