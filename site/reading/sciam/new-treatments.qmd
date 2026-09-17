@@ -5,8 +5,8 @@ subtitle: "Scientific American Special Editions, The Healthy Brain, Fall 2026"
 
 [Back to the issue notes](../sciam-healthy-brain-2026.qmd)
 
-**Topic.** The current landscape of drug development for the brain. This was the most useful
-article in the issue.
+**Topic.** The current landscape of drug development for the brain. This one was quite
+interesting to read, and it gave me an idea of what to look at in our research as well.
 
 *Note: this piece does not appear in the online contents listing for the issue, which may
 be incomplete. Worth confirming the exact title and author from the printed copy.*

@@ -42,21 +42,11 @@ CSF as the brain's sewage system, why sleep matters for clearing it, and a claim
 [Read the notes →](sciam/brainwashing.qmd)
 :::
 
-Outside the blood brain barrier discussion, kept for completeness. It did send me back to Max Bennett on bipedalism and brain size.
-
-[Read the notes →](sciam/brain-exercise.qmd)
-:::
-
-Interesting to read, but it did not matter a lot for this project.
-
-[Read the notes →](sciam/ozempic.qmd)
-:::
-
 ::: {.paper-card .paper-card-wider}
 ### [A wealth of new treatments, by Esther Landhuis](sciam/new-treatments.qmd)
 
 ::: {.paper-meta}
-[Esther Landhuis]{.pm} [Most useful]{.pm}
+[Esther Landhuis]{.pm} [Drug development landscape]{.pm}
 :::
 
 A map of brain drug development by treatment target and clinical phase. Vasculature is one class among a dozen, and it is where the leaky barrier idea came from.
