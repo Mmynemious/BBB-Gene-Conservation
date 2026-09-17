@@ -42,23 +42,9 @@ CSF as the brain's sewage system, why sleep matters for clearing it, and a claim
 [Read the notes →](sciam/brainwashing.qmd)
 :::
 
-::: {.paper-card .paper-card-wider}
-### [Why your brain needs exercise, by David A. Raichlen and Gene E. Alexander](sciam/brain-exercise.qmd)
-
-::: {.paper-meta}
-[Raichlen and Alexander]{.pm} [Not relevant here]{.pm}
-:::
-
 Outside the blood brain barrier discussion, kept for completeness. It did send me back to Max Bennett on bipedalism and brain size.
 
 [Read the notes →](sciam/brain-exercise.qmd)
-:::
-
-::: {.paper-card .paper-card-wider}
-### [Ozempic quiets the brain's food noise, by Lauren J. Young](sciam/ozempic.qmd)
-
-::: {.paper-meta}
-[Lauren J. Young]{.pm} [Not relevant here]{.pm}
 :::
 
 Interesting to read, but it did not matter a lot for this project.
