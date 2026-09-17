@@ -1,0 +1,120 @@
+---
+title: "Scientific American: The Healthy Brain"
+subtitle: "Special edition, Summer/Fall 2026"
+---
+
+::: {.callout-note appearance="simple"}
+## Wider reading, not primary literature
+
+This is popular science journalism, so it is read differently from the papers. It is not
+evidence and is not cited for any claim on this site. Its value is orientation: what the field
+is working on, and **leads to primary papers worth finding**.
+
+The magazine came through a personal subscription, so these are short notes on what I took
+from each article rather than any reproduction of the text.
+:::
+
+> *Scientific American* Special Edition, "The Healthy Brain", Summer/Fall 2026.
+
+## Why I read it
+
+To get a sense of what the field has been up to, outside the narrow question this project
+asks. Reading only the papers that are directly about conservation makes it easy to lose
+track of what the wider brain research world thinks is important.
+
+## Articles
+
+### Brainwashing, by Lydia Denworth
+
+**Topic.** Sleep and the clearance of waste from the brain by cerebrospinal fluid.
+
+**What stuck with me.** CSF travels through the brain and essentially acts like a sewage
+system, taking things out of the brain that can be taken out, so it is cleaning waste. The
+fluid can pass down along the spinal column, or exit the nervous system via the lymphatic
+system, or through valve-like structures called **arachnoid granulations** that give it access
+to the blood circulation.
+
+What they are showing in this article is that sleep can be a very important step in clearing
+out the brain.
+
+They also say this CSF cleaning system can depend on **sound**. They looked at different age
+classes, specifically older people, and tried to understand how the frequencies they record
+from the CSF behave in correlation with sound frequencies played to people while they are
+sleeping. Apparently there seems to be a correlation, where the higher the frequency the more
+the CSF is cleaning the brain. I found that interesting to see, though that is just my
+understanding of it.
+
+**Lead to follow up.** The primary work behind the sound and frequency claim, since that is
+the part I would want to see properly before believing it.
+
+### Why your brain needs exercise
+
+**What stuck with me.** Not really part of the blood brain barrier discussion, so it is here
+for completeness rather than because it matters to the project.
+
+It did remind me of *A Brief History of Intelligence*, where the argument is that bipedalism
+enabled a larger prefrontal cortex and a larger hippocampus, because of the new tasks we were
+then able to do, such as navigating our environment with goals and intentions.
+
+### Ozempic quiets the brain's food noise, by Lauren J. Young
+
+**What stuck with me.** Interesting to read, but it did not matter a lot for this project.
+
+### A wealth of new treatments, by Esther Landhuis
+
+**Topic.** The current landscape of drug development for the brain. This was the most useful
+article in the issue.
+
+**What stuck with me.** It shows a graph of drugs currently in development and which clinical
+phase they are in, organised by **treatment target**. The target classes named are:
+
+- neurotransmitter receptors
+- amyloid
+- inflammation and immune processes
+- tau
+- synaptic plasticity and neuroprotection
+- metabolism
+- **vasculature**
+- growth factors and hormones
+- epigenetic regulators
+- neurogenesis
+- oxidative stress
+- proteostasis
+- APOE
+
+**Vasculature** is the class most closely related to what this project is doing. Under it they
+discuss, very briefly, two targets that can be inhibited by the vasculature itself, and they
+look at **less leaky sections of the blood brain barrier**.
+
+**The idea I took from this.** It might be interesting to look at papers that study the
+**leaky sections** of the blood brain barrier, rather than only the tight ones. That could
+matter for understanding how drugs can actually be administered.
+
+## What the field seems to be up to
+
+The drug development graph is the thing I keep coming back to. The sheer number of target
+classes says that nobody has settled on a mechanism, and that the vasculature is only one
+route among a dozen being tried at once. That is worth knowing when this project treats BBB
+genes as though they are the obvious place to look.
+
+## Leads worth turning into entries
+
+Primary work to find and read properly, then add to the
+[literature review](../literature-review.qmd).
+
+**On the leaky barrier.** This is the strongest lead and the one that connects directly to the
+project. If the barrier is not uniformly tight, then a gene list built from average enrichment
+across a whole microvessel fraction is describing an average of two different things. That
+bears on [step 1](../audit.qmd) and on the brain region field in
+[how each paper is read](../literature-review.qmd). Worth starting from a review of BBB
+breakdown and regional vulnerability, then following into the primary literature.
+
+**On sleep and CSF clearance.** The glymphatic literature is the place to start, and the sound
+and frequency angle should trace back to work on CSF oscillations coupled to slow wave
+activity during sleep. Worth checking whether the magazine's framing survives contact with the
+primary paper, since "higher frequency means more cleaning" is the kind of claim that gets
+tidied up in the retelling.
+
+**On drainage routes.** Arachnoid granulations and the meningeal lymphatics are both well
+studied. Relevant here only as a reminder that the barrier is one part of a larger system of
+exchange between brain, blood and lymph, which this project's framing leaves out entirely.

@@ -78,3 +78,29 @@ clear demonstration that immortalised cell lines drift away from real brain endo
 :::
 
 *More to follow.*
+
+## Wider reading
+
+Journalism, reviews and special editions read for orientation rather than evidence. These are
+not cited for claims. They show what the field is working on and point to primary papers worth
+finding, which then get read properly and added above.
+
+::: {.paper-list}
+
+::: {.paper-card .paper-card-wider}
+### [Scientific American: The Healthy Brain](reading/sciam-healthy-brain-2026.qmd)
+
+::: {.paper-meta}
+[2026]{.pm} [Special edition]{.pm} [Popular science]{.pm}
+:::
+
+The Summer/Fall 2026 special edition, read for a sense of where the field is heading. Sleep
+and CSF clearance, and a map of brain drug development by treatment target, in which
+vasculature is one class among a dozen. The lead worth chasing: the **leaky sections** of the
+barrier, rather than only the tight ones.
+
+[Read the notes →](reading/sciam-healthy-brain-2026.qmd)
+:::
+
+:::
+

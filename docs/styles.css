@@ -394,3 +394,7 @@ main.content dd em a, main.content dd p em a{ font-weight:400; }
 @media (min-width:900px){
   .scan-gallery{ grid-template-columns:1fr 1fr; }
 }
+
+/* wider reading: same card, quieter accent, so it reads as a different kind of source */
+.paper-card-wider{ border-left-color:var(--line-2); background:var(--tint); }
+.paper-card-wider:hover{ border-left-color:var(--text-3); }

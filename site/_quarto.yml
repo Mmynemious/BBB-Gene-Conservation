@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "papers/*.qmd"
+    - "reading/*.qmd"
 
 website:
   title: "BBB Gene Conservation"
