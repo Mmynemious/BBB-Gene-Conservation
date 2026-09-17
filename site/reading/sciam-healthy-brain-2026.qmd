@@ -1,6 +1,6 @@
 ---
 title: "Scientific American: The Healthy Brain"
-subtitle: "Special edition, Summer/Fall 2026"
+subtitle: "Special edition, Fall 2026"
 ---
 
 ::: {.callout-note appearance="simple"}
@@ -14,7 +14,8 @@ The magazine came through a personal subscription, so these are short notes on w
 from each article rather than any reproduction of the text.
 :::
 
-> *Scientific American* Special Edition, "The Healthy Brain", Summer/Fall 2026.
+> *Scientific American* Special Edition, "The Healthy Brain", Fall 2026.
+> No issue or volume number is printed on the masthead.
 
 ## Why I read it
 
@@ -52,9 +53,10 @@ the part I would want to see properly before believing it.
 **What stuck with me.** Not really part of the blood brain barrier discussion, so it is here
 for completeness rather than because it matters to the project.
 
-It did remind me of *A Brief History of Intelligence*, where the argument is that bipedalism
-enabled a larger prefrontal cortex and a larger hippocampus, because of the new tasks we were
-then able to do, such as navigating our environment with goals and intentions.
+It did remind me of *A Brief History of Intelligence* by Max Bennett, where the argument is
+that bipedalism enabled a larger prefrontal cortex and a larger hippocampus, because of the
+new tasks we were then able to do, such as navigating our environment with goals and
+intentions.
 
 ### Ozempic quiets the brain's food noise, by Lauren J. Young
 

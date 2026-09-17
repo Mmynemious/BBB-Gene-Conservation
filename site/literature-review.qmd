@@ -94,7 +94,7 @@ finding, which then get read properly and added above.
 [2026]{.pm} [Special edition]{.pm} [Popular science]{.pm}
 :::
 
-The Summer/Fall 2026 special edition, read for a sense of where the field is heading. Sleep
+The Fall 2026 special edition, read for a sense of where the field is heading. Sleep
 and CSF clearance, and a map of brain drug development by treatment target, in which
 vasculature is one class among a dozen. The lead worth chasing: the **leaky sections** of the
 barrier, rather than only the tight ones.
