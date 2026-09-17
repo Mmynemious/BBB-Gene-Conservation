@@ -1,6 +1,6 @@
 ---
 title: "Scientific American: The Healthy Brain"
-subtitle: "Special edition, Fall 2026"
+subtitle: "Special edition, Summer/Fall 2026"
 ---
 
 ::: {.callout-note appearance="simple"}
@@ -14,8 +14,9 @@ The magazine came through a personal subscription, so these are short notes on w
 from each article rather than any reproduction of the text.
 :::
 
-> *Scientific American* Special Edition, "The Healthy Brain", Fall 2026.
-> No issue or volume number is printed on the masthead.
+> *Scientific American* Special Editions, "The Healthy Brain". Volume 35, Issue 3,
+> September 2026. Cover marked Summer/Fall 2026, display until 8 December 2026.
+> <https://www.scientificamerican.com/issue/special-editions/2026/09-01/>
 
 ## Why I read it
 
@@ -26,6 +27,8 @@ track of what the wider brain research world thinks is important.
 ## Articles
 
 ### Brainwashing, by Lydia Denworth
+
+*Published online as "How your brain's nightly cleanse keeps it healthy", 19 August 2025.*
 
 **Topic.** Sleep and the clearance of waste from the brain by cerebrospinal fluid.
 
@@ -48,7 +51,7 @@ understanding of it.
 **Lead to follow up.** The primary work behind the sound and frequency claim, since that is
 the part I would want to see properly before believing it.
 
-### Why your brain needs exercise
+### Why your brain needs exercise, by David A. Raichlen and Gene E. Alexander
 
 **What stuck with me.** Not really part of the blood brain barrier discussion, so it is here
 for completeness rather than because it matters to the project.
@@ -66,6 +69,9 @@ intentions.
 
 **Topic.** The current landscape of drug development for the brain. This was the most useful
 article in the issue.
+
+*Note: this piece does not appear in the online contents listing for the issue, which may
+be incomplete. Worth confirming the exact title and author from the printed copy.*
 
 **What stuck with me.** It shows a graph of drugs currently in development and which clinical
 phase they are in, organised by **treatment target**. The target classes named are:
@@ -116,6 +122,12 @@ and frequency angle should trace back to work on CSF oscillations coupled to slo
 activity during sleep. Worth checking whether the magazine's framing survives contact with the
 primary paper, since "higher frequency means more cleaning" is the kind of claim that gets
 tidied up in the retelling.
+
+**Already in this issue, and not yet read.** The contents list an article by **Daniela Kaufer
+and Alon Friedman**, "Damage to a protective shield around the brain may lead to Alzheimer's",
+originally published May 2021. The protective shield is the blood brain barrier. That is the
+leaky barrier lead above, sitting in the same magazine, so it is the obvious next thing to
+read from this issue.
 
 **On drainage routes.** Arachnoid granulations and the meningeal lymphatics are both well
 studied. Relevant here only as a reminder that the barrier is one part of a larger system of
