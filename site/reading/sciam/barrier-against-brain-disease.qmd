@@ -1,0 +1,95 @@
+---
+title: "Barrier against brain disease, by Daniela Kaufer and Alon Friedman"
+subtitle: "Scientific American Special Editions, The Healthy Brain, Fall 2026"
+---
+
+[Back to the issue notes](../sciam-healthy-brain-2026.qmd)
+
+*Listed online as "Damage to a protective shield around the brain may lead to Alzheimer's",
+originally published May 2021.*
+
+**Topic.** What happens to the brain once the blood brain barrier starts to leak, and whether
+the damage that follows can be reversed. This was a very interesting paper to read.
+
+**Where it started.** These two researchers came across Gulf War syndrome, where they found
+that **pyridostigmine** was reaching the brain when it was not supposed to. Soldiers were
+reporting long term tiredness and similar symptoms, and they believed the penetration of the
+blood brain barrier by pyridostigmine was the primary factor.
+
+What they were speculating at the time is that **stress would make the blood brain barrier
+leaky**, allowing proteins that are normally not found past it to appear.
+
+Their first experiments: they let mice swim in water to put them under a lot of stress, then
+injected blue dye into their veins. They found that these brains had a strong blue tint. So
+one of the first assumptions was that putting animals, or even people, under a lot of stress
+would cause the blood brain barrier to leak. They published these results in *Nature
+Medicine*.
+
+**The link to brain disease.** Barrier damage in patients with some brain disorders does seem
+to point to Alzheimer's patients, who seem to have a leaky blood brain barrier.
+
+What they wanted to see was the brain function directly after the blood brain barrier started
+to malfunction, meaning once it gets leaky. They gave rats a chemical that poked holes in
+their barrier, then dissected their brains at various later times.
+
+**The storm.** What they found was what they call a **social media storm**, as an analogy.
+There was a trigger in the blood brain barrier which suddenly allowed **epilepsy like signals**
+to appear, very suddenly. This storm happened only after they mimicked a blood brain barrier
+leak. They repeated it several times and it worked.
+
+Then they injected blood into the rat's brain, and came to the conclusion that specifically
+**albumin** is responsible for this reaction. They were not thrilled with this catch, because
+albumin is in the blood and the blood fulfils a lot of different tasks in our body. So before
+running the experiments again, they tried to understand what albumin does in the blood brain
+barrier context.
+
+**The mechanism, as I understand it.** When albumin contacts an astrocyte it binds on
+**TGF beta**. TGF beta is an indicator for inflammation, or can cause inflammation, and when
+you have inflammation **cytokines** are released. On the other hand, TGF beta also activates
+the astrocyte and the microglia.
+
+Albumin provides a **positive feedback loop** and an overproduction of TGF beta. So there is
+an over-activation of astrocytes and microglia, which in turn activates more TGF beta, which
+in turn causes more inflammation and cytokines. This is essentially the stress they had
+recorded in mice previously, which also made the blood brain barrier leaky.
+
+They also say that astrocytes become **senescent**, that is, chemically active even after
+their role in the feedback loop is done.
+
+**Age.** They compared albumin concentrations in the brain depending on the age of mice, and
+found that albumin in younger mice was not apparent, but started to show up when they were in
+middle age. They checked this for humans and it seems to be the same case: heightened albumin
+levels accompanied greater amounts of TGF beta in astrocytes, and also in people who had
+neurological diseases.
+
+**Correlation or causation.** This is where it gets interesting. They infused albumin into the
+intact healthy brains of young mice for one week, and these brains started to work and function
+like older brains, with abnormal neuronal function.
+
+To make sure the experiment was not flawed by TGF beta, they cut out the **TGF beta cascade**
+that came after the leak, so that you are really seeing a causation result. It turned out that
+the mice with the receptors and with albumin in their brains had a lot of trouble getting out
+of the **water maze**, while the young mice without the TGF beta cascade behaved in a very
+normal way and found their way out.
+
+**The drug.** You cannot knock out TGF beta in humans, that is too risky. Instead they were
+contacted by a medical startup drug company, and were given a drug called **IPW**, which is an
+inhibitor for the activity of TGF beta.
+
+They gave the mice the IPW drug, and it turned out that these mice, even though they had had
+abnormal functions for a very long time, were **able to regain their brain functions** to the
+state they were in before albumin was injected. So it seems like the brain is able to rebound
+from some types of abnormal activity.
+
+**What this changed for me.** When I think about diseases like Alzheimer's, I think the damage
+done to the brain is permanent, and that when a brain deteriorates it is not possible to get it
+back to a state where it functions normally, even if you had a magical drug that cancelled out
+the negative effects.
+
+It turns out it is possible. The brain has some hidden feedback loop, some kind of mechanism
+that allows it to regain normal function, to such an extent that even the researchers were
+quite surprised, because the mice that were injected with albumin and then got the IPW drug
+were able to swim out of the maze.
+
+**Worth confirming from the printed copy.** The exact drug designation and the name of the
+company that supplied it. IPW is most likely IPW-5371, a TGF beta receptor inhibitor.

@@ -1,0 +1,29 @@
+---
+title: "Brainwashing, by Lydia Denworth"
+subtitle: "Scientific American Special Editions, The Healthy Brain, Fall 2026"
+---
+
+[Back to the issue notes](../sciam-healthy-brain-2026.qmd)
+
+*Published online as "How your brain's nightly cleanse keeps it healthy", 19 August 2025.*
+
+**Topic.** Sleep and the clearance of waste from the brain by cerebrospinal fluid.
+
+**What stuck with me.** CSF travels through the brain and essentially acts like a sewage
+system, taking things out of the brain that can be taken out, so it is cleaning waste. The
+fluid can pass down along the spinal column, or exit the nervous system via the lymphatic
+system, or through valve-like structures called **arachnoid granulations** that give it access
+to the blood circulation.
+
+What they are showing in this article is that sleep can be a very important step in clearing
+out the brain.
+
+They also say this CSF cleaning system can depend on **sound**. They looked at different age
+classes, specifically older people, and tried to understand how the frequencies they record
+from the CSF behave in correlation with sound frequencies played to people while they are
+sleeping. Apparently there seems to be a correlation, where the higher the frequency the more
+the CSF is cleaning the brain. I found that interesting to see, though that is just my
+understanding of it.
+
+**Lead to follow up.** The primary work behind the sound and frequency claim, since that is
+the part I would want to see properly before believing it.

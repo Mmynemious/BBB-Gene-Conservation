@@ -5,6 +5,7 @@ project:
     - "*.qmd"
     - "papers/*.qmd"
     - "reading/*.qmd"
+    - "reading/sciam/*.qmd"
 
 website:
   title: "BBB Gene Conservation"

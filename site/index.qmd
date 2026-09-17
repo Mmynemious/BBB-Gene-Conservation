@@ -48,7 +48,7 @@ the results can be trusted. **3 steps break results, 6 move numbers, 6 are clean
 [Read more →](audit.qmd)
 :::
 
-::: {.hub-card .hub-card-muted}
+::: {.hub-card}
 ### Literature Review
 Papers on BBB gene conservation, translational models and comparative genomics, with my
 comments. **In progress.**

@@ -273,8 +273,6 @@ nav[role="doc-toc"] > h2{
 
 .hub-card-flag{ border-left:3px solid var(--a-breaks,#A02D21); }
 .hub-card-flag strong{ color:var(--a-breaks,#A02D21); font-weight:500; }
-.hub-card-muted{ background:var(--tint); }
-.hub-card-muted h3{ color:var(--text-2); }
 
 .hub-figs{
   display:grid;
@@ -396,5 +394,5 @@ main.content dd em a, main.content dd p em a{ font-weight:400; }
 }
 
 /* wider reading: same card, quieter accent, so it reads as a different kind of source */
-.paper-card-wider{ border-left-color:var(--line-2); background:var(--tint); }
+.paper-card-wider{ border-left-color:var(--line-2); }
 .paper-card-wider:hover{ border-left-color:var(--text-3); }

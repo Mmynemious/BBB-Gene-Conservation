@@ -1,0 +1,37 @@
+---
+title: "A wealth of new treatments, by Esther Landhuis"
+subtitle: "Scientific American Special Editions, The Healthy Brain, Fall 2026"
+---
+
+[Back to the issue notes](../sciam-healthy-brain-2026.qmd)
+
+**Topic.** The current landscape of drug development for the brain. This was the most useful
+article in the issue.
+
+*Note: this piece does not appear in the online contents listing for the issue, which may
+be incomplete. Worth confirming the exact title and author from the printed copy.*
+
+**What stuck with me.** It shows a graph of drugs currently in development and which clinical
+phase they are in, organised by **treatment target**. The target classes named are:
+
+- neurotransmitter receptors
+- amyloid
+- inflammation and immune processes
+- tau
+- synaptic plasticity and neuroprotection
+- metabolism
+- **vasculature**
+- growth factors and hormones
+- epigenetic regulators
+- neurogenesis
+- oxidative stress
+- proteostasis
+- APOE
+
+**Vasculature** is the class most closely related to what this project is doing. Under it they
+discuss, very briefly, two targets that can be inhibited by the vasculature itself, and they
+look at **less leaky sections of the blood brain barrier**.
+
+**The idea I took from this.** It might be interesting to look at papers that study the
+**leaky sections** of the blood brain barrier, rather than only the tight ones. That could
+matter for understanding how drugs can actually be administered.
