@@ -43,6 +43,23 @@ correction.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [O'Brown et al. 2018](papers/obrown2018.qmd)
+
+::: {.paper-meta}
+[2018]{.pm} [Fly · shark · zebrafish · mouse · human]{.pm} [Review]{.pm} [Comparative]{.pm}
+:::
+
+A comparative review of the barrier across organisms, from Ehrlich's dye experiments to iPSC
+models, with zebrafish and mouse compared in detail. It makes this project's central claim,
+that barrier machinery is conserved across species, from expression and function rather than
+sequence. It also reports regional differences in permeability within the mouse brain, and
+states that barrier properties are acquired from the neural microenvironment rather than being
+intrinsic to the endothelial cell.
+
+[Read the entry →](papers/obrown2018.qmd)
+:::
+
+::: {.paper-card}
 ### [Park et al. 2019](papers/park2019.qmd)
 
 ::: {.paper-meta}
