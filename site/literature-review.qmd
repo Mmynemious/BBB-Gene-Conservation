@@ -43,6 +43,22 @@ correction.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [Miao et al. 2026](papers/miao2026.qmd)
+
+::: {.paper-meta}
+[2026]{.pm} [Mouse · human]{.pm} [RNA]{.pm} [Single-cell and single-nucleus]{.pm}
+:::
+
+The closest paper yet to what this project is doing, published two months ago. Same two
+species and the same question of how far mouse stands in for human at the barrier, but
+measured through expression rather than coding sequence. 169 genes enriched in human capillary
+endothelium, 386 in mouse, and the family that diverges most is the SLC transporters, which is
+exactly what this project's gene list is full of.
+
+[Read the entry →](papers/miao2026.qmd)
+:::
+
+::: {.paper-card}
 ### [O'Brown et al. 2018](papers/obrown2018.qmd)
 
 ::: {.paper-meta}
