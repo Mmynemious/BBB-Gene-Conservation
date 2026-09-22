@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-09-17">
+<meta name="dcterms.date" content="2026-09-22">
 
 <title>Park et al.&nbsp;2019 – BBB Gene Conservation</title>
 <style>
@@ -218,7 +218,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 17, 2026</p>
+      <p class="date">September 22, 2026</p>
     </div>
   </div>
   
@@ -320,7 +320,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="how-it-relates-to-this-project" class="level2">
 <h2 class="anchored" data-anchor-id="how-it-relates-to-this-project">How it relates to this project</h2>
-<p><em>To write. Yara is working through the connections to the pipeline separately.</em></p>
+<p>This is the most <strong>different</strong> paper in the review so far. It has no cross-species comparison, no sequence, and no conservation measure. Its relevance is indirect but real.</p>
+<ol type="1">
+<li><p><strong>It is an argument against the pipeline this project is premised on.</strong> The opening frame of this project is mouse, then macaque, then human, and the question of whether sequence conservation makes that chain trustworthy. Park’s work attacks the same problem from the other end: build a <strong>human</strong> system in vitro and skip the species jump entirely. The paper states plainly that neither animal models nor existing in vitro cultures effectively mimic the human BBB. If human chips mature, cross-species conservation becomes less load-bearing as a translational argument, and more of a question about evolutionary biology. Worth saying somewhere in the project’s framing.</p></li>
+<li><p><strong>It independently nominates several genes on this project’s list as functionally important</strong>, and does so by <em>function</em> rather than by expression: P-gp (<code>ABCB1</code>), BCRP (<code>ABCG2</code>), MRP1 and MRP4, GLUT-1 (<code>SLC2A1</code>), plus LRP1 and the transferrin receptor as shuttling routes. These are not just detected here, they are shown to pump, and knocking each one out with a specific inhibitor changes what crosses.</p></li>
+<li><p><strong>Claudin-5 again, and this time it matters.</strong> Park treats claudin-5 as a defining marker of a working barrier. This project’s gene list <strong>does not contain CLDN5</strong>, because it failed the differential-expression cutoff in the source studies: it is expressed in all endothelia, not only brain. That is a defensible reason for a <em>enrichment-based</em> list, but it means the list omits a gene the functional literature treats as central. See the <a href="../results.html">limitations</a>.</p></li>
+<li><p><strong>It connects directly to <a href="../papers/kumabe2025.html">Kumabe 2025</a> on in vitro model fidelity.</strong> Kumabe found claudin-5 <strong>absent</strong> from hCMEC/D3, an immortalised line, and found immortalised lines drifting towards generic vein endothelium. Park’s chip <strong>does</strong> express claudin-5 and reaches barrier values two orders of magnitude above primary-cell chips. Read together, the two papers say the same thing from opposite directions: how the endothelium is produced determines whether an in vitro BBB is a BBB at all.</p></li>
+<li><p><strong>Function is not presence.</strong> <code>step4b</code> scores a gene on whether it was <em>detected</em> in human datasets. Park’s whole method rests on the difference between a transporter being present and a transporter working. That is a fair challenge to how this project’s validation score is constructed, quite apart from the parsing bugs the <a href="../audit.html">audit</a> records.</p></li>
+</ol>
 </section>
 <section id="reference-detail-from-the-paper" class="level2">
 <h2 class="anchored" data-anchor-id="reference-detail-from-the-paper">Reference detail from the paper</h2>
@@ -985,84 +992,119 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="fu">## How it relates to this project</span></span>
 <span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>*To write. Yara is working through the connections to the pipeline separately.*</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reference detail from the paper</span></span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chip:** 2-channel PDMS microfluidic device, porous PET membrane (2 µm pores) coated with</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>  collagen IV and fibronectin. Astrocytes and pericytes seeded 7:3 on the apical side,</span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>  iPS-BMVECs on the vascular side. Flow at 100 µL/h giving 6 dyne/cm² shear, medium viscosity</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>  3 to 4 cP.</span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Differentiation:** iPSCs under 5% O~2~ from D0, retinoic acid at D6 to D8, seeded on chip</span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>  at D9, then shifted to normoxia. Hypoxia raised mRNA for VE-cadherin, PECAM-1, GLUT-1, INSR,</span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>  P-gp, BCRP, MRP1 and MRP4, and Wnt7a by over 25-fold.</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Barrier:** impedance about 25,000 Ω under hypoxia differentiation against about 400 Ω for</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>  chips with primary human BMVECs. *P*~app~ about 10⁻⁸ to 10⁻⁹ cm/s, inversely correlated with</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>  tracer size.</span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Efflux selectivity:** verapamil (P-gp) raised rhodamine 123 and DiOC2 in the CNS channel;</span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>  Ko143 (BCRP) affected DiOC2 but not rhodamine 123; MK571 (MRP1) affected rhodamine 123 only.</span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>  Doxorubicin rose 2.7-fold with verapamil and was unchanged by MK571 or Ko143.</span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Citalopram:** permeability increased when P-gp was inhibited in the chip, matching in vivo</span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a>  animal studies. The paper notes that **past in vitro BBB models failed to identify</span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>  citalopram as a P-gp substrate**, and the equivalent Transwell experiment showed no such</span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>  effect.</span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Osmotic opening:** 485 mOsmol/L mannitol for 1 h. TEER fell about 50% within 2 h.</span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>  10 kDa dextran *P*~app~ rose from 3 to 32 × 10⁻⁸ cm/s and cetuximab from 2 to 5.1 × 10⁻⁸</span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>  cm/s. Both back to normal within 4 h.</span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Shuttling:** Angiopep-2-conjugated Q-dots showed about 3.5-fold greater CNS penetration</span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a>  than scrambled-peptide Q-dots, with no change in barrier integrity. Anti-TfR MEM75 showed</span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>  about threefold higher penetration than 13E4.</span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="fu">## Annotated scan</span></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a>My own printed and annotated pages, scanned back in. Highlighting follows the usual key: the claim, the method, numbers worth quoting, and anything that surprised me.</span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="scan-gallery"&gt;</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-01.jpg" alt="Annotated page 1 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 1&lt;/figcaption&gt;</span></span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-02.jpg" alt="Annotated page 2 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 2&lt;/figcaption&gt;</span></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-03.jpg" alt="Annotated page 3 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 3&lt;/figcaption&gt;</span></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-04.jpg" alt="Annotated page 4 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 4&lt;/figcaption&gt;</span></span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-05.jpg" alt="Annotated page 5 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 5&lt;/figcaption&gt;</span></span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-06.jpg" alt="Annotated page 6 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 6&lt;/figcaption&gt;</span></span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-07.jpg" alt="Annotated page 7 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 7&lt;/figcaption&gt;</span></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-08.jpg" alt="Annotated page 8 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 8&lt;/figcaption&gt;</span></span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-09.jpg" alt="Annotated page 9 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 9&lt;/figcaption&gt;</span></span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a>Pages reproduced from Park et al. 2019, *Nature Communications* 10:2621, open access under CC BY 4.0. Handwriting and highlighting are mine. <span class="co">[</span><span class="ot">Original paper</span><span class="co">](https://doi.org/10.1038/s41467-019-10588-0)</span>.</span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>This is the most **different** paper in the review so far. It has no cross-species comparison,</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>no sequence, and no conservation measure. Its relevance is indirect but real.</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**It is an argument against the pipeline this project is premised on.** The opening frame</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>   of this project is mouse, then macaque, then human, and the question of whether sequence</span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>   conservation makes that chain trustworthy. Park's work attacks the same problem from the</span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>   other end: build a **human** system in vitro and skip the species jump entirely. The paper</span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>   states plainly that neither animal models nor existing in vitro cultures effectively mimic</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>   the human BBB. If human chips mature, cross-species conservation becomes less load-bearing</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>   as a translational argument, and more of a question about evolutionary biology. Worth</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>   saying somewhere in the project's framing.</span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**It independently nominates several genes on this project's list as functionally</span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a>   important**, and does so by *function* rather than by expression: P-gp (<span class="in">`ABCB1`</span>), BCRP</span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a>   (<span class="in">`ABCG2`</span>), MRP1 and MRP4, GLUT-1 (<span class="in">`SLC2A1`</span>), plus LRP1 and the transferrin receptor as</span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a>   shuttling routes. These are not just detected here, they are shown to pump, and knocking</span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a>   each one out with a specific inhibitor changes what crosses.</span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Claudin-5 again, and this time it matters.** Park treats claudin-5 as a defining marker</span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a>   of a working barrier. This project's gene list **does not contain CLDN5**, because it failed</span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a>   the differential-expression cutoff in the source studies: it is expressed in all endothelia,</span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a>   not only brain. That is a defensible reason for a *enrichment-based* list, but it means the</span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a>   list omits a gene the functional literature treats as central. See the</span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">limitations</span><span class="co">](../results.qmd)</span>.</span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**It connects directly to [Kumabe 2025](kumabe2025.qmd) on in vitro model fidelity.**</span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a>   Kumabe found claudin-5 **absent** from hCMEC/D3, an immortalised line, and found</span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a>   immortalised lines drifting towards generic vein endothelium. Park's chip **does** express</span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a>   claudin-5 and reaches barrier values two orders of magnitude above primary-cell chips. Read</span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a>   together, the two papers say the same thing from opposite directions: how the endothelium is</span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a>   produced determines whether an in vitro BBB is a BBB at all.</span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Function is not presence.** <span class="in">`step4b`</span> scores a gene on whether it was *detected* in human</span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a>   datasets. Park's whole method rests on the difference between a transporter being present</span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a>   and a transporter working. That is a fair challenge to how this project's validation score</span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a>   is constructed, quite apart from the parsing bugs the <span class="co">[</span><span class="ot">audit</span><span class="co">](../audit.qmd)</span> records.</span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reference detail from the paper</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Chip:** 2-channel PDMS microfluidic device, porous PET membrane (2 µm pores) coated with</span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a>  collagen IV and fibronectin. Astrocytes and pericytes seeded 7:3 on the apical side,</span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a>  iPS-BMVECs on the vascular side. Flow at 100 µL/h giving 6 dyne/cm² shear, medium viscosity</span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a>  3 to 4 cP.</span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Differentiation:** iPSCs under 5% O~2~ from D0, retinoic acid at D6 to D8, seeded on chip</span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>  at D9, then shifted to normoxia. Hypoxia raised mRNA for VE-cadherin, PECAM-1, GLUT-1, INSR,</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>  P-gp, BCRP, MRP1 and MRP4, and Wnt7a by over 25-fold.</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Barrier:** impedance about 25,000 Ω under hypoxia differentiation against about 400 Ω for</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>  chips with primary human BMVECs. *P*~app~ about 10⁻⁸ to 10⁻⁹ cm/s, inversely correlated with</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>  tracer size.</span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Efflux selectivity:** verapamil (P-gp) raised rhodamine 123 and DiOC2 in the CNS channel;</span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a>  Ko143 (BCRP) affected DiOC2 but not rhodamine 123; MK571 (MRP1) affected rhodamine 123 only.</span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>  Doxorubicin rose 2.7-fold with verapamil and was unchanged by MK571 or Ko143.</span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Citalopram:** permeability increased when P-gp was inhibited in the chip, matching in vivo</span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a>  animal studies. The paper notes that **past in vitro BBB models failed to identify</span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a>  citalopram as a P-gp substrate**, and the equivalent Transwell experiment showed no such</span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a>  effect.</span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Osmotic opening:** 485 mOsmol/L mannitol for 1 h. TEER fell about 50% within 2 h.</span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a>  10 kDa dextran *P*~app~ rose from 3 to 32 × 10⁻⁸ cm/s and cetuximab from 2 to 5.1 × 10⁻⁸</span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a>  cm/s. Both back to normal within 4 h.</span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Shuttling:** Angiopep-2-conjugated Q-dots showed about 3.5-fold greater CNS penetration</span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a>  than scrambled-peptide Q-dots, with no change in barrier integrity. Anti-TfR MEM75 showed</span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a>  about threefold higher penetration than 13E4.</span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="fu">## Annotated scan</span></span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a>My own printed and annotated pages, scanned back in. Highlighting follows the usual key: the claim, the method, numbers worth quoting, and anything that surprised me.</span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="scan-gallery"&gt;</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-01.jpg" alt="Annotated page 1 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 1&lt;/figcaption&gt;</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-02.jpg" alt="Annotated page 2 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 2&lt;/figcaption&gt;</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-03.jpg" alt="Annotated page 3 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 3&lt;/figcaption&gt;</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-04.jpg" alt="Annotated page 4 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 4&lt;/figcaption&gt;</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-05.jpg" alt="Annotated page 5 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 5&lt;/figcaption&gt;</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-06.jpg" alt="Annotated page 6 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 6&lt;/figcaption&gt;</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-07.jpg" alt="Annotated page 7 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 7&lt;/figcaption&gt;</span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-08.jpg" alt="Annotated page 8 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 8&lt;/figcaption&gt;</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/park2019/p-09.jpg" alt="Annotated page 9 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 9&lt;/figcaption&gt;</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a>Pages reproduced from Park et al. 2019, *Nature Communications* 10:2621, open access under CC BY 4.0. Handwriting and highlighting are mine. <span class="co">[</span><span class="ot">Original paper</span><span class="co">](https://doi.org/10.1038/s41467-019-10588-0)</span>.</span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
