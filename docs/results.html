@@ -191,6 +191,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <li><a href="#findings-re-graded-against-the-audit" id="toc-findings-re-graded-against-the-audit" class="nav-link" data-scroll-target="#findings-re-graded-against-the-audit">Findings, re-graded against the audit</a></li>
   <li><a href="#limitations" id="toc-limitations" class="nav-link" data-scroll-target="#limitations">Limitations</a>
   <ul class="collapse">
+  <li><a href="#what-counts-as-a-canonical-bbb-gene-was-never-pinned-down" id="toc-what-counts-as-a-canonical-bbb-gene-was-never-pinned-down" class="nav-link" data-scroll-target="#what-counts-as-a-canonical-bbb-gene-was-never-pinned-down">What counts as a canonical BBB gene was never pinned down</a></li>
   <li><a href="#methodological-caveats" id="toc-methodological-caveats" class="nav-link" data-scroll-target="#methodological-caveats">Methodological caveats</a></li>
   <li><a href="#biological-caveats" id="toc-biological-caveats" class="nav-link" data-scroll-target="#biological-caveats">Biological caveats</a></li>
   </ul></li>
@@ -481,6 +482,87 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="limitations" class="level2">
 <h2 class="anchored" data-anchor-id="limitations">Limitations</h2>
+<section id="what-counts-as-a-canonical-bbb-gene-was-never-pinned-down" class="level3">
+<h3 class="anchored" data-anchor-id="what-counts-as-a-canonical-bbb-gene-was-never-pinned-down">What counts as a canonical BBB gene was never pinned down</h3>
+<p>The project uses the phrase “canonical BBB genes” without ever saying which genes it means. The working definition is the one the field uses: genes consistently identified across multiple independent transcriptomic studies as highly expressed and functionally important in brain endothelial cells. “Canonical” does not mean the only important BBB genes, it means the well validated ones.</p>
+<p>Four papers read for the <a href="./literature-review.html">literature review</a> do name them, so the master list of 1,526 genes can be checked against those names.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 30%">
+<col style="width: 14%">
+<col style="width: 56%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Canonical marker</th>
+<th>On the list</th>
+<th>Note</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>SLC2A1</code> (GLUT1)</td>
+<td>yes</td>
+<td>glucose transporter</td>
+</tr>
+<tr class="even">
+<td><code>MFSD2A</code></td>
+<td>yes</td>
+<td>DHA transport, suppresses transcytosis</td>
+</tr>
+<tr class="odd">
+<td><code>ABCB1</code> (P-gp)</td>
+<td>yes</td>
+<td>main efflux pump</td>
+</tr>
+<tr class="even">
+<td><code>ABCG2</code> (BCRP)</td>
+<td>yes</td>
+<td>efflux pump</td>
+</tr>
+<tr class="odd">
+<td><code>SLC7A5</code> (LAT1)</td>
+<td>yes</td>
+<td>amino acid transport</td>
+</tr>
+<tr class="even">
+<td><code>SLCO1C1</code>, <code>SLC22A8</code></td>
+<td>yes</td>
+<td>organic anion transport</td>
+</tr>
+<tr class="odd">
+<td><code>LSR</code>, <code>FLT1</code>, <code>TFRC</code></td>
+<td>yes</td>
+<td></td>
+</tr>
+<tr class="even">
+<td><code>OCLN</code> (occludin)</td>
+<td>yes</td>
+<td>tight junction</td>
+</tr>
+<tr class="odd">
+<td><code>CLDN5</code></td>
+<td><strong>no</strong></td>
+<td>tight junction, the most cited BBB gene of all</td>
+</tr>
+<tr class="even">
+<td><code>TJP1</code> (ZO-1)</td>
+<td><strong>no</strong></td>
+<td>tight junction scaffold</td>
+</tr>
+<tr class="odd">
+<td><code>PECAM1</code>, <code>KDR</code>, <code>CDH5</code></td>
+<td>no</td>
+<td>general endothelial markers</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Two different reasons for absence, which should not be conflated.</strong> <code>PECAM1</code>, <code>KDR</code> and <code>CDH5</code> are general endothelial markers expressed in endothelium everywhere. An enrichment-based list is supposed to exclude them, and their absence is correct.</p>
+<p><code>CLDN5</code> and <code>TJP1</code> are excluded by the same rule, because they too are expressed in all endothelia, but here the rule removes the machinery that makes the barrier a barrier. The clearest illustration is the claudin family: <strong>of 1,526 genes, the only claudin present is <code>CLDN6</code></strong>, which is not a BBB claudin.</p>
+<p><strong>The transporters are better covered.</strong> The list contains 52 <code>SLC</code> genes, about 3.4% of it, and 9 <code>ABC</code> transporters, including all the ones the literature names.</p>
+<p><strong>What this means for every result on this page.</strong> Enrichment and importance are not the same thing, and this list selects for the first. Any statement here about “BBB genes” should be read as <em>genes differentially enriched in brain endothelium in two mouse studies</em>, not <em>genes that make the barrier work</em>. The tight junction proteins, which are the barrier, are almost entirely missing.</p>
+<p><strong>The fix</strong> is to name the canonical set explicitly, check membership, and either state that the enrichment rule excludes some of them or carry them as a named supplementary set that is scored alongside. This is separate from the <a href="./audit.html">three fixes</a> and does not depend on them.</p>
+</section>
 <section id="methodological-caveats" class="level3">
 <h3 class="anchored" data-anchor-id="methodological-caveats">Methodological caveats</h3>
 <ul>
@@ -492,7 +574,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="biological-caveats" class="level3">
 <h3 class="anchored" data-anchor-id="biological-caveats">Biological caveats</h3>
 <ul>
-<li><strong>The starting gene list is enrichment-based.</strong> CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.</li>
+<li><strong>The starting gene list is enrichment-based.</strong> See the section below, which sets out what that excludes.</li>
 <li><strong>Liver is one specific control choice.</strong> A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.</li>
 <li><strong>Coding sequence only.</strong> Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.</li>
 </ul>
@@ -1161,19 +1243,69 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb6-198"><a href="#cb6-198" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-199"><a href="#cb6-199" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limitations</span></span>
 <span id="cb6-200"><a href="#cb6-200" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### Methodological caveats</span></span>
+<span id="cb6-201"><a href="#cb6-201" aria-hidden="true" tabindex="-1"></a><span class="fu">### What counts as a canonical BBB gene was never pinned down</span></span>
 <span id="cb6-202"><a href="#cb6-202" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML <span class="in">`codeml`</span> on a multi-species alignment with an explicit phylogenetic tree.</span>
-<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Longest-transcript heuristic.** MANE Select / Ensembl Canonical (<span class="in">`step5b_alt_canonical_transcripts.R`</span>) are more standard. The canonical FASTAs are already generated.</span>
-<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.</span>
-<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a><span class="fu">### Biological caveats</span></span>
+<span id="cb6-203"><a href="#cb6-203" aria-hidden="true" tabindex="-1"></a>The project uses the phrase "canonical BBB genes" without ever saying which genes it means.</span>
+<span id="cb6-204"><a href="#cb6-204" aria-hidden="true" tabindex="-1"></a>The working definition is the one the field uses: genes consistently identified across</span>
+<span id="cb6-205"><a href="#cb6-205" aria-hidden="true" tabindex="-1"></a>multiple independent transcriptomic studies as highly expressed and functionally important in</span>
+<span id="cb6-206"><a href="#cb6-206" aria-hidden="true" tabindex="-1"></a>brain endothelial cells. "Canonical" does not mean the only important BBB genes, it means the</span>
+<span id="cb6-207"><a href="#cb6-207" aria-hidden="true" tabindex="-1"></a>well validated ones.</span>
 <span id="cb6-208"><a href="#cb6-208" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The starting gene list is enrichment-based.** CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.</span>
-<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.</span>
-<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.</span>
-<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a>---</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb6-209"><a href="#cb6-209" aria-hidden="true" tabindex="-1"></a>Four papers read for the <span class="co">[</span><span class="ot">literature review</span><span class="co">](literature-review.qmd)</span> do name them, so the</span>
+<span id="cb6-210"><a href="#cb6-210" aria-hidden="true" tabindex="-1"></a>master list of 1,526 genes can be checked against those names.</span>
+<span id="cb6-211"><a href="#cb6-211" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-212"><a href="#cb6-212" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Canonical marker <span class="pp">|</span> On the list <span class="pp">|</span> Note <span class="pp">|</span></span>
+<span id="cb6-213"><a href="#cb6-213" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|---|</span></span>
+<span id="cb6-214"><a href="#cb6-214" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`SLC2A1`</span> (GLUT1) <span class="pp">|</span> yes <span class="pp">|</span> glucose transporter <span class="pp">|</span></span>
+<span id="cb6-215"><a href="#cb6-215" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`MFSD2A`</span> <span class="pp">|</span> yes <span class="pp">|</span> DHA transport, suppresses transcytosis <span class="pp">|</span></span>
+<span id="cb6-216"><a href="#cb6-216" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ABCB1`</span> (P-gp) <span class="pp">|</span> yes <span class="pp">|</span> main efflux pump <span class="pp">|</span></span>
+<span id="cb6-217"><a href="#cb6-217" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`ABCG2`</span> (BCRP) <span class="pp">|</span> yes <span class="pp">|</span> efflux pump <span class="pp">|</span></span>
+<span id="cb6-218"><a href="#cb6-218" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`SLC7A5`</span> (LAT1) <span class="pp">|</span> yes <span class="pp">|</span> amino acid transport <span class="pp">|</span></span>
+<span id="cb6-219"><a href="#cb6-219" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`SLCO1C1`</span>, <span class="in">`SLC22A8`</span> <span class="pp">|</span> yes <span class="pp">|</span> organic anion transport <span class="pp">|</span></span>
+<span id="cb6-220"><a href="#cb6-220" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`LSR`</span>, <span class="in">`FLT1`</span>, <span class="in">`TFRC`</span> <span class="pp">|</span> yes <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb6-221"><a href="#cb6-221" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`OCLN`</span> (occludin) <span class="pp">|</span> yes <span class="pp">|</span> tight junction <span class="pp">|</span></span>
+<span id="cb6-222"><a href="#cb6-222" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`CLDN5`</span> <span class="pp">|</span> **no** <span class="pp">|</span> tight junction, the most cited BBB gene of all <span class="pp">|</span></span>
+<span id="cb6-223"><a href="#cb6-223" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`TJP1`</span> (ZO-1) <span class="pp">|</span> **no** <span class="pp">|</span> tight junction scaffold <span class="pp">|</span></span>
+<span id="cb6-224"><a href="#cb6-224" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> <span class="in">`PECAM1`</span>, <span class="in">`KDR`</span>, <span class="in">`CDH5`</span> <span class="pp">|</span> no <span class="pp">|</span> general endothelial markers <span class="pp">|</span></span>
+<span id="cb6-225"><a href="#cb6-225" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-226"><a href="#cb6-226" aria-hidden="true" tabindex="-1"></a>: {tbl-colwidths="<span class="co">[</span><span class="ot">30,14,56</span><span class="co">]</span>"}</span>
+<span id="cb6-227"><a href="#cb6-227" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-228"><a href="#cb6-228" aria-hidden="true" tabindex="-1"></a>**Two different reasons for absence, which should not be conflated.** <span class="in">`PECAM1`</span>, <span class="in">`KDR`</span> and</span>
+<span id="cb6-229"><a href="#cb6-229" aria-hidden="true" tabindex="-1"></a><span class="in">`CDH5`</span> are general endothelial markers expressed in endothelium everywhere. An</span>
+<span id="cb6-230"><a href="#cb6-230" aria-hidden="true" tabindex="-1"></a>enrichment-based list is supposed to exclude them, and their absence is correct.</span>
+<span id="cb6-231"><a href="#cb6-231" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-232"><a href="#cb6-232" aria-hidden="true" tabindex="-1"></a><span class="in">`CLDN5`</span> and <span class="in">`TJP1`</span> are excluded by the same rule, because they too are expressed in all</span>
+<span id="cb6-233"><a href="#cb6-233" aria-hidden="true" tabindex="-1"></a>endothelia, but here the rule removes the machinery that makes the barrier a barrier. The</span>
+<span id="cb6-234"><a href="#cb6-234" aria-hidden="true" tabindex="-1"></a>clearest illustration is the claudin family: **of 1,526 genes, the only claudin present is</span>
+<span id="cb6-235"><a href="#cb6-235" aria-hidden="true" tabindex="-1"></a><span class="in">`CLDN6`</span>**, which is not a BBB claudin.</span>
+<span id="cb6-236"><a href="#cb6-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-237"><a href="#cb6-237" aria-hidden="true" tabindex="-1"></a>**The transporters are better covered.** The list contains 52 <span class="in">`SLC`</span> genes, about 3.4% of it,</span>
+<span id="cb6-238"><a href="#cb6-238" aria-hidden="true" tabindex="-1"></a>and 9 <span class="in">`ABC`</span> transporters, including all the ones the literature names.</span>
+<span id="cb6-239"><a href="#cb6-239" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-240"><a href="#cb6-240" aria-hidden="true" tabindex="-1"></a>**What this means for every result on this page.** Enrichment and importance are not the same</span>
+<span id="cb6-241"><a href="#cb6-241" aria-hidden="true" tabindex="-1"></a>thing, and this list selects for the first. Any statement here about "BBB genes" should be</span>
+<span id="cb6-242"><a href="#cb6-242" aria-hidden="true" tabindex="-1"></a>read as *genes differentially enriched in brain endothelium in two mouse studies*, not *genes</span>
+<span id="cb6-243"><a href="#cb6-243" aria-hidden="true" tabindex="-1"></a>that make the barrier work*. The tight junction proteins, which are the barrier, are almost</span>
+<span id="cb6-244"><a href="#cb6-244" aria-hidden="true" tabindex="-1"></a>entirely missing.</span>
+<span id="cb6-245"><a href="#cb6-245" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-246"><a href="#cb6-246" aria-hidden="true" tabindex="-1"></a>**The fix** is to name the canonical set explicitly, check membership, and either state that</span>
+<span id="cb6-247"><a href="#cb6-247" aria-hidden="true" tabindex="-1"></a>the enrichment rule excludes some of them or carry them as a named supplementary set that is</span>
+<span id="cb6-248"><a href="#cb6-248" aria-hidden="true" tabindex="-1"></a>scored alongside. This is separate from the <span class="co">[</span><span class="ot">three fixes</span><span class="co">](audit.qmd)</span> and does not depend on</span>
+<span id="cb6-249"><a href="#cb6-249" aria-hidden="true" tabindex="-1"></a>them.</span>
+<span id="cb6-250"><a href="#cb6-250" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-251"><a href="#cb6-251" aria-hidden="true" tabindex="-1"></a><span class="fu">### Methodological caveats</span></span>
+<span id="cb6-252"><a href="#cb6-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-253"><a href="#cb6-253" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML <span class="in">`codeml`</span> on a multi-species alignment with an explicit phylogenetic tree.</span>
+<span id="cb6-254"><a href="#cb6-254" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Longest-transcript heuristic.** MANE Select / Ensembl Canonical (<span class="in">`step5b_alt_canonical_transcripts.R`</span>) are more standard. The canonical FASTAs are already generated.</span>
+<span id="cb6-255"><a href="#cb6-255" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Multiple testing correction was applied to primary tests only.** Stratified subgroup analyses (by Daneman filter, validation score, paralogue type) are exploratory.</span>
+<span id="cb6-256"><a href="#cb6-256" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-257"><a href="#cb6-257" aria-hidden="true" tabindex="-1"></a><span class="fu">### Biological caveats</span></span>
+<span id="cb6-258"><a href="#cb6-258" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-259"><a href="#cb6-259" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The starting gene list is enrichment-based.** See the section below, which sets out what that excludes.</span>
+<span id="cb6-260"><a href="#cb6-260" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.</span>
+<span id="cb6-261"><a href="#cb6-261" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.</span>
+<span id="cb6-262"><a href="#cb6-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-263"><a href="#cb6-263" aria-hidden="true" tabindex="-1"></a>---</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

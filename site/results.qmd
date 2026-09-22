@@ -198,6 +198,56 @@ each of them.
 
 ## Limitations
 
+### What counts as a canonical BBB gene was never pinned down
+
+The project uses the phrase "canonical BBB genes" without ever saying which genes it means.
+The working definition is the one the field uses: genes consistently identified across
+multiple independent transcriptomic studies as highly expressed and functionally important in
+brain endothelial cells. "Canonical" does not mean the only important BBB genes, it means the
+well validated ones.
+
+Four papers read for the [literature review](literature-review.qmd) do name them, so the
+master list of 1,526 genes can be checked against those names.
+
+| Canonical marker | On the list | Note |
+|---|---|---|
+| `SLC2A1` (GLUT1) | yes | glucose transporter |
+| `MFSD2A` | yes | DHA transport, suppresses transcytosis |
+| `ABCB1` (P-gp) | yes | main efflux pump |
+| `ABCG2` (BCRP) | yes | efflux pump |
+| `SLC7A5` (LAT1) | yes | amino acid transport |
+| `SLCO1C1`, `SLC22A8` | yes | organic anion transport |
+| `LSR`, `FLT1`, `TFRC` | yes | |
+| `OCLN` (occludin) | yes | tight junction |
+| `CLDN5` | **no** | tight junction, the most cited BBB gene of all |
+| `TJP1` (ZO-1) | **no** | tight junction scaffold |
+| `PECAM1`, `KDR`, `CDH5` | no | general endothelial markers |
+
+: {tbl-colwidths="[30,14,56]"}
+
+**Two different reasons for absence, which should not be conflated.** `PECAM1`, `KDR` and
+`CDH5` are general endothelial markers expressed in endothelium everywhere. An
+enrichment-based list is supposed to exclude them, and their absence is correct.
+
+`CLDN5` and `TJP1` are excluded by the same rule, because they too are expressed in all
+endothelia, but here the rule removes the machinery that makes the barrier a barrier. The
+clearest illustration is the claudin family: **of 1,526 genes, the only claudin present is
+`CLDN6`**, which is not a BBB claudin.
+
+**The transporters are better covered.** The list contains 52 `SLC` genes, about 3.4% of it,
+and 9 `ABC` transporters, including all the ones the literature names.
+
+**What this means for every result on this page.** Enrichment and importance are not the same
+thing, and this list selects for the first. Any statement here about "BBB genes" should be
+read as *genes differentially enriched in brain endothelium in two mouse studies*, not *genes
+that make the barrier work*. The tight junction proteins, which are the barrier, are almost
+entirely missing.
+
+**The fix** is to name the canonical set explicitly, check membership, and either state that
+the enrichment rule excludes some of them or carry them as a named supplementary set that is
+scored alongside. This is separate from the [three fixes](audit.qmd) and does not depend on
+them.
+
 ### Methodological caveats
 
 - **Pairwise dN/dS, not phylogenetic.** A more rigorous analysis uses PAML `codeml` on a multi-species alignment with an explicit phylogenetic tree.
@@ -206,7 +256,7 @@ each of them.
 
 ### Biological caveats
 
-- **The starting gene list is enrichment-based.** CLDN5 (the canonical BBB tight junction protein) is absent because it failed the differential expression cutoff — it is expressed in all endothelia, not just brain.
+- **The starting gene list is enrichment-based.** See the section below, which sets out what that excludes.
 - **Liver is one specific control choice.** A different control (brain non-BBB genes, genes matched by protein domain) could give a different picture.
 - **Coding sequence only.** Regulatory regions (promoters, enhancers, UTRs) — where most cross-species expression-level differences live — were deliberately excluded.
 

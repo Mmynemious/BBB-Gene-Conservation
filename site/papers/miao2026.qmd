@@ -140,8 +140,8 @@ and `CLDN5` consistently recovered as canonical capillary markers.
 
 4. **The sharpest finding for this project: the divergent family is the SLC family.** A
    substantial proportion of the differentially expressed genes are solute carriers. This
-   project's gene list is heavy with SLC transporters, and it is measuring how conserved their
-   *sequence* is. Miao shows that this is exactly the family whose *expression* diverges most
+   project's gene list carries 52 SLC genes, about 3.4% of it, including the ones named here,
+   and it is measuring how conserved their *sequence* is. Miao shows that this is exactly the family whose *expression* diverges most
    between mouse and human. So the two measurements may well disagree, with a gene conserved in
    sequence and expressed quite differently. That is not a problem with either study. It is the
    most interesting thing either could say, and it is a result this project is positioned to
