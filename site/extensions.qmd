@@ -55,6 +55,27 @@ tolerates far lower conservation than CDS.
 
 ## Data extensions
 
+### Narrow the project to the SLC and ABC transporter families
+
+Rather than scoring the whole enrichment-derived list, restrict to the solute carrier and ATP
+binding cassette families. This would fix several problems at once:
+
+- **Membership stops being a judgement call.** The families are defined by gene nomenclature,
+  so the "what counts as a canonical BBB gene" problem in the
+  [limitations](results.qmd) does not arise.
+- **There is something to compare against.** [Song 2020](papers/song2020.qmd) and
+  [Miao 2026](papers/miao2026.qmd) independently report the same transporters diverging
+  between mouse and human, including `Slco1c1`, `Slc22a8` and `SLCO1A2`. A sequence
+  conservation result would land against a published expression result.
+- **The question gains a consequence.** These are the families that decide whether a drug
+  crosses, which is why both papers frame their species differences as a drug development
+  problem.
+- **The data already exists.** The gene list carries 52 SLC and 9 ABC genes.
+
+**Needs:** a decision on whether narrowing the scope is acceptable, since it changes the
+project from "are BBB genes conserved" to "are BBB transporters conserved". The second is a
+smaller claim and a much more defensible one.
+
 ### A macaque expression atlas
 
 The project's largest structural gap. Real macaque DNA is used throughout, but **no macaque

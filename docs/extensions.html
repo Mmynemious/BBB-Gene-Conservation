@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-09-22">
+<meta name="dcterms.date" content="2026-09-23">
 
 <title>Extensions – BBB Gene Conservation</title>
 <style>
@@ -194,6 +194,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   </ul></li>
   <li><a href="#data-extensions" id="toc-data-extensions" class="nav-link" data-scroll-target="#data-extensions">Data extensions</a>
   <ul class="collapse">
+  <li><a href="#narrow-the-project-to-the-slc-and-abc-transporter-families" id="toc-narrow-the-project-to-the-slc-and-abc-transporter-families" class="nav-link" data-scroll-target="#narrow-the-project-to-the-slc-and-abc-transporter-families">Narrow the project to the SLC and ABC transporter families</a></li>
   <li><a href="#a-macaque-expression-atlas" id="toc-a-macaque-expression-atlas" class="nav-link" data-scroll-target="#a-macaque-expression-atlas">A macaque expression atlas</a></li>
   <li><a href="#wälchlis-endothelial-subtypes" id="toc-wälchlis-endothelial-subtypes" class="nav-link" data-scroll-target="#wälchlis-endothelial-subtypes">Wälchli’s endothelial subtypes</a></li>
   <li><a href="#a-better-control-or-several" id="toc-a-better-control-or-several" class="nav-link" data-scroll-target="#a-better-control-or-several">A better control, or several</a></li>
@@ -225,7 +226,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">September 22, 2026</p>
+      <p class="date">September 23, 2026</p>
     </div>
   </div>
   
@@ -268,6 +269,17 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="data-extensions" class="level2">
 <h2 class="anchored" data-anchor-id="data-extensions">Data extensions</h2>
+<section id="narrow-the-project-to-the-slc-and-abc-transporter-families" class="level3">
+<h3 class="anchored" data-anchor-id="narrow-the-project-to-the-slc-and-abc-transporter-families">Narrow the project to the SLC and ABC transporter families</h3>
+<p>Rather than scoring the whole enrichment-derived list, restrict to the solute carrier and ATP binding cassette families. This would fix several problems at once:</p>
+<ul>
+<li><strong>Membership stops being a judgement call.</strong> The families are defined by gene nomenclature, so the “what counts as a canonical BBB gene” problem in the <a href="./results.html">limitations</a> does not arise.</li>
+<li><strong>There is something to compare against.</strong> <a href="./papers/song2020.html">Song 2020</a> and <a href="./papers/miao2026.html">Miao 2026</a> independently report the same transporters diverging between mouse and human, including <code>Slco1c1</code>, <code>Slc22a8</code> and <code>SLCO1A2</code>. A sequence conservation result would land against a published expression result.</li>
+<li><strong>The question gains a consequence.</strong> These are the families that decide whether a drug crosses, which is why both papers frame their species differences as a drug development problem.</li>
+<li><strong>The data already exists.</strong> The gene list carries 52 SLC and 9 ABC genes.</li>
+</ul>
+<p><strong>Needs:</strong> a decision on whether narrowing the scope is acceptable, since it changes the project from “are BBB genes conserved” to “are BBB transporters conserved”. The second is a smaller claim and a much more defensible one.</p>
+</section>
 <section id="a-macaque-expression-atlas" class="level3">
 <h3 class="anchored" data-anchor-id="a-macaque-expression-atlas">A macaque expression atlas</h3>
 <p>The project’s largest structural gap. Real macaque DNA is used throughout, but <strong>no macaque study tells us which genes macaque brain vessels actually express</strong> — every gene earned its place from a mouse study, and the paper logged as the macaque dataset (<a href="./resources.html">Giger 2010</a>) contains no macaque samples.</p>
@@ -812,43 +824,64 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-55"><a href="#cb1-55" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-56"><a href="#cb1-56" aria-hidden="true" tabindex="-1"></a><span class="fu">## Data extensions</span></span>
 <span id="cb1-57"><a href="#cb1-57" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### A macaque expression atlas</span></span>
+<span id="cb1-58"><a href="#cb1-58" aria-hidden="true" tabindex="-1"></a><span class="fu">### Narrow the project to the SLC and ABC transporter families</span></span>
 <span id="cb1-59"><a href="#cb1-59" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>The project's largest structural gap. Real macaque DNA is used throughout, but **no macaque</span>
-<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>study tells us which genes macaque brain vessels actually express** — every gene earned its</span>
-<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a>place from a mouse study, and the paper logged as the macaque dataset</span>
-<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a>(<span class="co">[</span><span class="ot">Giger 2010</span><span class="co">](resources.qmd)</span>) contains no macaque samples.</span>
-<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>The candidate is the rhesus macaque single-nucleus brain atlas (*Science Advances* 2023,</span>
-<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a>~1M nuclei, 28 regions, on CellxGene).</span>
-<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>**Needs:** the dataset, and Dr. Clelland's sign-off — this widens the project's scope.</span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="fu">### Wälchli's endothelial subtypes</span></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>The atlas resolves 12 endothelial subtypes; <span class="in">`step4b`</span> collapsed all of it to one above-zero</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>test. Asking whether a gene is **capillary-specific** rather than merely detected is the</span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>question this dataset exists to answer, and would turn the validation score from a</span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>near-constant into something informative.</span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>**Needs:** nothing new — the matrix is already in <span class="in">`processed/`</span>.</span>
+<span id="cb1-60"><a href="#cb1-60" aria-hidden="true" tabindex="-1"></a>Rather than scoring the whole enrichment-derived list, restrict to the solute carrier and ATP</span>
+<span id="cb1-61"><a href="#cb1-61" aria-hidden="true" tabindex="-1"></a>binding cassette families. This would fix several problems at once:</span>
+<span id="cb1-62"><a href="#cb1-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-63"><a href="#cb1-63" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Membership stops being a judgement call.** The families are defined by gene nomenclature,</span>
+<span id="cb1-64"><a href="#cb1-64" aria-hidden="true" tabindex="-1"></a>  so the "what counts as a canonical BBB gene" problem in the</span>
+<span id="cb1-65"><a href="#cb1-65" aria-hidden="true" tabindex="-1"></a>  <span class="co">[</span><span class="ot">limitations</span><span class="co">](results.qmd)</span> does not arise.</span>
+<span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**There is something to compare against.** <span class="co">[</span><span class="ot">Song 2020</span><span class="co">](papers/song2020.qmd)</span> and</span>
+<span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>  <span class="co">[</span><span class="ot">Miao 2026</span><span class="co">](papers/miao2026.qmd)</span> independently report the same transporters diverging</span>
+<span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a>  between mouse and human, including <span class="in">`Slco1c1`</span>, <span class="in">`Slc22a8`</span> and <span class="in">`SLCO1A2`</span>. A sequence</span>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>  conservation result would land against a published expression result.</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The question gains a consequence.** These are the families that decide whether a drug</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>  crosses, which is why both papers frame their species differences as a drug development</span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>  problem.</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**The data already exists.** The gene list carries 52 SLC and 9 ABC genes.</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>**Needs:** a decision on whether narrowing the scope is acceptable, since it changes the</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>project from "are BBB genes conserved" to "are BBB transporters conserved". The second is a</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>smaller claim and a much more defensible one.</span>
 <span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### A better control, or several</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="fu">### A macaque expression atlas</span></span>
 <span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>Liver was one choice. Brain non-BBB genes would test whether the signal is specific to the</span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>barrier rather than to the brain; genes matched on protein domain would control for the fact</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>that transporters and tight-junction proteins are structurally unusual. Running more than one</span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>control would say more than fixing the single one.</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>The project's largest structural gap. Real macaque DNA is used throughout, but **no macaque</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>study tells us which genes macaque brain vessels actually express** — every gene earned its</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>place from a mouse study, and the paper logged as the macaque dataset</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>(<span class="co">[</span><span class="ot">Giger 2010</span><span class="co">](resources.qmd)</span>) contains no macaque samples.</span>
 <span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>**Needs:** Dr. Clelland's decision on what claim the control is meant to support.</span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a><span class="fu">## Housekeeping</span></span>
-<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make <span class="in">`step2`</span> reproducible from a clean clone, or document the exact supplementary file to</span>
-<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>  fetch.</span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Drop the <span class="in">`Mitochondrial`</span> cluster — dying cells, not a cell type — from the Wälchli output</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  matrix.</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Correct the <span class="in">`step3c`</span> biotype check so it can actually fail, or remove it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>The candidate is the rhesus macaque single-nucleus brain atlas (*Science Advances* 2023,</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>~1M nuclei, 28 regions, on CellxGene).</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>**Needs:** the dataset, and Dr. Clelland's sign-off — this widens the project's scope.</span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="fu">### Wälchli's endothelial subtypes</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>The atlas resolves 12 endothelial subtypes; <span class="in">`step4b`</span> collapsed all of it to one above-zero</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>test. Asking whether a gene is **capillary-specific** rather than merely detected is the</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>question this dataset exists to answer, and would turn the validation score from a</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>near-constant into something informative.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>**Needs:** nothing new — the matrix is already in <span class="in">`processed/`</span>.</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">### A better control, or several</span></span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>Liver was one choice. Brain non-BBB genes would test whether the signal is specific to the</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>barrier rather than to the brain; genes matched on protein domain would control for the fact</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>that transporters and tight-junction proteins are structurally unusual. Running more than one</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a>control would say more than fixing the single one.</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>**Needs:** Dr. Clelland's decision on what claim the control is meant to support.</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## Housekeeping</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Make <span class="in">`step2`</span> reproducible from a clean clone, or document the exact supplementary file to</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>  fetch.</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Drop the <span class="in">`Mitochondrial`</span> cluster — dying cells, not a cell type — from the Wälchli output</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>  matrix.</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Correct the <span class="in">`step3c`</span> biotype check so it can actually fail, or remove it.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

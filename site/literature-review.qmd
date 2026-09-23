@@ -43,6 +43,22 @@ correction.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [Song et al. 2020](papers/song2020.qmd)
+
+::: {.paper-meta}
+[2020]{.pm} [Human · mouse]{.pm} [RNA]{.pm} [Laser capture microdissection]{.pm}
+:::
+
+Brain microvessels cut straight out of frozen tissue by laser, so low abundance transcripts
+survive and nothing is dissociated. The transporter families are the story: Slco1c1 and
+Slc22a8 mouse-enriched, SLCO1A2 human-only, and a worked example of a species difference in
+one transporter breaking a mouse disease model. Also a first molecular definition of human
+brain pericytes.
+
+[Read the entry →](papers/song2020.qmd)
+:::
+
+::: {.paper-card}
 ### [Miao et al. 2026](papers/miao2026.qmd)
 
 ::: {.paper-meta}
