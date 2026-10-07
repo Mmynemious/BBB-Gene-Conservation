@@ -18,6 +18,11 @@ bioinformatics pipeline is a rough structure — usable, but it needs polishing.
 is a literature review, currently in progress, where I will add and comment on the papers I
 read.
 
+I am now trying to build a method-driven pipeline that lets gene conservation run more
+efficiently, based upon established algorithms for the rough steps of: choosing gene sets,
+validating genes, mapping orthologues, running conservation, and interpreting and exporting
+the data.
+
 :::
 
 ## What's in this project
@@ -70,16 +75,6 @@ What comes after the fixes: MANE Select transcripts, phylogenetic dN/dS, regulat
 sequence, and a macaque expression atlas.
 
 [Read more →](extensions.qmd)
-:::
-
-::: {.hub-card}
-### Method-Driven Pipeline
-I am now trying to build a method-driven pipeline that lets gene conservation run more
-efficiently, based upon established algorithms for the rough steps of: choosing gene sets,
-validating genes, mapping orthologues, running conservation, and interpreting and exporting
-the data.
-
-**In progress.**
 :::
 
 ::: {.hub-card}
