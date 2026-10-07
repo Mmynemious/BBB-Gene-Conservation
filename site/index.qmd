@@ -73,6 +73,16 @@ sequence, and a macaque expression atlas.
 :::
 
 ::: {.hub-card}
+### Method-Driven Pipeline
+I am now trying to build a method-driven pipeline that lets gene conservation run more
+efficiently, based upon established algorithms for the rough steps of: choosing gene sets,
+validating genes, mapping orthologues, running conservation, and interpreting and exporting
+the data.
+
+**In progress.**
+:::
+
+::: {.hub-card}
 ### Resources
 The papers, databases and tools this project is built on, with full citations.
 
