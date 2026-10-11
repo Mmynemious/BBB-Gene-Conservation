@@ -139,6 +139,20 @@ bioinformatical project with relatively little academic review in mind.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [Beker et al. 2025](papers/beker2025.qmd)
+
+::: {.paper-meta}
+[2025]{.pm} [Human]{.pm} [RNA]{.pm} [Bulk RNA-seq]{.pm} [Method]{.pm} [Reading in progress]{.pm}
+:::
+
+Brendo identifies genes selectively enriched in brain microvascular endothelial cells versus
+endothelial cells from other tissues, using bulk RNA sequencing. The important thing here is
+that it shows how it works with multiple datasets and quality control.
+
+[Read the entry →](papers/beker2025.qmd)
+:::
+
+::: {.paper-card}
 ### [Sheng et al. 2022](papers/sheng2022.qmd)
 
 ::: {.paper-meta}

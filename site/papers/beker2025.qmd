@@ -1,0 +1,54 @@
+---
+title: "Beker et al. 2025"
+subtitle: "Brendo: an open resource for uniquely transcribed genes in brain endothelial cells"
+---
+
+> Beker O, Ramezani Khorsand F, Adebali O, Mustafaoglu N (2025). Brendo: an open resource for
+> uniquely transcribed genes in brain endothelial cells. *bioRxiv* 2025.10.25.684508.
+> <https://doi.org/10.1101/2025.10.25.684508>. Sabancı University.
+> Code: <https://github.com/CompGenomeLab/brendo> (MIT licence).
+> Platform: <https://brendo.sabanciuniv.edu>.
+
+::: {.scan-note}
+Reading in progress.
+:::
+
+| Field | |
+|---|---|
+| **Year** | Preprint posted 26 October 2025 |
+| **Models** | **Human only.** Brain microvascular endothelial cells compared against endothelial cells from 15 other tissues. No cross-species comparison |
+| **Brain region** | Not matched; samples pooled from many public studies |
+| **Measures** | **RNA** |
+| **Method** | **Bulk RNA-seq**, 264 public healthy samples from 63 studies, 16 tissues. Fresh tissue, primary cells and immortalised cell lines. Aligned with STAR to GRCh38 |
+| **Cross-species stats** | Not applicable. Within human: **DESeq2 and Wilcoxon rank-sum** for each brain vs tissue pair, combined by **Robust Rank Aggregation**, checked by bootstrapping |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+I had a look again at the papers I have. Miao and the others from this year is probably the
+best paper we have on **transcriptomes of blood brain barrier capillary endothelial cells**, and
+on how they did the analysis. But for us specifically, if we want to concentrate on endothelial
+cells, apparently there is **no identical pipeline** we could use.
+
+There is something by Brendo which **identifies genes selectively enriched in brain
+microvascular endothelial cells versus endothelial cells from other tissues**, using **bulk RNA
+sequencing**. The important thing here is that it shows how it works with **multiple datasets
+and quality control**.
+
+Now I am a bit confused as to how to approach this currently, assuming we want to use
+endothelial cells. Miao et al. showed that even if they looked at a very broad gene selection,
+in a brain part I do not remember, there was only a small part which overlapped in gene
+expression between the species, and most of them were **transporter proteins**.
+
+There is one graph that I want to understand in order to figure out how we want to continue.
+
+## Checks against the paper
+
+- **Is there a pipeline identical to this project?** Not here. Brendo compares brain
+  endothelium against other tissues' endothelium within human only, which matches this
+  project's enrichment step rather than its cross-species step.
+- **Which brain part did Miao look at, and how much overlapped?** Mouse was whole brain
+  vasculature; human was post-mortem brain and tissue next to gliomas. The overlap was broad
+  (correlation 0.68). The genes that differed between species, 169 and 386, were where the
+  SLC transporters stood out.
