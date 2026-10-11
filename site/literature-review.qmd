@@ -43,6 +43,20 @@ correction.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [Sheng et al. 2022](papers/sheng2022.qmd)
+
+::: {.paper-meta}
+[2022]{.pm} [Mouse]{.pm} [RNA]{.pm} [De novo assembly]{.pm} [Method]{.pm} [Reading in progress]{.pm}
+:::
+
+CoRMAP, a pipeline that processes raw RNA sequencing datasets in the same way for each
+species, and uses OrthoMCL to create orthologous groups so gene expression can be compared
+between them. It encounters all the problems we had with orthologues. A much clearer approach.
+
+[Read the entry →](papers/sheng2022.qmd)
+:::
+
+::: {.paper-card}
 ### [Barr and Gilad 2025](papers/barr2025.qmd)
 
 ::: {.paper-meta}

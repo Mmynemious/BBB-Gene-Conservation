@@ -1,0 +1,62 @@
+---
+title: "Sheng et al. 2022"
+subtitle: "Comparative transcriptomics analysis pipeline for the meta-analysis of phylogenetically divergent datasets (CoRMAP)"
+---
+
+> Sheng Y, Ali RA, Heyland A (2022). Comparative transcriptomics analysis pipeline for the
+> meta-analysis of phylogenetically divergent datasets (CoRMAP). *BMC Bioinformatics* 23:415.
+> <https://doi.org/10.1186/s12859-022-04972-9>. Open access under CC BY 4.0.
+> Read on [PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC9547434/).
+
+::: {.scan-note}
+Reading in progress.
+:::
+
+| Field | |
+|---|---|
+| **Year** | 2022 |
+| **Models** | **Mouse only** in the demonstration: two independent mouse brain datasets. The pipeline itself is built for any species |
+| **Brain region** | Not matched between the two datasets: **medial prefrontal cortex** in one, **dentate gyrus of the hippocampus** in the other |
+| **Measures** | **RNA** |
+| **Method** | Bulk RNA-seq, reprocessed from raw reads. **De novo assembly** with Trinity, no reference genome. Quantification with RSEM, normalised to TPM, with TMM as an option |
+| **Cross-species stats** | Orthology by **OrthoMCL**: all-versus-all BLAST of predicted proteins, then Markov clustering into **orthologous gene groups**. Expression compared per group |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+Now I am reading this paper, which is called **the comparative transcriptomics analysis
+pipeline for the meta-analysis of phylogenetically divergent datasets**, which is an amazing
+project. It encounters all the problems we had, specifically with **orthologues** and how
+orthologues differ from species to species, and also the **RNA sequencing datasets** have been
+taken into consideration in terms of data divergence.
+
+This pipeline aims at retrieving gene expression data from **any RNA sequencing dataset**
+using **de novo assembly**, **standardized gene expression tools**, and the implementation of
+**OrthoMCL**, in order to allow for faster and more statistically, or bioinformatically, clean
+datasets. It is a much clearer approach. They have demonstrated this project on **two mouse
+brain transcriptomes**.
+
+The background for this project was that **transcriptional regulation** is an important player
+for certain diseases, and also for certain gene expression between different species. The
+issue with all of that is that transcriptomic divergences between groups are **time consuming
+for researchers to understand**, and even more so how to categorize, for instance, different
+orthologues. So that is the issue we had: we were not sure how to categorize orthologues and
+how to use their gene expression levels accordingly.
+
+They are solving this issue by introducing **CoRMAP**. It **processes raw datasets in the same
+way for each species**. OrthoMCL creates **orthologous groups** and allows for gene expression
+analysis in relation to the different orthologous groups.
+
+That is where I am currently at. I will continue reading.
+
+## What I take from it
+
+An amazing project, and a much clearer approach. It encounters all the problems we had,
+specifically with orthologues and how to use their gene expression levels.
+
+## Checks against the paper
+
+- **Is this the same orthologue categorisation problem?** Yes. CoRMAP does not choose between
+  one-to-one and one-to-many: OrthoMCL clusters orthologues and in-paralogues into orthologous
+  gene groups, and expression is compared per group.
