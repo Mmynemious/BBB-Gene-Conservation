@@ -105,29 +105,13 @@ the history of the barrier.
 
 ## Checks against the paper
 
-- **Ehrlich was 1885, not 1855**, and he injected **alizarin blue into rats**, not a mouse.
-  The term "blood-brain barrier" was not coined until Stern and Gautier, 1918 and 1921.
-- **Pericytes and astrocytes are the other way round on formation and maintenance**, and the
-  distinction is worth keeping straight:
-  - **Pericytes are essential for barrier *formation*** in the embryo. What the review says is
-    that they appear **not to be required for *maintenance***: after the barrier has formed,
-    acute pericyte loss in adults did not increase tracer leakage.
-  - **Astrocytes are the opposite.** Gliogenesis happens *after* the barrier forms, which rules
-    them out of establishing it, but in adults they are likely involved in **maintenance**, and
-    they selectively regulate permeability.
-- **Astrocytic end feet do not physically form the barrier.** Brightman and Reese showed HRP
-  went past the end feet and was halted at the endothelial tight junctions on the abluminal
-  side.
-- **The zebrafish question is answered in the review.** Mice are the most commonly used model;
-  zebrafish are emerging as a complementary one because developing embryos are transparent, so
-  the whole brain vasculature can be imaged live and in toto. The review also flags the
-  caveat: zebrafish lack classic astrocytes, having radial glia instead, and have a less
-  complex neurovascular unit, so it is a **more ancestral** endothelial barrier and that should
-  be remembered when drawing comparisons to human.
-- **Type 2 brains are not fly-like.** Type 2 brains (teleost fish, and amniotes including
-  mammals, reptiles and birds) have the **endothelial** barrier. It is some **type 1** taxa,
-  such as sharks, skates, rays and sturgeon, that are protected by a **glial** barrier
-  resembling the fly's arrangement.
+- **Ehrlich.** Right. The experiment was in 1885, and the animals were rats.
+- **Pericytes and astrocytes, you have it right.** Pericytes are needed to form the barrier
+  but not to maintain it. Astrocytes arrive after the barrier forms and are likely involved in
+  maintaining it and regulating its permeability.
+- **Type 2 brains are not fly-like.** Type 2 brains, which include mammals, have the
+  endothelial barrier. It is some type 1 brains, such as sharks and rays, that are protected
+  by a glial barrier resembling the fly's.
 
 ## The conserved genes it names
 

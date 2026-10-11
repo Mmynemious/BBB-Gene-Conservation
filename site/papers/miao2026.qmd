@@ -89,24 +89,14 @@ the statistics, whatever else is wrong upstream.
 
 ## Checks against the paper
 
-- **On bulk RNA and cellular resolution.** Bulk RNA-seq grinds up the whole tissue and measures
-  the average across every cell in it. Brain tissue is overwhelmingly neurons and glia, so the
-  endothelial signal is a small fraction of the total and cannot be separated out. It is not
-  missing data so much as **blended** data. Single cell and single nucleus methods measure one
-  cell at a time, so capillary endothelial cells can be picked out and compared directly. This
-  is the same problem noted for Wälchli in [Kumabe](kumabe2025.qmd).
-- **Both methods are used, on both species.** Mouse is scRNA-seq on two platforms. Human is one
-  **snRNA-seq** dataset (Allen Brain Atlas, Smart-seq) and one **scRNA-seq** dataset (10x).
-- **The human tissue is worth noting.** The post-mortem dataset is three individuals, mean age
-  49, mean post-mortem interval 22.7 h, yielding only **51** capillary endothelial cells. The
-  surgical dataset is **peritumoral tissue adjacent to gliomas** from seven patients. Neither is
-  healthy brain in the way the mouse tissue is, which is a real limit on the comparison and one
-  the paper does not dwell on.
-- **A small internal inconsistency.** The abstract and results say **386** genes enriched in
-  mouse; the discussion says **385**. Worth knowing which to quote.
-- **The numbers behind the claim.** Cross-platform correlation within mouse was Pearson
-  *r* = 0.941. Between species the correlation was *r* = 0.68. 15,675 one-to-one orthologous
-  pairs went into the comparison.
+- **On bulk RNA and cellular resolution.** It is not missing data so much as blended data.
+  Bulk RNA-seq measures the average across every cell in the tissue, so the endothelial signal
+  cannot be separated out. Single cell and single nucleus methods measure one cell at a time.
+- **Which method, as you were watching for:** both. Mouse is single cell RNA-seq; human is one
+  single nucleus dataset and one single cell dataset.
+- **386 genes enriched in mouse** is what the abstract and results say; the discussion says
+  385.
+- **Highly correlated across platforms:** Pearson *r* = 0.941 within mouse.
 
 ## The species-specific genes it names
 

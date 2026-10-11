@@ -79,27 +79,10 @@ absent in mouse brain pericytes but robustly expressed in human.
 
 ## Checks against the paper
 
-- **On LCM against single cell, the reasoning is worth having precisely.** The paper's argument
-  is that single cell RNA-seq has a **poor ability to detect very low abundance transcripts**,
-  and that the dissociation and purification needed to isolate single cells can itself alter
-  the transcriptome. LCM cuts the vessel straight out of frozen tissue, so nothing is
-  dissociated and low-abundance transcripts survive. The cost is that it cannot separate cell
-  types: everything captured is endothelium and pericytes mixed. The paper calls the two
-  approaches **complementary** rather than ranking one above the other.
-- **The human data is noisier than the mouse data, and the paper is open about it.** Mouse
-  microvessel replicates cluster cleanly away from whole brain. The human ones do not: one
-  whole-brain sample clustered closer to a microvessel sample from a different patient. They
-  attribute this to genetic background, brain region, and the conditions that required the
-  surgery.
-- **Pericyte enrichment was weaker in human.** Human microvessels showed less enrichment of
-  `RGS5`, `ABCC9` and `PDGFRB`, and no significant enrichment of `ANPEP`, `CSPG4` or `KCNJ8`.
-  The paper offers three possible reasons: patient variability, genuinely fewer pericytes in
-  the human samples, or a real species difference in pericyte gene expression. It does not
-  choose between them.
-- **TGF beta signalling came out enriched** in microvessels in both species, by KEGG gene set
-  enrichment. That is the same pathway
-  [Kaufer and Friedman](../reading/sciam/barrier-against-brain-disease.qmd) build their
-  albumin feedback loop on.
+- **On LCM against single cell RNA sequencing, you are right.** The paper's reason is that
+  single cell RNA-seq has a poor ability to detect very low abundance transcripts, while LCM
+  cuts the vessel straight out of frozen tissue so they survive. The paper calls the two
+  approaches complementary rather than ranking one above the other.
 
 ## How it relates to this project
 

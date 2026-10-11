@@ -72,39 +72,19 @@ out.
 ## Checks against the paper
 
 - **It has now been peer reviewed.** The preprint was published in *Genome Biology* in April
-  2026 (volume 27, article 187), with "of primates" added to the title. Cite the journal
-  version from now on.
-- **What "maps reciprocally" means.** Not that reads sit between features. Each read is
-  carried from the human genome over to the other species, realigned there from scratch, and
-  then carried back. It is kept only if it lands in **exactly the same place both ways**: same
-  start position and same alignment shape (the CIGAR string). Reads that fail either direction
-  are thrown away. Only after that are reads assigned to orthologous features with CAT.
-- **What a chain is.** A chain is a run of pairwise alignment blocks between two genomes,
-  kept in the same order and orientation in both. By definition a chain contains **no
-  duplications, inversions or translocations**. The UCSC genome browser publishes these
-  between species, and "liftover" is converting a coordinate in one genome to the matching
-  coordinate in the other by following the chain. So chains are the bridge between the two
-  genomes that the read walks across.
-- **On one-to-many orthologues, you are right, for two reasons.** Reads are aligned keeping
-  only uniquely mapped reads, and chains by definition exclude duplications. A read from a
-  gene duplicated in one species cannot pass. This is the same direction as the `step5d` fix.
-- **Annotation quality is the weaker point for macaque, not the stronger.** The paper names
-  **human and mouse** as the highly curated annotations, and says other genomes are often
-  annotated with incomplete or lower confidence annotations. Macaque is one of those. That is
-  part of why they transfer the human annotation onto macaque with CAT rather than using the
-  macaque's own.
-- **Mouse is not tested.** Only primates. Divergence already bites between human and macaque:
-  14.7% of gene positions differ, against 3.6% for human and chimpanzee, and every pipeline did
-  worse on the macaque comparison. Mouse is far further from human than macaque is, so more
-  reads would be filtered out. The authors say the method extends to more divergent species
-  but do not show it.
-- **None of the tissues is brain.** Heart, kidney, liver and lung. Nothing in the method
-  depends on the tissue, but none of their numbers are about the BBB.
-- **The false positive numbers are striking.** On simulated data, CrossFilt's false discovery
-  rate was **4.0%** for both human vs chimpanzee and human vs macaque. The common
-  "dual-reference" approach, where each species is aligned to its own genome and genes are
-  matched by name, came out at **53%** and **57%**. Over half of what it called different was
-  not.
+  2026 (volume 27, article 187). Cite the journal version from now on.
+- **"Map between genomic features, I think on the same side."** Each read is carried to the
+  other species' genome, realigned there, and carried back. It is kept only if it lands in
+  exactly the same place both ways.
+- **What a chain is.** A run of alignment blocks between two genomes, kept in the same order in
+  both, with no duplications or inversions. It is the bridge the read is lifted across.
+- **On one-to-many orthologues, you are right.** Only uniquely mapped reads are kept, and
+  chains exclude duplications, so duplicated genes are cut out.
+- **Annotation quality.** The paper names human and mouse as the well curated annotations.
+  Macaque is in the less curated group, which is why they transfer the human annotation onto
+  it with CAT.
+- **Different datasets.** Only primates were tested, not mouse. The authors say it should
+  extend to more distant species and to other read based data, but do not show it.
 
 ## Open questions from this read
 
