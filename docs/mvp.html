@@ -403,7 +403,13 @@ function classify(row, s){
   if (row.status !== "ok"){ row.interpretation = "not run"; row.notes.unshift(row.status); }
   else if (!row.one_to_one){
     row.interpretation = "not suitable for simple cross-species comparison";
-    row.notes.unshift("not one-to-one in all three pairs (macaque: " + row.n_macaque_orthologues + ", mouse: " + row.n_mouse_orthologues + " orthologues)");
+    const why = [];
+    if (!row.n_macaque_orthologues) why.push("no macaque orthologue in Ensembl");
+    else if (row.n_macaque_orthologues > 1) why.push(row.n_macaque_orthologues + " macaque orthologues");
+    if (!row.n_mouse_orthologues) why.push("no mouse orthologue in Ensembl");
+    else if (row.n_mouse_orthologues > 1) why.push(row.n_mouse_orthologues + " mouse orthologues");
+    for (const [k, label] of pairs) if (row[k] && row[k].type !== "ortholog_one2one") why.push(label + " is " + row[k].type.replace("ortholog_", "").replace("2", " to "));
+    row.notes.unshift("not one-to-one: " + (why.join(", ") || "pair missing"));
   }
   else if (lengthFlag) row.interpretation = "not suitable for simple cross-species comparison";
   else if (row.lowest_identity >= s.high) row.interpretation = "highly conserved core barrier protein";
@@ -1267,194 +1273,200 @@ $("mvp-retry").onclick = () => runGenes(results.filter(r => r.status.startsWith(
 <span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="in">  if (row.status !== "ok"){ row.interpretation = "not run"; row.notes.unshift(row.status); }</span></span>
 <span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (!row.one_to_one){</span></span>
 <span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="in">    row.interpretation = "not suitable for simple cross-species comparison";</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="in">    row.notes.unshift("not one-to-one in all three pairs (macaque: " + row.n_macaque_orthologues + ", mouse: " + row.n_mouse_orthologues + " orthologues)");</span></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (lengthFlag) row.interpretation = "not suitable for simple cross-species comparison";</span></span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (row.lowest_identity &gt;= s.high) row.interpretation = "highly conserved core barrier protein";</span></span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (row.lowest_identity &gt;= s.mod) row.interpretation = "moderately conserved";</span></span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="in">  else row.interpretation = "weakly conserved";</span></span>
-<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="in">  return row;</span></span>
-<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="in">function flat(r){</span></span>
-<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="in">  const g = (p, k) =&gt; p ? p[k] : null;</span></span>
-<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="in">  return {</span></span>
-<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="in">    gene: r.gene,</span></span>
-<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="in">    status: r.status,</span></span>
-<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a><span class="in">    interpretation: r.interpretation,</span></span>
-<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="in">    one_to_one: r.one_to_one,</span></span>
-<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="in">    lowest_identity: r.lowest_identity,</span></span>
-<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_macaque_identity_from_human: g(r.hm,"identity_source"),</span></span>
-<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_macaque_identity_from_macaque: g(r.hm,"identity_target"),</span></span>
-<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_mouse_identity_from_human: g(r.hmo,"identity_source"),</span></span>
-<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_mouse_identity_from_mouse: g(r.hmo,"identity_target"),</span></span>
-<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_vs_mouse_identity_from_macaque: g(r.mm,"identity_source"),</span></span>
-<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_vs_mouse_identity_from_mouse: g(r.mm,"identity_target"),</span></span>
-<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="in">    human_length_aa: r.human_length,</span></span>
-<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_length_aa: r.macaque_length,</span></span>
-<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_length_aa: r.mouse_length,</span></span>
-<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a><span class="in">    alignment_status: r.alignment_status,</span></span>
-<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="in">    orthology_human_macaque: g(r.hm,"type"),</span></span>
-<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="in">    orthology_human_mouse: g(r.hmo,"type"),</span></span>
-<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="in">    orthology_macaque_mouse: g(r.mm,"type"),</span></span>
-<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="in">    n_macaque_orthologues: r.n_macaque_orthologues,</span></span>
-<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="in">    n_mouse_orthologues: r.n_mouse_orthologues,</span></span>
-<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="in">    human_gene_id: r.human_gene_id || null,</span></span>
-<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_gene_id: r.macaque_gene_id || null,</span></span>
-<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_gene_id: r.mouse_gene_id || null,</span></span>
-<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a><span class="in">    human_protein_id: r.human_protein_id || null,</span></span>
-<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_protein_id: r.macaque_protein_id || null,</span></span>
-<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_protein_id: r.mouse_protein_id || null,</span></span>
-<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="in">    human_ensembl_page: geneLink(SP.human, r.human_gene_id),</span></span>
-<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_ensembl_page: geneLink(SP.macaque, r.macaque_gene_id),</span></span>
-<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_ensembl_page: geneLink(SP.mouse, r.mouse_gene_id),</span></span>
-<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="in">    pfam_domains_human: r.domains || "",</span></span>
-<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="in">    notes: r.notes.join("; "),</span></span>
-<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="in">    ensembl_release: meta.ensembl_release,</span></span>
-<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="in">    run_date: meta.run_date</span></span>
-<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a><span class="in">  };</span></span>
-<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a><span class="in">const COLS = [</span></span>
-<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="in">  ["gene","Gene"],["interpretation","Interpretation"],["one_to_one","1:1"],["lowest_identity","Lowest identity %"],</span></span>
-<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="in">  ["human_vs_macaque_identity_from_human","H vs Mac %"],["human_vs_mouse_identity_from_human","H vs Mo %"],</span></span>
-<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="in">  ["macaque_vs_mouse_identity_from_macaque","Mac vs Mo %"],</span></span>
-<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a><span class="in">  ["human_length_aa","H aa"],["macaque_length_aa","Mac aa"],["mouse_length_aa","Mo aa"],</span></span>
-<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a><span class="in">  ["alignment_status","Alignment"],["pfam_domains_human","Pfam domains (human)"],["notes","Notes"]</span></span>
-<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="in">];</span></span>
-<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="in">const VCLASS = { "highly conserved core barrier protein":"v-high", "moderately conserved":"v-mod",</span></span>
-<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="in">  "weakly conserved":"v-low", "not suitable for simple cross-species comparison":"v-unsuit" };</span></span>
-<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="in">function esc(x){ return String(x == null ? "" : x).replace(/[&amp;&lt;&gt;"]/g, c =&gt; ({"&amp;":"&amp;amp;","&lt;":"&amp;lt;","&gt;":"&amp;gt;",'"':"&amp;quot;"}[c])); }</span></span>
-<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="in">function render(){</span></span>
-<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="in">  const rows = results.map(flat);</span></span>
-<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="in">  let h = "&lt;thead&gt;&lt;tr&gt;" + COLS.map(c =&gt; "&lt;th&gt;" + c[1] + "&lt;/th&gt;").join("") + "&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;";</span></span>
-<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a><span class="in">  for (const r of rows){</span></span>
-<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a><span class="in">    h += "&lt;tr&gt;" + COLS.map(([k]) =&gt; {</span></span>
-<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a><span class="in">      let v = r[k];</span></span>
-<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="in">      if (k === "gene" &amp;&amp; r.human_ensembl_page) return '&lt;td&gt;&lt;a href="' + r.human_ensembl_page + '" target="_blank" rel="noopener"&gt;' + esc(v) + "&lt;/a&gt;&lt;/td&gt;";</span></span>
-<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="in">      if (k === "interpretation") return '&lt;td class="' + (VCLASS[v] || "") + '"&gt;' + esc(v) + "&lt;/td&gt;";</span></span>
-<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a><span class="in">      if (k === "one_to_one") return "&lt;td&gt;" + (r.status !== "ok" ? "" : v ? "yes" : '&lt;span class="mvp-flag"&gt;no&lt;/span&gt;') + "&lt;/td&gt;";</span></span>
-<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="in">      if (typeof v === "number") return '&lt;td class="num"&gt;' + (Math.round(v * 10) / 10) + "&lt;/td&gt;";</span></span>
-<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a><span class="in">      return "&lt;td&gt;" + esc(v) + "&lt;/td&gt;";</span></span>
-<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="in">    }).join("") + "&lt;/tr&gt;";</span></span>
-<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
-<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-table").innerHTML = h + "&lt;/tbody&gt;";</span></span>
-<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a><span class="in">  const count = {};</span></span>
-<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a><span class="in">  rows.forEach(r =&gt; count[r.interpretation] = (count[r.interpretation] || 0) + 1);</span></span>
-<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-summary").innerHTML = "&lt;strong&gt;" + rows.length + " genes.&lt;/strong&gt; " +</span></span>
-<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="in">    Object.keys(count).map(k =&gt; esc(k) + ": " + count[k]).join(" · ") +</span></span>
-<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="in">    " · Ensembl release " + esc(meta.ensembl_release) + ".";</span></span>
-<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="in">function download(name, text, type){</span></span>
-<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="in">  const a = document.createElement("a");</span></span>
-<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="in">  a.href = URL.createObjectURL(new Blob([text], { type }));</span></span>
-<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a><span class="in">  a.download = name; a.click();</span></span>
-<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(() =&gt; URL.revokeObjectURL(a.href), 1000);</span></span>
-<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-csv").onclick = () =&gt; {</span></span>
-<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a><span class="in">  const rows = results.map(flat), keys = Object.keys(rows[0]);</span></span>
-<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a><span class="in">  const cell = v =&gt; { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; };</span></span>
-<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a><span class="in">  download("bbb_conservation_mvp.csv", [keys.join(",")].concat(rows.map(r =&gt; keys.map(k =&gt; cell(r[k])).join(","))).join("\n"), "text/csv");</span></span>
-<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a><span class="in">};</span></span>
-<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-json").onclick = () =&gt; {</span></span>
-<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="in">  const out = { meta, genes: results.map(r =&gt; Object.assign(flat(r), {</span></span>
-<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="in">    alignments: { human_vs_macaque: r.hm ? [r.hm.align_source, r.hm.align_target] : null,</span></span>
-<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="in">                  human_vs_mouse: r.hmo ? [r.hmo.align_source, r.hmo.align_target] : null,</span></span>
-<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a><span class="in">                  macaque_vs_mouse: r.mm ? [r.mm.align_source, r.mm.align_target] : null },</span></span>
-<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a><span class="in">    api_queries: r.queries })) };</span></span>
-<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a><span class="in">  download("bbb_conservation_mvp.json", JSON.stringify(out, null, 2), "application/json");</span></span>
-<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a><span class="in">};</span></span>
-<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a><span class="in">let settings = {};</span></span>
-<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="in">async function runGenes(genes){</span></span>
-<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a><span class="in">  ["mvp-run","mvp-csv","mvp-json","mvp-retry"].forEach(id =&gt; $(id).disabled = true);</span></span>
-<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a><span class="in">  const prog = $("mvp-progress"); prog.hidden = false; prog.max = genes.length; prog.value = 0;</span></span>
-<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a><span class="in">  const t0 = Date.now();</span></span>
-<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a><span class="in">  let next = 0;</span></span>
-<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a><span class="in">  const worker = async () =&gt; {</span></span>
-<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a><span class="in">    while (next &lt; genes.length){</span></span>
-<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a><span class="in">      const i = next++;</span></span>
-<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a><span class="in">      const row = await runGene(genes[i], settings);</span></span>
-<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a><span class="in">      const at = results.findIndex(r =&gt; r.gene === row.gene);</span></span>
-<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a><span class="in">      if (at &gt;= 0) results[at] = row; else results.push(row);</span></span>
-<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a><span class="in">      prog.value++;</span></span>
-<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a><span class="in">      const left = Math.round((Date.now() - t0) / prog.value * (genes.length - prog.value) / 1000);</span></span>
-<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a><span class="in">      $("mvp-status").textContent = prog.value + " of " + genes.length + " genes done" +</span></span>
-<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a><span class="in">        (prog.value &lt; genes.length ? ", about " + Math.max(1, Math.round(left / 60)) + " min left" : "");</span></span>
-<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
-<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a><span class="in">  };</span></span>
-<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a><span class="in">  await Promise.all([worker(), worker(), worker()]);</span></span>
-<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a><span class="in">  const order = $("mvp-genes").value.split(/[\s,;]+/).map(g =&gt; g.trim().toUpperCase());</span></span>
-<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a><span class="in">  results.sort((a, b) =&gt; order.indexOf(a.gene) - order.indexOf(b.gene));</span></span>
-<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a><span class="in">  render();</span></span>
-<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a><span class="in">  const failed = results.filter(r =&gt; r.status.startsWith("request failed")).length;</span></span>
-<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-status").textContent = "Done" + (failed ? ". " + failed + " genes failed because Ensembl did not respond; retry them below." : ".");</span></span>
-<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a><span class="in">  prog.hidden = true;</span></span>
-<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-retry").hidden = !failed;</span></span>
-<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a><span class="in">  ["mvp-run","mvp-csv","mvp-json","mvp-retry"].forEach(id =&gt; $(id).disabled = false);</span></span>
-<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
-<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-run").onclick = async () =&gt; {</span></span>
-<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a><span class="in">  const genes = [...new Set($("mvp-genes").value.split(/[\s,;]+/).map(g =&gt; g.trim().toUpperCase()).filter(Boolean))];</span></span>
-<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!genes.length) return;</span></span>
-<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a><span class="in">  settings = { high: +$("mvp-high").value, mod: +$("mvp-mod").value, len: +$("mvp-len").value };</span></span>
-<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a><span class="in">  results = []; $("mvp-table").innerHTML = ""; $("mvp-summary").innerHTML = "";</span></span>
-<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-status").textContent = "Starting…";</span></span>
-<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a><span class="in">  try {</span></span>
-<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a><span class="in">    const info = await getJSON("/info/data");</span></span>
-<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a><span class="in">    meta = { ensembl_release: info.data.releases[0], run_date: new Date().toISOString().slice(0,10),</span></span>
-<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a><span class="in">             thresholds: { highly_conserved_min_identity: settings.high, moderately_conserved_min_identity: settings.mod, max_length_difference_pct: settings.len },</span></span>
-<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a><span class="in">             source: "Ensembl REST API, Compara orthologues and Pfam protein features",</span></span>
-<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a><span class="in">             identity_definition: "Ensembl perc_id: percentage of one protein's residues identical to the other in the Compara alignment. Reported from both sides; lowest_identity is the minimum over all six values." };</span></span>
-<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a><span class="in">  } catch(e){ meta = { ensembl_release: "unknown", run_date: new Date().toISOString().slice(0,10) }; }</span></span>
-<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a><span class="in">  await runGenes(genes);</span></span>
-<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a><span class="in">};</span></span>
-<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-retry").onclick = () =&gt; runGenes(results.filter(r =&gt; r.status.startsWith("request failed")).map(r =&gt; r.gene));</span></span>
-<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
-<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
-<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a><span class="fu">## What each column means</span></span>
-<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Meaning <span class="pp">|</span></span>
-<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
-<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Interpretation** <span class="pp">|</span> Highly conserved core barrier protein, moderately conserved, weakly conserved, or not suitable for simple cross-species comparison. Not suitable means the gene is not one-to-one in all three pairs, or the proteins differ in length beyond the tolerance <span class="pp">|</span></span>
-<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **1:1** <span class="pp">|</span> Whether Ensembl calls the gene one-to-one in all three pairs: human vs macaque, human vs mouse, macaque vs mouse <span class="pp">|</span></span>
-<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Identity %** <span class="pp">|</span> Ensembl's percent identity: the share of one protein's amino acids that are identical in the other, in Ensembl's alignment. It depends on which protein you count from, so the download gives both directions for every pair. The table shows the value counted from the first species named <span class="pp">|</span></span>
-<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Lowest identity** <span class="pp">|</span> The lowest of all six identity values. The interpretation is based on this, so one weak pair is enough to lower it <span class="pp">|</span></span>
-<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **aa** <span class="pp">|</span> Protein length in amino acids, for the protein Ensembl used in the comparison <span class="pp">|</span></span>
-<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Alignment** <span class="pp">|</span> Aligned, aligned with a length mismatch, or incomplete if a pair is missing <span class="pp">|</span></span>
-<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Pfam domains** <span class="pp">|</span> Protein domains found in the human protein <span class="pp">|</span></span>
-<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to check a result by hand</span></span>
-<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Open the gene in Ensembl.** The gene name in the table links to its Ensembl page. Each</span>
-<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a>   row in the download carries the Ensembl page for all three species.</span>
-<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Check the orthologues.** On the human gene's Ensembl page, open *Comparative Genomics,</span>
-<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a>   Orthologues*. The macaque and mouse genes, the type (1-to-1) and the identity numbers there</span>
-<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a>   should match the download.</span>
-<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Check the release.** The download records the Ensembl release and the date of the run.</span>
-<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a>   Numbers can change between releases.</span>
-<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Check the identity yourself.** The JSON download contains the aligned protein sequences</span>
-<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a>   for every pair and the exact API queries used, so any identity can be recounted from the</span>
-<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>   alignment.</span>
-<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limits of this version</span></span>
-<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**One protein per gene.** Ensembl compares one representative protein per gene. If that</span>
-<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>  protein differs between species, for example a longer macaque model, identity drops and the</span>
-<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a>  length flag catches it. This is the same canonical transcript problem found in the</span>
-<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a>  <span class="co">[</span><span class="ot">audit</span><span class="co">](audit.qmd)</span>.</span>
-<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Protein identity only.** No dN/dS yet. That is the next sequence conservation module.</span>
-<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Thresholds are provisional.** The 90%, 70% and 10% defaults are starting points, not</span>
-<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a>  values taken from a paper.</span>
-<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**No RNA layer yet.**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a><span class="in">    const why = [];</span></span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!row.n_macaque_orthologues) why.push("no macaque orthologue in Ensembl");</span></span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a><span class="in">    else if (row.n_macaque_orthologues &gt; 1) why.push(row.n_macaque_orthologues + " macaque orthologues");</span></span>
+<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a><span class="in">    if (!row.n_mouse_orthologues) why.push("no mouse orthologue in Ensembl");</span></span>
+<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="in">    else if (row.n_mouse_orthologues &gt; 1) why.push(row.n_mouse_orthologues + " mouse orthologues");</span></span>
+<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a><span class="in">    for (const [k, label] of pairs) if (row[k] &amp;&amp; row[k].type !== "ortholog_one2one") why.push(label + " is " + row[k].type.replace("ortholog_", "").replace("2", " to "));</span></span>
+<span id="cb1-195"><a href="#cb1-195" aria-hidden="true" tabindex="-1"></a><span class="in">    row.notes.unshift("not one-to-one: " + (why.join(", ") || "pair missing"));</span></span>
+<span id="cb1-196"><a href="#cb1-196" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb1-197"><a href="#cb1-197" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (lengthFlag) row.interpretation = "not suitable for simple cross-species comparison";</span></span>
+<span id="cb1-198"><a href="#cb1-198" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (row.lowest_identity &gt;= s.high) row.interpretation = "highly conserved core barrier protein";</span></span>
+<span id="cb1-199"><a href="#cb1-199" aria-hidden="true" tabindex="-1"></a><span class="in">  else if (row.lowest_identity &gt;= s.mod) row.interpretation = "moderately conserved";</span></span>
+<span id="cb1-200"><a href="#cb1-200" aria-hidden="true" tabindex="-1"></a><span class="in">  else row.interpretation = "weakly conserved";</span></span>
+<span id="cb1-201"><a href="#cb1-201" aria-hidden="true" tabindex="-1"></a><span class="in">  return row;</span></span>
+<span id="cb1-202"><a href="#cb1-202" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb1-203"><a href="#cb1-203" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-204"><a href="#cb1-204" aria-hidden="true" tabindex="-1"></a><span class="in">function flat(r){</span></span>
+<span id="cb1-205"><a href="#cb1-205" aria-hidden="true" tabindex="-1"></a><span class="in">  const g = (p, k) =&gt; p ? p[k] : null;</span></span>
+<span id="cb1-206"><a href="#cb1-206" aria-hidden="true" tabindex="-1"></a><span class="in">  return {</span></span>
+<span id="cb1-207"><a href="#cb1-207" aria-hidden="true" tabindex="-1"></a><span class="in">    gene: r.gene,</span></span>
+<span id="cb1-208"><a href="#cb1-208" aria-hidden="true" tabindex="-1"></a><span class="in">    status: r.status,</span></span>
+<span id="cb1-209"><a href="#cb1-209" aria-hidden="true" tabindex="-1"></a><span class="in">    interpretation: r.interpretation,</span></span>
+<span id="cb1-210"><a href="#cb1-210" aria-hidden="true" tabindex="-1"></a><span class="in">    one_to_one: r.one_to_one,</span></span>
+<span id="cb1-211"><a href="#cb1-211" aria-hidden="true" tabindex="-1"></a><span class="in">    lowest_identity: r.lowest_identity,</span></span>
+<span id="cb1-212"><a href="#cb1-212" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_macaque_identity_from_human: g(r.hm,"identity_source"),</span></span>
+<span id="cb1-213"><a href="#cb1-213" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_macaque_identity_from_macaque: g(r.hm,"identity_target"),</span></span>
+<span id="cb1-214"><a href="#cb1-214" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_mouse_identity_from_human: g(r.hmo,"identity_source"),</span></span>
+<span id="cb1-215"><a href="#cb1-215" aria-hidden="true" tabindex="-1"></a><span class="in">    human_vs_mouse_identity_from_mouse: g(r.hmo,"identity_target"),</span></span>
+<span id="cb1-216"><a href="#cb1-216" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_vs_mouse_identity_from_macaque: g(r.mm,"identity_source"),</span></span>
+<span id="cb1-217"><a href="#cb1-217" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_vs_mouse_identity_from_mouse: g(r.mm,"identity_target"),</span></span>
+<span id="cb1-218"><a href="#cb1-218" aria-hidden="true" tabindex="-1"></a><span class="in">    human_length_aa: r.human_length,</span></span>
+<span id="cb1-219"><a href="#cb1-219" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_length_aa: r.macaque_length,</span></span>
+<span id="cb1-220"><a href="#cb1-220" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_length_aa: r.mouse_length,</span></span>
+<span id="cb1-221"><a href="#cb1-221" aria-hidden="true" tabindex="-1"></a><span class="in">    alignment_status: r.alignment_status,</span></span>
+<span id="cb1-222"><a href="#cb1-222" aria-hidden="true" tabindex="-1"></a><span class="in">    orthology_human_macaque: g(r.hm,"type"),</span></span>
+<span id="cb1-223"><a href="#cb1-223" aria-hidden="true" tabindex="-1"></a><span class="in">    orthology_human_mouse: g(r.hmo,"type"),</span></span>
+<span id="cb1-224"><a href="#cb1-224" aria-hidden="true" tabindex="-1"></a><span class="in">    orthology_macaque_mouse: g(r.mm,"type"),</span></span>
+<span id="cb1-225"><a href="#cb1-225" aria-hidden="true" tabindex="-1"></a><span class="in">    n_macaque_orthologues: r.n_macaque_orthologues,</span></span>
+<span id="cb1-226"><a href="#cb1-226" aria-hidden="true" tabindex="-1"></a><span class="in">    n_mouse_orthologues: r.n_mouse_orthologues,</span></span>
+<span id="cb1-227"><a href="#cb1-227" aria-hidden="true" tabindex="-1"></a><span class="in">    human_gene_id: r.human_gene_id || null,</span></span>
+<span id="cb1-228"><a href="#cb1-228" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_gene_id: r.macaque_gene_id || null,</span></span>
+<span id="cb1-229"><a href="#cb1-229" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_gene_id: r.mouse_gene_id || null,</span></span>
+<span id="cb1-230"><a href="#cb1-230" aria-hidden="true" tabindex="-1"></a><span class="in">    human_protein_id: r.human_protein_id || null,</span></span>
+<span id="cb1-231"><a href="#cb1-231" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_protein_id: r.macaque_protein_id || null,</span></span>
+<span id="cb1-232"><a href="#cb1-232" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_protein_id: r.mouse_protein_id || null,</span></span>
+<span id="cb1-233"><a href="#cb1-233" aria-hidden="true" tabindex="-1"></a><span class="in">    human_ensembl_page: geneLink(SP.human, r.human_gene_id),</span></span>
+<span id="cb1-234"><a href="#cb1-234" aria-hidden="true" tabindex="-1"></a><span class="in">    macaque_ensembl_page: geneLink(SP.macaque, r.macaque_gene_id),</span></span>
+<span id="cb1-235"><a href="#cb1-235" aria-hidden="true" tabindex="-1"></a><span class="in">    mouse_ensembl_page: geneLink(SP.mouse, r.mouse_gene_id),</span></span>
+<span id="cb1-236"><a href="#cb1-236" aria-hidden="true" tabindex="-1"></a><span class="in">    pfam_domains_human: r.domains || "",</span></span>
+<span id="cb1-237"><a href="#cb1-237" aria-hidden="true" tabindex="-1"></a><span class="in">    notes: r.notes.join("; "),</span></span>
+<span id="cb1-238"><a href="#cb1-238" aria-hidden="true" tabindex="-1"></a><span class="in">    ensembl_release: meta.ensembl_release,</span></span>
+<span id="cb1-239"><a href="#cb1-239" aria-hidden="true" tabindex="-1"></a><span class="in">    run_date: meta.run_date</span></span>
+<span id="cb1-240"><a href="#cb1-240" aria-hidden="true" tabindex="-1"></a><span class="in">  };</span></span>
+<span id="cb1-241"><a href="#cb1-241" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb1-242"><a href="#cb1-242" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-243"><a href="#cb1-243" aria-hidden="true" tabindex="-1"></a><span class="in">const COLS = [</span></span>
+<span id="cb1-244"><a href="#cb1-244" aria-hidden="true" tabindex="-1"></a><span class="in">  ["gene","Gene"],["interpretation","Interpretation"],["one_to_one","1:1"],["lowest_identity","Lowest identity %"],</span></span>
+<span id="cb1-245"><a href="#cb1-245" aria-hidden="true" tabindex="-1"></a><span class="in">  ["human_vs_macaque_identity_from_human","H vs Mac %"],["human_vs_mouse_identity_from_human","H vs Mo %"],</span></span>
+<span id="cb1-246"><a href="#cb1-246" aria-hidden="true" tabindex="-1"></a><span class="in">  ["macaque_vs_mouse_identity_from_macaque","Mac vs Mo %"],</span></span>
+<span id="cb1-247"><a href="#cb1-247" aria-hidden="true" tabindex="-1"></a><span class="in">  ["human_length_aa","H aa"],["macaque_length_aa","Mac aa"],["mouse_length_aa","Mo aa"],</span></span>
+<span id="cb1-248"><a href="#cb1-248" aria-hidden="true" tabindex="-1"></a><span class="in">  ["alignment_status","Alignment"],["pfam_domains_human","Pfam domains (human)"],["notes","Notes"]</span></span>
+<span id="cb1-249"><a href="#cb1-249" aria-hidden="true" tabindex="-1"></a><span class="in">];</span></span>
+<span id="cb1-250"><a href="#cb1-250" aria-hidden="true" tabindex="-1"></a><span class="in">const VCLASS = { "highly conserved core barrier protein":"v-high", "moderately conserved":"v-mod",</span></span>
+<span id="cb1-251"><a href="#cb1-251" aria-hidden="true" tabindex="-1"></a><span class="in">  "weakly conserved":"v-low", "not suitable for simple cross-species comparison":"v-unsuit" };</span></span>
+<span id="cb1-252"><a href="#cb1-252" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-253"><a href="#cb1-253" aria-hidden="true" tabindex="-1"></a><span class="in">function esc(x){ return String(x == null ? "" : x).replace(/[&amp;&lt;&gt;"]/g, c =&gt; ({"&amp;":"&amp;amp;","&lt;":"&amp;lt;","&gt;":"&amp;gt;",'"':"&amp;quot;"}[c])); }</span></span>
+<span id="cb1-254"><a href="#cb1-254" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-255"><a href="#cb1-255" aria-hidden="true" tabindex="-1"></a><span class="in">function render(){</span></span>
+<span id="cb1-256"><a href="#cb1-256" aria-hidden="true" tabindex="-1"></a><span class="in">  const rows = results.map(flat);</span></span>
+<span id="cb1-257"><a href="#cb1-257" aria-hidden="true" tabindex="-1"></a><span class="in">  let h = "&lt;thead&gt;&lt;tr&gt;" + COLS.map(c =&gt; "&lt;th&gt;" + c[1] + "&lt;/th&gt;").join("") + "&lt;/tr&gt;&lt;/thead&gt;&lt;tbody&gt;";</span></span>
+<span id="cb1-258"><a href="#cb1-258" aria-hidden="true" tabindex="-1"></a><span class="in">  for (const r of rows){</span></span>
+<span id="cb1-259"><a href="#cb1-259" aria-hidden="true" tabindex="-1"></a><span class="in">    h += "&lt;tr&gt;" + COLS.map(([k]) =&gt; {</span></span>
+<span id="cb1-260"><a href="#cb1-260" aria-hidden="true" tabindex="-1"></a><span class="in">      let v = r[k];</span></span>
+<span id="cb1-261"><a href="#cb1-261" aria-hidden="true" tabindex="-1"></a><span class="in">      if (k === "gene" &amp;&amp; r.human_ensembl_page) return '&lt;td&gt;&lt;a href="' + r.human_ensembl_page + '" target="_blank" rel="noopener"&gt;' + esc(v) + "&lt;/a&gt;&lt;/td&gt;";</span></span>
+<span id="cb1-262"><a href="#cb1-262" aria-hidden="true" tabindex="-1"></a><span class="in">      if (k === "interpretation") return '&lt;td class="' + (VCLASS[v] || "") + '"&gt;' + esc(v) + "&lt;/td&gt;";</span></span>
+<span id="cb1-263"><a href="#cb1-263" aria-hidden="true" tabindex="-1"></a><span class="in">      if (k === "one_to_one") return "&lt;td&gt;" + (r.status !== "ok" ? "" : v ? "yes" : '&lt;span class="mvp-flag"&gt;no&lt;/span&gt;') + "&lt;/td&gt;";</span></span>
+<span id="cb1-264"><a href="#cb1-264" aria-hidden="true" tabindex="-1"></a><span class="in">      if (typeof v === "number") return '&lt;td class="num"&gt;' + (Math.round(v * 10) / 10) + "&lt;/td&gt;";</span></span>
+<span id="cb1-265"><a href="#cb1-265" aria-hidden="true" tabindex="-1"></a><span class="in">      return "&lt;td&gt;" + esc(v) + "&lt;/td&gt;";</span></span>
+<span id="cb1-266"><a href="#cb1-266" aria-hidden="true" tabindex="-1"></a><span class="in">    }).join("") + "&lt;/tr&gt;";</span></span>
+<span id="cb1-267"><a href="#cb1-267" aria-hidden="true" tabindex="-1"></a><span class="in">  }</span></span>
+<span id="cb1-268"><a href="#cb1-268" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-table").innerHTML = h + "&lt;/tbody&gt;";</span></span>
+<span id="cb1-269"><a href="#cb1-269" aria-hidden="true" tabindex="-1"></a><span class="in">  const count = {};</span></span>
+<span id="cb1-270"><a href="#cb1-270" aria-hidden="true" tabindex="-1"></a><span class="in">  rows.forEach(r =&gt; count[r.interpretation] = (count[r.interpretation] || 0) + 1);</span></span>
+<span id="cb1-271"><a href="#cb1-271" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-summary").innerHTML = "&lt;strong&gt;" + rows.length + " genes.&lt;/strong&gt; " +</span></span>
+<span id="cb1-272"><a href="#cb1-272" aria-hidden="true" tabindex="-1"></a><span class="in">    Object.keys(count).map(k =&gt; esc(k) + ": " + count[k]).join(" · ") +</span></span>
+<span id="cb1-273"><a href="#cb1-273" aria-hidden="true" tabindex="-1"></a><span class="in">    " · Ensembl release " + esc(meta.ensembl_release) + ".";</span></span>
+<span id="cb1-274"><a href="#cb1-274" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb1-275"><a href="#cb1-275" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-276"><a href="#cb1-276" aria-hidden="true" tabindex="-1"></a><span class="in">function download(name, text, type){</span></span>
+<span id="cb1-277"><a href="#cb1-277" aria-hidden="true" tabindex="-1"></a><span class="in">  const a = document.createElement("a");</span></span>
+<span id="cb1-278"><a href="#cb1-278" aria-hidden="true" tabindex="-1"></a><span class="in">  a.href = URL.createObjectURL(new Blob([text], { type }));</span></span>
+<span id="cb1-279"><a href="#cb1-279" aria-hidden="true" tabindex="-1"></a><span class="in">  a.download = name; a.click();</span></span>
+<span id="cb1-280"><a href="#cb1-280" aria-hidden="true" tabindex="-1"></a><span class="in">  setTimeout(() =&gt; URL.revokeObjectURL(a.href), 1000);</span></span>
+<span id="cb1-281"><a href="#cb1-281" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb1-282"><a href="#cb1-282" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-283"><a href="#cb1-283" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-csv").onclick = () =&gt; {</span></span>
+<span id="cb1-284"><a href="#cb1-284" aria-hidden="true" tabindex="-1"></a><span class="in">  const rows = results.map(flat), keys = Object.keys(rows[0]);</span></span>
+<span id="cb1-285"><a href="#cb1-285" aria-hidden="true" tabindex="-1"></a><span class="in">  const cell = v =&gt; { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; };</span></span>
+<span id="cb1-286"><a href="#cb1-286" aria-hidden="true" tabindex="-1"></a><span class="in">  download("bbb_conservation_mvp.csv", [keys.join(",")].concat(rows.map(r =&gt; keys.map(k =&gt; cell(r[k])).join(","))).join("\n"), "text/csv");</span></span>
+<span id="cb1-287"><a href="#cb1-287" aria-hidden="true" tabindex="-1"></a><span class="in">};</span></span>
+<span id="cb1-288"><a href="#cb1-288" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-json").onclick = () =&gt; {</span></span>
+<span id="cb1-289"><a href="#cb1-289" aria-hidden="true" tabindex="-1"></a><span class="in">  const out = { meta, genes: results.map(r =&gt; Object.assign(flat(r), {</span></span>
+<span id="cb1-290"><a href="#cb1-290" aria-hidden="true" tabindex="-1"></a><span class="in">    alignments: { human_vs_macaque: r.hm ? [r.hm.align_source, r.hm.align_target] : null,</span></span>
+<span id="cb1-291"><a href="#cb1-291" aria-hidden="true" tabindex="-1"></a><span class="in">                  human_vs_mouse: r.hmo ? [r.hmo.align_source, r.hmo.align_target] : null,</span></span>
+<span id="cb1-292"><a href="#cb1-292" aria-hidden="true" tabindex="-1"></a><span class="in">                  macaque_vs_mouse: r.mm ? [r.mm.align_source, r.mm.align_target] : null },</span></span>
+<span id="cb1-293"><a href="#cb1-293" aria-hidden="true" tabindex="-1"></a><span class="in">    api_queries: r.queries })) };</span></span>
+<span id="cb1-294"><a href="#cb1-294" aria-hidden="true" tabindex="-1"></a><span class="in">  download("bbb_conservation_mvp.json", JSON.stringify(out, null, 2), "application/json");</span></span>
+<span id="cb1-295"><a href="#cb1-295" aria-hidden="true" tabindex="-1"></a><span class="in">};</span></span>
+<span id="cb1-296"><a href="#cb1-296" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-297"><a href="#cb1-297" aria-hidden="true" tabindex="-1"></a><span class="in">let settings = {};</span></span>
+<span id="cb1-298"><a href="#cb1-298" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-299"><a href="#cb1-299" aria-hidden="true" tabindex="-1"></a><span class="in">async function runGenes(genes){</span></span>
+<span id="cb1-300"><a href="#cb1-300" aria-hidden="true" tabindex="-1"></a><span class="in">  ["mvp-run","mvp-csv","mvp-json","mvp-retry"].forEach(id =&gt; $(id).disabled = true);</span></span>
+<span id="cb1-301"><a href="#cb1-301" aria-hidden="true" tabindex="-1"></a><span class="in">  const prog = $("mvp-progress"); prog.hidden = false; prog.max = genes.length; prog.value = 0;</span></span>
+<span id="cb1-302"><a href="#cb1-302" aria-hidden="true" tabindex="-1"></a><span class="in">  const t0 = Date.now();</span></span>
+<span id="cb1-303"><a href="#cb1-303" aria-hidden="true" tabindex="-1"></a><span class="in">  let next = 0;</span></span>
+<span id="cb1-304"><a href="#cb1-304" aria-hidden="true" tabindex="-1"></a><span class="in">  const worker = async () =&gt; {</span></span>
+<span id="cb1-305"><a href="#cb1-305" aria-hidden="true" tabindex="-1"></a><span class="in">    while (next &lt; genes.length){</span></span>
+<span id="cb1-306"><a href="#cb1-306" aria-hidden="true" tabindex="-1"></a><span class="in">      const i = next++;</span></span>
+<span id="cb1-307"><a href="#cb1-307" aria-hidden="true" tabindex="-1"></a><span class="in">      const row = await runGene(genes[i], settings);</span></span>
+<span id="cb1-308"><a href="#cb1-308" aria-hidden="true" tabindex="-1"></a><span class="in">      const at = results.findIndex(r =&gt; r.gene === row.gene);</span></span>
+<span id="cb1-309"><a href="#cb1-309" aria-hidden="true" tabindex="-1"></a><span class="in">      if (at &gt;= 0) results[at] = row; else results.push(row);</span></span>
+<span id="cb1-310"><a href="#cb1-310" aria-hidden="true" tabindex="-1"></a><span class="in">      prog.value++;</span></span>
+<span id="cb1-311"><a href="#cb1-311" aria-hidden="true" tabindex="-1"></a><span class="in">      const left = Math.round((Date.now() - t0) / prog.value * (genes.length - prog.value) / 1000);</span></span>
+<span id="cb1-312"><a href="#cb1-312" aria-hidden="true" tabindex="-1"></a><span class="in">      $("mvp-status").textContent = prog.value + " of " + genes.length + " genes done" +</span></span>
+<span id="cb1-313"><a href="#cb1-313" aria-hidden="true" tabindex="-1"></a><span class="in">        (prog.value &lt; genes.length ? ", about " + Math.max(1, Math.round(left / 60)) + " min left" : "");</span></span>
+<span id="cb1-314"><a href="#cb1-314" aria-hidden="true" tabindex="-1"></a><span class="in">    }</span></span>
+<span id="cb1-315"><a href="#cb1-315" aria-hidden="true" tabindex="-1"></a><span class="in">  };</span></span>
+<span id="cb1-316"><a href="#cb1-316" aria-hidden="true" tabindex="-1"></a><span class="in">  await Promise.all([worker(), worker(), worker()]);</span></span>
+<span id="cb1-317"><a href="#cb1-317" aria-hidden="true" tabindex="-1"></a><span class="in">  const order = $("mvp-genes").value.split(/[\s,;]+/).map(g =&gt; g.trim().toUpperCase());</span></span>
+<span id="cb1-318"><a href="#cb1-318" aria-hidden="true" tabindex="-1"></a><span class="in">  results.sort((a, b) =&gt; order.indexOf(a.gene) - order.indexOf(b.gene));</span></span>
+<span id="cb1-319"><a href="#cb1-319" aria-hidden="true" tabindex="-1"></a><span class="in">  render();</span></span>
+<span id="cb1-320"><a href="#cb1-320" aria-hidden="true" tabindex="-1"></a><span class="in">  const failed = results.filter(r =&gt; r.status.startsWith("request failed")).length;</span></span>
+<span id="cb1-321"><a href="#cb1-321" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-status").textContent = "Done" + (failed ? ". " + failed + " genes failed because Ensembl did not respond; retry them below." : ".");</span></span>
+<span id="cb1-322"><a href="#cb1-322" aria-hidden="true" tabindex="-1"></a><span class="in">  prog.hidden = true;</span></span>
+<span id="cb1-323"><a href="#cb1-323" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-retry").hidden = !failed;</span></span>
+<span id="cb1-324"><a href="#cb1-324" aria-hidden="true" tabindex="-1"></a><span class="in">  ["mvp-run","mvp-csv","mvp-json","mvp-retry"].forEach(id =&gt; $(id).disabled = false);</span></span>
+<span id="cb1-325"><a href="#cb1-325" aria-hidden="true" tabindex="-1"></a><span class="in">}</span></span>
+<span id="cb1-326"><a href="#cb1-326" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-327"><a href="#cb1-327" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-run").onclick = async () =&gt; {</span></span>
+<span id="cb1-328"><a href="#cb1-328" aria-hidden="true" tabindex="-1"></a><span class="in">  const genes = [...new Set($("mvp-genes").value.split(/[\s,;]+/).map(g =&gt; g.trim().toUpperCase()).filter(Boolean))];</span></span>
+<span id="cb1-329"><a href="#cb1-329" aria-hidden="true" tabindex="-1"></a><span class="in">  if (!genes.length) return;</span></span>
+<span id="cb1-330"><a href="#cb1-330" aria-hidden="true" tabindex="-1"></a><span class="in">  settings = { high: +$("mvp-high").value, mod: +$("mvp-mod").value, len: +$("mvp-len").value };</span></span>
+<span id="cb1-331"><a href="#cb1-331" aria-hidden="true" tabindex="-1"></a><span class="in">  results = []; $("mvp-table").innerHTML = ""; $("mvp-summary").innerHTML = "";</span></span>
+<span id="cb1-332"><a href="#cb1-332" aria-hidden="true" tabindex="-1"></a><span class="in">  $("mvp-status").textContent = "Starting…";</span></span>
+<span id="cb1-333"><a href="#cb1-333" aria-hidden="true" tabindex="-1"></a><span class="in">  try {</span></span>
+<span id="cb1-334"><a href="#cb1-334" aria-hidden="true" tabindex="-1"></a><span class="in">    const info = await getJSON("/info/data");</span></span>
+<span id="cb1-335"><a href="#cb1-335" aria-hidden="true" tabindex="-1"></a><span class="in">    meta = { ensembl_release: info.data.releases[0], run_date: new Date().toISOString().slice(0,10),</span></span>
+<span id="cb1-336"><a href="#cb1-336" aria-hidden="true" tabindex="-1"></a><span class="in">             thresholds: { highly_conserved_min_identity: settings.high, moderately_conserved_min_identity: settings.mod, max_length_difference_pct: settings.len },</span></span>
+<span id="cb1-337"><a href="#cb1-337" aria-hidden="true" tabindex="-1"></a><span class="in">             source: "Ensembl REST API, Compara orthologues and Pfam protein features",</span></span>
+<span id="cb1-338"><a href="#cb1-338" aria-hidden="true" tabindex="-1"></a><span class="in">             identity_definition: "Ensembl perc_id: percentage of one protein's residues identical to the other in the Compara alignment. Reported from both sides; lowest_identity is the minimum over all six values." };</span></span>
+<span id="cb1-339"><a href="#cb1-339" aria-hidden="true" tabindex="-1"></a><span class="in">  } catch(e){ meta = { ensembl_release: "unknown", run_date: new Date().toISOString().slice(0,10) }; }</span></span>
+<span id="cb1-340"><a href="#cb1-340" aria-hidden="true" tabindex="-1"></a><span class="in">  await runGenes(genes);</span></span>
+<span id="cb1-341"><a href="#cb1-341" aria-hidden="true" tabindex="-1"></a><span class="in">};</span></span>
+<span id="cb1-342"><a href="#cb1-342" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-343"><a href="#cb1-343" aria-hidden="true" tabindex="-1"></a><span class="in">$("mvp-retry").onclick = () =&gt; runGenes(results.filter(r =&gt; r.status.startsWith("request failed")).map(r =&gt; r.gene));</span></span>
+<span id="cb1-344"><a href="#cb1-344" aria-hidden="true" tabindex="-1"></a><span class="in">})();</span></span>
+<span id="cb1-345"><a href="#cb1-345" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/script&gt;</span></span>
+<span id="cb1-346"><a href="#cb1-346" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-347"><a href="#cb1-347" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-348"><a href="#cb1-348" aria-hidden="true" tabindex="-1"></a><span class="fu">## What each column means</span></span>
+<span id="cb1-349"><a href="#cb1-349" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-350"><a href="#cb1-350" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Column <span class="pp">|</span> Meaning <span class="pp">|</span></span>
+<span id="cb1-351"><a href="#cb1-351" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb1-352"><a href="#cb1-352" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Interpretation** <span class="pp">|</span> Highly conserved core barrier protein, moderately conserved, weakly conserved, or not suitable for simple cross-species comparison. Not suitable means the gene is not one-to-one in all three pairs, or the proteins differ in length beyond the tolerance <span class="pp">|</span></span>
+<span id="cb1-353"><a href="#cb1-353" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **1:1** <span class="pp">|</span> Whether Ensembl calls the gene one-to-one in all three pairs: human vs macaque, human vs mouse, macaque vs mouse <span class="pp">|</span></span>
+<span id="cb1-354"><a href="#cb1-354" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Identity %** <span class="pp">|</span> Ensembl's percent identity: the share of one protein's amino acids that are identical in the other, in Ensembl's alignment. It depends on which protein you count from, so the download gives both directions for every pair. The table shows the value counted from the first species named <span class="pp">|</span></span>
+<span id="cb1-355"><a href="#cb1-355" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Lowest identity** <span class="pp">|</span> The lowest of all six identity values. The interpretation is based on this, so one weak pair is enough to lower it <span class="pp">|</span></span>
+<span id="cb1-356"><a href="#cb1-356" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **aa** <span class="pp">|</span> Protein length in amino acids, for the protein Ensembl used in the comparison <span class="pp">|</span></span>
+<span id="cb1-357"><a href="#cb1-357" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Alignment** <span class="pp">|</span> Aligned, aligned with a length mismatch, or incomplete if a pair is missing <span class="pp">|</span></span>
+<span id="cb1-358"><a href="#cb1-358" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Pfam domains** <span class="pp">|</span> Protein domains found in the human protein <span class="pp">|</span></span>
+<span id="cb1-359"><a href="#cb1-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-360"><a href="#cb1-360" aria-hidden="true" tabindex="-1"></a><span class="fu">## How to check a result by hand</span></span>
+<span id="cb1-361"><a href="#cb1-361" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-362"><a href="#cb1-362" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Open the gene in Ensembl.** The gene name in the table links to its Ensembl page. Each</span>
+<span id="cb1-363"><a href="#cb1-363" aria-hidden="true" tabindex="-1"></a>   row in the download carries the Ensembl page for all three species.</span>
+<span id="cb1-364"><a href="#cb1-364" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Check the orthologues.** On the human gene's Ensembl page, open *Comparative Genomics,</span>
+<span id="cb1-365"><a href="#cb1-365" aria-hidden="true" tabindex="-1"></a>   Orthologues*. The macaque and mouse genes, the type (1-to-1) and the identity numbers there</span>
+<span id="cb1-366"><a href="#cb1-366" aria-hidden="true" tabindex="-1"></a>   should match the download.</span>
+<span id="cb1-367"><a href="#cb1-367" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Check the release.** The download records the Ensembl release and the date of the run.</span>
+<span id="cb1-368"><a href="#cb1-368" aria-hidden="true" tabindex="-1"></a>   Numbers can change between releases.</span>
+<span id="cb1-369"><a href="#cb1-369" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Check the identity yourself.** The JSON download contains the aligned protein sequences</span>
+<span id="cb1-370"><a href="#cb1-370" aria-hidden="true" tabindex="-1"></a>   for every pair and the exact API queries used, so any identity can be recounted from the</span>
+<span id="cb1-371"><a href="#cb1-371" aria-hidden="true" tabindex="-1"></a>   alignment.</span>
+<span id="cb1-372"><a href="#cb1-372" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-373"><a href="#cb1-373" aria-hidden="true" tabindex="-1"></a><span class="fu">## Limits of this version</span></span>
+<span id="cb1-374"><a href="#cb1-374" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-375"><a href="#cb1-375" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**One protein per gene.** Ensembl compares one representative protein per gene. If that</span>
+<span id="cb1-376"><a href="#cb1-376" aria-hidden="true" tabindex="-1"></a>  protein differs between species, for example a longer macaque model, identity drops and the</span>
+<span id="cb1-377"><a href="#cb1-377" aria-hidden="true" tabindex="-1"></a>  length flag catches it. This is the same canonical transcript problem found in the</span>
+<span id="cb1-378"><a href="#cb1-378" aria-hidden="true" tabindex="-1"></a>  <span class="co">[</span><span class="ot">audit</span><span class="co">](audit.qmd)</span>.</span>
+<span id="cb1-379"><a href="#cb1-379" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Protein identity only.** No dN/dS yet. That is the next sequence conservation module.</span>
+<span id="cb1-380"><a href="#cb1-380" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Thresholds are provisional.** The 90%, 70% and 10% defaults are starting points, not</span>
+<span id="cb1-381"><a href="#cb1-381" aria-hidden="true" tabindex="-1"></a>  values taken from a paper.</span>
+<span id="cb1-382"><a href="#cb1-382" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**No RNA layer yet.**</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

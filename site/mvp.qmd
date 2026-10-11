@@ -186,7 +186,13 @@ function classify(row, s){
   if (row.status !== "ok"){ row.interpretation = "not run"; row.notes.unshift(row.status); }
   else if (!row.one_to_one){
     row.interpretation = "not suitable for simple cross-species comparison";
-    row.notes.unshift("not one-to-one in all three pairs (macaque: " + row.n_macaque_orthologues + ", mouse: " + row.n_mouse_orthologues + " orthologues)");
+    const why = [];
+    if (!row.n_macaque_orthologues) why.push("no macaque orthologue in Ensembl");
+    else if (row.n_macaque_orthologues > 1) why.push(row.n_macaque_orthologues + " macaque orthologues");
+    if (!row.n_mouse_orthologues) why.push("no mouse orthologue in Ensembl");
+    else if (row.n_mouse_orthologues > 1) why.push(row.n_mouse_orthologues + " mouse orthologues");
+    for (const [k, label] of pairs) if (row[k] && row[k].type !== "ortholog_one2one") why.push(label + " is " + row[k].type.replace("ortholog_", "").replace("2", " to "));
+    row.notes.unshift("not one-to-one: " + (why.join(", ") || "pair missing"));
   }
   else if (lengthFlag) row.interpretation = "not suitable for simple cross-species comparison";
   else if (row.lowest_identity >= s.high) row.interpretation = "highly conserved core barrier protein";
