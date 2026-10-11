@@ -230,7 +230,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>Sheng Y, Ali RA, Heyland A (2022). Comparative transcriptomics analysis pipeline for the meta-analysis of phylogenetically divergent datasets (CoRMAP). <em>BMC Bioinformatics</em> 23:415. <a href="https://doi.org/10.1186/s12859-022-04972-9" class="uri">https://doi.org/10.1186/s12859-022-04972-9</a>. Open access under CC BY 4.0. Read on <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9547434/">PubMed Central</a>.</p>
 </blockquote>
 <div class="scan-note">
-<p>Reading in progress.</p>
+<p>Reading in progress. Read so far: abstract, background and implementation. Results skimmed.</p>
 </div>
 <table class="caption-top table">
 <colgroup>
@@ -289,6 +289,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Report a metadata table.</strong></li>
 <li>Allow for the <strong>downstream analysis with the OGG analysis</strong>, which I think they have also published, so this tool also belongs to them.</li>
 </ol>
+<p><strong>Where I am.</strong> I have only read the abstract, background and implementation, and I have been skimming through the results section.</p>
+<p><strong>Using it on my own project.</strong> This is a very clear mechanism to actually use. They are talking about any RNA sequencing dataset, so that means in theory I should be able to test it on my own project. This is something you need to run locally, but I do not have the hardware requirement: they talk about <strong>100 gigabytes of free space</strong> for the OrthoMCL step, which I do not have. Since we have the code, I have been wondering whether I could create some kind of software for easier use.</p>
+<p>I do see that it calls other tools, but I was assuming that it would be possible to use it on any type of RNA sequencing dataset, because they explicitly say it is developed for the <strong>meta-analysis of phylogenetically divergent datasets</strong>. Human, macaque and mouse are somewhat divergent, specifically human and mouse, with I think <strong>90 million years</strong> of evolution apart.</p>
 </section>
 <section id="what-i-take-from-it" class="level2">
 <h2 class="anchored" data-anchor-id="what-i-take-from-it">What I take from it</h2>
@@ -300,6 +303,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li><strong>Is this the same orthologue categorisation problem?</strong> Yes. CoRMAP does not choose between one-to-one and one-to-many: OrthoMCL clusters orthologues and in-paralogues into orthologous gene groups, and expression is compared per group.</li>
 <li><strong>Is quantification something that can be input?</strong> It is done by the pipeline: reads are mapped back to the assembly and quantified with RSEM inside Trinity, then normalised to TPM. The input is raw RNA sequencing data, either public or one’s own.</li>
 <li><strong>Is the OGG analysis their own published tool?</strong> The OGG analysis is part of CoRMAP itself, written as their own R scripts. OrthoMCL, Trinity and Trinotate are existing tools by others.</li>
+<li><strong>Are human and mouse about 90 million years apart?</strong> Yes, roughly. Common estimates place the human and mouse split at about 75 to 90 million years ago.</li>
+<li><strong>Could CoRMAP’s code be built into easier software?</strong> Yes. The code is released under the GPL-3.0 licence, which allows modifying and sharing it, provided the new software is also GPL-3.0, keeps the authors’ credit, and states what was changed.</li>
 </ul>
 
 
@@ -775,7 +780,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="at">&gt; Read on </span><span class="co">[</span><span class="ot">PubMed Central</span><span class="co">](https://pmc.ncbi.nlm.nih.gov/articles/PMC9547434/)</span><span class="at">.</span></span>
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Reading in progress.</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>Reading in progress. Read so far: abstract, background and implementation. Results skimmed.</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Field <span class="pp">|</span> <span class="pp">|</span></span>
@@ -832,21 +837,41 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-66"><a href="#cb1-66" aria-hidden="true" tabindex="-1"></a><span class="ss">9. </span>Allow for the **downstream analysis with the OGG analysis**, which I think they have also</span>
 <span id="cb1-67"><a href="#cb1-67" aria-hidden="true" tabindex="-1"></a>   published, so this tool also belongs to them.</span>
 <span id="cb1-68"><a href="#cb1-68" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a><span class="fu">## What I take from it</span></span>
-<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a>An amazing project, and a much clearer approach. It encounters all the problems we had,</span>
-<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>specifically with orthologues and how to use their gene expression levels.</span>
-<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a><span class="fu">## Checks against the paper</span></span>
-<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Is this the same orthologue categorisation problem?** Yes. CoRMAP does not choose between</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  one-to-one and one-to-many: OrthoMCL clusters orthologues and in-paralogues into orthologous</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  gene groups, and expression is compared per group.</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Is quantification something that can be input?** It is done by the pipeline: reads are</span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>  mapped back to the assembly and quantified with RSEM inside Trinity, then normalised to TPM.</span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  The input is raw RNA sequencing data, either public or one's own.</span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Is the OGG analysis their own published tool?** The OGG analysis is part of CoRMAP itself,</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  written as their own R scripts. OrthoMCL, Trinity and Trinotate are existing tools by others.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-69"><a href="#cb1-69" aria-hidden="true" tabindex="-1"></a>**Where I am.** I have only read the abstract, background and implementation, and I have been</span>
+<span id="cb1-70"><a href="#cb1-70" aria-hidden="true" tabindex="-1"></a>skimming through the results section.</span>
+<span id="cb1-71"><a href="#cb1-71" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-72"><a href="#cb1-72" aria-hidden="true" tabindex="-1"></a>**Using it on my own project.** This is a very clear mechanism to actually use. They are</span>
+<span id="cb1-73"><a href="#cb1-73" aria-hidden="true" tabindex="-1"></a>talking about any RNA sequencing dataset, so that means in theory I should be able to test it</span>
+<span id="cb1-74"><a href="#cb1-74" aria-hidden="true" tabindex="-1"></a>on my own project. This is something you need to run locally, but I do not have the hardware</span>
+<span id="cb1-75"><a href="#cb1-75" aria-hidden="true" tabindex="-1"></a>requirement: they talk about **100 gigabytes of free space** for the OrthoMCL step, which I do</span>
+<span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>not have. Since we have the code, I have been wondering whether I could create some kind of</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>software for easier use.</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>I do see that it calls other tools, but I was assuming that it would be possible to use it on</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>any type of RNA sequencing dataset, because they explicitly say it is developed for the</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>**meta-analysis of phylogenetically divergent datasets**. Human, macaque and mouse are somewhat</span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>divergent, specifically human and mouse, with I think **90 million years** of evolution apart.</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a><span class="fu">## What I take from it</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>An amazing project, and a much clearer approach. It encounters all the problems we had,</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>specifically with orthologues and how to use their gene expression levels.</span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a><span class="fu">## Checks against the paper</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Is this the same orthologue categorisation problem?** Yes. CoRMAP does not choose between</span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>  one-to-one and one-to-many: OrthoMCL clusters orthologues and in-paralogues into orthologous</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  gene groups, and expression is compared per group.</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Is quantification something that can be input?** It is done by the pipeline: reads are</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>  mapped back to the assembly and quantified with RSEM inside Trinity, then normalised to TPM.</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  The input is raw RNA sequencing data, either public or one's own.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Is the OGG analysis their own published tool?** The OGG analysis is part of CoRMAP itself,</span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>  written as their own R scripts. OrthoMCL, Trinity and Trinotate are existing tools by others.</span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Are human and mouse about 90 million years apart?** Yes, roughly. Common estimates place</span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>  the human and mouse split at about 75 to 90 million years ago.</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Could CoRMAP's code be built into easier software?** Yes. The code is released under the</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>  GPL-3.0 licence, which allows modifying and sharing it, provided the new software is also</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>  GPL-3.0, keeps the authors' credit, and states what was changed.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
