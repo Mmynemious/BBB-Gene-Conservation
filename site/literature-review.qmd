@@ -139,6 +139,20 @@ bioinformatical project with relatively little academic review in mind.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [LoVerso and Cui 2015](papers/loverso2015.qmd)
+
+::: {.paper-meta}
+[2015]{.pm} [Mouse · rat]{.pm} [RNA]{.pm} [Bulk RNA-seq]{.pm} [Method]{.pm} [Reading in progress]{.pm}
+:::
+
+A computational pipeline for cross-species expression analysis using RNA sequencing, laid out
+step by step in one graph. I suppose this is the best guide on how to do this, and a way to
+think about where the workflows encountered so far fit into our project.
+
+[Read the entry →](papers/loverso2015.qmd)
+:::
+
+::: {.paper-card}
 ### [Beker et al. 2025](papers/beker2025.qmd)
 
 ::: {.paper-meta}
