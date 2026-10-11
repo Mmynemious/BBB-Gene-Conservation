@@ -77,13 +77,6 @@ against single-cell data and immunohistochemistry: `SLC6A12`, `SLC12A7`, `GEM`, 
 `FOXL1`, `PTGDR2`, `FHL5`, `SMOC2`, `LPL`. `GEM`, `FOXL1` and `FRZB` are absent or nearly
 absent in mouse brain pericytes but robustly expressed in human.
 
-## Checks against the paper
-
-- **On LCM against single cell RNA sequencing, you are right.** The paper's reason is that
-  single cell RNA-seq has a poor ability to detect very low abundance transcripts, while LCM
-  cuts the vessel straight out of frozen tissue so they survive. The paper calls the two
-  approaches complementary rather than ranking one above the other.
-
 ## How it relates to this project
 
 1. **The SLC point is right, and it is stronger than it looks.** Two independent papers now

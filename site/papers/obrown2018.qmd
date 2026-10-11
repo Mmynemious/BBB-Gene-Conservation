@@ -105,13 +105,9 @@ the history of the barrier.
 
 ## Checks against the paper
 
-- **Ehrlich.** Right. The experiment was in 1885, and the animals were rats.
-- **Pericytes and astrocytes, you have it right.** Pericytes are needed to form the barrier
-  but not to maintain it. Astrocytes arrive after the barrier forms and are likely involved in
-  maintaining it and regulating its permeability.
-- **Type 2 brains are not fly-like.** Type 2 brains, which include mammals, have the
-  endothelial barrier. It is some type 1 brains, such as sharks and rays, that are protected
-  by a glial barrier resembling the fly's.
+- **Are type 2 brains protected like the fruit fly?** No. Type 2 brains, which include
+  mammals, have the endothelial barrier. The fly-like glial barrier is found in some type 1
+  brains, such as sharks and rays.
 
 ## The conserved genes it names
 

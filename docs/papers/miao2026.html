@@ -294,13 +294,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <section id="checks-against-the-paper" class="level2">
 <h2 class="anchored" data-anchor-id="checks-against-the-paper">Checks against the paper</h2>
 <ul>
-<li><strong>On bulk RNA and cellular resolution.</strong> It is not missing data so much as blended data. Bulk RNA-seq measures the average across every cell in the tissue, so the endothelial signal cannot be separated out. Single cell and single nucleus methods measure one cell at a time.</li>
-<li><strong>Which method, as you were watching for:</strong> both. Mouse is single cell RNA-seq; human is one single nucleus dataset and one single cell dataset.</li>
-<li><strong>386 genes enriched in mouse</strong> is what the abstract and results say; the discussion says
-<ol start="385" type="1">
-<li></li>
-</ol></li>
-<li><strong>Highly correlated across platforms:</strong> Pearson <em>r</em> = 0.941 within mouse.</li>
+<li><strong>What does “bulk RNA is limited due to the lack of cellular resolution” mean?</strong> Bulk RNA-seq averages across every cell in the tissue, so the endothelial signal is blended with neurons and glia. Single cell and single nucleus methods measure one cell at a time.</li>
+<li><strong>Single nucleus or single cell RNA sequencing?</strong> Both. Mouse is single cell; human is one single nucleus and one single cell dataset.</li>
 </ul>
 </section>
 <section id="the-species-specific-genes-it-names" class="level2">
@@ -912,109 +907,106 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a><span class="fu">## Checks against the paper</span></span>
 <span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**On bulk RNA and cellular resolution.** It is not missing data so much as blended data.</span>
-<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  Bulk RNA-seq measures the average across every cell in the tissue, so the endothelial signal</span>
-<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  cannot be separated out. Single cell and single nucleus methods measure one cell at a time.</span>
-<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Which method, as you were watching for:** both. Mouse is single cell RNA-seq; human is one</span>
-<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  single nucleus dataset and one single cell dataset.</span>
-<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**386 genes enriched in mouse** is what the abstract and results say; the discussion says</span>
-<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>  385.</span>
-<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Highly correlated across platforms:** Pearson *r* = 0.941 within mouse.</span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="fu">## The species-specific genes it names</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**What does "bulk RNA is limited due to the lack of cellular resolution" mean?** Bulk RNA-seq</span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  averages across every cell in the tissue, so the endothelial signal is blended with neurons</span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  and glia. Single cell and single nucleus methods measure one cell at a time.</span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>**Single nucleus or single cell RNA sequencing?** Both. Mouse is single cell; human is one</span>
+<span id="cb1-96"><a href="#cb1-96" aria-hidden="true" tabindex="-1"></a>  single nucleus and one single cell dataset.</span>
+<span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a><span class="fu">## The species-specific genes it names</span></span>
+<span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a>**Higher or specific in mouse:** <span class="in">`Slco1c1`</span>, <span class="in">`Slc22a8`</span>, <span class="in">`Pglyrp1`</span>, <span class="in">`Tspan13`</span>, <span class="in">`Ucp2`</span>.</span>
+<span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a><span class="in">`Slco1c1`</span> encodes Oatp1c1, which carries thyroid hormone T4 across the mouse barrier.</span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>**Higher or specific in mouse:** <span class="in">`Slco1c1`</span>, <span class="in">`Slc22a8`</span>, <span class="in">`Pglyrp1`</span>, <span class="in">`Tspan13`</span>, <span class="in">`Ucp2`</span>.</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a><span class="in">`Slco1c1`</span> encodes Oatp1c1, which carries thyroid hormone T4 across the mouse barrier.</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>**Higher or specific in human:** <span class="in">`A2M`</span>, <span class="in">`CLEC3B`</span>, <span class="in">`BTNL9`</span>, <span class="in">`SPOCK3`</span>, <span class="in">`RUNDC3B`</span>. <span class="in">`A2M`</span> is</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>alpha-2-macroglobulin, a protease inhibitor implicated in amyloid-beta clearance.</span>
 <span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>**Higher or specific in human:** <span class="in">`A2M`</span>, <span class="in">`CLEC3B`</span>, <span class="in">`BTNL9`</span>, <span class="in">`SPOCK3`</span>, <span class="in">`RUNDC3B`</span>. <span class="in">`A2M`</span> is</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>alpha-2-macroglobulin, a protease inhibitor implicated in amyloid-beta clearance.</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>**Conserved and robust in both:** <span class="in">`FLT1`</span>, <span class="in">`CLDN5`</span>, <span class="in">`PECAM1`</span>, <span class="in">`SLC2A1`</span> (GLUT1), with <span class="in">`MFSD2A`</span></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>and <span class="in">`CLDN5`</span> consistently recovered as canonical capillary markers.</span>
 <span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a>**Conserved and robust in both:** <span class="in">`FLT1`</span>, <span class="in">`CLDN5`</span>, <span class="in">`PECAM1`</span>, <span class="in">`SLC2A1`</span> (GLUT1), with <span class="in">`MFSD2A`</span></span>
-<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>and <span class="in">`CLDN5`</span> consistently recovered as canonical capillary markers.</span>
-<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="fu">## How it relates to this project</span></span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**This is the closest paper yet to what the project is doing, and it is two months old.**</span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>   Same two species, same question of how far mouse stands in for human at the barrier, and</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>   published while this project was running. The difference is the measurement: they compare</span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>   **expression**, this project compares **coding sequence**. That is a real distinction and it</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>   is worth stating in the project's framing rather than discovering later.</span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**It validates the statistical choices.** One-to-one orthologues, Seurat, Wilcoxon</span>
-<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>   rank-sum, Bonferroni adjustment. That is the same framework as <span class="in">`step5e`</span> and <span class="in">`step5g`</span>. The</span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">audit</span><span class="co">](../audit.qmd)</span> already found the statistics to be the clean part of the pipeline;</span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>   this is independent confirmation that they match current practice in the field.</span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**It settles the one-to-many orthologue question.** They restricted to **one-to-one</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>   orthologous pairs only**, 15,675 of them, and cross-checked Ensembl against NCBI. This</span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>   project admitted 196 one-to-many pairs at 25.8% identity into the BBB set in <span class="in">`step3b`</span>, and</span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>   then <span class="in">`step5d`</span> excluded them from the control but not from the BBB set. The field standard is</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>   to use one-to-one throughout. That is direct support for the <span class="in">`step5d`</span> fix.</span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**The sharpest finding for this project: the divergent family is the SLC family.** A</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>   substantial proportion of the differentially expressed genes are solute carriers. This</span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>   project's gene list carries 52 SLC genes, about 3.4% of it, including the ones named here,</span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>   and it is measuring how conserved their *sequence* is. Miao shows that this is exactly the family whose *expression* diverges most</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>   between mouse and human. So the two measurements may well disagree, with a gene conserved in</span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>   sequence and expressed quite differently. That is not a problem with either study. It is the</span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>   most interesting thing either could say, and it is a result this project is positioned to</span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>   contribute to.</span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**CLDN5 for the fourth time.** Here it is one of the two most abundantly expressed</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>   transcripts in mouse BBB capillary endothelial cells, and a canonical marker robustly</span>
-<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>   expressed in both species. It is still absent from this project's gene list because it</span>
-<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>   failed an enrichment cutoff. Four independent papers now treat it as central. This needs</span>
-<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>   writing into the <span class="co">[</span><span class="ot">limitations</span><span class="co">](../results.qmd)</span>.</span>
-<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**It gives a ready-made comparison set.** The 169 human-enriched and 386 mouse-enriched</span>
-<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a>   genes are a published, thresholded list of where the two species differ at the barrier. Once</span>
-<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a>   this project's conservation scores are corrected, asking whether those divergent genes are</span>
-<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>   also less conserved in sequence is a direct, cheap and genuinely novel question.</span>
-<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a><span class="fu">## Annotated scan</span></span>
-<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
-<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a>My own printed and annotated pages, scanned back in.</span>
-<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a>:::</span>
-<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
-<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="scan-gallery"&gt;</span></span>
-<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-01.jpg" alt="Annotated page 1 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 1&lt;/figcaption&gt;</span></span>
-<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-02.jpg" alt="Annotated page 2 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 2&lt;/figcaption&gt;</span></span>
-<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-03.jpg" alt="Annotated page 3 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 3&lt;/figcaption&gt;</span></span>
-<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-04.jpg" alt="Annotated page 4 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 4&lt;/figcaption&gt;</span></span>
-<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-05.jpg" alt="Annotated page 5 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 5&lt;/figcaption&gt;</span></span>
-<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-06.jpg" alt="Annotated page 6 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 6&lt;/figcaption&gt;</span></span>
-<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
-<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-07.jpg" alt="Annotated page 7 of the paper" loading="lazy"&gt;</span></span>
-<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 7&lt;/figcaption&gt;</span></span>
-<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
-<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
-<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
-<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
-<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>Pages reproduced from Miao et al. 2026, *Microvascular Research* 166:104933,</span>
-<span id="cb1-192"><a href="#cb1-192" aria-hidden="true" tabindex="-1"></a>open access under CC BY 4.0. Handwriting and highlighting are mine.</span>
-<span id="cb1-193"><a href="#cb1-193" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Original paper</span><span class="co">](https://doi.org/10.1016/j.mvr.2026.104933)</span>.</span>
-<span id="cb1-194"><a href="#cb1-194" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a><span class="fu">## How it relates to this project</span></span>
+<span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**This is the closest paper yet to what the project is doing, and it is two months old.**</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a>   Same two species, same question of how far mouse stands in for human at the barrier, and</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>   published while this project was running. The difference is the measurement: they compare</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a>   **expression**, this project compares **coding sequence**. That is a real distinction and it</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>   is worth stating in the project's framing rather than discovering later.</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**It validates the statistical choices.** One-to-one orthologues, Seurat, Wilcoxon</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>   rank-sum, Bonferroni adjustment. That is the same framework as <span class="in">`step5e`</span> and <span class="in">`step5g`</span>. The</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">audit</span><span class="co">](../audit.qmd)</span> already found the statistics to be the clean part of the pipeline;</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>   this is independent confirmation that they match current practice in the field.</span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**It settles the one-to-many orthologue question.** They restricted to **one-to-one</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>   orthologous pairs only**, 15,675 of them, and cross-checked Ensembl against NCBI. This</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>   project admitted 196 one-to-many pairs at 25.8% identity into the BBB set in <span class="in">`step3b`</span>, and</span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>   then <span class="in">`step5d`</span> excluded them from the control but not from the BBB set. The field standard is</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a>   to use one-to-one throughout. That is direct support for the <span class="in">`step5d`</span> fix.</span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**The sharpest finding for this project: the divergent family is the SLC family.** A</span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>   substantial proportion of the differentially expressed genes are solute carriers. This</span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>   project's gene list carries 52 SLC genes, about 3.4% of it, including the ones named here,</span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>   and it is measuring how conserved their *sequence* is. Miao shows that this is exactly the family whose *expression* diverges most</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>   between mouse and human. So the two measurements may well disagree, with a gene conserved in</span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>   sequence and expressed quite differently. That is not a problem with either study. It is the</span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>   most interesting thing either could say, and it is a result this project is positioned to</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>   contribute to.</span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**CLDN5 for the fourth time.** Here it is one of the two most abundantly expressed</span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>   transcripts in mouse BBB capillary endothelial cells, and a canonical marker robustly</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>   expressed in both species. It is still absent from this project's gene list because it</span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>   failed an enrichment cutoff. Four independent papers now treat it as central. This needs</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>   writing into the <span class="co">[</span><span class="ot">limitations</span><span class="co">](../results.qmd)</span>.</span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**It gives a ready-made comparison set.** The 169 human-enriched and 386 mouse-enriched</span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>   genes are a published, thresholded list of where the two species differ at the barrier. Once</span>
+<span id="cb1-145"><a href="#cb1-145" aria-hidden="true" tabindex="-1"></a>   this project's conservation scores are corrected, asking whether those divergent genes are</span>
+<span id="cb1-146"><a href="#cb1-146" aria-hidden="true" tabindex="-1"></a>   also less conserved in sequence is a direct, cheap and genuinely novel question.</span>
+<span id="cb1-147"><a href="#cb1-147" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="fu">## Annotated scan</span></span>
+<span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>My own printed and annotated pages, scanned back in.</span>
+<span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a>:::</span>
+<span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a><span class="in">```{=html}</span></span>
+<span id="cb1-155"><a href="#cb1-155" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;div class="scan-gallery"&gt;</span></span>
+<span id="cb1-156"><a href="#cb1-156" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-157"><a href="#cb1-157" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-01.jpg" alt="Annotated page 1 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-158"><a href="#cb1-158" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 1&lt;/figcaption&gt;</span></span>
+<span id="cb1-159"><a href="#cb1-159" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-160"><a href="#cb1-160" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-161"><a href="#cb1-161" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-02.jpg" alt="Annotated page 2 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-162"><a href="#cb1-162" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 2&lt;/figcaption&gt;</span></span>
+<span id="cb1-163"><a href="#cb1-163" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-164"><a href="#cb1-164" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-165"><a href="#cb1-165" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-03.jpg" alt="Annotated page 3 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-166"><a href="#cb1-166" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 3&lt;/figcaption&gt;</span></span>
+<span id="cb1-167"><a href="#cb1-167" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-168"><a href="#cb1-168" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-169"><a href="#cb1-169" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-04.jpg" alt="Annotated page 4 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-170"><a href="#cb1-170" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 4&lt;/figcaption&gt;</span></span>
+<span id="cb1-171"><a href="#cb1-171" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-172"><a href="#cb1-172" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-173"><a href="#cb1-173" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-05.jpg" alt="Annotated page 5 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-174"><a href="#cb1-174" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 5&lt;/figcaption&gt;</span></span>
+<span id="cb1-175"><a href="#cb1-175" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-176"><a href="#cb1-176" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-177"><a href="#cb1-177" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-06.jpg" alt="Annotated page 6 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-178"><a href="#cb1-178" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 6&lt;/figcaption&gt;</span></span>
+<span id="cb1-179"><a href="#cb1-179" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-180"><a href="#cb1-180" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;figure&gt;</span></span>
+<span id="cb1-181"><a href="#cb1-181" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;img src="scans/miao2026/p-07.jpg" alt="Annotated page 7 of the paper" loading="lazy"&gt;</span></span>
+<span id="cb1-182"><a href="#cb1-182" aria-hidden="true" tabindex="-1"></a><span class="in">    &lt;figcaption&gt;Page 7&lt;/figcaption&gt;</span></span>
+<span id="cb1-183"><a href="#cb1-183" aria-hidden="true" tabindex="-1"></a><span class="in">  &lt;/figure&gt;</span></span>
+<span id="cb1-184"><a href="#cb1-184" aria-hidden="true" tabindex="-1"></a><span class="in">&lt;/div&gt;</span></span>
+<span id="cb1-185"><a href="#cb1-185" aria-hidden="true" tabindex="-1"></a><span class="in">```</span></span>
+<span id="cb1-186"><a href="#cb1-186" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-187"><a href="#cb1-187" aria-hidden="true" tabindex="-1"></a>::: {.scan-note}</span>
+<span id="cb1-188"><a href="#cb1-188" aria-hidden="true" tabindex="-1"></a>Pages reproduced from Miao et al. 2026, *Microvascular Research* 166:104933,</span>
+<span id="cb1-189"><a href="#cb1-189" aria-hidden="true" tabindex="-1"></a>open access under CC BY 4.0. Handwriting and highlighting are mine.</span>
+<span id="cb1-190"><a href="#cb1-190" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Original paper</span><span class="co">](https://doi.org/10.1016/j.mvr.2026.104933)</span>.</span>
+<span id="cb1-191"><a href="#cb1-191" aria-hidden="true" tabindex="-1"></a>:::</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

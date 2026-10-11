@@ -151,7 +151,7 @@
     "href": "papers/park2019.html#checks-against-the-paper",
     "title": "Park et al. 2019",
     "section": "Checks against the paper",
-    "text": "Checks against the paper\n\nPaclitaxel and the HER2 antibody are earlier work the paper cites, as you put it, “has been used”. What Park’s group tested themselves was Angiopep-2 coated Q-dots, and the 3.5 fold figure is theirs.\nThe HER2 antibody guess is right. It is used in HER2 positive breast cancer.\nThe FDA approved drug in the osmotic opening experiment is cetuximab.\nRecovery time and duration are right: permeability returned to normal within 4 hours, and the chip lasts one week."
+    "text": "Checks against the paper\n\nIs the HER2 antibody used in breast cancer? Yes, in HER2 positive breast cancer."
   },
   {
     "objectID": "papers/park2019.html#open-questions-from-this-read",
@@ -207,7 +207,7 @@
     "href": "papers/miao2026.html#checks-against-the-paper",
     "title": "Miao et al. 2026",
     "section": "Checks against the paper",
-    "text": "Checks against the paper\n\nOn bulk RNA and cellular resolution. It is not missing data so much as blended data. Bulk RNA-seq measures the average across every cell in the tissue, so the endothelial signal cannot be separated out. Single cell and single nucleus methods measure one cell at a time.\nWhich method, as you were watching for: both. Mouse is single cell RNA-seq; human is one single nucleus dataset and one single cell dataset.\n386 genes enriched in mouse is what the abstract and results say; the discussion says\n\n\n\nHighly correlated across platforms: Pearson r = 0.941 within mouse."
+    "text": "Checks against the paper\n\nWhat does “bulk RNA is limited due to the lack of cellular resolution” mean? Bulk RNA-seq averages across every cell in the tissue, so the endothelial signal is blended with neurons and glia. Single cell and single nucleus methods measure one cell at a time.\nSingle nucleus or single cell RNA sequencing? Both. Mouse is single cell; human is one single nucleus and one single cell dataset."
   },
   {
     "objectID": "papers/miao2026.html#the-species-specific-genes-it-names",
@@ -445,7 +445,7 @@
     "href": "papers/obrown2018.html#checks-against-the-paper",
     "title": "O’Brown et al. 2018",
     "section": "Checks against the paper",
-    "text": "Checks against the paper\n\nEhrlich. Right. The experiment was in 1885, and the animals were rats.\nPericytes and astrocytes, you have it right. Pericytes are needed to form the barrier but not to maintain it. Astrocytes arrive after the barrier forms and are likely involved in maintaining it and regulating its permeability.\nType 2 brains are not fly-like. Type 2 brains, which include mammals, have the endothelial barrier. It is some type 1 brains, such as sharks and rays, that are protected by a glial barrier resembling the fly’s."
+    "text": "Checks against the paper\n\nAre type 2 brains protected like the fruit fly? No. Type 2 brains, which include mammals, have the endothelial barrier. The fly-like glial barrier is found in some type 1 brains, such as sharks and rays."
   },
   {
     "objectID": "papers/obrown2018.html#the-conserved-genes-it-names",
@@ -634,7 +634,7 @@
     "href": "papers/barr2025.html#checks-against-the-paper",
     "title": "Barr and Gilad 2025",
     "section": "Checks against the paper",
-    "text": "Checks against the paper\n\nIt has now been peer reviewed. The preprint was published in Genome Biology in April 2026 (volume 27, article 187). Cite the journal version from now on.\n“Map between genomic features, I think on the same side.” Each read is carried to the other species’ genome, realigned there, and carried back. It is kept only if it lands in exactly the same place both ways.\nWhat a chain is. A run of alignment blocks between two genomes, kept in the same order in both, with no duplications or inversions. It is the bridge the read is lifted across.\nOn one-to-many orthologues, you are right. Only uniquely mapped reads are kept, and chains exclude duplications, so duplicated genes are cut out.\nAnnotation quality. The paper names human and mouse as the well curated annotations. Macaque is in the less curated group, which is why they transfer the human annotation onto it with CAT.\nDifferent datasets, and “we can only use RNA sequencing”. RNA sequencing is the only data they tested, and only on primates, not mouse. But the authors say it applies to any read based data, such as chromatin accessibility or binding, and to more distant species. They just do not show it.\nNormalization. CrossFilt does not normalize. It only filters reads, before they are counted. Normalization comes afterwards, the same for every pipeline, inside the edgeR and limma-voom step.\n“The only variable was the alignment and the filtering strategy.” Right, plus how the orthologous genes are defined, the annotation. The paper names three differences between the pipelines: which genome reads are aligned to, how features are annotated, and whether reads are filtered for bias."
+    "text": "Checks against the paper\n\nNot yet peer reviewed? Published in Genome Biology, April 2026, 27:187.\nMap between genomic features on the same side? Each read is lifted to the other genome, realigned, and lifted back. It is kept only if it lands in exactly the same place both ways.\nWhat is a chain? A run of alignment blocks between two genomes in the same order in both, with no duplications or inversions. The read is lifted across it.\nNo one-to-many orthologues? Correct. Only uniquely mapped reads are kept, and chains contain no duplications.\nIs annotation quality an issue for macaque? Partly. Human and mouse annotations are well curated; macaque is less so, which is why the human annotation is transferred onto it with CAT.\nOnly RNA sequencing, and only these species? Only RNA sequencing on primates was tested. The method is stated to apply to any read based data and to more distant species.\nDoes CrossFilt do the normalization? No. It filters reads before counting; normalization follows in the edgeR and limma-voom step, identical for all pipelines.\nWas alignment and filtering the only variable? Also the annotation: how orthologous genes are defined."
   },
   {
     "objectID": "papers/barr2025.html#open-questions-from-this-read",

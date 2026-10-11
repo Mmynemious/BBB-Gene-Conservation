@@ -89,14 +89,11 @@ the statistics, whatever else is wrong upstream.
 
 ## Checks against the paper
 
-- **On bulk RNA and cellular resolution.** It is not missing data so much as blended data.
-  Bulk RNA-seq measures the average across every cell in the tissue, so the endothelial signal
-  cannot be separated out. Single cell and single nucleus methods measure one cell at a time.
-- **Which method, as you were watching for:** both. Mouse is single cell RNA-seq; human is one
-  single nucleus dataset and one single cell dataset.
-- **386 genes enriched in mouse** is what the abstract and results say; the discussion says
-  385.
-- **Highly correlated across platforms:** Pearson *r* = 0.941 within mouse.
+- **What does "bulk RNA is limited due to the lack of cellular resolution" mean?** Bulk RNA-seq
+  averages across every cell in the tissue, so the endothelial signal is blended with neurons
+  and glia. Single cell and single nucleus methods measure one cell at a time.
+- **Single nucleus or single cell RNA sequencing?** Both. Mouse is single cell; human is one
+  single nucleus and one single cell dataset.
 
 ## The species-specific genes it names
 

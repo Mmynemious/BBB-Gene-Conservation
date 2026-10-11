@@ -86,29 +86,22 @@ out.
 
 ## Checks against the paper
 
-- **It has now been peer reviewed.** The preprint was published in *Genome Biology* in April
-  2026 (volume 27, article 187). Cite the journal version from now on.
-- **"Map between genomic features, I think on the same side."** Each read is carried to the
-  other species' genome, realigned there, and carried back. It is kept only if it lands in
-  exactly the same place both ways.
-- **What a chain is.** A run of alignment blocks between two genomes, kept in the same order in
-  both, with no duplications or inversions. It is the bridge the read is lifted across.
-- **On one-to-many orthologues, you are right.** Only uniquely mapped reads are kept, and
-  chains exclude duplications, so duplicated genes are cut out.
-- **Annotation quality.** The paper names human and mouse as the well curated annotations.
-  Macaque is in the less curated group, which is why they transfer the human annotation onto
-  it with CAT.
-- **Different datasets, and "we can only use RNA sequencing".** RNA sequencing is the only
-  data they tested, and only on primates, not mouse. But the authors say it applies to any
-  read based data, such as chromatin accessibility or binding, and to more distant species.
-  They just do not show it.
-- **Normalization.** CrossFilt does not normalize. It only filters reads, before they are
-  counted. Normalization comes afterwards, the same for every pipeline, inside the edgeR and
-  limma-voom step.
-- **"The only variable was the alignment and the filtering strategy."** Right, plus how the
-  orthologous genes are defined, the annotation. The paper names three differences between
-  the pipelines: which genome reads are aligned to, how features are annotated, and whether
-  reads are filtered for bias.
+- **Not yet peer reviewed?** Published in *Genome Biology*, April 2026, 27:187.
+- **Map between genomic features on the same side?** Each read is lifted to the other genome,
+  realigned, and lifted back. It is kept only if it lands in exactly the same place both ways.
+- **What is a chain?** A run of alignment blocks between two genomes in the same order in both,
+  with no duplications or inversions. The read is lifted across it.
+- **No one-to-many orthologues?** Correct. Only uniquely mapped reads are kept, and chains
+  contain no duplications.
+- **Is annotation quality an issue for macaque?** Partly. Human and mouse annotations are well
+  curated; macaque is less so, which is why the human annotation is transferred onto it with
+  CAT.
+- **Only RNA sequencing, and only these species?** Only RNA sequencing on primates was tested.
+  The method is stated to apply to any read based data and to more distant species.
+- **Does CrossFilt do the normalization?** No. It filters reads before counting;
+  normalization follows in the edgeR and limma-voom step, identical for all pipelines.
+- **Was alignment and filtering the only variable?** Also the annotation: how orthologous genes
+  are defined.
 
 ## Open questions from this read
 

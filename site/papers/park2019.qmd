@@ -104,13 +104,7 @@ abilities than what they have currently shown.
 
 ## Checks against the paper
 
-- **Paclitaxel and the HER2 antibody are earlier work the paper cites,** as you put it, "has
-  been used". What Park's group tested themselves was Angiopep-2 coated Q-dots, and the 3.5
-  fold figure is theirs.
-- **The HER2 antibody guess is right.** It is used in HER2 positive breast cancer.
-- **The FDA approved drug in the osmotic opening experiment is cetuximab.**
-- **Recovery time and duration are right:** permeability returned to normal within 4 hours,
-  and the chip lasts one week.
+- **Is the HER2 antibody used in breast cancer?** Yes, in HER2 positive breast cancer.
 
 ## Open questions from this read
 
