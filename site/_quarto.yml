@@ -18,6 +18,8 @@ website:
         text: "Overview"
       - href: literature-review.qmd
         text: "Literature"
+      - href: mvp.qmd
+        text: "Conservation MVP"
       - href: glossary.qmd
         text: "Glossary"
       - text: "First Pipeline"

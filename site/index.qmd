@@ -100,7 +100,8 @@ The papers, databases and tools this project is built on, with full citations.
 ## What's currently being built
 
 A small, modular version of the pipeline, built one layer at a time and checked at each step.
-**In progress.**
+**In progress.** The first rough version, covering the orthologue layer and protein identity,
+can be used now: [Conservation MVP](mvp.qmd).
 
 **The question.** Primary: how conserved is the coding sequence of blood brain barrier genes
 across human, macaque and mouse? Secondary: how conserved is their expression, using RNA

@@ -1,0 +1,376 @@
+---
+title: "Conservation MVP"
+subtitle: "Rough ideation of the new modular pipeline: orthologues and protein conservation for a small gene set, across human, macaque and mouse."
+toc: false
+page-layout: full
+---
+
+::: {.mvp-note}
+**Rough ideation.** This is the first, minimal version of the tool described under
+[What's currently being built](index.qmd#whats-currently-being-built). It covers the
+orthologue layer and protein identity only. The RNA layer is not built yet. The
+interpretation thresholds below are provisional and can be changed before each run.
+:::
+
+```{=html}
+<div id="mvp">
+  <div class="mvp-panel">
+    <label for="mvp-genes"><strong>Genes</strong> (human symbols, one per line or separated by spaces or commas). Default: the 61 SLC and ABC transporters in this project's gene list.</label>
+    <textarea id="mvp-genes" rows="6" spellcheck="false"></textarea>
+
+    <div class="mvp-settings">
+      <label>Highly conserved if the lowest identity is at least
+        <input id="mvp-high" type="number" value="90" min="0" max="100"> %</label>
+      <label>Moderately conserved if at least
+        <input id="mvp-mod" type="number" value="70" min="0" max="100"> %</label>
+      <label>Flag lengths that differ by more than
+        <input id="mvp-len" type="number" value="10" min="0" max="100"> %</label>
+    </div>
+
+    <div class="mvp-actions">
+      <button id="mvp-run" type="button">Run</button>
+      <button id="mvp-csv" type="button" disabled>Download CSV</button>
+      <button id="mvp-json" type="button" disabled>Download JSON</button>
+      <button id="mvp-retry" type="button" hidden>Retry failed genes</button>
+      <span id="mvp-status" aria-live="polite"></span>
+    </div>
+    <progress id="mvp-progress" value="0" max="1" hidden></progress>
+  </div>
+
+  <div id="mvp-summary"></div>
+  <div class="mvp-tablewrap"><table id="mvp-table"></table></div>
+</div>
+
+<style>
+.mvp-note{ background:var(--a-open-bg,#EDF2FB); border:1px solid var(--a-open-br,#C2D2ED); border-radius:6px; padding:.8rem 1rem; }
+.mvp-panel{ background:var(--a-sunk,#F4F6F4); border:1px solid var(--a-rule,#DFE4E1); border-radius:6px; padding:1rem; margin:1rem 0; }
+.mvp-panel label{ display:block; font-size:.92rem; }
+#mvp-genes{ width:100%; font-family:var(--bs-font-monospace,monospace); font-size:.85rem; margin:.4rem 0 .8rem; }
+.mvp-settings{ display:flex; flex-wrap:wrap; gap:.4rem 1.6rem; margin-bottom:.8rem; }
+.mvp-settings input{ width:4.2rem; }
+.mvp-actions{ display:flex; flex-wrap:wrap; align-items:center; gap:.5rem; }
+.mvp-actions button{ border:1px solid var(--a-ink-3,#7E8885); background:#fff; border-radius:4px; padding:.35rem .9rem; cursor:pointer; }
+.mvp-actions button#mvp-run{ background:var(--a-ink,#141817); color:#fff; border-color:var(--a-ink,#141817); }
+.mvp-actions button:disabled{ opacity:.45; cursor:default; }
+#mvp-status{ font-size:.9rem; color:var(--a-ink-2,#545C5A); }
+#mvp-progress{ width:100%; margin-top:.6rem; }
+#mvp-summary{ margin:.6rem 0; font-size:.95rem; }
+.mvp-tablewrap{ overflow-x:auto; }
+#mvp-table{ border-collapse:collapse; font-size:.82rem; white-space:nowrap; }
+#mvp-table th, #mvp-table td{ border-bottom:1px solid var(--a-rule,#DFE4E1); padding:.3rem .55rem; text-align:left; vertical-align:top; }
+#mvp-table th{ background:var(--a-sunk,#F4F6F4); position:sticky; top:0; }
+#mvp-table td.num{ text-align:right; font-variant-numeric:tabular-nums; }
+.v-high{ color:var(--a-clean,#2C6C4C); font-weight:600; }
+.v-mod{ color:var(--a-shifts,#875110); font-weight:600; }
+.v-low, .v-unsuit{ color:var(--a-breaks,#A02D21); font-weight:600; }
+.mvp-flag{ color:var(--a-breaks,#A02D21); }
+</style>
+
+<script>
+(function(){
+const DEFAULT_GENES = "SLC12A2 SLC12A5 SLC12A6 SLC16A2 SLC16A4 SLC16A6 SLC19A1 SLC19A3 SLC1A1 SLC1A4 SLC22A5 SLC22A8 SLC25A10 SLC25A20 SLC25A24 SLC27A1 SLC29A1 SLC2A1 SLC30A1 SLC30A10 SLC31A1 SLC35D2 SLC35F2 SLC36A1 SLC38A1 SLC38A3 SLC38A5 SLC39A10 SLC39A8 SLC40A1 SLC41A1 SLC43A2 SLC43A3 SLC44A5 SLC45A4 SLC4A1 SLC52A2 SLC52A3 SLC5A6 SLC6A13 SLC6A6 SLC7A1 SLC7A11 SLC7A3 SLC7A5 SLC7A7 SLC7A8 SLC9A2 SLCO1C1 SLCO2A1 SLCO2B1 SLCO3A1 ABCA1 ABCA5 ABCA9 ABCB1 ABCC4 ABCC6 ABCC9 ABCG1 ABCG2";
+const API = "https://rest.ensembl.org";
+const SP = { human:"homo_sapiens", macaque:"macaca_mulatta", mouse:"mus_musculus" };
+const PAGE = { homo_sapiens:"Homo_sapiens", macaca_mulatta:"Macaca_mulatta", mus_musculus:"Mus_musculus" };
+const $ = id => document.getElementById(id);
+
+$("mvp-genes").value = DEFAULT_GENES.split(" ").join("\n");
+
+let results = [], meta = {};
+
+async function getJSON(path, tries){
+  // Ensembl's homology service is slow and sometimes returns 500/503 or drops the
+  // connection. Retry those with increasing waits; a 400 means the gene is unknown.
+  tries = tries || 0;
+  const url = API + path + (path.includes("?") ? ";" : "?") + "content-type=application/json";
+  let r;
+  try { r = await fetch(url); }
+  catch(e){ r = null; }
+  if (r && r.ok) return { data: await r.json(), url };
+  const status = r ? r.status : 0;
+  if ((status === 0 || status === 429 || status >= 500) && tries < 6){
+    const after = r && parseFloat(r.headers.get("Retry-After"));
+    const wait = after ? after * 1000 : Math.min(2000 * Math.pow(2, tries), 30000);
+    await new Promise(res => setTimeout(res, wait));
+    return getJSON(path, tries + 1);
+  }
+  const e = new Error(status ? "HTTP " + status : "network error"); e.status = status; e.url = url; throw e;
+}
+
+const ungapped = s => s ? s.replace(/-/g, "").length : null;
+const r1 = x => x == null ? null : Math.round(x * 10) / 10;
+const geneLink = (sp, id) => id ? "https://www.ensembl.org/" + PAGE[sp] + "/Gene/Summary?g=" + id : "";
+
+function pairFrom(h){
+  // One Ensembl Compara homology record -> identity read from each side.
+  return {
+    type: h.type,
+    source_protein: h.source.protein_id, target_protein: h.target.protein_id,
+    identity_source: h.source.perc_id, identity_target: h.target.perc_id,
+    len_source: ungapped(h.source.align_seq), len_target: ungapped(h.target.align_seq),
+    align_source: h.source.align_seq || null, align_target: h.target.align_seq || null
+  };
+}
+
+async function runGene(symbol, s){
+  const row = { gene: symbol, status: "ok", notes: [], queries: [] };
+  try {
+    const q1 = await getJSON("/homology/symbol/" + SP.human + "/" + encodeURIComponent(symbol) +
+      "?target_species=" + SP.macaque + ";target_species=" + SP.mouse + ";type=orthologues;sequence=protein");
+    row.queries.push(q1.url);
+    const block = q1.data.data && q1.data.data[0];
+    const homs = block ? block.homologies : [];
+    row.human_gene_id = block ? block.id : null;
+    const mac = homs.filter(h => h.target.species === SP.macaque);
+    const mou = homs.filter(h => h.target.species === SP.mouse);
+    row.n_macaque_orthologues = mac.length;
+    row.n_mouse_orthologues = mou.length;
+
+    if (mac.length){ const p = pairFrom(mac[0]); row.macaque_gene_id = mac[0].target.id; row.hm = p; }
+    if (mou.length){ const p = pairFrom(mou[0]); row.mouse_gene_id = mou[0].target.id; row.hmo = p; }
+    row.human_protein_id = (row.hm || row.hmo || {}).source_protein || null;
+    row.macaque_protein_id = row.hm ? row.hm.target_protein : null;
+    row.mouse_protein_id = row.hmo ? row.hmo.target_protein : null;
+
+    if (mac.length === 1 && mou.length === 1){
+      const q2 = await getJSON("/homology/id/" + SP.macaque + "/" + row.macaque_gene_id +
+        "?target_species=" + SP.mouse + ";type=orthologues;sequence=protein");
+      row.queries.push(q2.url);
+      const b2 = q2.data.data && q2.data.data[0];
+      const hit = b2 ? b2.homologies.find(h => h.target.id === row.mouse_gene_id) : null;
+      if (hit) row.mm = pairFrom(hit);
+      else row.notes.push("macaque and mouse orthologues are not paired with each other in Ensembl");
+    }
+
+    if (row.human_protein_id){
+      try {
+        const q3 = await getJSON("/overlap/translation/" + row.human_protein_id + "?type=Pfam;feature=protein_feature");
+        row.queries.push(q3.url);
+        const seen = {};
+        row.domains = q3.data.filter(d => !seen[d.id] && (seen[d.id] = 1))
+          .map(d => d.id + " " + (d.description || "")).join("; ");
+      } catch(e){ row.domains = ""; row.notes.push("domain lookup failed"); }
+    }
+  } catch(e){
+    row.status = e.status === 400 || e.status === 404 ? "symbol not found in Ensembl" : "request failed (" + e.message + ")";
+  }
+  return classify(row, s);
+}
+
+function classify(row, s){
+  const pairs = [["hm","human vs macaque"],["hmo","human vs mouse"],["mm","macaque vs mouse"]];
+  row.one_to_one = !!(row.hm && row.hmo && row.mm &&
+    row.hm.type === "ortholog_one2one" && row.hmo.type === "ortholog_one2one" && row.mm.type === "ortholog_one2one");
+  row.human_length = (row.hm || row.hmo || {}).len_source || null;
+  row.macaque_length = row.hm ? row.hm.len_target : null;
+  row.mouse_length = row.hmo ? row.hmo.len_target : null;
+
+  // Alignment status: every pair aligned, and no pair differing in length beyond the tolerance.
+  let lengthFlag = false;
+  for (const [k, label] of pairs){
+    const p = row[k]; if (!p) continue;
+    p.identity_min = Math.min(p.identity_source, p.identity_target);
+    if (p.len_source && p.len_target){
+      const diff = Math.abs(p.len_source - p.len_target) / Math.max(p.len_source, p.len_target) * 100;
+      p.length_diff_pct = r1(diff);
+      if (diff > s.len){ lengthFlag = true; row.notes.push(label + " lengths differ by " + r1(diff) + "%"); }
+    }
+  }
+  const allAligned = pairs.every(([k]) => row[k] && row[k].align_source);
+  row.alignment_status = row.status !== "ok" ? "not run" :
+    !allAligned ? "incomplete" : lengthFlag ? "aligned, length mismatch" : "aligned";
+
+  const mins = pairs.map(([k]) => row[k] ? row[k].identity_min : null).filter(x => x != null);
+  row.lowest_identity = mins.length === 3 ? r1(Math.min(...mins)) : null;
+
+  if (row.status !== "ok"){ row.interpretation = "not run"; row.notes.unshift(row.status); }
+  else if (!row.one_to_one){
+    row.interpretation = "not suitable for simple cross-species comparison";
+    row.notes.unshift("not one-to-one in all three pairs (macaque: " + row.n_macaque_orthologues + ", mouse: " + row.n_mouse_orthologues + " orthologues)");
+  }
+  else if (lengthFlag) row.interpretation = "not suitable for simple cross-species comparison";
+  else if (row.lowest_identity >= s.high) row.interpretation = "highly conserved core barrier protein";
+  else if (row.lowest_identity >= s.mod) row.interpretation = "moderately conserved";
+  else row.interpretation = "weakly conserved";
+  return row;
+}
+
+function flat(r){
+  const g = (p, k) => p ? p[k] : null;
+  return {
+    gene: r.gene,
+    status: r.status,
+    interpretation: r.interpretation,
+    one_to_one: r.one_to_one,
+    lowest_identity: r.lowest_identity,
+    human_vs_macaque_identity_from_human: g(r.hm,"identity_source"),
+    human_vs_macaque_identity_from_macaque: g(r.hm,"identity_target"),
+    human_vs_mouse_identity_from_human: g(r.hmo,"identity_source"),
+    human_vs_mouse_identity_from_mouse: g(r.hmo,"identity_target"),
+    macaque_vs_mouse_identity_from_macaque: g(r.mm,"identity_source"),
+    macaque_vs_mouse_identity_from_mouse: g(r.mm,"identity_target"),
+    human_length_aa: r.human_length,
+    macaque_length_aa: r.macaque_length,
+    mouse_length_aa: r.mouse_length,
+    alignment_status: r.alignment_status,
+    orthology_human_macaque: g(r.hm,"type"),
+    orthology_human_mouse: g(r.hmo,"type"),
+    orthology_macaque_mouse: g(r.mm,"type"),
+    n_macaque_orthologues: r.n_macaque_orthologues,
+    n_mouse_orthologues: r.n_mouse_orthologues,
+    human_gene_id: r.human_gene_id || null,
+    macaque_gene_id: r.macaque_gene_id || null,
+    mouse_gene_id: r.mouse_gene_id || null,
+    human_protein_id: r.human_protein_id || null,
+    macaque_protein_id: r.macaque_protein_id || null,
+    mouse_protein_id: r.mouse_protein_id || null,
+    human_ensembl_page: geneLink(SP.human, r.human_gene_id),
+    macaque_ensembl_page: geneLink(SP.macaque, r.macaque_gene_id),
+    mouse_ensembl_page: geneLink(SP.mouse, r.mouse_gene_id),
+    pfam_domains_human: r.domains || "",
+    notes: r.notes.join("; "),
+    ensembl_release: meta.ensembl_release,
+    run_date: meta.run_date
+  };
+}
+
+const COLS = [
+  ["gene","Gene"],["interpretation","Interpretation"],["one_to_one","1:1"],["lowest_identity","Lowest identity %"],
+  ["human_vs_macaque_identity_from_human","H vs Mac %"],["human_vs_mouse_identity_from_human","H vs Mo %"],
+  ["macaque_vs_mouse_identity_from_macaque","Mac vs Mo %"],
+  ["human_length_aa","H aa"],["macaque_length_aa","Mac aa"],["mouse_length_aa","Mo aa"],
+  ["alignment_status","Alignment"],["pfam_domains_human","Pfam domains (human)"],["notes","Notes"]
+];
+const VCLASS = { "highly conserved core barrier protein":"v-high", "moderately conserved":"v-mod",
+  "weakly conserved":"v-low", "not suitable for simple cross-species comparison":"v-unsuit" };
+
+function esc(x){ return String(x == null ? "" : x).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c])); }
+
+function render(){
+  const rows = results.map(flat);
+  let h = "<thead><tr>" + COLS.map(c => "<th>" + c[1] + "</th>").join("") + "</tr></thead><tbody>";
+  for (const r of rows){
+    h += "<tr>" + COLS.map(([k]) => {
+      let v = r[k];
+      if (k === "gene" && r.human_ensembl_page) return '<td><a href="' + r.human_ensembl_page + '" target="_blank" rel="noopener">' + esc(v) + "</a></td>";
+      if (k === "interpretation") return '<td class="' + (VCLASS[v] || "") + '">' + esc(v) + "</td>";
+      if (k === "one_to_one") return "<td>" + (r.status !== "ok" ? "" : v ? "yes" : '<span class="mvp-flag">no</span>') + "</td>";
+      if (typeof v === "number") return '<td class="num">' + (Math.round(v * 10) / 10) + "</td>";
+      return "<td>" + esc(v) + "</td>";
+    }).join("") + "</tr>";
+  }
+  $("mvp-table").innerHTML = h + "</tbody>";
+  const count = {};
+  rows.forEach(r => count[r.interpretation] = (count[r.interpretation] || 0) + 1);
+  $("mvp-summary").innerHTML = "<strong>" + rows.length + " genes.</strong> " +
+    Object.keys(count).map(k => esc(k) + ": " + count[k]).join(" · ") +
+    " · Ensembl release " + esc(meta.ensembl_release) + ".";
+}
+
+function download(name, text, type){
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(new Blob([text], { type }));
+  a.download = name; a.click();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+
+$("mvp-csv").onclick = () => {
+  const rows = results.map(flat), keys = Object.keys(rows[0]);
+  const cell = v => { v = v == null ? "" : String(v); return /[",\n]/.test(v) ? '"' + v.replace(/"/g,'""') + '"' : v; };
+  download("bbb_conservation_mvp.csv", [keys.join(",")].concat(rows.map(r => keys.map(k => cell(r[k])).join(","))).join("\n"), "text/csv");
+};
+$("mvp-json").onclick = () => {
+  const out = { meta, genes: results.map(r => Object.assign(flat(r), {
+    alignments: { human_vs_macaque: r.hm ? [r.hm.align_source, r.hm.align_target] : null,
+                  human_vs_mouse: r.hmo ? [r.hmo.align_source, r.hmo.align_target] : null,
+                  macaque_vs_mouse: r.mm ? [r.mm.align_source, r.mm.align_target] : null },
+    api_queries: r.queries })) };
+  download("bbb_conservation_mvp.json", JSON.stringify(out, null, 2), "application/json");
+};
+
+let settings = {};
+
+async function runGenes(genes){
+  ["mvp-run","mvp-csv","mvp-json","mvp-retry"].forEach(id => $(id).disabled = true);
+  const prog = $("mvp-progress"); prog.hidden = false; prog.max = genes.length; prog.value = 0;
+  const t0 = Date.now();
+  let next = 0;
+  const worker = async () => {
+    while (next < genes.length){
+      const i = next++;
+      const row = await runGene(genes[i], settings);
+      const at = results.findIndex(r => r.gene === row.gene);
+      if (at >= 0) results[at] = row; else results.push(row);
+      prog.value++;
+      const left = Math.round((Date.now() - t0) / prog.value * (genes.length - prog.value) / 1000);
+      $("mvp-status").textContent = prog.value + " of " + genes.length + " genes done" +
+        (prog.value < genes.length ? ", about " + Math.max(1, Math.round(left / 60)) + " min left" : "");
+    }
+  };
+  await Promise.all([worker(), worker(), worker()]);
+  const order = $("mvp-genes").value.split(/[\s,;]+/).map(g => g.trim().toUpperCase());
+  results.sort((a, b) => order.indexOf(a.gene) - order.indexOf(b.gene));
+  render();
+  const failed = results.filter(r => r.status.startsWith("request failed")).length;
+  $("mvp-status").textContent = "Done" + (failed ? ". " + failed + " genes failed because Ensembl did not respond; retry them below." : ".");
+  prog.hidden = true;
+  $("mvp-retry").hidden = !failed;
+  ["mvp-run","mvp-csv","mvp-json","mvp-retry"].forEach(id => $(id).disabled = false);
+}
+
+$("mvp-run").onclick = async () => {
+  const genes = [...new Set($("mvp-genes").value.split(/[\s,;]+/).map(g => g.trim().toUpperCase()).filter(Boolean))];
+  if (!genes.length) return;
+  settings = { high: +$("mvp-high").value, mod: +$("mvp-mod").value, len: +$("mvp-len").value };
+  results = []; $("mvp-table").innerHTML = ""; $("mvp-summary").innerHTML = "";
+  $("mvp-status").textContent = "Starting…";
+  try {
+    const info = await getJSON("/info/data");
+    meta = { ensembl_release: info.data.releases[0], run_date: new Date().toISOString().slice(0,10),
+             thresholds: { highly_conserved_min_identity: settings.high, moderately_conserved_min_identity: settings.mod, max_length_difference_pct: settings.len },
+             source: "Ensembl REST API, Compara orthologues and Pfam protein features",
+             identity_definition: "Ensembl perc_id: percentage of one protein's residues identical to the other in the Compara alignment. Reported from both sides; lowest_identity is the minimum over all six values." };
+  } catch(e){ meta = { ensembl_release: "unknown", run_date: new Date().toISOString().slice(0,10) }; }
+  await runGenes(genes);
+};
+
+$("mvp-retry").onclick = () => runGenes(results.filter(r => r.status.startsWith("request failed")).map(r => r.gene));
+})();
+</script>
+```
+
+## What each column means
+
+| Column | Meaning |
+|---|---|
+| **Interpretation** | Highly conserved core barrier protein, moderately conserved, weakly conserved, or not suitable for simple cross-species comparison. Not suitable means the gene is not one-to-one in all three pairs, or the proteins differ in length beyond the tolerance |
+| **1:1** | Whether Ensembl calls the gene one-to-one in all three pairs: human vs macaque, human vs mouse, macaque vs mouse |
+| **Identity %** | Ensembl's percent identity: the share of one protein's amino acids that are identical in the other, in Ensembl's alignment. It depends on which protein you count from, so the download gives both directions for every pair. The table shows the value counted from the first species named |
+| **Lowest identity** | The lowest of all six identity values. The interpretation is based on this, so one weak pair is enough to lower it |
+| **aa** | Protein length in amino acids, for the protein Ensembl used in the comparison |
+| **Alignment** | Aligned, aligned with a length mismatch, or incomplete if a pair is missing |
+| **Pfam domains** | Protein domains found in the human protein |
+
+## How to check a result by hand
+
+1. **Open the gene in Ensembl.** The gene name in the table links to its Ensembl page. Each
+   row in the download carries the Ensembl page for all three species.
+2. **Check the orthologues.** On the human gene's Ensembl page, open *Comparative Genomics,
+   Orthologues*. The macaque and mouse genes, the type (1-to-1) and the identity numbers there
+   should match the download.
+3. **Check the release.** The download records the Ensembl release and the date of the run.
+   Numbers can change between releases.
+4. **Check the identity yourself.** The JSON download contains the aligned protein sequences
+   for every pair and the exact API queries used, so any identity can be recounted from the
+   alignment.
+
+## Limits of this version
+
+- **One protein per gene.** Ensembl compares one representative protein per gene. If that
+  protein differs between species, for example a longer macaque model, identity drops and the
+  length flag catches it. This is the same canonical transcript problem found in the
+  [audit](audit.qmd).
+- **Protein identity only.** No dN/dS yet. That is the next sequence conservation module.
+- **Thresholds are provisional.** The 90%, 70% and 10% defaults are starting points, not
+  values taken from a paper.
+- **No RNA layer yet.**
