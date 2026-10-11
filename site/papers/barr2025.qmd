@@ -1,0 +1,154 @@
+---
+title: "Barr and Gilad 2025"
+subtitle: "CrossFilt: a cross-species filtering tool that eliminates alignment bias in comparative genomics studies"
+---
+
+> Barr KA, Gilad Y (2025). CrossFilt: A Cross-species Filtering Tool that Eliminates Alignment
+> Bias in Comparative Genomics Studies. *bioRxiv* 2025.06.05.654938.
+> <https://doi.org/10.1101/2025.06.05.654938>. Open access under CC BY-NC 4.0.
+> Read on [PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC12157504/).
+>
+> Since published as: CrossFilt: a cross-species filtering tool that eliminates alignment bias
+> in comparative genomics studies of primates. *Genome Biology* 27:187 (2026).
+> <https://doi.org/10.1186/s13059-026-04082-2>.
+
+| Field | |
+|---|---|
+| **Year** | Preprint posted 6 June 2025. Peer reviewed version in *Genome Biology*, April 2026 |
+| **Models** | **Human, chimpanzee and rhesus macaque**, compared pairwise against human. Four individuals per species. No mouse |
+| **Brain region** | **None.** The tissues are heart (left ventricle), kidney cortex, liver and lung |
+| **Measures** | **RNA.** But the method is written for any read-based measure: chromatin accessibility, binding, splicing |
+| **Method** | **Bulk RNA-seq**, 50 bp single-end, 48 samples, reused from the group's earlier study. Plus **simulated** RNA-seq with known differences planted in 10% of genes |
+| **Cross-species stats** | Reads aligned with STAR, keeping uniquely mapped reads only. Reciprocal liftover through UCSC chains. Orthologous features from the **Comparative Annotation Toolkit (CAT)**. Differential expression with edgeR and limma-voom, FDR ≤ 5%. Compared against five other pipelines |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+For the literature review I found one more very interesting paper, which fits exactly with
+our to-do, which is the CrossFilt paper. It is a preprint, which means that it has not been, I
+think, admitted to a journal yet, and probably has not undergone a peer review process. Which
+until this point, I think is fine.
+
+What essentially they are doing, or what they have built, is **CrossFilt**. CrossFilt is a
+**filtering strategy that retains only sequencing reads that map between genomic features**. I
+think on the same side. What it does is it **aligns sequencing reads to a reference genome**,
+then it identifies **orthologues and syntenic genomic features**, and it counters **alignment
+bias**, which is interspecies variation in length etc., by just keeping the reads between the
+genomic features that can be found definitely in both genomic datasets.
+
+They do discuss the **genome annotation quality** between species, but for the species that I
+have in mind, human, macaque and mouse, that should not be a huge issue.
+
+In this paper they applied CrossFilt to **RNA sequencing data from humans, chimpanzee and
+rhesus macaque**, so up until this point I do not know whether you can use it for different
+datasets. Maybe you can, since it relies on genomic data, so that you can map it. I guess RNA
+data is pretty useful for **enrichment**, because that is what Miao and others have done this
+year, 2026, in the paper that we have.
+
+CrossFilt also **reduces the number of false positives**, which is amazing.
+
+**How does it work?** This is what I currently have. I have not read through the whole paper.
+
+1. It aligns sequencing reads derived from target samples to the target reference genome.
+2. Then CrossFilt uses the reference genome coordinates to identify the start and end
+   positions.
+3. It retrieves all **chains**. I do not know what that is yet. If there are more chains, it
+   selects the chain with the highest **UCSC score**, which reflects length and quality of
+   alignment, favouring long gap-free regions.
+4. Then it **lifts** the reads, transforms them into **FASTQ** format, and independently
+   realigns them to the query genome using the query species annotations. So I suppose that
+   the genes kind of overlap, so that if you run the computation you have both sides, I think.
+5. For the orthologues they use the **Comparative Annotation Toolkit, CAT**, which keeps only
+   reads that map consistently to the same genomic feature in both species. So at this point I
+   believe there is not a **one-to-many orthologue** system, because you are cutting them out.
+
+## What I take from it
+
+It fits exactly with our to-do. It reduces the number of false positives, which is amazing,
+and at this point there is not a one-to-many orthologue system, because you are cutting them
+out.
+
+## Checks against the paper
+
+- **It has now been peer reviewed.** The preprint was published in *Genome Biology* in April
+  2026 (volume 27, article 187), with "of primates" added to the title. Cite the journal
+  version from now on.
+- **What "maps reciprocally" means.** Not that reads sit between features. Each read is
+  carried from the human genome over to the other species, realigned there from scratch, and
+  then carried back. It is kept only if it lands in **exactly the same place both ways**: same
+  start position and same alignment shape (the CIGAR string). Reads that fail either direction
+  are thrown away. Only after that are reads assigned to orthologous features with CAT.
+- **What a chain is.** A chain is a run of pairwise alignment blocks between two genomes,
+  kept in the same order and orientation in both. By definition a chain contains **no
+  duplications, inversions or translocations**. The UCSC genome browser publishes these
+  between species, and "liftover" is converting a coordinate in one genome to the matching
+  coordinate in the other by following the chain. So chains are the bridge between the two
+  genomes that the read walks across.
+- **On one-to-many orthologues, you are right, for two reasons.** Reads are aligned keeping
+  only uniquely mapped reads, and chains by definition exclude duplications. A read from a
+  gene duplicated in one species cannot pass. This is the same direction as the `step5d` fix.
+- **Annotation quality is the weaker point for macaque, not the stronger.** The paper names
+  **human and mouse** as the highly curated annotations, and says other genomes are often
+  annotated with incomplete or lower confidence annotations. Macaque is one of those. That is
+  part of why they transfer the human annotation onto macaque with CAT rather than using the
+  macaque's own.
+- **Mouse is not tested.** Only primates. Divergence already bites between human and macaque:
+  14.7% of gene positions differ, against 3.6% for human and chimpanzee, and every pipeline did
+  worse on the macaque comparison. Mouse is far further from human than macaque is, so more
+  reads would be filtered out. The authors say the method extends to more divergent species
+  but do not show it.
+- **None of the tissues is brain.** Heart, kidney, liver and lung. Nothing in the method
+  depends on the tissue, but none of their numbers are about the BBB.
+- **The false positive numbers are striking.** On simulated data, CrossFilt's false discovery
+  rate was **4.0%** for both human vs chimpanzee and human vs macaque. The common
+  "dual-reference" approach, where each species is aligned to its own genome and genes are
+  matched by name, came out at **53%** and **57%**. Over half of what it called different was
+  not.
+
+## Open questions from this read
+
+- Has anyone run CrossFilt on **human vs mouse**, and how many reads survive at that distance?
+- Does it work on **single-cell or single-nucleus** data, where reads are short and come with
+  cell barcodes? Every result here is bulk.
+- How did **Miao 2026** align their reads? If each species went to its own genome and genes
+  were matched as orthologue pairs afterwards, that is close to what this paper calls
+  dual-reference, the approach with the worst false positive rate.
+- They found a spurious "cytoplasmic translation" signal driven by ribosomal genes with
+  near-identical sequence. Miao **excluded ribosomal genes** outright. Same problem, two
+  different fixes?
+
+## How it relates to this project
+
+1. **It is a ready-made algorithm for the method-driven pipeline.** The to-do on the home page
+   is to rebuild the pipeline on established algorithms for each step. CrossFilt is one for
+   the expression side: deciding which genes are BBB-enriched before conservation is ever
+   measured. That step currently comes from Wälchli and is checked against Miao.
+
+2. **It does not touch the conservation step itself.** This project compares **coding
+   sequence**, not reads. Percent identity and dN/dS come from aligned CDS, so read mapping
+   bias does not enter there. CrossFilt matters wherever the project uses expression data to
+   choose or validate genes.
+
+3. **It agrees with the one-to-one decision.** Its own design cuts out duplicated regions, the
+   same way Miao restricted to one-to-one orthologues. That is now three lines of support
+   for applying the [`step5d`](../audit.qmd) fix to the BBB set as well as the control.
+
+4. **It is a warning about any expression comparison the project adds.** The macaque
+   expression atlas in [Extensions](../extensions.qmd) would mean comparing expression across
+   species. If that is done by aligning each species to its own genome and matching genes by
+   name, this paper says to expect a lot of false differences.
+
+## Reference detail from the paper
+
+- **Data.** 48 bulk RNA-seq samples: 4 individuals × 4 tissues × 3 species. SRA accessions
+  SRR6900765 to SRR6900812. Genomes hg38, panTro6, rheMac10; human annotation from Ensembl
+  v110.
+- **Simulation.** 34,693 genes for human vs chimpanzee, 31,807 for human vs macaque. 10% made
+  differentially expressed at log fold change 2, half each direction.
+- **Empirical FDR on simulated data.** CrossFilt 4.0% and 4.0%. Consensus 5.4% and 8.9%.
+  Single-reference 6.8% and 18.5%. Orthologous exons 10.9%. Annotation transfer 12.0%.
+  Dual-reference 53% and 57%. (Human vs chimpanzee, then human vs macaque.)
+- **Real data.** 68.2% of the differentially expressed genes found only by dual-reference
+  were found by no other method. Fewer than half of DE genes were found by every approach.
+- **Code.** <https://github.com/kennethabarr/CrossFilt>

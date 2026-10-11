@@ -43,6 +43,21 @@ correction.
 ::: {.paper-list}
 
 ::: {.paper-card}
+### [Barr and Gilad 2025](papers/barr2025.qmd)
+
+::: {.paper-meta}
+[2025]{.pm} [Human · chimpanzee · macaque]{.pm} [RNA]{.pm} [Bulk RNA-seq]{.pm} [Method]{.pm}
+:::
+
+CrossFilt is a filtering strategy that retains only sequencing reads that map between genomic
+features in both species, so alignment bias from interspecies variation in length and
+annotation is cut out. It fits exactly with our to-do, it reduces the number of false
+positives, and there is no one-to-many orthologue system because they are cut out.
+
+[Read the entry →](papers/barr2025.qmd)
+:::
+
+::: {.paper-card}
 ### [Song et al. 2020](papers/song2020.qmd)
 
 ::: {.paper-meta}
