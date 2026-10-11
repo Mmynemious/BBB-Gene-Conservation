@@ -16,16 +16,18 @@ website:
     left:
       - href: index.qmd
         text: "Overview"
-      - href: pipeline.qmd
-        text: "Pipeline & Methods"
-      - href: results.qmd
-        text: "Results"
-      - href: audit.qmd
-        text: "Audit"
       - href: literature-review.qmd
         text: "Literature"
       - href: glossary.qmd
         text: "Glossary"
+      - text: "First Pipeline"
+        menu:
+          - href: pipeline.qmd
+            text: "Pipeline & Methods"
+          - href: audit.qmd
+            text: "Audit"
+          - href: results.qmd
+            text: "Results (preliminary)"
       - href: data-code.qmd
         text: "Data & Code"
       - href: resources.qmd

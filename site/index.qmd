@@ -24,23 +24,33 @@ the data.
 ::: {.hub-grid}
 
 ::: {.hub-card}
-### Pipeline & Methods
-How the analysis was built, step by step: gene lists, orthologues across three species,
-coding-sequence alignment, % identity and dN/dS. Each step carries its own audit flag.
+### Literature Review
+Papers on BBB gene conservation, translational models and comparative genomics, with my
+comments, plus a bioinformatical view of workflows built by others. **In progress.**
+
+[Read more →](literature-review.qmd)
+:::
+
+:::
+
+### The first pipeline: rough ideation
+
+My first attempt, built before the literature review. It runs end to end, but the audit
+found errors that have to be fixed before any of its numbers can be trusted.
+
+::: {.hub-grid}
+
+::: {.hub-card}
+### First Pipeline
+How the first analysis was built, step by step: gene lists, orthologues across three
+species, coding-sequence alignment, % identity and dN/dS. Each step carries its own audit
+flag.
 
 [Read more →](pipeline.qmd)
 :::
 
-::: {.hub-card}
-### Results
-Conservation distributions, BBB genes against the liver control, and the three pairwise
-species comparisons — each finding graded for whether it survives the audit.
-
-[Read more →](results.qmd)
-:::
-
 ::: {.hub-card .hub-card-flag}
-### Audit — what went wrong
+### Audit: what went wrong
 All 15 pipeline steps with a verdict each, and the three fixes that have to happen before
 the results can be trusted. **3 steps break results, 6 move numbers, 6 are clean.**
 
@@ -48,12 +58,19 @@ the results can be trusted. **3 steps break results, 6 move numbers, 6 are clean
 :::
 
 ::: {.hub-card}
-### Literature Review
-Papers on BBB gene conservation, translational models and comparative genomics, with my
-comments. **In progress.**
+### Results (preliminary)
+Conservation distributions, BBB genes against the liver control, and the three pairwise
+species comparisons. **Not correct yet:** these come from the first pipeline, before the
+audit fixes.
 
-[Read more →](literature-review.qmd)
+[Read more →](results.qmd)
 :::
+
+:::
+
+### For reuse
+
+::: {.hub-grid}
 
 ::: {.hub-card}
 ### Data & Code
@@ -79,6 +96,42 @@ The papers, databases and tools this project is built on, with full citations.
 :::
 
 :::
+
+## What's currently being built
+
+A small, modular version of the pipeline, built one layer at a time and checked at each step.
+**In progress.**
+
+**The question.** Primary: how conserved is the coding sequence of blood brain barrier genes
+across human, macaque and mouse? Secondary: how conserved is their expression, using RNA
+sequencing?
+
+**The plan.**
+
+1. **A small gene set.** Fewer than 100 genes, starting with transporters, so the software can
+   be built and checked by hand.
+2. **The orthologue layer first.** Human, macaque and mouse orthologues, keeping one-to-one
+   orthologues only.
+3. **Sequence conservation modules**, added step by step.
+4. **RNA as the secondary layer**, using the workflows from the
+   [bioinformatical view](literature-review.qmd#the-bioinformatical-view).
+5. **Replicate published results.** Once it works and can reproduce other papers, apply it to
+   the full blood brain barrier gene set.
+
+**What it returns, per gene:**
+
+- Human, macaque and mouse orthologue IDs
+- Whether the orthology is one-to-one
+- Protein identity: human vs macaque, human vs mouse, macaque vs mouse
+- Sequence length and alignment status
+- Key domains, if available
+- A plain language interpretation: "highly conserved core barrier protein", "moderately
+  conserved", or "not suitable for simple cross-species comparison"
+- A downloadable CSV and JSON result
+
+**Checkable by hand.** The download is meant to be verifiable without rerunning anything:
+each row carries the database IDs and versions it came from, so any number can be looked up
+and checked directly.
 
 ## About this project
 
