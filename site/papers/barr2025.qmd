@@ -63,6 +63,21 @@ CrossFilt also **reduces the number of false positives**, which is amazing.
    reads that map consistently to the same genomic feature in both species. So at this point I
    believe there is not a **one-to-many orthologue** system, because you are cutting them out.
 
+**Results.** I will add now the results section from what I have understood with the usage of
+the software Anara. They use **six pipelines**, including their own: **CrossFilt,
+single-reference, dual-reference, annotation transfer, orthologous exons and consensus**, on
+RNA sequencing from human, macaque and chimpanzee. So up until this point, I believe for
+CrossFilt, which is incredibly helpful, we can only use **RNA sequencing**.
+
+Then they use **identical quality control and normalization**. I suppose normalization should
+depend on what step you are taking with CrossFilt, or whether CrossFilt is doing the
+normalization for you. Not quite sure about this one.
+
+Then the **limma-voom** differential expression framework, which I did not use for my project
+so far.
+
+And then the only variable they had was the **alignment and the filtering strategy**.
+
 ## What I take from it
 
 It fits exactly with our to-do. It reduces the number of false positives, which is amazing,
@@ -83,8 +98,17 @@ out.
 - **Annotation quality.** The paper names human and mouse as the well curated annotations.
   Macaque is in the less curated group, which is why they transfer the human annotation onto
   it with CAT.
-- **Different datasets.** Only primates were tested, not mouse. The authors say it should
-  extend to more distant species and to other read based data, but do not show it.
+- **Different datasets, and "we can only use RNA sequencing".** RNA sequencing is the only
+  data they tested, and only on primates, not mouse. But the authors say it applies to any
+  read based data, such as chromatin accessibility or binding, and to more distant species.
+  They just do not show it.
+- **Normalization.** CrossFilt does not normalize. It only filters reads, before they are
+  counted. Normalization comes afterwards, the same for every pipeline, inside the edgeR and
+  limma-voom step.
+- **"The only variable was the alignment and the filtering strategy."** Right, plus how the
+  orthologous genes are defined, the annotation. The paper names three differences between
+  the pipelines: which genome reads are aligned to, how features are annotated, and whether
+  reads are filtered for bias.
 
 ## Open questions from this read
 
