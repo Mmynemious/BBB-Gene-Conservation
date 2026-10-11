@@ -50,6 +50,22 @@ analysis in relation to the different orthologous groups.
 
 That is where I am currently at. I will continue reading.
 
+**The workflow figure.** I have come across their figure, which explains CoRMAP in a better
+way. The first thing that happens in this pipeline is to:
+
+1. **Download the RNA sequencing raw data** from public repositories.
+2. **Clean the data.**
+3. Do **de novo assembly**.
+4. **Quantify** all gene expression values. I assume it is something that we can input.
+5. **Predict the protein sequences.**
+6. **Find orthologous relationships** between species and/or taxonomic groups with the
+   **OrthoMCL pipeline**, which is not elaborated in this figure.
+7. **Annotate the mammalian sequences as representative**, using **BLASTP, BLASTX and
+   Trinotate**.
+8. **Report a metadata table.**
+9. Allow for the **downstream analysis with the OGG analysis**, which I think they have also
+   published, so this tool also belongs to them.
+
 ## What I take from it
 
 An amazing project, and a much clearer approach. It encounters all the problems we had,
@@ -60,3 +76,8 @@ specifically with orthologues and how to use their gene expression levels.
 - **Is this the same orthologue categorisation problem?** Yes. CoRMAP does not choose between
   one-to-one and one-to-many: OrthoMCL clusters orthologues and in-paralogues into orthologous
   gene groups, and expression is compared per group.
+- **Is quantification something that can be input?** It is done by the pipeline: reads are
+  mapped back to the assembly and quantified with RSEM inside Trinity, then normalised to TPM.
+  The input is raw RNA sequencing data, either public or one's own.
+- **Is the OGG analysis their own published tool?** The OGG analysis is part of CoRMAP itself,
+  written as their own R scripts. OrthoMCL, Trinity and Trinotate are existing tools by others.
