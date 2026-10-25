@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-10-11">
+<meta name="dcterms.date" content="2026-10-25">
 
 <title>Barr and Gilad 2025 – BBB Gene Conservation</title>
 <style>
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6b38416d90cdbb41281c8a2a0df0236b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-204905c8f2a13f9dbcd1d9ce328f69a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,29 +142,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../glossary.html"> 
 <span class="menu-text">Glossary</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-first-pipeline" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">First Pipeline</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-first-pipeline">    
-        <li>
-    <a class="dropdown-item" href="../pipeline.html">
- <span class="dropdown-text">Pipeline &amp; Methods</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../audit.html">
- <span class="dropdown-text">Audit</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../results.html">
- <span class="dropdown-text">Results (preliminary)</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../data-code.html"> 
-<span class="menu-text">Data &amp; Code</span></a>
-  </li>  
   <li class="nav-item">
     <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
@@ -224,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 11, 2026</p>
+      <p class="date">October 25, 2026</p>
     </div>
   </div>
   
@@ -329,8 +306,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p><strong>It is a ready-made algorithm for the method-driven pipeline.</strong> The to-do on the home page is to rebuild the pipeline on established algorithms for each step. CrossFilt is one for the expression side: deciding which genes are BBB-enriched before conservation is ever measured. That step currently comes from Wälchli and is checked against Miao.</p></li>
 <li><p><strong>It does not touch the conservation step itself.</strong> This project compares <strong>coding sequence</strong>, not reads. Percent identity and dN/dS come from aligned CDS, so read mapping bias does not enter there. CrossFilt matters wherever the project uses expression data to choose or validate genes.</p></li>
-<li><p><strong>It agrees with the one-to-one decision.</strong> Its own design cuts out duplicated regions, the same way Miao restricted to one-to-one orthologues. That is now three lines of support for applying the <a href="../audit.html"><code>step5d</code></a> fix to the BBB set as well as the control.</p></li>
-<li><p><strong>It is a warning about any expression comparison the project adds.</strong> The macaque expression atlas in <a href="../extensions.html">Extensions</a> would mean comparing expression across species. If that is done by aligning each species to its own genome and matching genes by name, this paper says to expect a lot of false differences.</p></li>
+<li><p><strong>It agrees with the one-to-one decision.</strong> Its own design cuts out duplicated regions, the same way Miao restricted to one-to-one orthologues. That is now three lines of support for applying the <a href="https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md"><code>step5d</code></a> fix to the BBB set as well as the control.</p></li>
+<li><p><strong>It is a warning about any expression comparison the project adds.</strong> The macaque expression atlas in <a href="../index.html#future-work">Extensions</a> would mean comparing expression across species. If that is done by aligning each species to its own genome and matching genes by name, this paper says to expect a lot of false differences.</p></li>
 </ol>
 </section>
 <section id="reference-detail-from-the-paper" class="level2">
@@ -936,10 +913,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**It agrees with the one-to-one decision.** Its own design cuts out duplicated regions, the</span>
 <span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>   same way Miao restricted to one-to-one orthologues. That is now three lines of support</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>   for applying the <span class="co">[</span><span class="ot">`step5d`</span><span class="co">](../audit.qmd)</span> fix to the BBB set as well as the control.</span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>   for applying the <span class="co">[</span><span class="ot">`step5d`</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md)</span> fix to the BBB set as well as the control.</span>
 <span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**It is a warning about any expression comparison the project adds.** The macaque</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>   expression atlas in <span class="co">[</span><span class="ot">Extensions</span><span class="co">](../extensions.qmd)</span> would mean comparing expression across</span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>   expression atlas in <span class="co">[</span><span class="ot">Extensions</span><span class="co">](../index.qmd#future-work)</span> would mean comparing expression across</span>
 <span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>   species. If that is done by aligning each species to its own genome and matching genes by</span>
 <span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>   name, this paper says to expect a lot of false differences.</span>
 <span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>

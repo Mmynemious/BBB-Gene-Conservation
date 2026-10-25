@@ -1,6 +1,6 @@
 ---
 title: "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque"
-subtitle: "A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls."
+subtitle: "Coding-sequence conservation of blood–brain barrier transporters, and how it relates to known species differences in expression."
 toc: false
 page-layout: article
 ---
@@ -8,14 +8,9 @@ page-layout: article
 ::: {.hub-summary}
 
 This project has been a way for me to get accustomed to bioinformatics, and it aims at a
-quantitative analysis of protein-coding conservation in human, mouse and macaque. This
-webpage shows the steps I took, the errors that occurred in the first static pipeline, and a
-literature review aimed at understanding the space of BBB analysis.
-
-I am now trying to build a method-driven pipeline that lets gene conservation run more
-efficiently, based upon established algorithms for the rough steps of: choosing gene sets,
-validating genes, mapping orthologues, running conservation, and interpreting and exporting
-the data.
+quantitative analysis of protein-coding conservation in human, mouse and macaque. It now
+focuses on the transporters of the blood–brain barrier, the genes that decide whether a drug
+can cross it.
 
 :::
 
@@ -31,61 +26,11 @@ comments, plus a bioinformatical view of workflows built by others. **In progres
 [Read more →](literature-review.qmd)
 :::
 
-:::
-
-### The first pipeline: rough ideation
-
-My first attempt, built before the literature review. It runs end to end, but the audit
-found errors that have to be fixed before any of its numbers can be trusted.
-
-::: {.hub-grid}
-
 ::: {.hub-card}
-### First Pipeline
-How the first analysis was built, step by step: gene lists, orthologues across three
-species, coding-sequence alignment, % identity and dN/dS. Each step carries its own audit
-flag.
+### Glossary
+The methods and terms used across the project, in plain language.
 
-[Read more →](pipeline.qmd)
-:::
-
-::: {.hub-card .hub-card-flag}
-### Audit: what went wrong
-All 15 pipeline steps with a verdict each, and the three fixes that have to happen before
-the results can be trusted. **3 steps break results, 6 move numbers, 6 are clean.**
-
-[Read more →](audit.qmd)
-:::
-
-::: {.hub-card}
-### Results (preliminary)
-Conservation distributions, BBB genes against the liver control, and the three pairwise
-species comparisons. **Not correct yet:** these come from the first pipeline, before the
-audit fixes.
-
-[Read more →](results.qmd)
-:::
-
-:::
-
-### For reuse
-
-::: {.hub-grid}
-
-::: {.hub-card}
-### Data & Code
-Processed datasets, the R script for every step, and instructions to reproduce the
-analysis.
-
-[Read more →](data-code.qmd)
-:::
-
-::: {.hub-card}
-### Extensions
-What comes after the fixes: MANE Select transcripts, phylogenetic dN/dS, regulatory
-sequence, and a macaque expression atlas.
-
-[Read more →](extensions.qmd)
+[Read more →](glossary.qmd)
 :::
 
 ::: {.hub-card}
@@ -112,10 +57,29 @@ together with a difference in **coding sequence**, across human, macaque and mou
 1. **Replicate Miao et al. 2026** as a calibration: capillary endothelial expression in mouse
    and human, with one-to-one orthologues, Seurat, Wilcoxon and Bonferroni.
 2. **Re-run sequence conservation on the transporter set**, reusing the clean steps of the
-   [first pipeline](audit.qmd) and applying the audit fixes.
+   [first pipeline](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) and applying the audit fixes.
 3. **Link expression and coding-sequence differences** gene by gene.
 4. **Write the introduction**: why the barrier matters, and what species differences in it
    mean for drug delivery between human, mouse and macaque. **In progress.**
+
+## Future work
+
+Kept out of the current scope on purpose:
+
+- **Phylogenetic dN/dS** with PAML across all three species, instead of pairwise estimates.
+- **Regulatory and non-coding sequence**, where most differences in expression level are
+  thought to live.
+- **A macaque expression atlas**, so macaque expression is measured rather than inferred
+  from mouse.
+- **Endothelial subtypes** from the Wälchli atlas, to ask whether a transporter is
+  capillary-specific rather than merely detected.
+
+## The first pipeline
+
+My first attempt scored every BBB gene at once. An audit of all 15 steps found three errors
+that change its conclusions, and it is the reason the project now looks the way it does. The
+pipeline, its results and the full audit are archived in the repository:
+[first pipeline and audit](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/README.md).
 
 ## About this project
 

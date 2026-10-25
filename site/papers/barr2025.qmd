@@ -129,10 +129,10 @@ out.
 
 3. **It agrees with the one-to-one decision.** Its own design cuts out duplicated regions, the
    same way Miao restricted to one-to-one orthologues. That is now three lines of support
-   for applying the [`step5d`](../audit.qmd) fix to the BBB set as well as the control.
+   for applying the [`step5d`](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) fix to the BBB set as well as the control.
 
 4. **It is a warning about any expression comparison the project adds.** The macaque
-   expression atlas in [Extensions](../extensions.qmd) would mean comparing expression across
+   expression atlas in [Extensions](../index.qmd#future-work) would mean comparing expression across
    species. If that is done by aligning each species to its own genome and matching genes by
    name, this paper says to expect a lot of false differences.
 

@@ -116,7 +116,7 @@ and `CLDN5` consistently recovered as canonical capillary markers.
 
 2. **It validates the statistical choices.** One-to-one orthologues, Seurat, Wilcoxon
    rank-sum, Bonferroni adjustment. That is the same framework as `step5e` and `step5g`. The
-   [audit](../audit.qmd) already found the statistics to be the clean part of the pipeline;
+   [audit](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) already found the statistics to be the clean part of the pipeline;
    this is independent confirmation that they match current practice in the field.
 
 3. **It settles the one-to-many orthologue question.** They restricted to **one-to-one
@@ -138,7 +138,7 @@ and `CLDN5` consistently recovered as canonical capillary markers.
    transcripts in mouse BBB capillary endothelial cells, and a canonical marker robustly
    expressed in both species. It is still absent from this project's gene list because it
    failed an enrichment cutoff. Four independent papers now treat it as central. This needs
-   writing into the [limitations](../results.qmd).
+   writing into the [limitations](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd).
 
 6. **It gives a ready-made comparison set.** The 169 human-enriched and 386 mouse-enriched
    genes are a published, thresholded list of where the two species differ at the barrier. Once

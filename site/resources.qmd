@@ -9,7 +9,7 @@ Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010).
 The mouse blood–brain barrier transcriptome: a new resource for understanding the development
 and function of brain endothelial cells. *PLOS ONE* 5(10): e13741. <https://doi.org/10.1371/journal.pone.0013741>
 : Mouse BBB gene list — `step1`. Supplementary tables S3–S5 were used in error; S6 is the
-BBB-enriched table. See the [audit](audit.qmd).
+BBB-enriched table. See the [audit](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md).
 
 Munji RN, et al. (2019).
 Profiling the mouse brain endothelial transcriptome in health and disease.
@@ -38,7 +38,7 @@ Bahn S, Pääbo S (2010).
 Evolution of neuronal and endothelial transcriptomes in primates.
 *Genome Biology and Evolution*. GEO: GSE12293. <https://doi.org/10.1093/gbe/evq018>
 : Originally logged as the macaque dataset. The downloaded samples are all human, so it does
-not supply macaque expression data. See the [audit](audit.qmd).
+not supply macaque expression data. See the [audit](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md).
 
 ## Databases
 

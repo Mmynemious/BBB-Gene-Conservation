@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-10-11">
+<meta name="dcterms.date" content="2026-10-25">
 
 <title>Miao et al.&nbsp;2026 – BBB Gene Conservation</title>
 <style>
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6b38416d90cdbb41281c8a2a0df0236b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-204905c8f2a13f9dbcd1d9ce328f69a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,29 +142,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../glossary.html"> 
 <span class="menu-text">Glossary</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-first-pipeline" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">First Pipeline</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-first-pipeline">    
-        <li>
-    <a class="dropdown-item" href="../pipeline.html">
- <span class="dropdown-text">Pipeline &amp; Methods</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../audit.html">
- <span class="dropdown-text">Audit</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../results.html">
- <span class="dropdown-text">Results (preliminary)</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../data-code.html"> 
-<span class="menu-text">Data &amp; Code</span></a>
-  </li>  
   <li class="nav-item">
     <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
@@ -224,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 11, 2026</p>
+      <p class="date">October 25, 2026</p>
     </div>
   </div>
   
@@ -315,10 +292,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <h2 class="anchored" data-anchor-id="how-it-relates-to-this-project">How it relates to this project</h2>
 <ol type="1">
 <li><p><strong>This is the closest paper yet to what the project is doing, and it is two months old.</strong> Same two species, same question of how far mouse stands in for human at the barrier, and published while this project was running. The difference is the measurement: they compare <strong>expression</strong>, this project compares <strong>coding sequence</strong>. That is a real distinction and it is worth stating in the project’s framing rather than discovering later.</p></li>
-<li><p><strong>It validates the statistical choices.</strong> One-to-one orthologues, Seurat, Wilcoxon rank-sum, Bonferroni adjustment. That is the same framework as <code>step5e</code> and <code>step5g</code>. The <a href="../audit.html">audit</a> already found the statistics to be the clean part of the pipeline; this is independent confirmation that they match current practice in the field.</p></li>
+<li><p><strong>It validates the statistical choices.</strong> One-to-one orthologues, Seurat, Wilcoxon rank-sum, Bonferroni adjustment. That is the same framework as <code>step5e</code> and <code>step5g</code>. The <a href="https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md">audit</a> already found the statistics to be the clean part of the pipeline; this is independent confirmation that they match current practice in the field.</p></li>
 <li><p><strong>It settles the one-to-many orthologue question.</strong> They restricted to <strong>one-to-one orthologous pairs only</strong>, 15,675 of them, and cross-checked Ensembl against NCBI. This project admitted 196 one-to-many pairs at 25.8% identity into the BBB set in <code>step3b</code>, and then <code>step5d</code> excluded them from the control but not from the BBB set. The field standard is to use one-to-one throughout. That is direct support for the <code>step5d</code> fix.</p></li>
 <li><p><strong>The sharpest finding for this project: the divergent family is the SLC family.</strong> A substantial proportion of the differentially expressed genes are solute carriers. This project’s gene list carries 52 SLC genes, about 3.4% of it, including the ones named here, and it is measuring how conserved their <em>sequence</em> is. Miao shows that this is exactly the family whose <em>expression</em> diverges most between mouse and human. So the two measurements may well disagree, with a gene conserved in sequence and expressed quite differently. That is not a problem with either study. It is the most interesting thing either could say, and it is a result this project is positioned to contribute to.</p></li>
-<li><p><strong>CLDN5 for the fourth time.</strong> Here it is one of the two most abundantly expressed transcripts in mouse BBB capillary endothelial cells, and a canonical marker robustly expressed in both species. It is still absent from this project’s gene list because it failed an enrichment cutoff. Four independent papers now treat it as central. This needs writing into the <a href="../results.html">limitations</a>.</p></li>
+<li><p><strong>CLDN5 for the fourth time.</strong> Here it is one of the two most abundantly expressed transcripts in mouse BBB capillary endothelial cells, and a canonical marker robustly expressed in both species. It is still absent from this project’s gene list because it failed an enrichment cutoff. Four independent papers now treat it as central. This needs writing into the <a href="https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd">limitations</a>.</p></li>
 <li><p><strong>It gives a ready-made comparison set.</strong> The 169 human-enriched and 386 mouse-enriched genes are a published, thresholded list of where the two species differ at the barrier. Once this project’s conservation scores are corrected, asking whether those divergent genes are also less conserved in sequence is a direct, cheap and genuinely novel question.</p></li>
 </ol>
 </section>
@@ -941,7 +918,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**It validates the statistical choices.** One-to-one orthologues, Seurat, Wilcoxon</span>
 <span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>   rank-sum, Bonferroni adjustment. That is the same framework as <span class="in">`step5e`</span> and <span class="in">`step5g`</span>. The</span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">audit</span><span class="co">](../audit.qmd)</span> already found the statistics to be the clean part of the pipeline;</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">audit</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md)</span> already found the statistics to be the clean part of the pipeline;</span>
 <span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>   this is independent confirmation that they match current practice in the field.</span>
 <span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**It settles the one-to-many orthologue question.** They restricted to **one-to-one</span>
@@ -963,7 +940,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>   transcripts in mouse BBB capillary endothelial cells, and a canonical marker robustly</span>
 <span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>   expressed in both species. It is still absent from this project's gene list because it</span>
 <span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>   failed an enrichment cutoff. Four independent papers now treat it as central. This needs</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>   writing into the <span class="co">[</span><span class="ot">limitations</span><span class="co">](../results.qmd)</span>.</span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>   writing into the <span class="co">[</span><span class="ot">limitations</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd)</span>.</span>
 <span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a><span class="ss">6. </span>**It gives a ready-made comparison set.** The 169 human-enriched and 386 mouse-enriched</span>
 <span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>   genes are a published, thresholded list of where the two species differ at the barrier. Once</span>

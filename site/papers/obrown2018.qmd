@@ -141,7 +141,7 @@ analogous to that of the mouse.
    permeability in mice**, with cortex, striatum and hippocampus leaking more than interbrain and
    midbrain, at similar pericyte coverage. So the barrier is not uniform, and a gene list built
    from a bulk microvessel fraction is averaging regions that differ. That is a real limit on
-   [step 1](../audit.qmd) and it now has a source.
+   [step 1](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) and it now has a source.
 
 3. **It undercuts the premise more sharply than Park does.** "Barrier properties are not
    intrinsic to the endothelial cells but rather are acquired from the neural
@@ -165,7 +165,7 @@ analogous to that of the mouse.
    mouse and zebrafish. It is absent from this project's gene list because it failed an
    enrichment cutoff. Three independent papers now treat it as central. That is no longer a
    quirk of one source, it is a pattern worth writing into the
-   [limitations](../results.qmd).
+   [limitations](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd).
 
 7. **"The BBB" is not one structure across all species.** In some taxa the barrier is glial
    rather than endothelial. That bounds how far a cross-species conservation argument can be

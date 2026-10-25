@@ -4,7 +4,9 @@
 ## Project Goal
 Do blood-brain barrier (BBB) transporters that differ in **expression** between human, rhesus macaque and mouse also differ in **coding sequence**? The project focuses on the solute carrier (SLC) and ATP binding cassette (ABC) transporter families, which decide whether a drug crosses the barrier.
 
-Project website, including the literature review and the audit of the first pipeline: <https://bbb-gene-conservation.vercel.app>
+Project website with the literature review: <https://bbb-gene-conservation.vercel.app>
+
+The first pipeline, its results and its audit are archived in [`archive/first_pipeline/`](archive/first_pipeline/README.md).
 
 ## Current plan
 1. Replicate Miao et al. 2026 (capillary endothelial expression, mouse vs human) as a calibration.
@@ -27,6 +29,7 @@ BBB-Gene-Conservation/
 │   └── hpa_liver/      # Human Protein Atlas, used for the first pipeline's control set
 ├── processed/          # Outputs of the first pipeline
 ├── scripts/            # R scripts, step1 to step5h, plus eval_step* audit scripts
+├── archive/            # First pipeline: audit, results, notes
 ├── site/               # Quarto sources for the project website
 └── docs/               # The rendered website (what Vercel serves) — no paper PDFs here
 ```

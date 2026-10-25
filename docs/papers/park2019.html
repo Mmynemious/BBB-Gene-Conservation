@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-10-11">
+<meta name="dcterms.date" content="2026-10-25">
 
 <title>Park et al.&nbsp;2019 – BBB Gene Conservation</title>
 <style>
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../site_libs/bootstrap/bootstrap-6b38416d90cdbb41281c8a2a0df0236b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../site_libs/bootstrap/bootstrap-204905c8f2a13f9dbcd1d9ce328f69a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -142,29 +142,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <a class="nav-link" href="../glossary.html"> 
 <span class="menu-text">Glossary</span></a>
   </li>  
-  <li class="nav-item dropdown ">
-    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-first-pipeline" role="link" data-bs-toggle="dropdown" aria-expanded="false">
- <span class="menu-text">First Pipeline</span>
-    </a>
-    <ul class="dropdown-menu" aria-labelledby="nav-menu-first-pipeline">    
-        <li>
-    <a class="dropdown-item" href="../pipeline.html">
- <span class="dropdown-text">Pipeline &amp; Methods</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../audit.html">
- <span class="dropdown-text">Audit</span></a>
-  </li>  
-        <li>
-    <a class="dropdown-item" href="../results.html">
- <span class="dropdown-text">Results (preliminary)</span></a>
-  </li>  
-    </ul>
-  </li>
-  <li class="nav-item">
-    <a class="nav-link" href="../data-code.html"> 
-<span class="menu-text">Data &amp; Code</span></a>
-  </li>  
   <li class="nav-item">
     <a class="nav-link" href="../resources.html"> 
 <span class="menu-text">Resources</span></a>
@@ -225,7 +202,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 11, 2026</p>
+      <p class="date">October 25, 2026</p>
     </div>
   </div>
   
@@ -323,9 +300,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ol type="1">
 <li><p><strong>It is an argument against the pipeline this project is premised on.</strong> The opening frame of this project is mouse, then macaque, then human, and the question of whether sequence conservation makes that chain trustworthy. Park’s work attacks the same problem from the other end: build a <strong>human</strong> system in vitro and skip the species jump entirely. The paper states plainly that neither animal models nor existing in vitro cultures effectively mimic the human BBB. If human chips mature, cross-species conservation becomes less load-bearing as a translational argument, and more of a question about evolutionary biology. Worth saying somewhere in the project’s framing.</p></li>
 <li><p><strong>It independently nominates several genes on this project’s list as functionally important</strong>, and does so by <em>function</em> rather than by expression: P-gp (<code>ABCB1</code>), BCRP (<code>ABCG2</code>), MRP1 and MRP4, GLUT-1 (<code>SLC2A1</code>), plus LRP1 and the transferrin receptor as shuttling routes. These are not just detected here, they are shown to pump, and knocking each one out with a specific inhibitor changes what crosses.</p></li>
-<li><p><strong>Claudin-5 again, and this time it matters.</strong> Park treats claudin-5 as a defining marker of a working barrier. This project’s gene list <strong>does not contain CLDN5</strong>, because it failed the differential-expression cutoff in the source studies: it is expressed in all endothelia, not only brain. That is a defensible reason for a <em>enrichment-based</em> list, but it means the list omits a gene the functional literature treats as central. See the <a href="../results.html">limitations</a>.</p></li>
+<li><p><strong>Claudin-5 again, and this time it matters.</strong> Park treats claudin-5 as a defining marker of a working barrier. This project’s gene list <strong>does not contain CLDN5</strong>, because it failed the differential-expression cutoff in the source studies: it is expressed in all endothelia, not only brain. That is a defensible reason for a <em>enrichment-based</em> list, but it means the list omits a gene the functional literature treats as central. See the <a href="https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd">limitations</a>.</p></li>
 <li><p><strong>It connects directly to <a href="../papers/kumabe2025.html">Kumabe 2025</a> on in vitro model fidelity.</strong> Kumabe found claudin-5 <strong>absent</strong> from hCMEC/D3, an immortalised line, and found immortalised lines drifting towards generic vein endothelium. Park’s chip <strong>does</strong> express claudin-5 and reaches barrier values two orders of magnitude above primary-cell chips. Read together, the two papers say the same thing from opposite directions: how the endothelium is produced determines whether an in vitro BBB is a BBB at all.</p></li>
-<li><p><strong>Function is not presence.</strong> <code>step4b</code> scores a gene on whether it was <em>detected</em> in human datasets. Park’s whole method rests on the difference between a transporter being present and a transporter working. That is a fair challenge to how this project’s validation score is constructed, quite apart from the parsing bugs the <a href="../audit.html">audit</a> records.</p></li>
+<li><p><strong>Function is not presence.</strong> <code>step4b</code> scores a gene on whether it was <em>detected</em> in human datasets. Park’s whole method rests on the difference between a transporter being present and a transporter working. That is a fair challenge to how this project’s validation score is constructed, quite apart from the parsing bugs the <a href="https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md">audit</a> records.</p></li>
 </ol>
 </section>
 <section id="reference-detail-from-the-paper" class="level2">
@@ -987,7 +964,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>   the differential-expression cutoff in the source studies: it is expressed in all endothelia,</span>
 <span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>   not only brain. That is a defensible reason for a *enrichment-based* list, but it means the</span>
 <span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>   list omits a gene the functional literature treats as central. See the</span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">limitations</span><span class="co">](../results.qmd)</span>.</span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">limitations</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd)</span>.</span>
 <span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**It connects directly to [Kumabe 2025](kumabe2025.qmd) on in vitro model fidelity.**</span>
 <span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>   Kumabe found claudin-5 **absent** from hCMEC/D3, an immortalised line, and found</span>
@@ -999,7 +976,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-148"><a href="#cb1-148" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Function is not presence.** <span class="in">`step4b`</span> scores a gene on whether it was *detected* in human</span>
 <span id="cb1-149"><a href="#cb1-149" aria-hidden="true" tabindex="-1"></a>   datasets. Park's whole method rests on the difference between a transporter being present</span>
 <span id="cb1-150"><a href="#cb1-150" aria-hidden="true" tabindex="-1"></a>   and a transporter working. That is a fair challenge to how this project's validation score</span>
-<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>   is constructed, quite apart from the parsing bugs the <span class="co">[</span><span class="ot">audit</span><span class="co">](../audit.qmd)</span> records.</span>
+<span id="cb1-151"><a href="#cb1-151" aria-hidden="true" tabindex="-1"></a>   is constructed, quite apart from the parsing bugs the <span class="co">[</span><span class="ot">audit</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md)</span> records.</span>
 <span id="cb1-152"><a href="#cb1-152" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-153"><a href="#cb1-153" aria-hidden="true" tabindex="-1"></a><span class="fu">## Reference detail from the paper</span></span>
 <span id="cb1-154"><a href="#cb1-154" aria-hidden="true" tabindex="-1"></a></span>

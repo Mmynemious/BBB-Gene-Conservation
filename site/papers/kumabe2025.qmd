@@ -171,7 +171,7 @@ the problem and the standard the method is judged against both come from the sam
    *expression*.
 
 2. **It is a primate BBB dataset, which this project does not have.** The
-   [audit](../audit.qmd) records that there is no macaque expression evidence at all. Every
+   [audit](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) records that there is no macaque expression evidence at all. Every
    gene earned its place from a mouse study, and the paper logged as the macaque dataset
    contained no macaque samples. Kumabe supplies that missing layer, at protein level.
 

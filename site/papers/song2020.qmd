@@ -94,7 +94,7 @@ absent in mouse brain pericytes but robustly expressed in human.
 3. **It sharpens the brain region gap.** The project never picked a region, and neither does
    this paper, but Song names region as a likely source of its human variability. Two papers
    now, this one and [O'Brown](obrown2018.qmd), point at region as an uncontrolled variable.
-   That belongs in the [limitations](../results.qmd) alongside the canonical gene problem.
+   That belongs in the [limitations](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd) alongside the canonical gene problem.
 
 4. **Microvessel preparations are not endothelial preparations, and this project's list proves
    it.** LCM captures endothelium and pericytes together, and the paper is explicit about it.
@@ -102,7 +102,7 @@ absent in mouse brain pericytes but robustly expressed in human.
    `KCNJ8`, `ABCC9`, `NOTCH3` and `VTN` are all on it.** Those are pericyte genes sitting in a
    list the project describes as brain endothelial.
 
-   This is the [`step1` defect](../audit.qmd) showing up from a second direction. Daneman S3,
+   This is the [`step1` defect](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) showing up from a second direction. Daneman S3,
    one of the three tables read in error, **is** the pericyte-specific list, and the audit
    noted it contains `Pdgfrb`, `Kcnj8`, `Vtn` and `Zic1`. Song independently confirms those are
    pericyte markers. So the contamination is not hypothetical and it is not small: fixing
@@ -121,7 +121,7 @@ reports as species-divergent, so there is something to compare against. They are
 that matter for drug delivery, which gives the conservation question a consequence. And the
 gene list already carries 52 SLC and 9 ABC genes, so the data exists.
 
-Recorded in [extensions](../extensions.qmd).
+Recorded in [extensions](../index.qmd#future-work).
 
 ## Annotated scan
 

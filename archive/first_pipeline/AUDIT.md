@@ -1,37 +1,30 @@
----
-title: "Audit — what's wrong"
-subtitle: "Every defect, pinned to the numbered script step it lives in"
----
+# Audit — what's wrong
 
-Every defect below is pinned to the **numbered script step** it lives in, using the
-script's own filename. The step names here and the step names in the pipeline are
-the same names — the ambiguity in the tab labels (which bundle several steps
-together) is not carried into the audit.
+*Every defect, pinned to the numbered script step it lives in*
+
+> Archived from the project website. This page belongs to the **first pipeline**, which has been superseded by the transporter-focused analysis described on the [project website](https://bbb-gene-conservation.vercel.app/).
+
+Every defect below is pinned to the **numbered script step** it lives in, using the script’s own filename. The step names here and the step names in the pipeline are the same names — the ambiguity in the tab labels (which bundle several steps together) is not carried into the audit.
 
 ### The count
 
-```{=html}
-<div class="audit-tally">
-  <div class="t-breaks"><span class="k">Breaks results</span><span class="n">3</span><span class="d">Fix these and a stated conclusion changes. Steps 1, 4c, 5d.</span></div>
-  <div class="t-shifts"><span class="k">Numbers move</span><span class="n">6</span><span class="d">Real defects that shift figures without reversing a claim.</span></div>
-  <div class="t-clean"><span class="k">Clean</span><span class="n">6</span><span class="d">No defect in the step itself, including both hard parts.</span></div>
-  <div class="t-open"><span class="k">Open questions</span><span class="n">6</span><span class="d">Not bugs — decisions, or data the project does not have.</span></div>
-</div>
-```
+| Verdict | Steps | Meaning |
+|---|---|---|
+| Breaks results | 3 | Fix these and a stated conclusion changes. Steps 1, 4c, 5d. |
+| Numbers move | 6 | Real defects that shift figures without reversing a claim. |
+| Clean | 6 | No defect in the step itself, including both hard parts. |
+| Open questions | 6 | Not bugs — decisions, or data the project does not have. |
 
 ### Register — all 15 numbered steps
 
-`Run` is the order the scripts actually execute in, which is **not** the order the
-step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
+`Run` is the order the scripts actually execute in, which is **not** the order the step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
 
-```{=html}
 <div class="audit-reg-wrap">
 <table class="audit-reg">
 <thead><tr>
   <th>Step</th><th>Run</th><th>What it does &middot; what's wrong</th><th>Verdict</th>
 </tr></thead>
 <tbody>
-
 <tr class="breaks"><td class="s-id">step1</td><td class="s-ord">1</td><td class="s-what">
   <b>Build the master BBB gene list.</b> Three of the four Daneman tables are the wrong
   tables &mdash; S3 is the pericyte-specific list (<code>Pdgfrb</code>, <code>Kcnj8</code>,
@@ -40,20 +33,17 @@ step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
   92 genes were lost silently: 18 to <code>toupper()</code> mangling the lowercase
   <code>orf</code> convention, 74 to HomoloGene's 2014 gene names.
 </td><td class="s-v"><span class="audit-chip" style="background:#A02D21;color:#fff">Wrong sources</span></td></tr>
-
 <tr class="clean"><td class="s-id">step2</td><td class="s-ord">2</td><td class="s-what">
   <b>Process the W&auml;lchli Seurat object.</b> Method correct &mdash; grouped by
   <code>ECclusters</code> rather than the default. Two things to know rather than fix: the
   input is gitignored so the step cannot re-run from a clean clone, and the
   <code>Mitochondrial</code> cluster (dying cells, not a cell type) is still in the output.
 </td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step3</td><td class="s-ord">3</td><td class="s-what">
   <b>Map to Ensembl IDs across three species.</b> The 92 names broken in step 1 return
   nothing from BioMart and drop out of every downstream calculation with no error raised.
   The step is doing what it was asked; it inherits the damage.
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">92 genes lost</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step4b</td><td class="s-ord">4</td><td class="s-what">
   <b>Cross-reference against human EC datasets.</b> Yang S6 was read without naming a
   sheet, so only the <em>first</em> sheet loaded &mdash; the column means "is an arterial
@@ -62,7 +52,6 @@ step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
   <b>88.5% of all genes pass</b>; that alone is why 1,131 of 1,526 genes score exactly 1.
   Winkler's parse is correct.
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Two reading bugs</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step3b</td><td class="s-ord">5</td><td class="s-what">
   <b>Add orthology confidence.</b> The script header says it recovers the genes step 1
   dropped. It does not &mdash; it re-queries the same out-of-date names and recovers none
@@ -70,14 +59,12 @@ step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
   <b>25.8% protein identity</b>, which step 5d then excludes from the control set but not
   from the BBB set.
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Overstated fix</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step3c</td><td class="s-ord">6</td><td class="s-what">
   <b>Gene biotype audit.</b> The check cannot fail. A CDS FASTA contains only
   protein-coding genes by definition, so a non-coding gene has no entry, comes back blank,
   and blank was not counted as a failure. 250 rows have no macaque label at all and were
   invisible to it. The reassuring answer was guaranteed by the method.
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Circular check</span></td></tr>
-
 <tr class="breaks"><td class="s-id">step4c</td><td class="s-ord">7</td><td class="s-what">
   <b>Build the liver control gene set.</b> The third filter looked for a tissue called
   <code>"brain"</code>; the Human Protein Atlas has no such label, only regions (cerebral
@@ -87,25 +74,21 @@ step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
   <b>86.6% of the "liver control" is brain-expressed</b>, median brain 31.3 against median
   liver 31.2. It is a housekeeping set &mdash; among the most conserved genes in the genome.
 </td><td class="s-v"><span class="audit-chip" style="background:#A02D21;color:#fff">Filter never ran</span></td></tr>
-
 <tr class="clean"><td class="s-id">step5a</td><td class="s-ord">8</td><td class="s-what">
   <b>Download CDS FASTAs.</b> Ensembl release 113 for all three species &mdash; GRCh38,
   GRCm39, Mmul_10. Straight downloads, nothing to get wrong.
 </td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step5b</td><td class="s-ord">9</td><td class="s-what">
   <b>Extract one CDS per gene.</b> Takes the <em>longest</em> isoform. Longest is not
   necessarily equivalent: human and mouse can land on non-corresponding versions of the
   same gene, which makes them look more different than they are. This is the origin of the
   224 impossible macaque scores visible in step 5c.
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Rough heuristic</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step5b_alt</td><td class="s-ord">&mdash;</td><td class="s-what">
   <b>MANE Select / Ensembl Canonical transcripts.</b> The standard alternative to the
   longest-isoform heuristic. It was written, it runs, and the canonical FASTAs already sit
   in <code>genomes/</code>. <b>It was never switched in.</b>
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Written, unused</span></td></tr>
-
 <tr class="shifts"><td class="s-id">step5c</td><td class="s-ord">10</td><td class="s-what">
   <b>Align and score the BBB genes.</b> dN/dS was computed on sequences that were trimmed
   but never aligned &mdash; genuinely wrong, and correctly fixed later in step 5f. But the
@@ -114,60 +97,48 @@ step names imply: `step4b` writes the file `step3b` reads, so 4b runs before 3b.
   the 10.0 ceiling</b> (2% after the 5f fix), and <b>224 one-to-one macaque pairs score
   under 85%</b> &mdash; <code>SLC2A1</code> at 71.4%, which is biologically impossible.
 </td><td class="s-v"><span class="audit-chip" style="background:#875110;color:#fff">Partly superseded</span></td></tr>
-
 <tr class="breaks"><td class="s-id">step5d</td><td class="s-ord">11</td><td class="s-what">
   <b>Score the liver control.</b> Described as "the same measurements", but it kept only
   the <em>single best-matching</em> orthologue per gene while the BBB set kept every match
   including the bad ones. Different rules on the two sides of the comparison &mdash; and
   that alone reverses the headline direction.
 </td><td class="s-v"><span class="audit-chip" style="background:#A02D21;color:#fff">Asymmetric rules</span></td></tr>
-
 <tr class="clean"><td class="s-id">step5e</td><td class="s-ord">12</td><td class="s-what">
   <b>First-pass statistics.</b> Wilcoxon rank-sum (correct &mdash; these data are not
   normal) with rank-biserial effect sizes. Superseded by 5g, but not wrong.
 </td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
-
 <tr class="clean"><td class="s-id">step5f</td><td class="s-ord">13</td><td class="s-what">
   <b>Recompute dN/dS, codon-aware.</b> Translate to protein, align the proteins, map back
   onto codons, discard gapped codons, then score. <b>This is the fix</b>, and it mattered:
   one-to-many mouse dN/dS moved from 0.14 to 0.354. The only gap is scope &mdash; it fixed
   dN/dS and left % identity untouched.
 </td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">This is the fix</span></td></tr>
-
 <tr class="clean"><td class="s-id">step5g</td><td class="s-ord">14</td><td class="s-what">
   <b>Multiple testing correction.</b> Bonferroni and FDR across the four primary
   comparisons, with subgroup analyses honestly labelled exploratory. Correct. What is wrong
   is what went <em>into</em> it &mdash; steps 1, 4c and 5d.
 </td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
-
 <tr class="clean"><td class="s-id">step5h</td><td class="s-ord">15</td><td class="s-what">
   <b>Mouse vs macaque.</b> Same codon-aware pipeline with no human reference. No defect of
   its own &mdash; but it inherits the step 1 gene list, so its numbers move when step 1 is
   fixed.
 </td><td class="s-v"><span class="audit-chip" style="background:#2C6C4C;color:#fff">Clean</span></td></tr>
-
 </tbody>
 </table>
 </div>
-```
 
 ### Three fixes change the conclusions
 
-1. **`step1`** — point it at Daneman **S6**, drop S3/S4/S5, retire the `Daneman_Filter`
-   column. Replace `toupper()` with a real ortholog mapping so the 92 lost genes come back.
-2. **`step4c`** — one line, so the brain filter matches the Atlas's real region names.
-   Then a separate decision about what the control should actually be.
-3. **`step5d`** — one orthologue rule applied to both groups.
+1.  **`step1`** — point it at Daneman **S6**, drop S3/S4/S5, retire the `Daneman_Filter` column. Replace `toupper()` with a real ortholog mapping so the 92 lost genes come back.
+2.  **`step4c`** — one line, so the brain filter matches the Atlas’s real region names. Then a separate decision about what the control should actually be.
+3.  **`step5d`** — one orthologue rule applied to both groups.
 
-Then re-run `step5c` through `step5h`. Everything else is numbers moving, not conclusions
-changing.
+Then re-run `step5c` through `step5h`. Everything else is numbers moving, not conclusions changing.
 
 ### What we still need to figure out
 
-These are not defects. They need a decision, a dataset, or both — and this is the section
-that grows as the literature review continues.
+These are not defects. They need a decision, a dataset, or both — and this is the section that grows as the literature review continues.
 
-```{=html}
 <div class="oq">
   <div>
     <p class="q">What should the control actually be?</p>
@@ -200,4 +171,3 @@ that grows as the literature review continues.
     <p class="n">Needs — a housekeeping decision</p>
   </div>
 </div>
-```

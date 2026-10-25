@@ -1,0 +1,76 @@
+# Extensions
+
+*Planned and ongoing follow-ups*
+
+> Archived from the project website. This page belongs to the **first pipeline**, which has been superseded by the transporter-focused analysis described on the [project website](https://bbb-gene-conservation.vercel.app/).
+
+Nothing on this page has been done yet. It is a record of what the project would need next, kept separate from the [audit](AUDIT.md) because these are not defects — a defect has a fix, and these need a decision, a dataset, or a method the project does not currently use.
+
+## Before anything else — the three fixes
+
+The extensions below are only worth doing on corrected inputs. In priority order:
+
+1.  **`step1`** — point it at Daneman **S6**, drop S3/S4/S5, retire the `Daneman_Filter` column, and replace `toupper()` with a real orthologue mapping so the 92 silently dropped genes return.
+2.  **`step4c`** — one line, so the brain filter matches the Human Protein Atlas’s real region names. Then decide what the control should actually be.
+3.  **`step5d`** — one orthologue rule applied to both groups.
+
+Then re-run `step5c` through `step5h`.
+
+## Method extensions
+
+### Phylogenetic dN/dS with PAML
+
+The current estimate is **pairwise**: each species pair scored independently. The rigorous approach runs `codeml` on a multi-species alignment with an explicit tree, which separates lineage-specific selection from shared ancestral signal and handles saturation properly. At ~80 My of human–mouse divergence, saturation is the specific worry — 38% of genes hit the dS ceiling before the codon-aware fix, and 2% still do.
+
+**Needs:** PAML, a three-species alignment per gene, and considerably more compute.
+
+### MANE Select transcripts, and re-running % identity
+
+[`step5b_alt_canonical_transcripts.R`](README.md) already generates canonical FASTAs and was never switched in. Doing so, then recomputing % identity the way `step5f` recomputed dN/dS, should remove the **224 one-to-one macaque pairs scoring under 85%** — figures that are currently reporting isoform length mismatch as evolutionary distance.
+
+This is the cheapest high-value extension: the code exists and the sequences are already downloaded.
+
+### Regulatory and non-coding sequence
+
+The analysis is **coding sequence only**. Promoters, enhancers and UTRs were deliberately excluded — and they are where most cross-species differences in *expression level* are thought to live. A gene can be 95% identical in its coding sequence and regulated completely differently. Extending to regulatory regions would test whether BBB conservation at the protein level is matched by conservation in how the genes are switched on.
+
+**Needs:** a definition of the regulatory region per gene, and an alignment strategy that tolerates far lower conservation than CDS.
+
+## Data extensions
+
+### Narrow the project to the SLC and ABC transporter families
+
+Rather than scoring the whole enrichment-derived list, restrict to the solute carrier and ATP binding cassette families. This would fix several problems at once:
+
+- **Membership stops being a judgement call.** The families are defined by gene nomenclature, so the “what counts as a canonical BBB gene” problem in the [limitations](results.qmd) does not arise.
+- **There is something to compare against.** [Song 2020](https://bbb-gene-conservation.vercel.app/papers/song2020.html) and [Miao 2026](https://bbb-gene-conservation.vercel.app/papers/miao2026.html) independently report the same transporters diverging between mouse and human, including `Slco1c1`, `Slc22a8` and `SLCO1A2`. A sequence conservation result would land against a published expression result.
+- **The question gains a consequence.** These are the families that decide whether a drug crosses, which is why both papers frame their species differences as a drug development problem.
+- **The data already exists.** The gene list carries 52 SLC and 9 ABC genes.
+
+**Needs:** a decision on whether narrowing the scope is acceptable, since it changes the project from “are BBB genes conserved” to “are BBB transporters conserved”. The second is a smaller claim and a much more defensible one.
+
+### A macaque expression atlas
+
+The project’s largest structural gap. Real macaque DNA is used throughout, but **no macaque study tells us which genes macaque brain vessels actually express** — every gene earned its place from a mouse study, and the paper logged as the macaque dataset ([Giger 2010](https://bbb-gene-conservation.vercel.app/resources.html)) contains no macaque samples.
+
+The candidate is the rhesus macaque single-nucleus brain atlas (*Science Advances* 2023, ~1M nuclei, 28 regions, on CellxGene).
+
+**Needs:** the dataset, and Dr. Clelland’s sign-off — this widens the project’s scope.
+
+### Wälchli’s endothelial subtypes
+
+The atlas resolves 12 endothelial subtypes; `step4b` collapsed all of it to one above-zero test. Asking whether a gene is **capillary-specific** rather than merely detected is the question this dataset exists to answer, and would turn the validation score from a near-constant into something informative.
+
+**Needs:** nothing new — the matrix is already in `processed/`.
+
+### A better control, or several
+
+Liver was one choice. Brain non-BBB genes would test whether the signal is specific to the barrier rather than to the brain; genes matched on protein domain would control for the fact that transporters and tight-junction proteins are structurally unusual. Running more than one control would say more than fixing the single one.
+
+**Needs:** Dr. Clelland’s decision on what claim the control is meant to support.
+
+## Housekeeping
+
+- Make `step2` reproducible from a clean clone, or document the exact supplementary file to fetch.
+- Drop the `Mitochondrial` cluster — dying cells, not a cell type — from the Wälchli output matrix.
+- Correct the `step3c` biotype check so it can actually fail, or remove it.

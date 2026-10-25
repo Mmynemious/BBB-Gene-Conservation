@@ -136,7 +136,7 @@ no sequence, and no conservation measure. Its relevance is indirect but real.
    the differential-expression cutoff in the source studies: it is expressed in all endothelia,
    not only brain. That is a defensible reason for a *enrichment-based* list, but it means the
    list omits a gene the functional literature treats as central. See the
-   [limitations](../results.qmd).
+   [limitations](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/results.qmd).
 
 4. **It connects directly to [Kumabe 2025](kumabe2025.qmd) on in vitro model fidelity.**
    Kumabe found claudin-5 **absent** from hCMEC/D3, an immortalised line, and found
@@ -148,7 +148,7 @@ no sequence, and no conservation measure. Its relevance is indirect but real.
 5. **Function is not presence.** `step4b` scores a gene on whether it was *detected* in human
    datasets. Park's whole method rests on the difference between a transporter being present
    and a transporter working. That is a fair challenge to how this project's validation score
-   is constructed, quite apart from the parsing bugs the [audit](../audit.qmd) records.
+   is constructed, quite apart from the parsing bugs the [audit](https://github.com/Mmynemious/BBB-Gene-Conservation/blob/main/archive/first_pipeline/AUDIT.md) records.
 
 ## Reference detail from the paper
 
