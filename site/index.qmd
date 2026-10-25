@@ -62,6 +62,8 @@ together with a difference in **coding sequence**, across human, macaque and mou
 4. **Write the introduction**: why the barrier matters, and what species differences in it
    mean for drug delivery between human, mouse and macaque. **In progress.**
 
+**Progress.** [Step 1, the transporter target list](method-driven-pipeline.qmd), is written up.
+
 ## Future work
 
 Kept out of the current scope on purpose:

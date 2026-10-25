@@ -1,0 +1,54 @@
+HGNC ID	Approved symbol	Approved name	Status	Locus type	Previous symbols	Alias symbols	Chromosome	NCBI Gene ID	Ensembl gene ID	Vega gene ID	Group ID	Group name
+HGNC:29	ABCA1	ATP binding cassette subfamily A member 1	Approved	gene with protein product	ABC1, HDLDT1	TGD	9q31.1	19	ENSG00000165029	OTTHUMG00000020417	805	ATP binding cassette subfamily A
+HGNC:30	ABCA10	ATP binding cassette subfamily A member 10	Approved	gene with protein product		EST698739	17q24.3	10349	ENSG00000154263	OTTHUMG00000164716	805	ATP binding cassette subfamily A
+HGNC:31	ABCA11P	ATP binding cassette subfamily A member 11, pseudogene	Approved	pseudogene	ABCA11	ABCA10P, EST1133530, FLJ14297	4p16.3	79963	ENSG00000251595	OTTHUMG00000159884	805	ATP binding cassette subfamily A
+HGNC:14637	ABCA12	ATP binding cassette subfamily A member 12	Approved	gene with protein product	ICR2B	DKFZP434G232, LI2	2q35	26154	ENSG00000144452	OTTHUMG00000154801	805	ATP binding cassette subfamily A
+HGNC:14638	ABCA13	ATP binding cassette subfamily A member 13	Approved	gene with protein product		FLJ33876, FLJ33951	7p12.3	154664	ENSG00000179869	OTTHUMG00000155840	805	ATP binding cassette subfamily A
+HGNC:34405	ABCA15P	ATP binding cassette subfamily A member 15, pseudogene	Approved	pseudogene	NCRNA00169, CRYM-AS1	ABCA15P1, FLJ41766	16p12.2	400508	ENSG00000189149	OTTHUMG00000156701	805	ATP binding cassette subfamily A
+HGNC:55707	ABCA16P	ATP binding cassette subfamily A member 16, pseudogene	Approved	pseudogene	ABCA3P1	ABCA15P2	16p12.2	342293	ENSG00000257408		805	ATP binding cassette subfamily A
+HGNC:32972	ABCA17P	ATP binding cassette subfamily A member 17, pseudogene	Approved	pseudogene			16p13.3	650655	ENSG00000238098	OTTHUMG00000154348	805	ATP binding cassette subfamily A
+HGNC:32	ABCA2	ATP binding cassette subfamily A member 2	Approved	gene with protein product	ABC2		9q34.3	20	ENSG00000107331	OTTHUMG00000020958	805	ATP binding cassette subfamily A
+HGNC:33	ABCA3	ATP binding cassette subfamily A member 3	Approved	gene with protein product	ABC3	ABC-C, EST111653, LBM180	16p13.3	21	ENSG00000167972	OTTHUMG00000128845	805	ATP binding cassette subfamily A
+HGNC:34	ABCA4	ATP binding cassette subfamily A member 4	Approved	gene with protein product	STGD1, ABCR, RP19, STGD	FFM, ARMD2, CORD3	1p22.1	24	ENSG00000198691	OTTHUMG00000010622	805	ATP binding cassette subfamily A
+HGNC:35	ABCA5	ATP binding cassette subfamily A member 5	Approved	gene with protein product		EST90625	17q24.3	23461	ENSG00000154265	OTTHUMG00000180303	805	ATP binding cassette subfamily A
+HGNC:36	ABCA6	ATP binding cassette subfamily A member 6	Approved	gene with protein product		EST155051	17q24.2-q24.3	23460	ENSG00000154262	OTTHUMG00000180258	805	ATP binding cassette subfamily A
+HGNC:37	ABCA7	ATP binding cassette subfamily A member 7	Approved	gene with protein product		ABCX	19p13.3	10347	ENSG00000064687	OTTHUMG00000167547	805	ATP binding cassette subfamily A
+HGNC:38	ABCA8	ATP binding cassette subfamily A member 8	Approved	gene with protein product		KIAA0822	17q24.2	10351	ENSG00000141338	OTTHUMG00000180192	805	ATP binding cassette subfamily A
+HGNC:39	ABCA9	ATP binding cassette subfamily A member 9	Approved	gene with protein product		EST640918	17q24.2	10350	ENSG00000154258	OTTHUMG00000140371	805	ATP binding cassette subfamily A
+HGNC:40	ABCB1	ATP binding cassette subfamily B member 1	Approved	gene with protein product	PGY1, MDR1, CLCS	P-gp, CD243, GP170, ABC20, p-170, PGY1	7q21.12	5243	ENSG00000085563	OTTHUMG00000023393	806	ATP binding cassette subfamily B
+HGNC:41	ABCB10	ATP binding cassette subfamily B member 10	Approved	gene with protein product		EST20237, M-ABC2, MTABC2	1q42.13	23456	ENSG00000135776	OTTHUMG00000039471	806	ATP binding cassette subfamily B
+HGNC:42	ABCB11	ATP binding cassette subfamily B member 11	Approved	gene with protein product	BSEP, PFIC2	ABC16, SPGP, PFIC-2, PGY4	2q31.1	8647	ENSG00000073734	OTTHUMG00000154039	806	ATP binding cassette subfamily B
+HGNC:43	TAP1	transporter 1, ATP binding cassette subfamily B member	Approved	gene with protein product	ABCB2	PSF1, RING4, D6S114E	6p21.32	6890	ENSG00000168394	OTTHUMG00000031067	806	ATP binding cassette subfamily B
+HGNC:44	TAP2	transporter 2, ATP binding cassette subfamily B member	Approved	gene with protein product	ABCB3	PSF2, RING11, D6S217E	6p21.32	6891	ENSG00000204267	OTTHUMG00000031068	806	ATP binding cassette subfamily B
+HGNC:45	ABCB4	ATP binding cassette subfamily B member 4	Approved	gene with protein product	PGY3, MDR3	MDR2, PFIC-3, GBD1	7q21.12	5244	ENSG00000005471	OTTHUMG00000023396	806	ATP binding cassette subfamily B
+HGNC:46	ABCB5	ATP binding cassette subfamily B member 5	Approved	gene with protein product		EST422562, ABCB5beta, ABCB5alpha	7p21.1	340273	ENSG00000004846	OTTHUMG00000094789	806	ATP binding cassette subfamily B
+HGNC:47	ABCB6	ATP binding cassette subfamily B member 6 (LAN blood group)	Approved	gene with protein product		EST45597, umat, MTABC3	2q35	10058	ENSG00000115657	OTTHUMG00000133131	806	ATP binding cassette subfamily B
+HGNC:48	ABCB7	ATP binding cassette subfamily B member 7	Approved	gene with protein product	ABC7	EST140535, Atm1p, ASAT	Xq13.3	22	ENSG00000131269	OTTHUMG00000021862	806	ATP binding cassette subfamily B
+HGNC:49	ABCB8	ATP binding cassette subfamily B member 8	Approved	gene with protein product		EST328128, M-ABC1, MABC1, MITOSUR	7q36.1	11194	ENSG00000197150	OTTHUMG00000158686	806	ATP binding cassette subfamily B
+HGNC:50	ABCB9	ATP binding cassette subfamily B member 9	Approved	gene with protein product		EST122234	12q24.31	23457	ENSG00000150967	OTTHUMG00000168769	806	ATP binding cassette subfamily B
+HGNC:51	ABCC1	ATP binding cassette subfamily C member 1 (ABCC1 blood group)	Approved	gene with protein product	MRP, MRP1	GS-X	16p13.11	4363	ENSG00000103222	OTTHUMG00000048267	807	ATP binding cassette subfamily C
+HGNC:52	ABCC10	ATP binding cassette subfamily C member 10	Approved	gene with protein product		EST182763, MRP7, SIMRP7	6p21.1	89845	ENSG00000124574	OTTHUMG00000014733	807	ATP binding cassette subfamily C
+HGNC:14639	ABCC11	ATP binding cassette subfamily C member 11	Approved	gene with protein product		MRP8	16q12.1	85320	ENSG00000121270	OTTHUMG00000133146	807	ATP binding cassette subfamily C
+HGNC:14640	ABCC12	ATP binding cassette subfamily C member 12	Approved	gene with protein product		MRP9	16q12.1	94160	ENSG00000140798	OTTHUMG00000133143	807	ATP binding cassette subfamily C
+HGNC:16022	ABCC13	ATP binding cassette subfamily C member 13 (pseudogene)	Approved	pseudogene		PRED6, C21orf73, ABCC13P	21q11.2	150000	ENSG00000243064	OTTHUMG00000074257	807	ATP binding cassette subfamily C
+HGNC:53	ABCC2	ATP binding cassette subfamily C member 2	Approved	gene with protein product	CMOAT	DJS, MRP2, cMRP	10q24.2	1244	ENSG00000023839	OTTHUMG00000018895	807	ATP binding cassette subfamily C
+HGNC:54	ABCC3	ATP binding cassette subfamily C member 3	Approved	gene with protein product		MRP3, cMOAT2, EST90757, MLP2, MOAT-D	17q21.33	8714	ENSG00000108846	OTTHUMG00000162245	807	ATP binding cassette subfamily C
+HGNC:55	ABCC4	ATP binding cassette subfamily C member 4 (PEL blood group)	Approved	gene with protein product		MRP4, EST170205, MOAT-B, MOATB	13q32.1	10257	ENSG00000125257	OTTHUMG00000017216	807	ATP binding cassette subfamily C
+HGNC:56	ABCC5	ATP binding cassette subfamily C member 5	Approved	gene with protein product		MRP5, SMRP, EST277145, MOAT-C	3q27.1	10057	ENSG00000114770	OTTHUMG00000156871	807	ATP binding cassette subfamily C
+HGNC:57	ABCC6	ATP binding cassette subfamily C member 6	Approved	gene with protein product	ARA, PXE	MRP6, EST349056, MLP1, URG7	16p13.11	368	ENSG00000091262	OTTHUMG00000129967	807	ATP binding cassette subfamily C
+HGNC:1884	CFTR	CF transmembrane conductance regulator	Approved	gene with protein product	CF, ABCC7	MRP7, ABC35, TNR-CFTR, dJ760C5.1, CFTR/MRP	7q31.2	1080	ENSG00000001626	OTTHUMG00000023076	807	ATP binding cassette subfamily C
+HGNC:59	ABCC8	ATP binding cassette subfamily C member 8	Approved	gene with protein product	SUR, HRINS	HI, PHHI, SUR1, MRP8, ABC36, HHF1, TNDM2	11p15.1	6833	ENSG00000006071	OTTHUMG00000166316	807	ATP binding cassette subfamily C
+HGNC:60	ABCC9	ATP binding cassette subfamily C member 9	Approved	gene with protein product		SUR2, CMD1O	12p12.1	10060	ENSG00000069431	OTTHUMG00000169094	807	ATP binding cassette subfamily C
+HGNC:61	ABCD1	ATP binding cassette subfamily D member 1	Approved	gene with protein product	ALD	AMN, ALDP, adrenoleukodystrophy	Xq28	215	ENSG00000101986	OTTHUMG00000024215	808	ATP binding cassette subfamily D
+HGNC:66	ABCD2	ATP binding cassette subfamily D member 2	Approved	gene with protein product	ALDL1	ALDR, ALDRP	12q12	225	ENSG00000173208	OTTHUMG00000169337	808	ATP binding cassette subfamily D
+HGNC:67	ABCD3	ATP binding cassette subfamily D member 3	Approved	gene with protein product	PXMP1	PMP70, ZWS2	1p21.3	5825	ENSG00000117528	OTTHUMG00000010717	808	ATP binding cassette subfamily D
+HGNC:68	ABCD4	ATP binding cassette subfamily D member 4	Approved	gene with protein product	PXMP1L	PMP69, P70R, EST352188	14q24.3	5826	ENSG00000119688	OTTHUMG00000171207	808	ATP binding cassette subfamily D
+HGNC:69	ABCE1	ATP binding cassette subfamily E member 1	Approved	gene with protein product	RNASEL1, RNASELI, RNS4I	RLI, OABP, RLI1	4q31.21	6059	ENSG00000164163	OTTHUMG00000161478	809	ATP binding cassette subfamily E
+HGNC:70	ABCF1	ATP binding cassette subfamily F member 1	Approved	gene with protein product	ABC50	EST123147	6p21.33	23	ENSG00000204574	OTTHUMG00000031094	810	ATP binding cassette subfamily F
+HGNC:71	ABCF2	ATP binding cassette subfamily F member 2	Approved	gene with protein product		EST133090, ABC28, M-ABC1, HUSSY-18	7q36.1	10061	ENSG00000033050	OTTHUMG00000154570	810	ATP binding cassette subfamily F
+HGNC:72	ABCF3	ATP binding cassette subfamily F member 3	Approved	gene with protein product		EST201864	3q27.1	55324	ENSG00000161204	OTTHUMG00000156824	810	ATP binding cassette subfamily F
+HGNC:73	ABCG1	ATP binding cassette subfamily G member 1	Approved	gene with protein product		ABC8	21q22.3	9619	ENSG00000160179	OTTHUMG00000086791	811	ATP binding cassette subfamily G
+HGNC:74	ABCG2	ATP binding cassette subfamily G member 2 (JR blood group)	Approved	gene with protein product		EST157481, MXR, BCRP, ABCP, CD338	4q22.1	9429	ENSG00000118777	OTTHUMG00000130601	811	ATP binding cassette subfamily G
+HGNC:13884	ABCG4	ATP binding cassette subfamily G member 4	Approved	gene with protein product		WHITE2	11q23.3	64137	ENSG00000172350	OTTHUMG00000166169	811	ATP binding cassette subfamily G
+HGNC:13886	ABCG5	ATP binding cassette subfamily G member 5	Approved	gene with protein product		STSL	2p21	64240	ENSG00000138075	OTTHUMG00000128758	811	ATP binding cassette subfamily G
+HGNC:13887	ABCG8	ATP binding cassette subfamily G member 8	Approved	gene with protein product		GBD4	2p21	64241	ENSG00000143921	OTTHUMG00000128756	811	ATP binding cassette subfamily G

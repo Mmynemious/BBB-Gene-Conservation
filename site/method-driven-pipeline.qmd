@@ -1,0 +1,35 @@
+---
+title: "Method-Driven Pipeline"
+subtitle: "In progress"
+---
+
+## Step 1: Transporter target list
+
+After conducting the literature review, I have noticed that for gene conservation analysis, most papers used a strict one-to-one orthologue mapping system and focused heavily on canonical BBB transporter genes, namely the solute carrier transporters (SLC) and the ATP-binding cassette transporters (ABC). For the transport genes, I expanded the project scope into evaluating the coding sequence divergence (dN/dS & % sequence identity) across the entire SLC and ABC transporters across human, macaque, and mouse.
+
+For this goal, I decided to use a strict one-to-one orthologue mapping to avoid confusion, since a hierarchical one-to-many orthologue system across three species still lacks proper macaque annotations. With strict one-to-one mapping, there is only one orthologue per species, so no choice between orthologues is made. MANE Select (human) and Ensembl Canonical (mouse, macaque) decide which transcript of each gene is compared.
+
+% sequence identity and dN/dS are results to be measured later from the same codon alignment.
+
+Additionally, orthologues will be matched to capillary endothelial cells in a later step in order to check whether the orthologues are indeed active on the blood-brain barrier, rather than on peripheral tissue functions.
+
+After selecting my rules, I gathered the dataset for all SLC and ABC transporters and used a Python script for a strict one-to-one orthologue mapping across the three species, which started from 527 HGNC entries (474 SLC + 53 ABC). Without further checking or overlapping the results with those from other papers such as Miao et al. (2026), the final list contains 425 SLC and 42 ABC transporter genes that are one-to-one between human and mouse. Of these, 409 SLC and 40 ABC genes are also one-to-one with macaque and form the three-species set.
+
+A few technical decisions were made while building the script: The script did not use my ^SLC/^ABC pattern because it misses SLC genes with other names (such as MFSD2A) and includes pseudogenes; it used the gene list from the HGNC group instead. Furthermore, I used BioMart for the orthologue mapping and found that BioMart cannot export the orthologues and the mouse and macaque transcripts in one query, so the script combines several queries. In order to make sure the mapping stayed one-to-one, the script stops automatically when it recognizes the same gene ID twice. At last, each CDS was checked against the Ensembl 113 FASTA files to confirm it is complete.
+
+As for the biological issues, the strict one-to-one orthologue mapping cost me genes like the ABCB1 (P-gp) protein due to one-to-many orthologues in mouse. This gene was added manually due to the importance of P-gp as the main efflux pump of the BBB, using the mouse copy Abcb1a, which is the copy found in the mouse BBB datasets (Daneman 2010, Munji 2019). The same issue occurred for an additional 21 genes on the mouse side that were not manually added to date (25.10.2026). Furthermore, one-to-many orthologue implementation might be too early to implement without the recalibration of this project to a paper like Miao et al. (2026).
+
+On the macaque side, BCRP (ABCG2) and SLC29A1 were dropped from the three-species set because no macaque orthologue was found, probably due to the annotation gap in macaque. They remain in the human and mouse set. In addition, some macaque transcripts seemed to be the wrong isoform.
+
+A known issue still to be corrected: Ensembl pairs human ABCG2 with mouse Abcg3 instead of Abcg2. This was found by cross-checking against NCBI.
+
+An additional side note for the technical versions of this pipeline: orthology and transcripts were taken from Ensembl release 113 (October 2024). The HGNC gene groups and the NCBI gene orthologues were downloaded on October 25th 2026.
+
+### Files
+
+- Script: `scripts/v2/step1_transporter_targets.py`
+- Human and mouse set: `processed/v2/step1_expression_set.csv`
+- Three-species set: `processed/v2/step1_three_species_set.csv`
+- Excluded genes with reasons: `processed/v2/step1_exclusions.csv`
+- Summary: `processed/v2/step1_summary.txt`
+- Downloaded source data: `raw_data/v2_step1/`

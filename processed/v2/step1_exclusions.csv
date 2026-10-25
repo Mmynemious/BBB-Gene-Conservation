@@ -1,0 +1,79 @@
+symbol,family,hgnc_subfamily,human_gene_id,stage,missing_from,reason
+ABCA11P,ABC,ATP binding cassette subfamily A,ENSG00000251595,0 gene set,both,not protein-coding in HGNC (pseudogene)
+ABCA15P,ABC,ATP binding cassette subfamily A,ENSG00000189149,0 gene set,both,not protein-coding in HGNC (pseudogene)
+ABCA16P,ABC,ATP binding cassette subfamily A,ENSG00000257408,0 gene set,both,not protein-coding in HGNC (pseudogene)
+ABCA17P,ABC,ATP binding cassette subfamily A,ENSG00000238098,0 gene set,both,not protein-coding in HGNC (pseudogene)
+ABCC13,ABC,ATP binding cassette subfamily C,ENSG00000243064,0 gene set,both,not protein-coding in HGNC (pseudogene)
+ABCE1,ABC,ATP binding cassette subfamily E,ENSG00000164163,0 gene set,both,ABC family member with no membrane domain (not a transporter)
+ABCF1,ABC,ATP binding cassette subfamily F,ENSG00000204574,0 gene set,both,ABC family member with no membrane domain (not a transporter)
+ABCF2,ABC,ATP binding cassette subfamily F,ENSG00000033050,0 gene set,both,ABC family member with no membrane domain (not a transporter)
+ABCF3,ABC,ATP binding cassette subfamily F,ENSG00000161204,0 gene set,both,ABC family member with no membrane domain (not a transporter)
+ABCA10,ABC,ATP binding cassette subfamily A,ENSG00000154263,1 orthology,both,no mouse orthologue
+ABCC11,ABC,ATP binding cassette subfamily C,ENSG00000121270,1 orthology,both,no mouse orthologue
+ABCB1,ABC,ATP binding cassette subfamily B,ENSG00000085563,1b macaque orthology,three-species set only,no macaque orthologue
+ABCG2,ABC,ATP binding cassette subfamily G,ENSG00000118777,1b macaque orthology,three-species set only,no macaque orthologue
+SLC19A4P,SLC,Solute carrier family 19,ENSG00000042304,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC22A20P,SLC,Solute carrier family 22,ENSG00000197847,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC23A4P,SLC,Solute carrier family 23,ENSG00000276067,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC26A10P,SLC,Solute carrier family 26,ENSG00000135502,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC35E2A,SLC,Solute carrier family 35,ENSG00000215790,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC66A1LP,SLC,Solute carrier family 66,ENSG00000174899,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC68A2P,SLC,Solute carrier family 68,ENSG00000230872,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC6A10P,SLC,Solute carrier family 6,ENSG00000214617,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC6A21P,SLC,Solute carrier family 6,ENSG00000269009,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC71A3P,SLC,Solute carrier family 71,ENSG00000196312,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLC7A15P,SLC,Solute carrier family 7,ENSG00000232800,0 gene set,both,not protein-coding in HGNC (pseudogene)
+SLCO1B7,SLC,Solute carrier organic anion transporter family,ENSG00000205754,0 gene set,both,not protein-coding in HGNC (unknown)
+MPC1L,SLC,"Solute carrier family 54, mitochondrial pyruvate carriers",ENSG00000238205,1 orthology,both,no mouse orthologue
+RHCE,SLC,Solute carrier family 42,ENSG00000188672,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+RHD,SLC,Solute carrier family 42,ENSG00000187010,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC22A10,SLC,Solute carrier family 22,ENSG00000184999,1 orthology,both,no mouse orthologue
+SLC22A11,SLC,Solute carrier family 22,ENSG00000168065,1 orthology,both,no mouse orthologue
+SLC22A13,SLC,Solute carrier family 22,ENSG00000172940,1 orthology,both,mouse: ortholog_one2many (2 mouse genes)
+SLC22A24,SLC,Solute carrier family 22,ENSG00000197658,1 orthology,both,no mouse orthologue
+SLC22A25,SLC,Solute carrier family 22,ENSG00000196600,1 orthology,both,no mouse orthologue
+SLC22A31,SLC,Solute carrier family 22,ENSG00000259803,1 orthology,both,no mouse orthologue
+SLC22A5,SLC,Solute carrier family 22,ENSG00000197375,1 orthology,both,mouse: ortholog_one2many (2 mouse genes)
+SLC22A9,SLC,Solute carrier family 22,ENSG00000149742,1 orthology,both,mouse: ortholog_one2many (6 mouse genes)
+SLC25A51,SLC,Solute carrier family 25,ENSG00000122696,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC25A52,SLC,Solute carrier family 25,ENSG00000141437,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC25A6,SLC,Solute carrier family 25,ENSG00000169100,1 orthology,both,no mouse orthologue
+SLC28A2,SLC,Solute carrier family 28,ENSG00000137860,1 orthology,both,mouse: ortholog_one2many (2 mouse genes)
+SLC2A11,SLC,Solute carrier family 2,ENSG00000133460,1 orthology,both,no mouse orthologue
+SLC2A14,SLC,Solute carrier family 2,ENSG00000173262,1 orthology,both,no mouse orthologue
+SLC2A3,SLC,Solute carrier family 2,ENSG00000059804,1 orthology,both,no mouse orthologue
+SLC35G3,SLC,Solute carrier family 35,ENSG00000164729,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC35G4,SLC,Solute carrier family 35,ENSG00000236396,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC35G5,SLC,Solute carrier family 35,ENSG00000177710,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC35G6,SLC,Solute carrier family 35,ENSG00000259224,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC37A3,SLC,Solute carrier family 37,ENSG00000157800,1 orthology,both,no mouse orthologue
+SLC47A2,SLC,Solute carrier family 47,ENSG00000180638,1 orthology,both,no mouse orthologue
+SLC52A1,SLC,Solute carrier family 52,ENSG00000132517,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC52A2,SLC,Solute carrier family 52,ENSG00000185803,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLC5A3,SLC,Solute carrier family 5,ENSG00000198743,1 orthology,both,no mouse orthologue
+SLC60A2,SLC,Solute carrier family 60,ENSG00000173214,1 orthology,both,mouse: ortholog_one2many (3 mouse genes)
+SLC6A14,SLC,Solute carrier family 6,ENSG00000268104,1 orthology,both,no mouse orthologue
+SLC6A20,SLC,Solute carrier family 6,ENSG00000163817,1 orthology,both,mouse: ortholog_one2many (2 mouse genes)
+SLC6A8,SLC,Solute carrier family 6,ENSG00000130821,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLCO1A2,SLC,Solute carrier organic anion transporter family,ENSG00000084453,1 orthology,both,mouse: ortholog_one2many (6 mouse genes)
+SLCO1B1,SLC,Solute carrier organic anion transporter family,ENSG00000134538,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLCO1B3,SLC,Solute carrier organic anion transporter family,ENSG00000111700,1 orthology,both,mouse: ortholog_one2many (1 mouse genes)
+SLCO6A1,SLC,Solute carrier organic anion transporter family,ENSG00000205359,1 orthology,both,mouse: ortholog_one2many (2 mouse genes)
+CNNM3,SLC,"Solute carrier family 70, cyclin and CBS domain divalent metal cation transport mediators",ENSG00000168763,1b macaque orthology,three-species set only,no macaque orthologue
+PTCH2,SLC,Solute carrier family 65,ENSG00000117425,1b macaque orthology,three-species set only,no macaque orthologue
+SFXN2,SLC,"Solute carrier family 56, sideroflexins",ENSG00000156398,1b macaque orthology,three-species set only,no macaque orthologue
+SLC25A15,SLC,Solute carrier family 25,ENSG00000102743,1b macaque orthology,three-species set only,no macaque orthologue
+SLC25A16,SLC,Solute carrier family 25,ENSG00000122912,1b macaque orthology,three-species set only,no macaque orthologue
+SLC25A33,SLC,Solute carrier family 25,ENSG00000171612,1b macaque orthology,three-species set only,no macaque orthologue
+SLC25A5,SLC,Solute carrier family 25,ENSG00000005022,1b macaque orthology,three-species set only,no macaque orthologue
+SLC29A1,SLC,Solute carrier family 29,ENSG00000112759,1b macaque orthology,three-species set only,no macaque orthologue
+SLC33A2,SLC,Solute carrier family 33,ENSG00000167700,1b macaque orthology,three-species set only,no macaque orthologue
+SLC35A3,SLC,Solute carrier family 35,ENSG00000117620,1b macaque orthology,three-species set only,no macaque orthologue
+SLC35B1,SLC,Solute carrier family 35,ENSG00000121073,1b macaque orthology,three-species set only,no macaque orthologue
+SLC37A1,SLC,Solute carrier family 37,ENSG00000160190,1b macaque orthology,three-species set only,macaque: ortholog_one2many (2 macaque genes)
+SLC4A3,SLC,Solute carrier family 4,ENSG00000114923,1b macaque orthology,three-species set only,no macaque orthologue
+SLC6A13,SLC,Solute carrier family 6,ENSG00000010379,1b macaque orthology,three-species set only,no macaque orthologue
+SLC75A1,SLC,Solute carrier family 75,ENSG00000109736,1b macaque orthology,three-species set only,macaque: ortholog_many2many (1 macaque genes)
+TMEM184B,SLC,Solute carrier family 51,ENSG00000198792,1b macaque orthology,three-species set only,no macaque orthologue
+PTCHD3,SLC,Solute carrier family 65,ENSG00000182077,2 transcripts,both,no human MANE Select transcript
+SLC37A4,SLC,Solute carrier family 37,ENSG00000137700,2 transcripts,both,no human MANE Select transcript

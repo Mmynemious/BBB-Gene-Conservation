@@ -1,0 +1,50 @@
+Step 1 transporter targets  (run 2026-10-25, Ensembl 113)
+
+SLC: 474 HGNC entries -> 425 expression set -> 409 three-species set
+    excluded at 0 gene set: 12
+    excluded at 1 orthology: 35
+    excluded at 1b macaque orthology: 16
+    excluded at 2 transcripts: 2
+ABC: 53 HGNC entries -> 42 expression set -> 40 three-species set
+    excluded at 0 gene set: 9
+    excluded at 1 orthology: 2
+    excluded at 1b macaque orthology: 2
+
+Orthology exclusions by reason:
+      21  mouse: ortholog_one2many
+      16  no mouse orthologue
+      16  no macaque orthologue
+       1  macaque: ortholog_one2many
+       1  macaque: ortholog_many2many
+
+Mouse orthology overrides:
+    ABCB1: ABCB1 paired with Abcb1a; mouse has Abcb1a and Abcb1b (rodent duplication)
+
+Macaque transcripts overriding canonical: 14
+    ABCB6: closest to human MANE length (canonical was 1.74x human), now 1.0x
+    CTNS: closest to human MANE length (canonical was 1.44x human), now 1.09x
+    MPC1: closest to human MANE length (canonical was 1.28x human), now 1.0x
+    NIPAL4: closest to human MANE length (canonical was 1.53x human), now 1.48x
+    SLC16A10: closest to human MANE length (canonical was 1.66x human), now 1.0x
+    SLC25A1: closest to human MANE length (canonical was 1.84x human), now 0.77x
+    SLC25A10: closest to human MANE length (canonical was 1.54x human), now 1.0x
+    SLC25A22: closest to human MANE length (canonical was 1.51x human), now 1.0x
+    SLC2A1: closest to human MANE length (canonical was 1.36x human), now 1.0x
+    SLC35B2: closest to human MANE length (canonical was 1.29x human), now 1.21x
+    SLC43A1: closest to human MANE length (canonical was 1.30x human), now 1.02x
+    SLC67A1: closest to human MANE length (canonical was 1.28x human), now 1.0x
+    SLC71A1: closest to human MANE length (canonical was 1.45x human), now 1.0x
+    SLC9A2: closest to human MANE length (canonical was 1.37x human), now 1.33x
+
+NCBI cross-check (Ensembl partner vs NCBI gene_orthologs):
+    mouse: agrees 460, no NCBI orthologue 3, disagrees 3, Ensembl partner has no NCBI ID 1
+        ABCB1: Abcb1a disagrees (NCBI partner GeneID 18669)
+        ABCG2: Abcg3 disagrees (NCBI partner GeneID 26357)
+        SLC10A4: Slc10a4-ps disagrees (NCBI partner GeneID 231290)
+    macaque: agrees 282, Ensembl partner has no NCBI ID 163, disagrees 2, no NCBI orthologue 2
+        ABCB4: ABCB4 disagrees (NCBI partner GeneID 706683)
+        TAP2: MAMU-DOB disagrees (NCBI partner GeneID 717742)
+
+Expression set, genes with any review flag: 49
+Three-species set, genes with any review flag: 45
+Three-species set, CDS outside 0.8-1.25x human after override: 9

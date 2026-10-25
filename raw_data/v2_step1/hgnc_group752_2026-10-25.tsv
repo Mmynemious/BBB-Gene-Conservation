@@ -1,0 +1,475 @@
+HGNC ID	Approved symbol	Approved name	Status	Locus type	Previous symbols	Alias symbols	Chromosome	NCBI Gene ID	Ensembl gene ID	Vega gene ID	Group ID	Group name
+HGNC:10939	SLC1A1	solute carrier family 1 member 1	Approved	gene with protein product		EAAC1, EAAT3, hEAAC1	9p24.2	6505	ENSG00000106688	OTTHUMG00000019468	2154	Solute carrier family 1
+HGNC:10940	SLC1A2	solute carrier family 1 member 2	Approved	gene with protein product		GLT-1, GLT1, EAAT2, HBGT	11p13	6506	ENSG00000110436	OTTHUMG00000044391	2154	Solute carrier family 1
+HGNC:10941	SLC1A3	solute carrier family 1 member 3	Approved	gene with protein product		EAAT1, GLAST, EA6, GLAST1, GLAST-1	5p13.2	6507	ENSG00000079215	OTTHUMG00000090793	2154	Solute carrier family 1
+HGNC:10942	SLC1A4	solute carrier family 1 member 4	Approved	gene with protein product		SATT, ASCT1, ASCT-1	2p14	6509	ENSG00000115902	OTTHUMG00000129537	2154	Solute carrier family 1
+HGNC:10943	SLC1A5	solute carrier family 1 member 5	Approved	gene with protein product	RDRC, M7V1	AAAT, ASCT2	19q13.32	6510	ENSG00000105281	OTTHUMG00000183434	2154	Solute carrier family 1
+HGNC:10944	SLC1A6	solute carrier family 1 member 6	Approved	gene with protein product		EAAT4	19p13.12	6511	ENSG00000105143	OTTHUMG00000183351	2154	Solute carrier family 1
+HGNC:10945	SLC1A7	solute carrier family 1 member 7	Approved	gene with protein product		EAAT5	1p32.3	6512	ENSG00000162383	OTTHUMG00000008937	2154	Solute carrier family 1
+HGNC:10905	SLC10A1	solute carrier family 10 member 1	Approved	gene with protein product		NTCP, NTCP1	14q24.1	6554	ENSG00000100652	OTTHUMG00000171236	2163	Solute carrier family 10
+HGNC:10906	SLC10A2	solute carrier family 10 member 2	Approved	gene with protein product	ASBT, ISBT	NTCP2, IBAT	13q33.1	6555	ENSG00000125255	OTTHUMG00000017313	2163	Solute carrier family 10
+HGNC:22979	SLC10A3	solute carrier family 10 member 3	Approved	gene with protein product		P3, DXS253E	Xq28	8273	ENSG00000126903	OTTHUMG00000013369	2163	Solute carrier family 10
+HGNC:22980	SLC10A4	solute carrier family 10 member 4	Approved	gene with protein product		MGC29802	4p11	201780	ENSG00000145248	OTTHUMG00000102092	2163	Solute carrier family 10
+HGNC:22981	SLC10A5	solute carrier family 10 member 5	Approved	gene with protein product			8q21.13	347051	ENSG00000253598	OTTHUMG00000164683	2163	Solute carrier family 10
+HGNC:30603	SLC10A6	solute carrier family 10 member 6	Approved	gene with protein product		SOAT	4q21.3	345274	ENSG00000145283	OTTHUMG00000130596	2163	Solute carrier family 10
+HGNC:23088	SLC10A7	solute carrier family 10 member 7	Approved	gene with protein product	C4orf13	MGC25043, DKFZp566M114, DKFZp313H0531, DKFZp779O2438	4q31.22	84068	ENSG00000120519	OTTHUMG00000161437	2163	Solute carrier family 10
+HGNC:10907	SLC11A1	solute carrier family 11 member 1	Approved	gene with protein product	LSH, NRAMP, NRAMP1		2q35	6556	ENSG00000018280	OTTHUMG00000086747	2164	Solute carrier family 11
+HGNC:10908	SLC11A2	solute carrier family 11 member 2	Approved	gene with protein product	NRAMP2	DCT1, DMT1, DMT-1, FLJ37416	12q13.12	4891	ENSG00000110911	OTTHUMG00000169493	2164	Solute carrier family 11
+HGNC:10910	SLC12A1	solute carrier family 12 member 1	Approved	gene with protein product		NKCC2, CCC2, BSC1, BSC, BSC-1	15q21.1	6557	ENSG00000074803	OTTHUMG00000131495	2152	Solute carrier family 12
+HGNC:10911	SLC12A2	solute carrier family 12 member 2	Approved	gene with protein product		NKCC1, BSC2, BSC-2, PPP1R141, CCC1	5q23.3	6558	ENSG00000064651	OTTHUMG00000128983	2152	Solute carrier family 12
+HGNC:10912	SLC12A3	solute carrier family 12 member 3	Approved	gene with protein product		NCCT, NCC, TSC	16q13	6559	ENSG00000070915	OTTHUMG00000133284	2152	Solute carrier family 12
+HGNC:10913	SLC12A4	solute carrier family 12 member 4	Approved	gene with protein product		KCC1	16q22.1	6560	ENSG00000124067	OTTHUMG00000137535	2152	Solute carrier family 12
+HGNC:13818	SLC12A5	solute carrier family 12 member 5	Approved	gene with protein product		KIAA1176, KCC2, hKCC2	20q13.12	57468	ENSG00000124140	OTTHUMG00000032638	2152	Solute carrier family 12
+HGNC:10914	SLC12A6	solute carrier family 12 member 6	Approved	gene with protein product	KCC3, ACCPN	KCC3A, KCC3B	15q14	9990	ENSG00000140199	OTTHUMG00000129441	2152	Solute carrier family 12
+HGNC:10915	SLC12A7	solute carrier family 12 member 7	Approved	gene with protein product		KCC4, DKFZP434F076	5p15.33	10723	ENSG00000113504	OTTHUMG00000161931	2152	Solute carrier family 12
+HGNC:15595	SLC12A8	solute carrier family 12 member 8	Approved	gene with protein product		CCC9	3q21.2	84561	ENSG00000221955	OTTHUMG00000159483	2152	Solute carrier family 12
+HGNC:17435	SLC12A9	solute carrier family 12 member 9	Approved	gene with protein product		CIP1	7q22.1	56996	ENSG00000146828	OTTHUMG00000156045	2152	Solute carrier family 12
+HGNC:10916	SLC13A1	solute carrier family 13 member 1	Approved	gene with protein product		NaSi-1, NAS1	7q31.32	6561	ENSG00000081800	OTTHUMG00000157087	2165	Solute carrier family 13
+HGNC:10917	SLC13A2	solute carrier family 13 member 2	Approved	gene with protein product		NaDC-1	17q11.2	9058	ENSG00000007216	OTTHUMG00000132523	2165	Solute carrier family 13
+HGNC:14430	SLC13A3	solute carrier family 13 member 3	Approved	gene with protein product		NADC3, SDCT2	20q13.12	64849	ENSG00000158296	OTTHUMG00000033042	2165	Solute carrier family 13
+HGNC:15827	SLC13A4	solute carrier family 13 member 4	Approved	gene with protein product		SUT-1, SUT1	7q33	26266	ENSG00000164707	OTTHUMG00000155539	2165	Solute carrier family 13
+HGNC:23089	SLC13A5	solute carrier family 13 member 5	Approved	gene with protein product		NACT, INDY, mINDY	17p13.1	284111	ENSG00000141485	OTTHUMG00000102052	2165	Solute carrier family 13
+HGNC:8101	OCA2	OCA2 melanosomal transmembrane protein	Approved	gene with protein product	D15S12, P, EYCL3, EYCL2	BEY, BEY1, BEY2, EYCL, SLC13B1	15q12-q13.1	4948	ENSG00000104044	OTTHUMG00000128871	2165	Solute carrier family 13
+HGNC:10918	SLC14A1	solute carrier family 14 member 1 (Kidd blood group)	Approved	gene with protein product	JK	HsT1341, RACH1, RACH2	18q12.3	6563	ENSG00000141469	OTTHUMG00000132617	2166	Solute carrier family 14
+HGNC:10919	SLC14A2	solute carrier family 14 member 2	Approved	gene with protein product		HUT2, UT2	18q12.3	8170	ENSG00000132874	OTTHUMG00000132616	2166	Solute carrier family 14
+HGNC:10920	SLC15A1	solute carrier family 15 member 1	Approved	gene with protein product		PEPT1, HPECT1, HPEPT1	13q32.2-q32.3	6564	ENSG00000088386	OTTHUMG00000017255	2167	Solute carrier family 15
+HGNC:10921	SLC15A2	solute carrier family 15 member 2	Approved	gene with protein product		PEPT2	3q13.33	6565	ENSG00000163406	OTTHUMG00000159423	2167	Solute carrier family 15
+HGNC:18068	SLC15A3	solute carrier family 15 member 3	Approved	gene with protein product		PHT2, hPTR3	11q12.2	51296	ENSG00000110446	OTTHUMG00000167804	2167	Solute carrier family 15
+HGNC:23090	SLC15A4	solute carrier family 15 member 4	Approved	gene with protein product		PHT1, PTR4	12q24.33	121260	ENSG00000139370	OTTHUMG00000168415	2167	Solute carrier family 15
+HGNC:33455	SLC15A5	solute carrier family 15 member 5	Approved	gene with protein product			12p12.3	729025	ENSG00000188991	OTTHUMG00000168793	2167	Solute carrier family 15
+HGNC:10922	SLC16A1	solute carrier family 16 member 1	Approved	gene with protein product		MCT, MCT1	1p13.2	6566	ENSG00000155380	OTTHUMG00000012129	2168	Solute carrier family 16
+HGNC:17027	SLC16A10	solute carrier family 16 member 10	Approved	gene with protein product		TAT1, MCT10	6q21	117247	ENSG00000112394	OTTHUMG00000015371	2168	Solute carrier family 16
+HGNC:23093	SLC16A11	solute carrier family 16 member 11	Approved	gene with protein product		FLJ90193, MCT11	17p13.1	162515	ENSG00000174326	OTTHUMG00000102087	2168	Solute carrier family 16
+HGNC:23094	SLC16A12	solute carrier family 16 member 12	Approved	gene with protein product		MCT12, CRT2	10q23.31	387700	ENSG00000152779	OTTHUMG00000018714	2168	Solute carrier family 16
+HGNC:31037	SLC16A13	solute carrier family 16 member 13	Approved	gene with protein product		MCT13	17p13.1	201232	ENSG00000174327	OTTHUMG00000102089	2168	Solute carrier family 16
+HGNC:26417	SLC16A14	solute carrier family 16 member 14	Approved	gene with protein product		FLJ30794, MCT14	2q36.3	151473	ENSG00000163053	OTTHUMG00000133205	2168	Solute carrier family 16
+HGNC:10923	SLC16A2	solute carrier family 16 member 2	Approved	gene with protein product	DXS128, AHDS, MRX22	XPCT, MCT8, MCT7, DXS128E	Xq13.2	6567	ENSG00000147100	OTTHUMG00000021857	2168	Solute carrier family 16
+HGNC:10924	SLC16A3	solute carrier family 16 member 3	Approved	gene with protein product		MCT3, MCT4	17q25.3	9123	ENSG00000141526	OTTHUMG00000178832	2168	Solute carrier family 16
+HGNC:10925	SLC16A4	solute carrier family 16 member 4	Approved	gene with protein product		MCT4, MCT5	1p13.3	9122	ENSG00000168679	OTTHUMG00000011285	2168	Solute carrier family 16
+HGNC:10926	SLC16A5	solute carrier family 16 member 5	Approved	gene with protein product		MCT5, MCT6	17q25.1	9121	ENSG00000170190	OTTHUMG00000179277	2168	Solute carrier family 16
+HGNC:10927	SLC16A6	solute carrier family 16 member 6	Approved	gene with protein product		MCT6, MCT7	17q24.2	9120	ENSG00000108932	OTTHUMG00000179812	2168	Solute carrier family 16
+HGNC:10928	SLC16A7	solute carrier family 16 member 7	Approved	gene with protein product		MCT2	12q14.1	9194	ENSG00000118596	OTTHUMG00000169923	2168	Solute carrier family 16
+HGNC:16270	SLC16A8	solute carrier family 16 member 8	Approved	gene with protein product		MCT3, REMP	22q13.1	23539	ENSG00000100156	OTTHUMG00000151196	2168	Solute carrier family 16
+HGNC:23520	SLC16A9	solute carrier family 16 member 9	Approved	gene with protein product	C10orf36	FLJ43803, MCT9	10q21.2	220963	ENSG00000165449	OTTHUMG00000018283	2168	Solute carrier family 16
+HGNC:10929	SLC17A1	solute carrier family 17 member 1	Approved	gene with protein product	NPT1	NAPI-1	6p22.2	6568	ENSG00000124568	OTTHUMG00000016297	2169	Solute carrier family 17
+HGNC:10930	SLC17A2	solute carrier family 17 member 2	Approved	gene with protein product		NPT3	6p22.2	10246	ENSG00000112337	OTTHUMG00000014413	2169	Solute carrier family 17
+HGNC:10931	SLC17A3	solute carrier family 17 member 3	Approved	gene with protein product		NPT4	6p22.2	10786	ENSG00000124564	OTTHUMG00000014412	2169	Solute carrier family 17
+HGNC:10932	SLC17A4	solute carrier family 17 member 4	Approved	gene with protein product		KIAA2138	6p22.2	10050	ENSG00000146039	OTTHUMG00000014410	2169	Solute carrier family 17
+HGNC:10933	SLC17A5	solute carrier family 17 member 5	Approved	gene with protein product	SIASD	AST, SD, ISSD, NSD, SIALIN, SLD	6q13	26503	ENSG00000119899	OTTHUMG00000015039	2169	Solute carrier family 17
+HGNC:16703	SLC17A6	solute carrier family 17 member 6	Approved	gene with protein product		DNPI, VGLUT2	11p14.3	57084	ENSG00000091664	OTTHUMG00000166063	2169	Solute carrier family 17
+HGNC:16704	SLC17A7	solute carrier family 17 member 7	Approved	gene with protein product		BNPI, VGLUT1	19q13.33	57030	ENSG00000104888	OTTHUMG00000183166	2169	Solute carrier family 17
+HGNC:20151	SLC17A8	solute carrier family 17 member 8	Approved	gene with protein product	DFNA25	VGLUT3	12q23.1	246213	ENSG00000179520	OTTHUMG00000170358	2169	Solute carrier family 17
+HGNC:16192	SLC17A9	solute carrier family 17 member 9	Approved	gene with protein product	C20orf59	FLJ23412, VNUT	20q13.33	63910	ENSG00000101194	OTTHUMG00000032951	2169	Solute carrier family 17
+HGNC:10934	SLC18A1	solute carrier family 18 member A1	Approved	gene with protein product	VMAT1, VAT1	CGAT	8p21.3	6570	ENSG00000036565	OTTHUMG00000097017	2170	Solute carrier family 18
+HGNC:10935	SLC18A2	solute carrier family 18 member A2	Approved	gene with protein product	VMAT2	SVMT, SVAT, VAT2	10q25.3	6571	ENSG00000165646	OTTHUMG00000019121	2170	Solute carrier family 18
+HGNC:10936	SLC18A3	solute carrier family 18 member A3	Approved	gene with protein product		VACHT	10q11.23	6572	ENSG00000187714	OTTHUMG00000018196	2170	Solute carrier family 18
+HGNC:21573	SLC18B1	solute carrier family 18 member B1	Approved	gene with protein product	C6orf192	dJ55C23.6	6q23.2	116843	ENSG00000146409	OTTHUMG00000015595	2170	Solute carrier family 18
+HGNC:10937	SLC19A1	solute carrier family 19 member 1	Approved	gene with protein product		FOLT, RFC1, IFC-1, RFC, hRFC, RFT-1	21q22.3	6573	ENSG00000173638	OTTHUMG00000090397	2171	Solute carrier family 19
+HGNC:10938	SLC19A2	solute carrier family 19 member 2	Approved	gene with protein product	TRMA	THTR1, ThT1	1q24.2	10560	ENSG00000117479	OTTHUMG00000035452	2171	Solute carrier family 19
+HGNC:16266	SLC19A3	solute carrier family 19 member 3	Approved	gene with protein product		THTR2, thTr-2, hTHTR2	2q36.3	80704	ENSG00000135917	OTTHUMG00000133185	2171	Solute carrier family 19
+HGNC:25344	SLC19A4P	solute carrier family 19 member 4, pseudogene	Approved	pseudogene	C2orf83	DKFZp547H025	2q36.3	56918	ENSG00000042304	OTTHUMG00000153550	2171	Solute carrier family 19
+HGNC:11005	SLC2A1	solute carrier family 2 member 1	Approved	gene with protein product	GLUT1, GLUT, HTLVR, CSE	DYT18, DYT9, GLUT-1	1p34.2	6513	ENSG00000117394	OTTHUMG00000007657	2155	Solute carrier family 2
+HGNC:13444	SLC2A10	solute carrier family 2 member 10	Approved	gene with protein product		GLUT10, GLUT-10	20q13.12	81031	ENSG00000197496	OTTHUMG00000032657	2155	Solute carrier family 2
+HGNC:14239	SLC2A11	solute carrier family 2 member 11	Approved	gene with protein product		GLUT11	22q11.23	66035	ENSG00000133460	OTTHUMG00000166469	2155	Solute carrier family 2
+HGNC:18067	SLC2A12	solute carrier family 2 member 12	Approved	gene with protein product		GLUT12, GLUT8	6q23.2	154091	ENSG00000146411	OTTHUMG00000015611	2155	Solute carrier family 2
+HGNC:15956	SLC2A13	solute carrier family 2 member 13	Approved	gene with protein product		HMIT	12q12	114134	ENSG00000151229	OTTHUMG00000059743	2155	Solute carrier family 2
+HGNC:18301	SLC2A14	solute carrier family 2 member 14	Approved	gene with protein product	SLC2A3P3	GLUT14	12p13.31	144195	ENSG00000173262	OTTHUMG00000168463	2155	Solute carrier family 2
+HGNC:11006	SLC2A2	solute carrier family 2 member 2	Approved	gene with protein product	GLUT2	GLUT-2	3q26.2	6514	ENSG00000163581	OTTHUMG00000158997	2155	Solute carrier family 2
+HGNC:11007	SLC2A3	solute carrier family 2 member 3	Approved	gene with protein product	GLUT3		12p13.31	6515	ENSG00000059804	OTTHUMG00000133685	2155	Solute carrier family 2
+HGNC:11009	SLC2A4	solute carrier family 2 member 4	Approved	gene with protein product	GLUT4		17p13.1	6517	ENSG00000181856	OTTHUMG00000102181	2155	Solute carrier family 2
+HGNC:11010	SLC2A5	solute carrier family 2 member 5	Approved	gene with protein product	GLUT5		1p36.23	6518	ENSG00000142583	OTTHUMG00000001771	2155	Solute carrier family 2
+HGNC:11011	SLC2A6	solute carrier family 2 member 6	Approved	gene with protein product		GLUT9, GLUT6, HSA011372	9q34.2	11182	ENSG00000160326	OTTHUMG00000020874	2155	Solute carrier family 2
+HGNC:13445	SLC2A7	solute carrier family 2 member 7	Approved	gene with protein product		GLUT7	1p36.23	155184	ENSG00000197241	OTTHUMG00000057499	2155	Solute carrier family 2
+HGNC:13812	SLC2A8	solute carrier family 2 member 8	Approved	gene with protein product		GLUTX1, GLUT8	9q33.3	29988	ENSG00000136856	OTTHUMG00000020702	2155	Solute carrier family 2
+HGNC:13446	SLC2A9	solute carrier family 2 member 9	Approved	gene with protein product		Glut9, GLUTX, URATv1	4p16.1	56606	ENSG00000109667	OTTHUMG00000044263	2155	Solute carrier family 2
+HGNC:10946	SLC20A1	solute carrier family 20 member 1	Approved	gene with protein product	GLVR1	PiT-1, Glvr-1, PiT1	2q14.1	6574	ENSG00000144136	OTTHUMG00000131317	2172	Solute carrier family 20
+HGNC:10947	SLC20A2	solute carrier family 20 member 2	Approved	gene with protein product	MLVAR, GLVR2	PiT-2, Glvr-2, Ram-1, PIT2	8p11.21	6575	ENSG00000168575	OTTHUMG00000164169	2172	Solute carrier family 20
+HGNC:10963	SLC22A1	solute carrier family 22 member 1	Approved	gene with protein product		OCT1	6q25.3	6580	ENSG00000175003	OTTHUMG00000015947	2173	Solute carrier family 22
+HGNC:18057	SLC22A10	solute carrier family 22 member 10 (gene/pseudogene)	Approved	gene with protein product		OAT5, hOAT5	11q12.3	387775	ENSG00000184999	OTTHUMG00000165197	2173	Solute carrier family 22
+HGNC:18120	SLC22A11	solute carrier family 22 member 11	Approved	gene with protein product		OAT4	11q13.1	55867	ENSG00000168065	OTTHUMG00000045142	2173	Solute carrier family 22
+HGNC:17989	SLC22A12	solute carrier family 22 member 12	Approved	gene with protein product		OAT4L, RST, URAT1, hURAT1, UAT	11q13.1	116085	ENSG00000197891	OTTHUMG00000045213	2173	Solute carrier family 22
+HGNC:8494	SLC22A13	solute carrier family 22 member 13	Approved	gene with protein product	ORCTL3	OCTL1, OCTL3, OAT10	3p22.2	9390	ENSG00000172940	OTTHUMG00000131086	2173	Solute carrier family 22
+HGNC:8495	SLC22A14	solute carrier family 22 member 14	Approved	gene with protein product	ORCTL4	OCTL2	3p22.2	9389	ENSG00000144671	OTTHUMG00000131082	2173	Solute carrier family 22
+HGNC:20301	SLC22A15	solute carrier family 22 member 15	Approved	gene with protein product		FLIPT1	1p13.1	55356	ENSG00000163393	OTTHUMG00000012008	2173	Solute carrier family 22
+HGNC:20302	SLC22A16	solute carrier family 22 member 16	Approved	gene with protein product		FLIPT2, CT2, OKB1, OAT6	6q21	85413	ENSG00000004809	OTTHUMG00000016171	2173	Solute carrier family 22
+HGNC:23095	SLC22A17	solute carrier family 22 member 17	Approved	gene with protein product		BOCT, BOIT, NGALR	14q11.2	51310	ENSG00000092096	OTTHUMG00000028740	2173	Solute carrier family 22
+HGNC:10966	SLC22A2	solute carrier family 22 member 2	Approved	gene with protein product		OCT2	6q25.3	6582	ENSG00000112499	OTTHUMG00000015950	2173	Solute carrier family 22
+HGNC:29867	SLC22A20P	solute carrier family 22 member 20, pseudogene	Approved	pseudogene	SLC22A20	Oat6, FLJ16331	11q13.1	440044	ENSG00000197847	OTTHUMG00000165615	2173	Solute carrier family 22
+HGNC:21106	SLC22A23	solute carrier family 22 member 23	Approved	gene with protein product	C6orf85	FLJ22174	6p25.2	63027	ENSG00000137266	OTTHUMG00000014144	2173	Solute carrier family 22
+HGNC:28542	SLC22A24	solute carrier family 22 member 24	Approved	gene with protein product		MGC34821, NET46	11q12.3	283238	ENSG00000197658	OTTHUMG00000165372	2173	Solute carrier family 22
+HGNC:32935	SLC22A25	solute carrier family 22 member 25	Approved	gene with protein product		UST6, HIMTP, MGC120420	11q12.3	387601	ENSG00000196600	OTTHUMG00000165340	2173	Solute carrier family 22
+HGNC:10967	SLC22A3	solute carrier family 22 member 3	Approved	gene with protein product		OCT3, EMT	6q25.3	6581	ENSG00000146477	OTTHUMG00000015953	2173	Solute carrier family 22
+HGNC:27091	SLC22A31	solute carrier family 22 member 31	Approved	gene with protein product			16q24.3	146429	ENSG00000259803	OTTHUMG00000175615	2173	Solute carrier family 22
+HGNC:10968	SLC22A4	solute carrier family 22 member 4	Approved	gene with protein product	DFNB60	OCTN1, MGC34546	5q31.1	6583	ENSG00000197208	OTTHUMG00000059648	2173	Solute carrier family 22
+HGNC:10969	SLC22A5	solute carrier family 22 member 5	Approved	gene with protein product	CDSP	OCTN2, SCD	5q31.1	6584	ENSG00000197375	OTTHUMG00000059634	2173	Solute carrier family 22
+HGNC:10970	SLC22A6	solute carrier family 22 member 6	Approved	gene with protein product		ROAT1, PAHT, OAT1	11q12.3	9356	ENSG00000197901	OTTHUMG00000167767	2173	Solute carrier family 22
+HGNC:10971	SLC22A7	solute carrier family 22 member 7	Approved	gene with protein product		NLT, OAT2	6p21.1	10864	ENSG00000137204	OTTHUMG00000014726	2173	Solute carrier family 22
+HGNC:10972	SLC22A8	solute carrier family 22 member 8	Approved	gene with protein product		OAT3	11q12.3	9376	ENSG00000149452	OTTHUMG00000167768	2173	Solute carrier family 22
+HGNC:16261	SLC22A9	solute carrier family 22 member 9	Approved	gene with protein product		OAT4, FLJ23666, UST3, OAT7	11q12.3	114571	ENSG00000149742	OTTHUMG00000167805	2173	Solute carrier family 22
+HGNC:20566	SV2A	synaptic vesicle glycoprotein 2A	Approved	gene with protein product		SV2, KIAA0736, SLC22B1	1q21.2	9900	ENSG00000159164	OTTHUMG00000012209	2173	Solute carrier family 22
+HGNC:16874	SV2B	synaptic vesicle glycoprotein 2B	Approved	gene with protein product		KIAA0735, HsT19680, SLC22B2	15q26.1	9899	ENSG00000185518	OTTHUMG00000149833	2173	Solute carrier family 22
+HGNC:30670	SV2C	synaptic vesicle glycoprotein 2C	Approved	gene with protein product		SLC22B3	5q13.3	22987	ENSG00000122012	OTTHUMG00000162384	2173	Solute carrier family 22
+HGNC:25417	SVOP	SV2 related protein	Approved	gene with protein product		DKFZp761H039, SLC22B4	12q24.11	55530	ENSG00000166111	OTTHUMG00000169432	2173	Solute carrier family 22
+HGNC:27034	SVOPL	SVOP like	Approved	gene with protein product		MGC46715, SLC22B5	7q34	136306	ENSG00000157703	OTTHUMG00000155870	2173	Solute carrier family 22
+HGNC:10974	SLC23A1	solute carrier family 23 member 1	Approved	gene with protein product	SLC23A2	YSPL3, SVCT1	5q31.2	9963	ENSG00000170482	OTTHUMG00000129228	2174	Solute carrier family 23
+HGNC:10973	SLC23A2	solute carrier family 23 member 2	Approved	gene with protein product	SLC23A1	SVCT2, KIAA0238, YSPL2	20p13	9962	ENSG00000089057	OTTHUMG00000031793	2174	Solute carrier family 23
+HGNC:20601	SLC23A3	solute carrier family 23 member 3	Approved	gene with protein product		SVCT3, FLJ31168, Yspl1	2q35	151295	ENSG00000213901	OTTHUMG00000154616	2174	Solute carrier family 23
+HGNC:20602	SLC23A4P	solute carrier family 23 member 4, pseudogene	Approved	pseudogene	SLC23A4		7q33	641842	ENSG00000276067	OTTHUMG00000187701	2174	Solute carrier family 23
+HGNC:10975	SLC24A1	solute carrier family 24 member 1	Approved	gene with protein product		NCKX1, NCKX, RODX, KIAA0702, HsT17412, CSNB1D	15q22.31	9187	ENSG00000074621	OTTHUMG00000167960	2175	Solute carrier family 24
+HGNC:10976	SLC24A2	solute carrier family 24 member 2	Approved	gene with protein product		NCKX2	9p22.1	25769	ENSG00000155886	OTTHUMG00000019646	2175	Solute carrier family 24
+HGNC:10977	SLC24A3	solute carrier family 24 member 3	Approved	gene with protein product			20p11.23	57419	ENSG00000185052	OTTHUMG00000031993	2175	Solute carrier family 24
+HGNC:10978	SLC24A4	solute carrier family 24 member 4	Approved	gene with protein product		NCKX4	14q32.12	123041	ENSG00000140090	OTTHUMG00000167589	2175	Solute carrier family 24
+HGNC:20611	SLC24A5	solute carrier family 24 member 5	Approved	gene with protein product		JSX, OCA6, NCKX5	15q21.1	283652	ENSG00000188467	OTTHUMG00000131494	2175	Solute carrier family 24
+HGNC:10979	SLC25A1	solute carrier family 25 member 1	Approved	gene with protein product	SLC20A3	CTP, CIC	22q11.21	6576	ENSG00000100075	OTTHUMG00000150123	2176	Solute carrier family 25
+HGNC:10980	SLC25A10	solute carrier family 25 member 10	Approved	gene with protein product	DIC		17q25.3	1468	ENSG00000183048	OTTHUMG00000178173	2176	Solute carrier family 25
+HGNC:10981	SLC25A11	solute carrier family 25 member 11	Approved	gene with protein product	SLC20A4	OGC	17p13.2	8402	ENSG00000108528	OTTHUMG00000099395	2176	Solute carrier family 25
+HGNC:10982	SLC25A12	solute carrier family 25 member 12	Approved	gene with protein product		Aralar, aralar1, AGC1	2q31.1	8604	ENSG00000115840	OTTHUMG00000134290	2176	Solute carrier family 25
+HGNC:10983	SLC25A13	solute carrier family 25 member 13	Approved	gene with protein product	CTLN2	CITRIN, ARALAR2	7q21.3	10165	ENSG00000004864	OTTHUMG00000023074	2176	Solute carrier family 25
+HGNC:10984	SLC25A14	solute carrier family 25 member 14	Approved	gene with protein product		BMCP1, UCP5	Xq26.1	9016	ENSG00000102078	OTTHUMG00000022394	2176	Solute carrier family 25
+HGNC:10985	SLC25A15	solute carrier family 25 member 15	Approved	gene with protein product	ORNT1, HHH	ORC1, lnc-HC, D13S327	13q14.11	10166	ENSG00000102743	OTTHUMG00000016776	2176	Solute carrier family 25
+HGNC:10986	SLC25A16	solute carrier family 25 member 16	Approved	gene with protein product		GDA, D10S105E, HGT.1, ML7	10q21.3	8034	ENSG00000122912	OTTHUMG00000018354	2176	Solute carrier family 25
+HGNC:10987	SLC25A17	solute carrier family 25 member 17	Approved	gene with protein product		PMP34	22q13.2	10478	ENSG00000100372	OTTHUMG00000151139	2176	Solute carrier family 25
+HGNC:10988	SLC25A18	solute carrier family 25 member 18	Approved	gene with protein product			22q11.21	83733	ENSG00000182902	OTTHUMG00000150089	2176	Solute carrier family 25
+HGNC:14409	SLC25A19	solute carrier family 25 member 19	Approved	gene with protein product	MCPHA	DNC, MUP1, TPC	17q25.1	60386	ENSG00000125454	OTTHUMG00000179607	2176	Solute carrier family 25
+HGNC:22921	SLC25A2	solute carrier family 25 member 2	Approved	gene with protein product		ORNT2	5q31.3	83884	ENSG00000120329	OTTHUMG00000129604	2176	Solute carrier family 25
+HGNC:1421	SLC25A20	solute carrier family 25 member 20	Approved	gene with protein product	CACT	CAC	3p21.31	788	ENSG00000178537	OTTHUMG00000133538	2176	Solute carrier family 25
+HGNC:14411	SLC25A21	solute carrier family 25 member 21	Approved	gene with protein product		ODC1, ODC	14q13.3	89874	ENSG00000183032	OTTHUMG00000140250	2176	Solute carrier family 25
+HGNC:19954	SLC25A22	solute carrier family 25 member 22	Approved	gene with protein product		GC1, FLJ13044, NET44, EIEE3, GC-1	11p15.5	79751	ENSG00000177542	OTTHUMG00000133310	2176	Solute carrier family 25
+HGNC:19375	SLC25A23	solute carrier family 25 member 23	Approved	gene with protein product		FLJ30339, MGC2615, APC2	19p13.3	79085	ENSG00000125648	OTTHUMG00000180852	2176	Solute carrier family 25
+HGNC:20662	SLC25A24	solute carrier family 25 member 24	Approved	gene with protein product		DKFZp586G0123, APC1, SCAMC1, SCAMC-1	1p13.3	29957	ENSG00000085491	OTTHUMG00000011013	2176	Solute carrier family 25
+HGNC:20663	SLC25A25	solute carrier family 25 member 25	Approved	gene with protein product		KIAA1896, PCSCL, MCSC	9q34.11	114789	ENSG00000148339	OTTHUMG00000020736	2176	Solute carrier family 25
+HGNC:20661	SLC25A26	solute carrier family 25 member 26	Approved	gene with protein product		SAMC	3p14.1	115286	ENSG00000144741	OTTHUMG00000149917	2176	Solute carrier family 25
+HGNC:21065	SLC25A27	solute carrier family 25 member 27	Approved	gene with protein product		UCP4, FLJ33552	6p12.3	9481	ENSG00000153291	OTTHUMG00000014786	2176	Solute carrier family 25
+HGNC:23472	SLC25A28	solute carrier family 25 member 28	Approved	gene with protein product		MRS3/4, MRS4L	10q24.2	81894	ENSG00000155287	OTTHUMG00000018886	2176	Solute carrier family 25
+HGNC:20116	SLC25A29	solute carrier family 25 member 29	Approved	gene with protein product	C14orf69	FLJ38975	14q32.2	123096	ENSG00000197119	OTTHUMG00000171569	2176	Solute carrier family 25
+HGNC:10989	SLC25A3	solute carrier family 25 member 3	Approved	gene with protein product	PHC	PiC, PTP	12q23.1	5250	ENSG00000075415	OTTHUMG00000170212	2176	Solute carrier family 25
+HGNC:27371	SLC25A30	solute carrier family 25 member 30	Approved	gene with protein product			13q14.13	253512	ENSG00000174032	OTTHUMG00000016853	2176	Solute carrier family 25
+HGNC:25319	SLC25A31	solute carrier family 25 member 31	Approved	gene with protein product		DKFZP434N1235, ANT4	4q28.1	83447	ENSG00000151475	OTTHUMG00000133300	2176	Solute carrier family 25
+HGNC:29683	SLC25A32	solute carrier family 25 member 32	Approved	gene with protein product		MFTC	8q22.3	81034	ENSG00000164933	OTTHUMG00000164790	2176	Solute carrier family 25
+HGNC:29681	SLC25A33	solute carrier family 25 member 33	Approved	gene with protein product		MGC4399, BMSC-MCP, PNC1	1p36.22	84275	ENSG00000171612	OTTHUMG00000001322	2176	Solute carrier family 25
+HGNC:27653	SLC25A34	solute carrier family 25 member 34	Approved	gene with protein product		DKFZp781A10161	1p36.21	284723	ENSG00000162461	OTTHUMG00000003063	2176	Solute carrier family 25
+HGNC:31921	SLC25A35	solute carrier family 25 member 35	Approved	gene with protein product		FLJ40217	17p13.1	399512	ENSG00000125434	OTTHUMG00000178480	2176	Solute carrier family 25
+HGNC:25554	SLC25A36	solute carrier family 25 member 36	Approved	gene with protein product		FLJ10618, PNC2	3q23	55186	ENSG00000114120	OTTHUMG00000160260	2176	Solute carrier family 25
+HGNC:29786	SLC25A37	solute carrier family 25 member 37	Approved	gene with protein product		MSCP, MFRN, MFRN1, HT015	8p21.2	51312	ENSG00000147454	OTTHUMG00000163865	2176	Solute carrier family 25
+HGNC:26054	SLC25A38	solute carrier family 25 member 38	Approved	gene with protein product		FLJ20551	3p22.1	54977	ENSG00000144659	OTTHUMG00000131289	2176	Solute carrier family 25
+HGNC:24279	SLC25A39	solute carrier family 25 member 39	Approved	gene with protein product		FLJ22407, CGI-69	17q21.31	51629	ENSG00000013306	OTTHUMG00000132628	2176	Solute carrier family 25
+HGNC:10990	SLC25A4	solute carrier family 25 member 4	Approved	gene with protein product	PEO3, PEO2, ANT1	T1, AAC1	4q35.1	291	ENSG00000151729	OTTHUMG00000134299	2176	Solute carrier family 25
+HGNC:29680	SLC25A40	solute carrier family 25 member 40	Approved	gene with protein product		MCFP	7q21.12	55972	ENSG00000075303	OTTHUMG00000131033	2176	Solute carrier family 25
+HGNC:28533	SLC25A41	solute carrier family 25 member 41	Approved	gene with protein product		FLJ40442, MGC34725, APC4	19p13.3	284427	ENSG00000181240	OTTHUMG00000180851	2176	Solute carrier family 25
+HGNC:28380	SLC25A42	solute carrier family 25 member 42	Approved	gene with protein product		MGC26694	19p13.11	284439	ENSG00000181035	OTTHUMG00000183280	2176	Solute carrier family 25
+HGNC:30557	SLC25A43	solute carrier family 25 member 43	Approved	gene with protein product			Xq24	203427	ENSG00000077713	OTTHUMG00000022272	2176	Solute carrier family 25
+HGNC:29036	SLC25A44	solute carrier family 25 member 44	Approved	gene with protein product		FLJ90431, KIAA0446	1q22	9673	ENSG00000160785	OTTHUMG00000014816	2176	Solute carrier family 25
+HGNC:27442	SLC25A45	solute carrier family 25 member 45	Approved	gene with protein product			11q13.1	283130	ENSG00000162241	OTTHUMG00000166255	2176	Solute carrier family 25
+HGNC:25198	SLC25A46	solute carrier family 25 member 46	Approved	gene with protein product			5q22.1	91137	ENSG00000164209	OTTHUMG00000128794	2176	Solute carrier family 25
+HGNC:20115	SLC25A47	solute carrier family 25 member 47	Approved	gene with protein product	C14orf68	HDCMP	14q32.2	283600	ENSG00000140107	OTTHUMG00000171571	2176	Solute carrier family 25
+HGNC:30451	SLC25A48	solute carrier family 25 member 48	Approved	gene with protein product		FLJ44862	5q31.1	153328	ENSG00000145832	OTTHUMG00000157007	2176	Solute carrier family 25
+HGNC:17586	MTCH1	mitochondrial carrier 1	Approved	gene with protein product		CGI-64, PSAP, SLC25A49	6p21.2	23787	ENSG00000137409	OTTHUMG00000014614	2176	Solute carrier family 25
+HGNC:10991	SLC25A5	solute carrier family 25 member 5	Approved	gene with protein product	ANT2	T2, 2F1, T3	Xq24	292	ENSG00000005022	OTTHUMG00000022715	2176	Solute carrier family 25
+HGNC:17587	MTCH2	mitochondrial carrier 2	Approved	gene with protein product		SLC25A50, MIMP	11p11.2	23788	ENSG00000109919	OTTHUMG00000166926	2176	Solute carrier family 25
+HGNC:23323	SLC25A51	solute carrier family 25 member 51	Approved	gene with protein product	MCART1	MGC14836, CG7943	9p13.2-p13.1	92014	ENSG00000122696	OTTHUMG00000019935	2176	Solute carrier family 25
+HGNC:23324	SLC25A52	solute carrier family 25 member 52	Approved	gene with protein product	MCART2		18q12.1	147407	ENSG00000141437	OTTHUMG00000179617	2176	Solute carrier family 25
+HGNC:31894	SLC25A53	solute carrier family 25 member 53	Approved	gene with protein product	MCART6		Xq22.2	401612	ENSG00000269743	OTTHUMG00000022124	2176	Solute carrier family 25
+HGNC:10992	SLC25A6	solute carrier family 25 member 6	Approved	gene with protein product	ANT3	ANT3Y, MGC17525	Xp22.32 and Yp11.3	293	ENSG00000169100	OTTHUMG00000021058	2176	Solute carrier family 25
+HGNC:12517	UCP1	uncoupling protein 1	Approved	gene with protein product	UCP	SLC25A7	4q31.1	7350	ENSG00000109424	OTTHUMG00000133415	2176	Solute carrier family 25
+HGNC:12518	UCP2	uncoupling protein 2	Approved	gene with protein product	BMIQ4	SLC25A8	11q13.4	7351	ENSG00000175567	OTTHUMG00000168095	2176	Solute carrier family 25
+HGNC:12519	UCP3	uncoupling protein 3	Approved	gene with protein product		SLC25A9	11q13.4	7352	ENSG00000175564	OTTHUMG00000168109	2176	Solute carrier family 25
+HGNC:10993	SLC26A1	solute carrier family 26 member 1	Approved	gene with protein product		SAT-1, EDM4	4p16.3	10861	ENSG00000145217	OTTHUMG00000160003	2177	Solute carrier family 26
+HGNC:14470	SLC26A10P	solute carrier family 26 member 10, pseudogene	Approved	pseudogene	SLC26A10		12q13.3	65012	ENSG00000135502	OTTHUMG00000128505	2177	Solute carrier family 26
+HGNC:14471	SLC26A11	solute carrier family 26 member 11	Approved	gene with protein product			17q25.3	284129	ENSG00000181045	OTTHUMG00000133419	2177	Solute carrier family 26
+HGNC:10994	SLC26A2	solute carrier family 26 member 2	Approved	gene with protein product	DTD	DTDST	5q32	1836	ENSG00000155850	OTTHUMG00000130054	2177	Solute carrier family 26
+HGNC:3018	SLC26A3	solute carrier family 26 member 3	Approved	gene with protein product	DRA, CLD		7q22.3-q31.1	1811	ENSG00000091138	OTTHUMG00000154812	2177	Solute carrier family 26
+HGNC:8818	SLC26A4	solute carrier family 26 member 4	Approved	gene with protein product	DFNB4	PDS	7q22.3	5172	ENSG00000091137	OTTHUMG00000154807	2177	Solute carrier family 26
+HGNC:9359	SLC26A5	solute carrier family 26 member 5	Approved	gene with protein product	PRES	DFNB61, PRESTIN	7q22.1	375611	ENSG00000170615	OTTHUMG00000149911	2177	Solute carrier family 26
+HGNC:14472	SLC26A6	solute carrier family 26 member 6	Approved	gene with protein product		DKFZp586E1422	3p21.31	65010	ENSG00000225697	OTTHUMG00000186381	2177	Solute carrier family 26
+HGNC:14467	SLC26A7	solute carrier family 26 member 7	Approved	gene with protein product		SUT2	8q21.3	115111	ENSG00000147606	OTTHUMG00000164062	2177	Solute carrier family 26
+HGNC:14468	SLC26A8	solute carrier family 26 member 8	Approved	gene with protein product		TAT1	6p21.31	116369	ENSG00000112053	OTTHUMG00000014586	2177	Solute carrier family 26
+HGNC:14469	SLC26A9	solute carrier family 26 member 9	Approved	gene with protein product			1q32.1	115019	ENSG00000174502	OTTHUMG00000036001	2177	Solute carrier family 26
+HGNC:10995	SLC27A1	solute carrier family 27 member 1	Approved	gene with protein product		FATP1, FATP, MGC71751, FLJ00336, ACSVL5	19p13.11	376497	ENSG00000130304	OTTHUMG00000182878	2178	Solute carrier family 27
+HGNC:10996	SLC27A2	solute carrier family 27 member 2	Approved	gene with protein product	FACVL1	FATP2, hFACVL1, VLACS, VLCS, HsT17226, ACSVL1	15q21.2	11001	ENSG00000140284	OTTHUMG00000131643	2178	Solute carrier family 27
+HGNC:10997	SLC27A3	solute carrier family 27 member 3	Approved	gene with protein product		FATP3, MGC4365, ACSVL3	1q21.3	11000	ENSG00000143554	OTTHUMG00000037155	2178	Solute carrier family 27
+HGNC:10998	SLC27A4	solute carrier family 27 member 4	Approved	gene with protein product		FATP4, ACSVL4, FATP-4	9q34.11	10999	ENSG00000167114	OTTHUMG00000020746	2178	Solute carrier family 27
+HGNC:10999	SLC27A5	solute carrier family 27 member 5	Approved	gene with protein product		FATP5, VLACSR, VLCS-H2, VLCSH2, FACVL3, FLJ22987, ACSVL6, ACSB	19q13.43	10998	ENSG00000083807	OTTHUMG00000183543	2178	Solute carrier family 27
+HGNC:11000	SLC27A6	solute carrier family 27 member 6	Approved	gene with protein product		FATP6, VLCS-H1, FACVL2, ACSVL2	5q23.3	28965	ENSG00000113396	OTTHUMG00000128991	2178	Solute carrier family 27
+HGNC:11001	SLC28A1	solute carrier family 28 member 1	Approved	gene with protein product		CNT1	15q25.3	9154	ENSG00000156222	OTTHUMG00000148668	2179	Solute carrier family 28
+HGNC:11002	SLC28A2	solute carrier family 28 member 2	Approved	gene with protein product		CNT2, SPNT1, HCNT2, HsT17153	15q21.1	9153	ENSG00000137860	OTTHUMG00000131426	2179	Solute carrier family 28
+HGNC:16484	SLC28A3	solute carrier family 28 member 3	Approved	gene with protein product		CNT3	9q21.32-q21.33	64078	ENSG00000197506	OTTHUMG00000020117	2179	Solute carrier family 28
+HGNC:11003	SLC29A1	solute carrier family 29 member 1 (Augustine blood group)	Approved	gene with protein product	ENT1		6p21.1	2030	ENSG00000112759	OTTHUMG00000014759	2180	Solute carrier family 29
+HGNC:11004	SLC29A2	solute carrier family 29 member 2	Approved	gene with protein product	ENT2, HNP36	DER12	11q13.2	3177	ENSG00000174669	OTTHUMG00000169056	2180	Solute carrier family 29
+HGNC:23096	SLC29A3	solute carrier family 29 member 3	Approved	gene with protein product		ENT3, FLJ11160, hENT3	10q22.1	55315	ENSG00000198246	OTTHUMG00000018424	2180	Solute carrier family 29
+HGNC:23097	SLC29A4	solute carrier family 29 member 4	Approved	gene with protein product		FLJ34923, ENT4	7p22.1	222962	ENSG00000164638	OTTHUMG00000023797	2180	Solute carrier family 29
+HGNC:2074	CLN3	CLN3 lysosomal/endosomal transmembrane protein, battenin	Approved	gene with protein product	BTS	BTN1, JNCL, SLC29B1	16p12.1	1201	ENSG00000188603	OTTHUMG00000097024	2180	Solute carrier family 29
+HGNC:11025	SLC3A1	solute carrier family 3 member 1	Approved	gene with protein product		CSNU1, D2H, RBAT, ATR1, NBAT	2p21	6519	ENSG00000138079	OTTHUMG00000128759	2156	Solute carrier family 3
+HGNC:11026	SLC3A2	solute carrier family 3 member 2	Approved	gene with protein product	MDU1	4T2HC, 4F2, NACAE, CD98, CD98HC, 4F2HC	11q12.3	6520	ENSG00000168003	OTTHUMG00000074091	2156	Solute carrier family 3
+HGNC:11012	SLC30A1	solute carrier family 30 member 1	Approved	gene with protein product	ZNT1	ZRC1	1q32.3	7779	ENSG00000170385	OTTHUMG00000036995	2181	Solute carrier family 30
+HGNC:25355	SLC30A10	solute carrier family 30 member 10	Approved	gene with protein product		DKFZp547M236, ZnT-10, ZRC1, ZNT8, ZNT10	1q41	55532	ENSG00000196660	OTTHUMG00000037434	2181	Solute carrier family 30
+HGNC:25380	TMEM163	transmembrane protein 163	Approved	gene with protein product		DKFZP566N034, SV31, SLC30A11	2q21.3	81615	ENSG00000152128	OTTHUMG00000131713	2181	Solute carrier family 30
+HGNC:11013	SLC30A2	solute carrier family 30 member 2	Approved	gene with protein product	ZNT2		1p36.11	7780	ENSG00000158014	OTTHUMG00000007508	2181	Solute carrier family 30
+HGNC:11014	SLC30A3	solute carrier family 30 member 3	Approved	gene with protein product	ZNT3		2p23.3	7781	ENSG00000115194	OTTHUMG00000128409	2181	Solute carrier family 30
+HGNC:11015	SLC30A4	solute carrier family 30 member 4	Approved	gene with protein product	ZNT4		15q21.1	7782	ENSG00000104154	OTTHUMG00000131439	2181	Solute carrier family 30
+HGNC:19089	SLC30A5	solute carrier family 30 member 5	Approved	gene with protein product		ZTL1, ZnT-5, FLJ12496, FLJ12756, ZNT5, MGC5499, ZNTL1	5q13.1-q13.2	64924	ENSG00000145740	OTTHUMG00000131253	2181	Solute carrier family 30
+HGNC:19305	SLC30A6	solute carrier family 30 member 6	Approved	gene with protein product		FLJ31101, ZNT6	2p22.3	55676	ENSG00000152683	OTTHUMG00000128456	2181	Solute carrier family 30
+HGNC:19306	SLC30A7	solute carrier family 30 member 7	Approved	gene with protein product		ZnTL2, ZNT7	1p21.2	148867	ENSG00000162695	OTTHUMG00000011815	2181	Solute carrier family 30
+HGNC:20303	SLC30A8	solute carrier family 30 member 8	Approved	gene with protein product		ZnT-8, ZNT8	8q24.11	169026	ENSG00000164756	OTTHUMG00000164962	2181	Solute carrier family 30
+HGNC:1329	SLC30A9	solute carrier family 30 member 9	Approved	gene with protein product	C4orf1	HUEL, ZNT9, GAC63	4p13	10463	ENSG00000014824	OTTHUMG00000099387	2181	Solute carrier family 30
+HGNC:11016	SLC31A1	solute carrier family 31 member 1	Approved	gene with protein product	COPT1	hCTR1, CTR1	9q32	1317	ENSG00000136868	OTTHUMG00000020519	2182	Solute carrier family 31
+HGNC:11017	SLC31A2	solute carrier family 31 member 2	Approved	gene with protein product	COPT2	hCTR2, CTR2	9q32	1318	ENSG00000136867	OTTHUMG00000021037	2182	Solute carrier family 31
+HGNC:11018	SLC32A1	solute carrier family 32 member 1	Approved	gene with protein product	VIAAT	VGAT, bA122O1.1	20q11.23	140679	ENSG00000101438	OTTHUMG00000032457	2183	Solute carrier family 32
+HGNC:95	SLC33A1	solute carrier family 33 member 1	Approved	gene with protein product	ACATN, SPG42	AT-1, AT1	3q25.31	9197	ENSG00000169359	OTTHUMG00000158481	2184	Solute carrier family 33
+HGNC:25157	SLC33A2	solute carrier family 33 member 2	Approved	gene with protein product	MFSD3		8q24.3	113655	ENSG00000167700	OTTHUMG00000165177	2184	Solute carrier family 33
+HGNC:11019	SLC34A1	solute carrier family 34 member 1	Approved	gene with protein product	NPT2, SLC17A2	NAPI-3, NPTIIa, SLC11	5q35.3	6569	ENSG00000131183	OTTHUMG00000130857	2185	Solute carrier family 34
+HGNC:11020	SLC34A2	solute carrier family 34 member 2	Approved	gene with protein product		NAPI-3B, NaPi-2b, NPTIIb, NaPi2b, NAPI-IIb	4p15.2	10568	ENSG00000157765	OTTHUMG00000097757	2185	Solute carrier family 34
+HGNC:20305	SLC34A3	solute carrier family 34 member 3	Approved	gene with protein product		NPTIIc, FLJ38680, NaPi-2c, NPT2C	9q34.3	142680	ENSG00000198569	OTTHUMG00000131780	2185	Solute carrier family 34
+HGNC:11021	SLC35A1	solute carrier family 35 member A1	Approved	gene with protein product		CMPST, hCST, CMP-Sia-Tr	6q15	10559	ENSG00000164414	OTTHUMG00000015177	2186	Solute carrier family 35
+HGNC:11022	SLC35A2	solute carrier family 35 member A2	Approved	gene with protein product	UGALT	UGAT, UGT, UGT1, UGT2, UGTL, UDP-Gal-Tr	Xp11.23	7355	ENSG00000102100	OTTHUMG00000024129	2186	Solute carrier family 35
+HGNC:11023	SLC35A3	solute carrier family 35 member A3	Approved	gene with protein product			1p21.2	23443	ENSG00000117620	OTTHUMG00000010805	2186	Solute carrier family 35
+HGNC:20753	SLC35A4	solute carrier family 35 member A4	Approved	gene with protein product			5q31.3	113829	ENSG00000176087	OTTHUMG00000129495	2186	Solute carrier family 35
+HGNC:20792	SLC35A5	solute carrier family 35 member A5	Approved	gene with protein product		FLJ20730	3q13.2	55032	ENSG00000138459	OTTHUMG00000159263	2186	Solute carrier family 35
+HGNC:20798	SLC35B1	solute carrier family 35 member B1	Approved	gene with protein product		UGTREL1, AXER	17q21.33	10237	ENSG00000121073	OTTHUMG00000161638	2186	Solute carrier family 35
+HGNC:16872	SLC35B2	solute carrier family 35 member B2	Approved	gene with protein product		UGTrel4	6p21.1	347734	ENSG00000157593	OTTHUMG00000014760	2186	Solute carrier family 35
+HGNC:21601	SLC35B3	solute carrier family 35 member B3	Approved	gene with protein product	C6orf196	CGI-19, dJ453H5.1, PAPST2	6p24.3	51000	ENSG00000124786	OTTHUMG00000014224	2186	Solute carrier family 35
+HGNC:20584	SLC35B4	solute carrier family 35 member B4	Approved	gene with protein product		FLJ14697, YEA4	7q33	84912	ENSG00000205060	OTTHUMG00000155321	2186	Solute carrier family 35
+HGNC:20197	SLC35C1	solute carrier family 35 member C1	Approved	gene with protein product		FUCT1, FLJ11320	11p11.2	55343	ENSG00000181830	OTTHUMG00000166519	2186	Solute carrier family 35
+HGNC:20800	SLC35D1	solute carrier family 35 member D1	Approved	gene with protein product		UGTREL7, KIAA0260	1p31.3	23169	ENSG00000116704	OTTHUMG00000009360	2186	Solute carrier family 35
+HGNC:20799	SLC35D2	solute carrier family 35 member D2	Approved	gene with protein product		UGTrel8, SQV7L	9q22.32	11046	ENSG00000130958	OTTHUMG00000020293	2186	Solute carrier family 35
+HGNC:15621	SLC35D3	solute carrier family 35 member D3	Approved	gene with protein product	FRCL1		6q23.3	340146	ENSG00000182747	OTTHUMG00000015651	2186	Solute carrier family 35
+HGNC:31723	SLC35D4	solute carrier family 35 member D4	Approved	gene with protein product	C18orf45, TMEM241	MGC11386, FLJ44259	18q11.2	85019	ENSG00000134490	OTTHUMG00000131771	2186	Solute carrier family 35
+HGNC:20803	SLC35E1	solute carrier family 35 member E1	Approved	gene with protein product		FLJ14251	19p13.11	79939	ENSG00000127526	OTTHUMG00000152575	2186	Solute carrier family 35
+HGNC:20863	SLC35E2A	solute carrier family 35 member E2A (pseudogene)	Approved	pseudogene	SLC35E2	KIAA0447, SLC35E2AP, SLC35E2P	1p36.33	9906	ENSG00000215790	OTTHUMG00000000823	2186	Solute carrier family 35
+HGNC:33941	SLC35E2B	solute carrier family 35 member E2B	Approved	gene with protein product			1p36.33	728661	ENSG00000189339	OTTHUMG00000078639	2186	Solute carrier family 35
+HGNC:20864	SLC35E3	solute carrier family 35 member E3	Approved	gene with protein product		BLOV1	12q15	55508	ENSG00000175782	OTTHUMG00000169282	2186	Solute carrier family 35
+HGNC:17058	SLC35E4	solute carrier family 35 member E4	Approved	gene with protein product			22q12.2	339665	ENSG00000100036	OTTHUMG00000151110	2186	Solute carrier family 35
+HGNC:21483	SLC35F1	solute carrier family 35 member F1	Approved	gene with protein product	C6orf169	dJ230I3.1	6q22.2-q22.31	222553	ENSG00000196376	OTTHUMG00000015460	2186	Solute carrier family 35
+HGNC:23615	SLC35F2	solute carrier family 35 member F2	Approved	gene with protein product		FLJ13018	11q22.3	54733	ENSG00000110660	OTTHUMG00000166366	2186	Solute carrier family 35
+HGNC:23616	SLC35F3	solute carrier family 35 member F3	Approved	gene with protein product		FLJ37712	1q42.2	148641	ENSG00000183780	OTTHUMG00000037929	2186	Solute carrier family 35
+HGNC:19845	SLC35F4	solute carrier family 35 member F4	Approved	gene with protein product	C14orf36	FLJ37712	14q22.3-q23.1	341880	ENSG00000151812	OTTHUMG00000171317	2186	Solute carrier family 35
+HGNC:23617	SLC35F5	solute carrier family 35 member F5	Approved	gene with protein product		FLJ22004	2q14.1	80255	ENSG00000115084	OTTHUMG00000131361	2186	Solute carrier family 35
+HGNC:26055	SLC35F6	solute carrier family 35 member F6	Approved	gene with protein product	C2orf18	FLJ20555, ANT2BP, TANGO9	2p23.3	54978	ENSG00000213699	OTTHUMG00000128407	2186	Solute carrier family 35
+HGNC:26607	SLC35G1	solute carrier family 35 member G1	Approved	gene with protein product	TMEM20	FLJ33990, C10orf60, POST	10q23.33	159371	ENSG00000176273	OTTHUMG00000018779	2186	Solute carrier family 35
+HGNC:28480	SLC35G2	solute carrier family 35 member G2	Approved	gene with protein product	TMEM22	MGC3295, DKFZp564K2464	3q22.3	80723	ENSG00000168917	OTTHUMG00000159787	2186	Solute carrier family 35
+HGNC:26848	SLC35G3	solute carrier family 35 member G3	Approved	gene with protein product	TMEM21A, AMAC1	FLJ40154	17q12	146861	ENSG00000164729	OTTHUMG00000132929	2186	Solute carrier family 35
+HGNC:31043	SLC35G4	solute carrier family 35 member G4	Approved	gene with protein product	AMAC1L1, SLC35G4P		18p11.21	646000	ENSG00000236396	OTTHUMG00000180598	2186	Solute carrier family 35
+HGNC:15546	SLC35G5	solute carrier family 35 member G5	Approved	gene with protein product	AMAC, AMAC1L2		8p23.1	83650	ENSG00000177710	OTTHUMG00000090653	2186	Solute carrier family 35
+HGNC:31351	SLC35G6	solute carrier family 35 member G6	Approved	gene with protein product	TMEM21B, AMAC1L3		17p13.1	643664	ENSG00000259224	OTTHUMG00000187017	2186	Solute carrier family 35
+HGNC:17117	SLC35H1	solute carrier family 35 member H1	Approved	gene with protein product	C20orf5, OVCOV1, SLC35C2	CGI-15, bA394O2.1	20q13.12	51006	ENSG00000080189	OTTHUMG00000033050	2186	Solute carrier family 35
+HGNC:18761	SLC36A1	solute carrier family 36 member 1	Approved	gene with protein product		LYAAT-1, PAT1, TRAMD3	5q33.1	206358	ENSG00000123643	OTTHUMG00000130125	2187	Solute carrier family 36
+HGNC:18762	SLC36A2	solute carrier family 36 member 2	Approved	gene with protein product		PAT2, tramdorin, TRAMD1	5q33.1	153201	ENSG00000186335	OTTHUMG00000130129	2187	Solute carrier family 36
+HGNC:19659	SLC36A3	solute carrier family 36 member 3	Approved	gene with protein product		PAT3, TRAMD2, tramdorin2	5q33.1	285641	ENSG00000186334	OTTHUMG00000130128	2187	Solute carrier family 36
+HGNC:19660	SLC36A4	solute carrier family 36 member 4	Approved	gene with protein product		PAT4, FLJ38932	11q21	120103	ENSG00000180773	OTTHUMG00000167368	2187	Solute carrier family 36
+HGNC:11024	SLC37A1	solute carrier family 37 member 1	Approved	gene with protein product		SPX1	21q22.3	54020	ENSG00000160190	OTTHUMG00000086803	2189	Solute carrier family 37
+HGNC:20644	SLC37A2	solute carrier family 37 member 2	Approved	gene with protein product		FLJ00171, SPX2	11q24.2	219855	ENSG00000134955	OTTHUMG00000165879	2189	Solute carrier family 37
+HGNC:20651	SLC37A3	solute carrier family 37 member 3	Approved	gene with protein product		DKFZp761N0624, SPX3	7q34	84255	ENSG00000157800	OTTHUMG00000157343	2189	Solute carrier family 37
+HGNC:4061	SLC37A4	solute carrier family 37 member 4	Approved	gene with protein product	G6PT1, G6PT2, G6PT3	GSD1b, GSD1c, GSD1d, G6PT, SPX4	11q23.3	2542	ENSG00000137700	OTTHUMG00000166352	2189	Solute carrier family 37
+HGNC:13447	SLC38A1	solute carrier family 38 member 1	Approved	gene with protein product		ATA1, NAT2, SAT1, SNAT1	12q13.11	81539	ENSG00000111371	OTTHUMG00000169470	2188	Solute carrier family 38
+HGNC:28237	SLC38A10	solute carrier family 38 member 10	Approved	gene with protein product		MGC15523, PP1744, SNAT10	17q25.3	124565	ENSG00000157637	OTTHUMG00000168049	2188	Solute carrier family 38
+HGNC:26836	SLC38A11	solute carrier family 38 member 11	Approved	gene with protein product		FLJ39822, AVT2	2q24.3	151258	ENSG00000169507	OTTHUMG00000132144	2188	Solute carrier family 38
+HGNC:25984	SLC38A12	solute carrier family 38 member 12	Approved	gene with protein product	TMEM104	FLJ20255, FLJ00021	17q25.1	54868	ENSG00000109066	OTTHUMG00000179025	2188	Solute carrier family 38
+HGNC:13448	SLC38A2	solute carrier family 38 member 2	Approved	gene with protein product		SAT2, ATA2, KIAA1382, SNAT2	12q13.11	54407	ENSG00000134294	OTTHUMG00000169471	2188	Solute carrier family 38
+HGNC:18044	SLC38A3	solute carrier family 38 member 3	Approved	gene with protein product		G17, SN1, SNAT3	3p21.31	10991	ENSG00000188338	OTTHUMG00000156764	2188	Solute carrier family 38
+HGNC:14679	SLC38A4	solute carrier family 38 member 4	Approved	gene with protein product		PAAT, NAT3, ATA3, SNAT4	12q13.11	55089	ENSG00000139209	OTTHUMG00000169518	2188	Solute carrier family 38
+HGNC:18070	SLC38A5	solute carrier family 38 member 5	Approved	gene with protein product		SN2, JM24, SNAT5	Xp11.23	92745	ENSG00000017483	OTTHUMG00000024117	2188	Solute carrier family 38
+HGNC:19863	SLC38A6	solute carrier family 38 member 6	Approved	gene with protein product		NAT-1, SNAT6	14q23.1	145389	ENSG00000139974	OTTHUMG00000140335	2188	Solute carrier family 38
+HGNC:25582	SLC38A7	solute carrier family 38 member 7	Approved	gene with protein product		FLJ10815, SNAT7	16q21	55238	ENSG00000103042	OTTHUMG00000133491	2188	Solute carrier family 38
+HGNC:32434	SLC38A8	solute carrier family 38 member 8	Approved	gene with protein product		SNAT8	16q23.3	146167	ENSG00000166558	OTTHUMG00000176588	2188	Solute carrier family 38
+HGNC:26907	SLC38A9	solute carrier family 38 member 9	Approved	gene with protein product		FLJ90709, SNAT9	5q11.2	153129	ENSG00000177058	OTTHUMG00000131189	2188	Solute carrier family 38
+HGNC:12876	SLC39A1	solute carrier family 39 member 1	Approved	gene with protein product	ZIRTL	ZIP1	1q21.3	27173	ENSG00000143570	OTTHUMG00000037158	2153	Solute carrier family 39 
+HGNC:20861	SLC39A10	solute carrier family 39 member 10	Approved	gene with protein product		KIAA1265, FLJ90515, DKFZp564L2123, ZIP10	2q32.3	57181	ENSG00000196950	OTTHUMG00000154380	2153	Solute carrier family 39 
+HGNC:14463	SLC39A11	solute carrier family 39 member 11	Approved	gene with protein product	C17orf26	ZIP11	17q24.3-q25.1	201266	ENSG00000133195	OTTHUMG00000178306	2153	Solute carrier family 39 
+HGNC:20860	SLC39A12	solute carrier family 39 member 12	Approved	gene with protein product		FLJ30499, ZIP12	10p12.33	221074	ENSG00000148482	OTTHUMG00000017759	2153	Solute carrier family 39 
+HGNC:20859	SLC39A13	solute carrier family 39 member 13	Approved	gene with protein product		FLJ25785, LZT-Hs9, ZIP13, ZIP-13	11p11.2	91252	ENSG00000165915	OTTHUMG00000166890	2153	Solute carrier family 39 
+HGNC:20858	SLC39A14	solute carrier family 39 member 14	Approved	gene with protein product		KIAA0062, NET34, ZIP14, ZIP-14	8p21.3	23516	ENSG00000104635	OTTHUMG00000097791	2153	Solute carrier family 39 
+HGNC:17127	SLC39A2	solute carrier family 39 member 2	Approved	gene with protein product		ZIP2	14q11.2	29986	ENSG00000165794	OTTHUMG00000029616	2153	Solute carrier family 39 
+HGNC:17128	SLC39A3	solute carrier family 39 member 3	Approved	gene with protein product		ZIP3	19p13.3	29985	ENSG00000141873	OTTHUMG00000180440	2153	Solute carrier family 39 
+HGNC:17129	SLC39A4	solute carrier family 39 member 4	Approved	gene with protein product	AEZ	ZIP4, ZIP-4, AWMS2	8q24.3	55630	ENSG00000147804	OTTHUMG00000165208	2153	Solute carrier family 39 
+HGNC:20502	SLC39A5	solute carrier family 39 member 5	Approved	gene with protein product		ZIP5	12q13.3	283375	ENSG00000139540	OTTHUMG00000156962	2153	Solute carrier family 39 
+HGNC:18607	SLC39A6	solute carrier family 39 member 6	Approved	gene with protein product		LIV-1, ZIP6	18q12.2	25800	ENSG00000141424	OTTHUMG00000178965	2153	Solute carrier family 39 
+HGNC:4927	SLC39A7	solute carrier family 39 member 7	Approved	gene with protein product	HKE4	H2-KE4, D6S2244E, KE4, RING5, ZIP7	6p21.32	7922	ENSG00000112473	OTTHUMG00000031238	2153	Solute carrier family 39 
+HGNC:20862	SLC39A8	solute carrier family 39 member 8	Approved	gene with protein product		BIGM103, ZIP8, ZIP-8	4q24	64116	ENSG00000138821	OTTHUMG00000131120	2153	Solute carrier family 39 
+HGNC:20182	SLC39A9	solute carrier family 39 member 9	Approved	gene with protein product		FLJ11274, ZIP9	14q24.1	55334	ENSG00000029364	OTTHUMG00000171232	2153	Solute carrier family 39 
+HGNC:11027	SLC4A1	solute carrier family 4 member 1 (Diego blood group)	Approved	gene with protein product	EPB3, AE1, DI, WD	RTA1A, CD233, FR, SW, WR, EMPB3	17q21.31	6521	ENSG00000004939	OTTHUMG00000156843	2157	Solute carrier family 4
+HGNC:13811	SLC4A10	solute carrier family 4 member 10	Approved	gene with protein product		NBCn2, NCBE	2q24.2	57282	ENSG00000144290	OTTHUMG00000153938	2157	Solute carrier family 4
+HGNC:16438	SLC4A11	solute carrier family 4 member 11	Approved	gene with protein product	CHED2, CDPD1	dJ794I6.2, BTR1, NaBC1, FECD4	20p13	83959	ENSG00000088836	OTTHUMG00000031740	2157	Solute carrier family 4
+HGNC:11028	SLC4A2	solute carrier family 4 member 2	Approved	gene with protein product	EPB3L1, AE2	HKB3, BND3L, NBND3	7q36.1	6522	ENSG00000164889	OTTHUMG00000158443	2157	Solute carrier family 4
+HGNC:11029	SLC4A3	solute carrier family 4 member 3	Approved	gene with protein product		AE3, SLC2C	2q35	6508	ENSG00000114923	OTTHUMG00000059238	2157	Solute carrier family 4
+HGNC:11030	SLC4A4	solute carrier family 4 member 4	Approved	gene with protein product	SLC4A5	NBC1, HNBC1, NBC2, pNBC, hhNMC, kNBC1, KNBC, NBCe1	4q13.3	8671	ENSG00000080493	OTTHUMG00000129907	2157	Solute carrier family 4
+HGNC:18168	SLC4A5	solute carrier family 4 member 5	Approved	gene with protein product		NBC4	2p13.1	57835	ENSG00000188687	OTTHUMG00000090263	2157	Solute carrier family 4
+HGNC:11033	SLC4A7	solute carrier family 4 member 7	Approved	gene with protein product	SLC4A6	NBC3, SBC2	3p24.1	9497	ENSG00000033867	OTTHUMG00000155679	2157	Solute carrier family 4
+HGNC:11034	SLC4A8	solute carrier family 4 member 8	Approved	gene with protein product		NBC3	12q13.13	9498	ENSG00000050438	OTTHUMG00000169489	2157	Solute carrier family 4
+HGNC:11035	SLC4A9	solute carrier family 4 member 9	Approved	gene with protein product		AE4	5q31.3	83697	ENSG00000113073	OTTHUMG00000163352	2157	Solute carrier family 4
+HGNC:10909	SLC40A1	solute carrier family 40 member 1	Approved	gene with protein product	SLC11A3	MTP1, IREG1, FPN1, HFE4, FPN	2q32.2	30061	ENSG00000138449	OTTHUMG00000132662	2190	Solute carrier family 40
+HGNC:19429	SLC41A1	solute carrier family 41 member 1	Approved	gene with protein product		MgtE	1q32.1	254428	ENSG00000133065	OTTHUMG00000036000	2191	Solute carrier family 41
+HGNC:31045	SLC41A2	solute carrier family 41 member 2	Approved	gene with protein product		DKFZP434K0427	12q23.3	84102	ENSG00000136052	OTTHUMG00000156965	2191	Solute carrier family 41
+HGNC:31046	SLC41A3	solute carrier family 41 member 3	Approved	gene with protein product		FLJ20473	3q21.2-q21.3	54946	ENSG00000114544	OTTHUMG00000162678	2191	Solute carrier family 41
+HGNC:10006	RHAG	Rh associated glycoprotein	Approved	gene with protein product		RH50A, CD241, SLC42A1	6p12.3	6005	ENSG00000112077	OTTHUMG00000016377	2192	Solute carrier family 42
+HGNC:14572	RHBG	Rh family B glycoprotein	Approved	gene with protein product		SLC42A2	1q22	57127	ENSG00000132677	OTTHUMG00000024057	2192	Solute carrier family 42
+HGNC:18140	RHCG	Rh family C glycoprotein	Approved	gene with protein product	C15orf6	RHGK, PDRC2, SLC42A3	15q26.1	51458	ENSG00000140519	OTTHUMG00000149647	2192	Solute carrier family 42
+HGNC:10008	RHCE	Rh blood group CcEe antigens	Approved	gene with protein product	RH	CD240CE, SLC42A4	1p36.11	6006	ENSG00000188672	OTTHUMG00000007650	2192	Solute carrier family 42
+HGNC:10009	RHD	Rh blood group D antigen	Approved	gene with protein product	RH	Rh30a, Rh4, RhPI, RhII, DIIIc, CD240D, SLC42A5	1p36.11	6007	ENSG00000187010	OTTHUMG00000003476	2192	Solute carrier family 42
+HGNC:9225	SLC43A1	solute carrier family 43 member 1	Approved	gene with protein product	POV1	R00504, PB39	11q12.1	8501	ENSG00000149150	OTTHUMG00000167030	2193	Solute carrier family 43
+HGNC:23087	SLC43A2	solute carrier family 43 member 2	Approved	gene with protein product		MGC34680	17p13.3	124935	ENSG00000167703	OTTHUMG00000090345	2193	Solute carrier family 43
+HGNC:17466	SLC43A3	solute carrier family 43 member 3	Approved	gene with protein product		SEEEG-1, Eeg1, DKFZp762A227, FOAP-13, PRO1659	11q12.1	29015	ENSG00000134802	OTTHUMG00000167113	2193	Solute carrier family 43
+HGNC:18798	SLC44A1	solute carrier family 44 member 1	Approved	gene with protein product	CDW92	CTL1, CHTL1, CD92	9q31.1-q31.2	23446	ENSG00000070214	OTTHUMG00000020421	2194	Solute carrier family 44
+HGNC:17292	SLC44A2	solute carrier family 44 member 2 (CTL2 blood group)	Approved	gene with protein product		HNA-3, CTL2	19p13.2	57153	ENSG00000129353	OTTHUMG00000180585	2194	Solute carrier family 44
+HGNC:28689	SLC44A3	solute carrier family 44 member 3	Approved	gene with protein product		MGC45474, CTL3	1p21.3	126969	ENSG00000143036	OTTHUMG00000010700	2194	Solute carrier family 44
+HGNC:13941	SLC44A4	solute carrier family 44 member 4	Approved	gene with protein product	C6orf29	NG22, CTL4, FLJ14491, TPPT, DFNA72	6p21.33	80736	ENSG00000204385	OTTHUMG00000031133	2194	Solute carrier family 44
+HGNC:28524	SLC44A5	solute carrier family 44 member 5	Approved	gene with protein product		MGC34032, CTL5	1p31.1	204962	ENSG00000137968	OTTHUMG00000009721	2194	Solute carrier family 44
+HGNC:17939	SLC45A1	solute carrier family 45 member 1	Approved	gene with protein product	DNB5		1p36.23	50651	ENSG00000162426	OTTHUMG00000000503	2195	Solute carrier family 45
+HGNC:16472	SLC45A2	solute carrier family 45 member 2	Approved	gene with protein product	MATP	AIM-1, OCA4	5p13.2	51151	ENSG00000164175	OTTHUMG00000090719	2195	Solute carrier family 45
+HGNC:8642	SLC45A3	solute carrier family 45 member 3	Approved	gene with protein product	PCANAP6, PCANAP2, PCANAP8	IPCA-6, prostein, IPCA-2, IPCA-8	1q32.1	85414	ENSG00000158715	OTTHUMG00000037223	2195	Solute carrier family 45
+HGNC:29196	SLC45A4	solute carrier family 45 member 4	Approved	gene with protein product		KIAA1126	8q24.3	57210	ENSG00000022567	OTTHUMG00000164393	2195	Solute carrier family 45
+HGNC:30521	SLC46A1	solute carrier family 46 member 1	Approved	gene with protein product		HCP1, MGC9564, PCFT, HsPCFT, hPCFT	17q11.2	113235	ENSG00000076351	OTTHUMG00000179415	2196	Solute carrier family 46
+HGNC:16055	SLC46A2	solute carrier family 46 member 2	Approved	gene with protein product	TSCOT	Ly110	9q32	57864	ENSG00000119457	OTTHUMG00000020513	2196	Solute carrier family 46
+HGNC:27501	SLC46A3	solute carrier family 46 member 3	Approved	gene with protein product		DKFZp686A1775, FLJ42613	13q12.3	283537	ENSG00000139508	OTTHUMG00000016650	2196	Solute carrier family 46
+HGNC:25588	SLC47A1	solute carrier family 47 member 1	Approved	gene with protein product		FLJ10847, MATE1	17p11.2	55244	ENSG00000142494	OTTHUMG00000059466	2197	Solute carrier family 47
+HGNC:26439	SLC47A2	solute carrier family 47 member 2	Approved	gene with protein product		FLJ31196, MATE2, MATE2-K	17p11.2	146802	ENSG00000180638	OTTHUMG00000059464	2197	Solute carrier family 47
+HGNC:26035	SLC48A1	solute carrier family 48 member 1	Approved	gene with protein product		FLJ20489, hHRG-1, HRG1	12q13.11	55652	ENSG00000211584	OTTHUMG00000156983	2198	Solute carrier family 48
+HGNC:24682	FLVCR1	FLVCR choline and heme transporter 1	Approved	gene with protein product	AXPC1	FLVCR, MFSD7B, PCA, SLC49A1	1q32.3	28982	ENSG00000162769	OTTHUMG00000036924	2199	Solute carrier family 49
+HGNC:20105	FLVCR2	FLVCR choline and putative heme transporter 2	Approved	gene with protein product	C14orf58	FLJ20371, MFSD7C, SLC49A2, CCT	14q24.3	55640	ENSG00000119686	OTTHUMG00000171487	2199	Solute carrier family 49
+HGNC:26177	SLC49A3	solute carrier family 49 member 3	Approved	gene with protein product	MFSD7	FLJ22269, LP2561	4p16.3	84179	ENSG00000169026	OTTHUMG00000119001	2199	Solute carrier family 49
+HGNC:16628	SLC49A4	solute carrier family 49 member 4	Approved	gene with protein product	DIRC2	FLJ14784, RCC4	3q21.1	84925	ENSG00000138463	OTTHUMG00000159553	2199	Solute carrier family 49
+HGNC:11036	SLC5A1	solute carrier family 5 member 1	Approved	gene with protein product	SGLT1	D22S675, NAGT, SGLT-1	22q12.3	6523	ENSG00000100170	OTTHUMG00000030768	2158	Solute carrier family 5
+HGNC:23155	SLC5A10	solute carrier family 5 member 10	Approved	gene with protein product		SGLT5	17p11.2	125206	ENSG00000154025	OTTHUMG00000178143	2158	Solute carrier family 5
+HGNC:23091	SLC5A11	solute carrier family 5 member 11	Approved	gene with protein product		KST1, SMIT2, SGLT6	16p12.1	115584	ENSG00000158865	OTTHUMG00000097003	2158	Solute carrier family 5
+HGNC:28750	SLC5A12	solute carrier family 5 member 12	Approved	gene with protein product		MGC52019, SMCT2	11p14.2	159963	ENSG00000148942	OTTHUMG00000150706	2158	Solute carrier family 5
+HGNC:11037	SLC5A2	solute carrier family 5 member 2	Approved	gene with protein product	SGLT2		16p11.2	6524	ENSG00000140675	OTTHUMG00000176620	2158	Solute carrier family 5
+HGNC:11038	SLC5A3	solute carrier family 5 member 3	Approved	gene with protein product		SMIT, SMIT1	21q22.11	6526	ENSG00000198743	OTTHUMG00000065821	2158	Solute carrier family 5
+HGNC:11039	SLC5A4	solute carrier family 5 member 4	Approved	gene with protein product		SAAT1, SGLT3, DJ90G24.4	22q12.3	6527	ENSG00000100191	OTTHUMG00000150007	2158	Solute carrier family 5
+HGNC:11040	SLC5A5	solute carrier family 5 member 5	Approved	gene with protein product		NIS	19p13.11	6528	ENSG00000105641	OTTHUMG00000183447	2158	Solute carrier family 5
+HGNC:11041	SLC5A6	solute carrier family 5 member 6	Approved	gene with protein product		SMVT	2p23.3	8884	ENSG00000138074	OTTHUMG00000097075	2158	Solute carrier family 5
+HGNC:14025	SLC5A7	solute carrier family 5 member 7	Approved	gene with protein product		hCHT, CHT1, ChT	2q12.3	60482	ENSG00000115665	OTTHUMG00000130959	2158	Solute carrier family 5
+HGNC:19119	SLC5A8	solute carrier family 5 member 8	Approved	gene with protein product		AIT	12q23.1-q23.2	160728	ENSG00000256870	OTTHUMG00000170499	2158	Solute carrier family 5
+HGNC:22146	SLC5A9	solute carrier family 5 member 9	Approved	gene with protein product		SGLT4	1p33	200010	ENSG00000117834	OTTHUMG00000007959	2158	Solute carrier family 5
+HGNC:30657	SLC50A1	solute carrier family 50 member 1	Approved	gene with protein product	RAG1AP1	SCP, RP11-540D14.5, slv, RZPDo834D038D, HsSWEET1, SWEET1	1q22	55974	ENSG00000169241	OTTHUMG00000035333	2200	Solute carrier family 50
+HGNC:29955	SLC51A	solute carrier family 51 member A	Approved	gene with protein product		OSTalpha, SLC51A1	3q29	200931	ENSG00000163959	OTTHUMG00000155684	2274	Solute carrier family 51
+HGNC:28797	TMEM184A	transmembrane protein 184A	Approved	gene with protein product		MGC9712, SDMG1, SLC51C1	7p22.3	202915	ENSG00000164855	OTTHUMG00000119025	2274	Solute carrier family 51
+HGNC:1310	TMEM184B	transmembrane protein 184B	Approved	gene with protein product	C22orf5	HS5O6A, DKFZP586A1024, FM08, SLC51C2	22q13.1	25829	ENSG00000198792	OTTHUMG00000030557	2274	Solute carrier family 51
+HGNC:25587	TMEM184C	transmembrane protein 184C	Approved	gene with protein product	TMEM34	FLJ10846, SLC51C3	4q31.23	55751	ENSG00000164168	OTTHUMG00000161358	2274	Solute carrier family 51
+HGNC:30225	SLC52A1	solute carrier family 52 member 1	Approved	gene with protein product	GPR172B	FLJ10060, GPCR42, PAR2, hRFT1, RFVT1	17p13.2	55065	ENSG00000132517	OTTHUMG00000099448	2202	Solute carrier family 52
+HGNC:30224	SLC52A2	solute carrier family 52 member 2	Approved	gene with protein product	GPR172A	FLJ11856, PAR1, GPCR41, D15Ertd747e, RFVT2, hRFT3, RFT3, HuPAR-1	8q24.3	79581	ENSG00000185803	OTTHUMG00000165168	2202	Solute carrier family 52
+HGNC:16187	SLC52A3	solute carrier family 52 member 3	Approved	gene with protein product	C20orf54	bA371L19.1, hRFT2, RFVT3, RFT2	20p13	113278	ENSG00000101276	OTTHUMG00000031647	2202	Solute carrier family 52
+HGNC:12827	XPR1	xenotropic and polytropic retrovirus receptor 1	Approved	gene with protein product		SYG1, X3, SLC53A1	1q25.3	9213	ENSG00000143324	OTTHUMG00000035116	2203	Solute carrier family 53
+HGNC:21606	MPC1	mitochondrial pyruvate carrier 1	Approved	gene with protein product	BRP44L	dJ68L15.3, CGI-129, SLC54A1	6q27	51660	ENSG00000060762	OTTHUMG00000015999	2204	Solute carrier family 54, mitochondrial pyruvate carriers
+HGNC:24515	MPC2	mitochondrial pyruvate carrier 2	Approved	gene with protein product	BRP44	DKFZP564B167, SLC54A2	1q24.2	25874	ENSG00000143158	OTTHUMG00000034570	2204	Solute carrier family 54, mitochondrial pyruvate carriers
+HGNC:44205	MPC1L	mitochondrial pyruvate carrier 1 like	Approved	gene with protein product		SLC54A3	Xp11.4	347411	ENSG00000238205	OTTHUMG00000024105	2204	Solute carrier family 54, mitochondrial pyruvate carriers
+HGNC:6556	LETM1	leucine zipper and EF-hand containing transmembrane protein 1	Approved	gene with protein product		SLC55A1, Mdm38	4p16.3	3954	ENSG00000168924	OTTHUMG00000121149	2205	Solute carrier family 55, LETM mitochondrial cation/proton exchangers
+HGNC:14648	LETM2	leucine zipper and EF-hand containing transmembrane protein 2	Approved	gene with protein product		FLJ25409, SLC55A2	8p11.23	137994	ENSG00000165046	OTTHUMG00000165059	2205	Solute carrier family 55, LETM mitochondrial cation/proton exchangers
+HGNC:24241	LETMD1	LETM1 domain containing 1	Approved	gene with protein product		HCCR1, HCCR, HCCR-2, HCCR-1, HCCR2, SLC55A3	12q13.12	25875	ENSG00000050426	OTTHUMG00000169538	2205	Solute carrier family 55, LETM mitochondrial cation/proton exchangers
+HGNC:16085	SFXN1	sideroflexin 1	Approved	gene with protein product		FLJ12876, SLC56A1	5q35.2	94081	ENSG00000164466	OTTHUMG00000130555	746	Solute carrier family 56, sideroflexins
+HGNC:16086	SFXN2	sideroflexin 2	Approved	gene with protein product		SLC56A2	10q24.32	118980	ENSG00000156398	OTTHUMG00000018967	746	Solute carrier family 56, sideroflexins
+HGNC:16087	SFXN3	sideroflexin 3	Approved	gene with protein product		SFX3, SLC56A3	10q24.31	81855	ENSG00000107819	OTTHUMG00000018921	746	Solute carrier family 56, sideroflexins
+HGNC:16088	SFXN4	sideroflexin 4	Approved	gene with protein product		SLC56A4	10q26.11	119559	ENSG00000183605	OTTHUMG00000019147	746	Solute carrier family 56, sideroflexins
+HGNC:16073	SFXN5	sideroflexin 5	Approved	gene with protein product		BBG-TCC, SLC56A5	2p13.2	94097	ENSG00000144040	OTTHUMG00000129775	746	Solute carrier family 56, sideroflexins
+HGNC:17043	NIPA1	NIPA magnesium transporter 1	Approved	gene with protein product	SPG6	MGC35570, SLC57A1	15q11.2	123606	ENSG00000170113	OTTHUMG00000129099	2206	Solute carrier family 57, NIPA-like magnesium transporters
+HGNC:17044	NIPA2	NIPA magnesium transporter 2	Approved	gene with protein product		SLC57A2	15q11.2	81614	ENSG00000140157	OTTHUMG00000129101	2206	Solute carrier family 57, NIPA-like magnesium transporters
+HGNC:27194	NIPAL1	NIPA like domain containing 1	Approved	gene with protein product	NPAL1	DKFZp686A06115, SLC57A3, NIPA3	4p12	152519	ENSG00000163293	OTTHUMG00000128622	2206	Solute carrier family 57, NIPA-like magnesium transporters
+HGNC:25854	NIPAL2	NIPA like domain containing 2	Approved	gene with protein product	NPAL2	FLJ13955, SLC57A4	8q22.2	79815	ENSG00000104361	OTTHUMG00000164668	2206	Solute carrier family 57, NIPA-like magnesium transporters
+HGNC:25233	NIPAL3	NIPA like domain containing 3	Approved	gene with protein product	NPAL3	DJ462O23.2, SLC57A5	1p36.11	57185	ENSG00000001461	OTTHUMG00000003299	2206	Solute carrier family 57, NIPA-like magnesium transporters
+HGNC:28018	NIPAL4	NIPA like domain containing 4	Approved	gene with protein product		ICHYN, SLC57A6, NIPA4	5q33.3	348938	ENSG00000172548	OTTHUMG00000163497	2206	Solute carrier family 57, NIPA-like magnesium transporters
+HGNC:28880	MAGT1	magnesium transporter 1	Approved	gene with protein product		DKFZp564K142, IAP, OST3B, MRX95, SLC58A1	Xq21.1	84061	ENSG00000102158	OTTHUMG00000021882	2207	Solute carrier family 58
+HGNC:30242	TUSC3	tumor suppressor candidate 3	Approved	gene with protein product	MRT22	MGC13453, N33, OST3A, MRT7, MagT2, SLC58A2	8p22	7991	ENSG00000104723	OTTHUMG00000094803	2207	Solute carrier family 58
+HGNC:25897	MFSD2A	MFSD2 lysolipid transporter A, lysophospholipid	Approved	gene with protein product	MFSD2	FLJ14490, SLC59A1	1p34.2	84879	ENSG00000168389	OTTHUMG00000009293	2208	Solute carrier family 59
+HGNC:37207	MFSD2B	MFSD2 lysolipid transporter B, sphingolipid	Approved	gene with protein product		SLC59A2	2p23.3	388931	ENSG00000205639	OTTHUMG00000090819	2208	Solute carrier family 59
+HGNC:28299	MFSD12	major facilitator superfamily domain containing 12	Approved	gene with protein product	C19orf28	MGC20700, PP3501, SLC59B1	19p13.3	126321	ENSG00000161091	OTTHUMG00000180766	2208	Solute carrier family 59
+HGNC:11042	SLC6A1	solute carrier family 6 member 1	Approved	gene with protein product		GAT1, GABATR, GABATHG, GAT-1, hGAT-1	3p25.3	6529	ENSG00000157103	OTTHUMG00000044208	2159	Solute carrier family 6
+HGNC:11043	SLC6A10P	solute carrier family 6 member 10, pseudogene	Approved	pseudogene	SLC6A10	CT-2	16p11.2	386757	ENSG00000214617	OTTHUMG00000132481	2159	Solute carrier family 6
+HGNC:11044	SLC6A11	solute carrier family 6 member 11	Approved	gene with protein product		GAT3	3p25.3	6538	ENSG00000132164	OTTHUMG00000129718	2159	Solute carrier family 6
+HGNC:11045	SLC6A12	solute carrier family 6 member 12	Approved	gene with protein product		BGT-1	12p13.33	6539	ENSG00000111181	OTTHUMG00000090309	2159	Solute carrier family 6
+HGNC:11046	SLC6A13	solute carrier family 6 member 13	Approved	gene with protein product		GAT2	12p13.33	6540	ENSG00000010379	OTTHUMG00000168053	2159	Solute carrier family 6
+HGNC:11047	SLC6A14	solute carrier family 6 member 14	Approved	gene with protein product			Xq23	11254	ENSG00000268104	OTTHUMG00000022245	2159	Solute carrier family 6
+HGNC:13621	SLC6A15	solute carrier family 6 member 15	Approved	gene with protein product		hv7-3, NTT73, FLJ10316, V7-3, SBAT1	12q21.31	55117	ENSG00000072041	OTTHUMG00000169742	2159	Solute carrier family 6
+HGNC:13622	SLC6A16	solute carrier family 6 member 16	Approved	gene with protein product		NTT5	19q13.33	28968	ENSG00000063127	OTTHUMG00000183179	2159	Solute carrier family 6
+HGNC:31399	SLC6A17	solute carrier family 6 member 17	Approved	gene with protein product		NTT4	1p13.3	388662	ENSG00000197106	OTTHUMG00000011761	2159	Solute carrier family 6
+HGNC:26441	SLC6A18	solute carrier family 6 member 18	Approved	gene with protein product		FLJ31236, Xtrp2	5p15.33	348932	ENSG00000164363	OTTHUMG00000090356	2159	Solute carrier family 6
+HGNC:27960	SLC6A19	solute carrier family 6 member 19	Approved	gene with protein product		B0AT1	5p15.33	340024	ENSG00000174358	OTTHUMG00000161636	2159	Solute carrier family 6
+HGNC:11048	SLC6A2	solute carrier family 6 member 2	Approved	gene with protein product	NET1, NAT1, SLC6A5	NET	16q12.2	6530	ENSG00000103546	OTTHUMG00000133208	2159	Solute carrier family 6
+HGNC:30927	SLC6A20	solute carrier family 6 member 20	Approved	gene with protein product		XT3, Xtrp3, SIT1, IMINO	3p21.31	54716	ENSG00000163817	OTTHUMG00000133446	2159	Solute carrier family 6
+HGNC:31400	SLC6A21P	solute carrier family 6 member 21, pseudogene	Approved	pseudogene	SLC6A21		19q13.33	652969	ENSG00000269009	OTTHUMG00000183204	2159	Solute carrier family 6
+HGNC:11049	SLC6A3	solute carrier family 6 member 3	Approved	gene with protein product	DAT1	DAT	5p15.33	6531	ENSG00000142319	OTTHUMG00000131016	2159	Solute carrier family 6
+HGNC:11050	SLC6A4	solute carrier family 6 member 4	Approved	gene with protein product	HTT, OCD1	5-HTT, SERT1	17q11.2	6532	ENSG00000108576	OTTHUMG00000132751	2159	Solute carrier family 6
+HGNC:11051	SLC6A5	solute carrier family 6 member 5	Approved	gene with protein product	NET1	GLYT2, GlyT-2	11p15.1	9152	ENSG00000165970	OTTHUMG00000166024	2159	Solute carrier family 6
+HGNC:11052	SLC6A6	solute carrier family 6 member 6	Approved	gene with protein product		TAUT	3p25.1	6533	ENSG00000131389	OTTHUMG00000155525	2159	Solute carrier family 6
+HGNC:11054	SLC6A7	solute carrier family 6 member 7	Approved	gene with protein product		PROT	5q32	6534	ENSG00000011083	OTTHUMG00000130046	2159	Solute carrier family 6
+HGNC:11055	SLC6A8	solute carrier family 6 member 8	Approved	gene with protein product		CRTR, CT1, CRT, CRT-1, CRT1	Xq28	6535	ENSG00000130821	OTTHUMG00000024208	2159	Solute carrier family 6
+HGNC:11056	SLC6A9	solute carrier family 6 member 9	Approved	gene with protein product		GLYT1, GlyT-1	1p34.1	6536	ENSG00000196517	OTTHUMG00000008294	2159	Solute carrier family 6
+HGNC:25433	SLC60A1	solute carrier family 60 member 1	Approved	gene with protein product	MFSD4, MFSD4A	DKFZp761N1114, FLJ34577, UNQ3064, FLJ25004	1q32.1	148808	ENSG00000174514	OTTHUMG00000037197	2209	Solute carrier family 60
+HGNC:21053	SLC60A2	solute carrier family 60 member 2	Approved	gene with protein product	KIAA1919, MFSD4B	MGC33953	6q21	91749	ENSG00000173214	OTTHUMG00000015372	2209	Solute carrier family 60
+HGNC:28156	SLC61A1	solute carrier family 61 member 1	Approved	gene with protein product	MFSD5	MGC11308, HsMOT2	12q13.13	84975	ENSG00000182544	OTTHUMG00000170028	2210	Solute carrier family 61
+HGNC:15492	ANKH	ANKH inorganic pyrophosphate transport regulator	Approved	gene with protein product	CCAL2, CMDJ	HANK, ANK, CPPDD, SLC62A1	5p15.2	56172	ENSG00000154122	OTTHUMG00000090539	2211	Solute carrier family 62
+HGNC:30621	SPNS1	SPNS lysolipid transporter 1, lysophospholipid	Approved	gene with protein product		HSpin1, nrs, SPINL, PP2030, SPIN1, LAT, SLC63A1	16p11.2	83985	ENSG00000169682	OTTHUMG00000131762	2212	Solute carrier family 63, sphingosine phosphate transporters
+HGNC:26992	SPNS2	SPNS lysolipid transporter 2, sphingosine-1-phosphate	Approved	gene with protein product		SLC63A2	17p13.2	124976	ENSG00000183018	OTTHUMG00000177739	2212	Solute carrier family 63, sphingosine phosphate transporters
+HGNC:28433	SPNS3	SPNS lysolipid transporter 3, sphingosine-1-phosphate (putative)	Approved	gene with protein product		MGC29671, SLC63A3	17p13.2	201305	ENSG00000182557	OTTHUMG00000177737	2212	Solute carrier family 63, sphingosine phosphate transporters
+HGNC:30760	TMEM165	transmembrane protein 165	Approved	gene with protein product		TMPT27, TPARL, GDT1, SLC64A1	4q12	55858	ENSG00000134851	OTTHUMG00000128735	2213	Solute carrier family 64
+HGNC:7897	NPC1	NPC intracellular cholesterol transporter 1	Approved	gene with protein product		SLC65A1	18q11.2	4864	ENSG00000141458	OTTHUMG00000131873	2214	Solute carrier family 65
+HGNC:7898	NPC1L1	NPC1 like intracellular cholesterol transporter 1	Approved	gene with protein product		SLC65A2	7p13	29881	ENSG00000015520	OTTHUMG00000023691	2214	Solute carrier family 65
+HGNC:9585	PTCH1	patched 1	Approved	gene with protein product	NBCCS, PTCH	BCNS, SLC65B1	9q22.32	5727	ENSG00000185920	OTTHUMG00000020280	2214	Solute carrier family 65
+HGNC:9586	PTCH2	patched 2	Approved	gene with protein product		SLC65B2	1p34.1	8643	ENSG00000117425	OTTHUMG00000008490	2214	Solute carrier family 65
+HGNC:26392	PTCHD1	patched domain containing 1	Approved	gene with protein product		SLC65C1, FLJ30296	Xp22.11	139411	ENSG00000165186	OTTHUMG00000021251	2214	Solute carrier family 65
+HGNC:21345	PTCHD4	patched domain containing 4	Approved	gene with protein product	C6orf138	PTCH53, SLC65C2, FLJ41841, dJ402H5.2	6p12.3	442213	ENSG00000244694	OTTHUMG00000150404	2214	Solute carrier family 65
+HGNC:24776	PTCHD3	patched domain containing 3 (gene/pseudogene)	Approved	gene with protein product		PTR, SLC65C3, FLJ44037	10p12.1	374308	ENSG00000182077	OTTHUMG00000017860	2214	Solute carrier family 65
+HGNC:26001	SLC66A1	solute carrier family 66 member 1	Approved	gene with protein product	PQLC2	FLJ20320, LAAT-1, LAAT1	1p36.13	54896	ENSG00000040487	OTTHUMG00000002521	2215	Solute carrier family 66
+HGNC:25146	SLC66A1LP	solute carrier family 66 member 1 like, pseudogene	Approved	pseudogene	C3orf55, PQLC2L, SLC66A1L		3q25.32	152078	ENSG00000174899	OTTHUMG00000158748	2215	Solute carrier family 66
+HGNC:26188	SLC66A2	solute carrier family 66 member 2	Approved	gene with protein product	PQLC1	FLJ22378	18q23	80148	ENSG00000122490	OTTHUMG00000132921	2215	Solute carrier family 66
+HGNC:28503	SLC66A3	solute carrier family 66 member 3	Approved	gene with protein product	C2orf22, PQLC3	MGC33602	2p25.1	130814	ENSG00000162976	OTTHUMG00000119055	2215	Solute carrier family 66
+HGNC:2518	CTNS	cystinosin, lysosomal cystine transporter	Approved	gene with protein product		CTNS-LSB, PQLC4, SLC66A4	17p13.2	1497	ENSG00000040531	OTTHUMG00000090693	2215	Solute carrier family 66
+HGNC:7207	MPDU1	mannose-P-dolichol utilization defect 1	Approved	gene with protein product		SL15, Lec35, PQLC5, CDGIf, SLC66A5	17p13.1	9526	ENSG00000129255	OTTHUMG00000108147	2215	Solute carrier family 66
+HGNC:10964	SLC67A1	solute carrier family 67 member 1	Approved	gene with protein product	IMPT1, ORCTL2, BWSCR1A, SLC22A18, SLC22A1L	BWR1A, TSSC5, ITM	11p15.4	5002	ENSG00000110628	OTTHUMG00000010037	2275	Solute carrier family 67
+HGNC:28158	SLC67A2	solute carrier family 67 member 2	Approved	gene with protein product	MFSD9	MGC11332	2q12.1	84804	ENSG00000135953	OTTHUMG00000130781	2275	Solute carrier family 67
+HGNC:26196	SLC68A1	solute carrier family 68 member 1	Approved	gene with protein product	C10orf77, TMEM180, MFSD13A	FLJ22529, bA18I14.8	10q24.32	79847	ENSG00000138111	OTTHUMG00000018961	2276	Solute carrier family 68
+HGNC:52163	SLC68A2P	solute carrier family 68 member 2, pseudogene	Approved	pseudogene	MFSD13B		16p12.2	105371130	ENSG00000230872	OTTHUMG00000154703	2276	Solute carrier family 68
+HGNC:30650	STRA6	signaling receptor and transporter of retinol STRA6	Approved	gene with protein product		SLC69A1, FLJ12541	15q24.1	64220	ENSG00000137868	OTTHUMG00000138998	2277	Solute carrier family 69
+HGNC:11057	SLC7A1	solute carrier family 7 member 1	Approved	gene with protein product	ERR, ATRC1	CAT-1, HCAT1, REC1L	13q12.3	6541	ENSG00000139514	OTTHUMG00000016658	2160	Solute carrier family 7
+HGNC:11058	SLC7A10	solute carrier family 7 member 10	Approved	gene with protein product		asc-1	19q13.11	56301	ENSG00000130876	OTTHUMG00000180344	2160	Solute carrier family 7
+HGNC:11059	SLC7A11	solute carrier family 7 member 11	Approved	gene with protein product		xCT	4q28.3	23657	ENSG00000151012	OTTHUMG00000133396	2160	Solute carrier family 7
+HGNC:23092	SLC7A13	solute carrier family 7 member 13	Approved	gene with protein product		AGT-1, XAT2	8q21.3	157724	ENSG00000164893	OTTHUMG00000163663	2160	Solute carrier family 7
+HGNC:29326	SLC7A14	solute carrier family 7 member 14	Approved	gene with protein product		KIAA1613, PPP1R142	3q26.2	57709	ENSG00000013293	OTTHUMG00000158941	2160	Solute carrier family 7
+HGNC:32724	SLC7A15P	solute carrier family 7 member 15, pseudogene	Approved	pseudogene			2p24.1	100289450	ENSG00000232800	OTTHUMG00000154621	2160	Solute carrier family 7
+HGNC:11060	SLC7A2	solute carrier family 7 member 2	Approved	gene with protein product	ATRC2	CAT-2, HCAT2, SLC7A2A, SLC7A2B, CAT-2A, CAT-2B	8p22	6542	ENSG00000003989	OTTHUMG00000130819	2160	Solute carrier family 7
+HGNC:11061	SLC7A3	solute carrier family 7 member 3	Approved	gene with protein product		CAT-3, ATRC3, FLJ14541	Xq13.1	84889	ENSG00000165349	OTTHUMG00000021780	2160	Solute carrier family 7
+HGNC:11062	SLC7A4	solute carrier family 7 member 4	Approved	gene with protein product		HCAT3, CAT-4	22q11.21	6545	ENSG00000099960	OTTHUMG00000150896	2160	Solute carrier family 7
+HGNC:11063	SLC7A5	solute carrier family 7 member 5	Approved	gene with protein product		LAT1, E16, D16S469E, MPE16, CD98	16q24.2	8140	ENSG00000103257	OTTHUMG00000137658	2160	Solute carrier family 7
+HGNC:11064	SLC7A6	solute carrier family 7 member 6	Approved	gene with protein product		y+LAT-2, KIAA0245, LAT3, LAT-2	16q22.1	9057	ENSG00000103064	OTTHUMG00000176544	2160	Solute carrier family 7
+HGNC:11065	SLC7A7	solute carrier family 7 member 7	Approved	gene with protein product	LPI	y+LAT-1, Y+LAT1	14q11.2	9056	ENSG00000155465	OTTHUMG00000028692	2160	Solute carrier family 7
+HGNC:11066	SLC7A8	solute carrier family 7 member 8	Approved	gene with protein product		LPI-PC1, LAT2	14q11.2	23428	ENSG00000092068	OTTHUMG00000028720	2160	Solute carrier family 7
+HGNC:11067	SLC7A9	solute carrier family 7 member 9	Approved	gene with protein product	CSNU3	BAT1	19q13.11	11136	ENSG00000021488	OTTHUMG00000180287	2160	Solute carrier family 7
+HGNC:102	CNNM1	cyclin and CBS domain divalent metal cation transport mediator 1	Approved	gene with protein product	ACDP1	SLC70A1	10q24.2	26507	ENSG00000119946	OTTHUMG00000018881	1801	Solute carrier family 70, cyclin and CBS domain divalent metal cation transport mediators
+HGNC:103	CNNM2	cyclin and CBS domain divalent metal cation transport mediator 2	Approved	gene with protein product	ACDP2	SLC70A2	10q24.32	54805	ENSG00000148842	OTTHUMG00000018976	1801	Solute carrier family 70, cyclin and CBS domain divalent metal cation transport mediators
+HGNC:104	CNNM3	cyclin and CBS domain divalent metal cation transport mediator 3	Approved	gene with protein product	ACDP3	SLC70A3	2q11.2	26505	ENSG00000168763	OTTHUMG00000130531	1801	Solute carrier family 70, cyclin and CBS domain divalent metal cation transport mediators
+HGNC:105	CNNM4	cyclin and CBS domain divalent metal cation transport mediator 4	Approved	gene with protein product	ACDP4	SLC70A4, KIAA1592	2q11.2	26504	ENSG00000158158	OTTHUMG00000130532	1801	Solute carrier family 70, cyclin and CBS domain divalent metal cation transport mediators
+HGNC:23363	SLC71A1	solute carrier family 71 member 1	Approved	gene with protein product	HIAT1, MFSD14A	DKFZP564L0864	1p21.2	64645	ENSG00000156875	OTTHUMG00000010755	2278	Solute carrier family 71
+HGNC:23376	SLC71A2	solute carrier family 71 member 2	Approved	gene with protein product	HIATL1, MFSD14B	FLJ14753	9q22.32	84641	ENSG00000148110	OTTHUMG00000020265	2278	Solute carrier family 71
+HGNC:23672	SLC71A3P	solute carrier family 71 member 3, pseudogene	Approved	pseudogene	HIATL2, MFSD14C, MFSD14CP	MGC12945	9q22.33	84278	ENSG00000196312	OTTHUMG00000020317	2278	Solute carrier family 71
+HGNC:25874	MFSD1	major facilitator superfamily domain containing 1	Approved	gene with protein product		Minerva, SLC72A1, FLJ14153, UG0581B09	3q25.32	64747	ENSG00000118855	OTTHUMG00000158835	3356	Solute carrier family 72
+HGNC:24711	MFSD6	major facilitator superfamily domain containing 6	Approved	gene with protein product		SLC73A1, FLJ20160	2q32.2	54842	ENSG00000151690	OTTHUMG00000132671	3357	Solute carrier family 73
+HGNC:26656	MFSD6L	major facilitator superfamily domain containing 6 like	Approved	gene with protein product		SLC73A2, FLJ35773	17p13.1	162387	ENSG00000185156	OTTHUMG00000178584	3357	Solute carrier family 73
+HGNC:28486	MFSD8	major facilitator superfamily domain containing 8	Approved	gene with protein product	CLN7	SLC74A1, MGC33302	4q28.2	256471	ENSG00000164073	OTTHUMG00000133303	3358	Solute carrier family 74
+HGNC:16894	SLC75A1	solute carrier family 75 member 1	Approved	gene with protein product	MFSD10	IT10C3, TETRAN, SLC75A1	4p16.3	10227	ENSG00000109736	OTTHUMG00000122081	3359	Solute carrier family 75
+HGNC:30220	RFT1	RFT1 glycolipid translocator homolog	Approved	gene with protein product		CDG1N, SLC76A1	3p21.1	91869	ENSG00000163933	OTTHUMG00000074035	3360	Solute carrier family 76
+HGNC:11068	SLC8A1	solute carrier family 8 member A1	Approved	gene with protein product	NCX1		2p22.1	6546	ENSG00000183023	OTTHUMG00000102183	2161	Solute carrier family 8
+HGNC:11069	SLC8A2	solute carrier family 8 member A2	Approved	gene with protein product		NCX2, KIAA1087	19q13.32	6543	ENSG00000118160	OTTHUMG00000183529	2161	Solute carrier family 8
+HGNC:11070	SLC8A3	solute carrier family 8 member A3	Approved	gene with protein product		NCX3	14q24.2	6547	ENSG00000100678	OTTHUMG00000152342	2161	Solute carrier family 8
+HGNC:26175	SLC8B1	solute carrier family 8 member B1	Approved	gene with protein product	SLC24A6	FLJ22233, NCKX6, NCLX	12q24.13	80024	ENSG00000089060	OTTHUMG00000169566	2161	Solute carrier family 8
+HGNC:11071	SLC9A1	solute carrier family 9 member A1	Approved	gene with protein product	APNH, NHE1, NHE-1	PPP1R143	1p36.11	6548	ENSG00000090020	OTTHUMG00000004271	2162	Solute carrier family 9
+HGNC:11072	SLC9A2	solute carrier family 9 member A2	Approved	gene with protein product	NHE2		2q12.1	6549	ENSG00000115616	OTTHUMG00000130778	2162	Solute carrier family 9
+HGNC:11073	SLC9A3	solute carrier family 9 member A3	Approved	gene with protein product	NHE3	NHE-3	5p15.33	6550	ENSG00000066230	OTTHUMG00000090315	2162	Solute carrier family 9
+HGNC:11077	SLC9A4	solute carrier family 9 member A4	Approved	gene with protein product		NHE4	2q12.1	389015	ENSG00000180251	OTTHUMG00000153093	2162	Solute carrier family 9
+HGNC:11078	SLC9A5	solute carrier family 9 member A5	Approved	gene with protein product		NHE5	16q22.1	6553	ENSG00000135740	OTTHUMG00000172935	2162	Solute carrier family 9
+HGNC:11079	SLC9A6	solute carrier family 9 member A6	Approved	gene with protein product		NHE6, KIAA0267, NHE-6	Xq26.3	10479	ENSG00000198689	OTTHUMG00000022498	2162	Solute carrier family 9
+HGNC:17123	SLC9A7	solute carrier family 9 member A7	Approved	gene with protein product		NHE7, NHE-7	Xp11.3	84679	ENSG00000065923	OTTHUMG00000021428	2162	Solute carrier family 9
+HGNC:20728	SLC9A8	solute carrier family 9 member A8	Approved	gene with protein product		KIAA0939, NHE8	20q13.13	23315	ENSG00000197818	OTTHUMG00000032710	2162	Solute carrier family 9
+HGNC:20653	SLC9A9	solute carrier family 9 member A9	Approved	gene with protein product		FLJ35613, NHE9	3q24	285195	ENSG00000181804	OTTHUMG00000159373	2162	Solute carrier family 9
+HGNC:24244	SLC9B1	solute carrier family 9 member B1	Approved	gene with protein product	NHEDC1	NHA1	4q24	150159	ENSG00000164037	OTTHUMG00000161114	2162	Solute carrier family 9
+HGNC:25143	SLC9B2	solute carrier family 9 member B2	Approved	gene with protein product	NHEDC2	FLJ23984, NHA2	4q24	133308	ENSG00000164038	OTTHUMG00000131125	2162	Solute carrier family 9
+HGNC:31401	SLC9C1	solute carrier family 9 member C1	Approved	gene with protein product	SLC9A10	NHE	3q13.2	285335	ENSG00000172139	OTTHUMG00000159245	2162	Solute carrier family 9
+HGNC:28664	SLC9C2	solute carrier family 9 member C2 (putative)	Approved	gene with protein product	SLC9A11	MGC43026	1q25.1	284525	ENSG00000162753	OTTHUMG00000034800	2162	Solute carrier family 9
+HGNC:20329	SLC9D1	solute carrier family 9 member D1	Approved	gene with protein product	C13orf11, TMCO3	FLJ20623	13q34	55002	ENSG00000150403	OTTHUMG00000017389	2162	Solute carrier family 9
+HGNC:10956	SLCO1A2	solute carrier organic anion transporter family member 1A2	Approved	gene with protein product	SLC21A3	OATP, OATP1A2, OATP-A	12p12.1	6579	ENSG00000084453	OTTHUMG00000156259	2216	Solute carrier organic anion transporter family
+HGNC:10959	SLCO1B1	solute carrier organic anion transporter family member 1B1	Approved	gene with protein product	SLC21A6	OATP-C, LST-1, OATP1B1	12p12.1	10599	ENSG00000134538	OTTHUMG00000169047	2216	Solute carrier organic anion transporter family
+HGNC:10961	SLCO1B3	solute carrier organic anion transporter family member 1B3	Approved	gene with protein product	SLC21A8	OATP8, OATP1B3	12p12.2	28234	ENSG00000111700	OTTHUMG00000169011	2216	Solute carrier organic anion transporter family
+HGNC:32934	SLCO1B7	solute carrier organic anion transporter family member 1B7 (putative)	Approved	unknown		LST3, SLC21A21	12p12.2	124902894	ENSG00000205754	OTTHUMG00000169045	2216	Solute carrier organic anion transporter family
+HGNC:13819	SLCO1C1	solute carrier organic anion transporter family member 1C1	Approved	gene with protein product	SLC21A14	OATP-F, OATP1C1, OATP1	12p12.2	53919	ENSG00000139155	OTTHUMG00000168966	2216	Solute carrier organic anion transporter family
+HGNC:10955	SLCO2A1	solute carrier organic anion transporter family member 2A1	Approved	gene with protein product	SLC21A2, MATR1	PGT, OATP2A1	3q22.1-q22.2	6578	ENSG00000174640	OTTHUMG00000159745	2216	Solute carrier organic anion transporter family
+HGNC:10962	SLCO2B1	solute carrier organic anion transporter family member 2B1	Approved	gene with protein product	SLC21A9	OATP-B, OATP2B1	11q13.4	11309	ENSG00000137491	OTTHUMG00000165420	2216	Solute carrier organic anion transporter family
+HGNC:10952	SLCO3A1	solute carrier organic anion transporter family member 3A1	Approved	gene with protein product	SLC21A11	OATP-D, OATP3A1	15q26.1	28232	ENSG00000176463	OTTHUMG00000149846	2216	Solute carrier organic anion transporter family
+HGNC:10953	SLCO4A1	solute carrier organic anion transporter family member 4A1	Approved	gene with protein product	SLC21A12	OATP-E, OATP4A1	20q13.33	28231	ENSG00000101187	OTTHUMG00000032923	2216	Solute carrier organic anion transporter family
+HGNC:23612	SLCO4C1	solute carrier organic anion transporter family member 4C1	Approved	gene with protein product		SLC21A20, OATP4C1, OATPX, OATP-H	5q21.1	353189	ENSG00000173930	OTTHUMG00000162757	2216	Solute carrier organic anion transporter family
+HGNC:19046	SLCO5A1	solute carrier organic anion transporter family member 5A1	Approved	gene with protein product	SLC21A15	OATPRP4, OATP-J, OATP5A1	8q13.3	81796	ENSG00000137571	OTTHUMG00000165121	2216	Solute carrier organic anion transporter family
+HGNC:23613	SLCO6A1	solute carrier organic anion transporter family member 6A1	Approved	gene with protein product		OATP6A1, OATPY, MGC26949, CT48	5q21.1	133482	ENSG00000205359	OTTHUMG00000162759	2216	Solute carrier organic anion transporter family
