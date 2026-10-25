@@ -83,6 +83,6 @@ pipeline, its results and the full audit are archived in the repository:
 
 ## About this project
 
-Research project by **Yara Ismail**, under the supervision of **Dr. Claire Clelland**.
+Research project by **Yara Ismail**, with guidance from **Dr. Claire Clelland**.
 Everything — data, scripts, and this site — is in the
 [GitHub repository](https://github.com/Mmynemious/BBB-Gene-Conservation).
