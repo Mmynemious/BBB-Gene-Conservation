@@ -139,10 +139,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span class="menu-text">Literature</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./mvp.html"> 
-<span class="menu-text">Conservation MVP</span></a>
-  </li>  
-  <li class="nav-item">
     <a class="nav-link" href="./glossary.html"> 
 <span class="menu-text">Glossary</span></a>
   </li>  
@@ -284,27 +280,30 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="whats-currently-being-built" class="level2">
 <h2 class="anchored" data-anchor-id="whats-currently-being-built">What’s currently being built</h2>
-<p>A small, modular version of the pipeline, built one layer at a time and checked at each step. <strong>In progress.</strong> The first rough version, covering the orthologue layer and protein identity, can be used now: <a href="./mvp.html">Conservation MVP</a>.</p>
-<p><strong>The question.</strong> Primary: how conserved is the coding sequence of blood brain barrier genes across human, macaque and mouse? Secondary: how conserved is their expression, using RNA sequencing?</p>
+<p>The first pipeline tried to score every BBB gene at once. The project
+now narrows to the <strong>transporters</strong>, the solute carrier
+(SLC) and ATP binding cassette (ABC) families, which decide whether a
+drug crosses the barrier and which <a href="papers/song2020.html">Song
+2020</a> and <a href="papers/miao2026.html">Miao 2026</a> both find
+diverging between mouse and human.</p>
+<p><strong>The question.</strong> For BBB transporters, does a
+difference in <strong>expression</strong> between species go together
+with a difference in <strong>coding sequence</strong>, across human,
+macaque and mouse?</p>
 <p><strong>The plan.</strong></p>
 <ol type="1">
-<li><strong>A small gene set.</strong> Fewer than 100 genes, starting with transporters, so the software can be built and checked by hand.</li>
-<li><strong>The orthologue layer first.</strong> Human, macaque and mouse orthologues, keeping one-to-one orthologues only.</li>
-<li><strong>Sequence conservation modules</strong>, added step by step.</li>
-<li><strong>RNA as the secondary layer</strong>, using the workflows from the <a href="./literature-review.html#the-bioinformatical-view">bioinformatical view</a>.</li>
-<li><strong>Replicate published results.</strong> Once it works and can reproduce other papers, apply it to the full blood brain barrier gene set.</li>
+<li><strong>Replicate Miao et al. 2026</strong> as a calibration:
+capillary endothelial expression in mouse and human, with one-to-one
+orthologues, Seurat, Wilcoxon and Bonferroni.</li>
+<li><strong>Re-run sequence conservation on the transporter
+set</strong>, reusing the clean steps of the <a href="audit.html">first
+pipeline</a> and applying the audit fixes.</li>
+<li><strong>Link expression and coding-sequence differences</strong>
+gene by gene.</li>
+<li><strong>Write the introduction</strong>: why the barrier matters,
+and what species differences in it mean for drug delivery between human,
+mouse and macaque. <strong>In progress.</strong></li>
 </ol>
-<p><strong>What it returns, per gene:</strong></p>
-<ul>
-<li>Human, macaque and mouse orthologue IDs</li>
-<li>Whether the orthology is one-to-one</li>
-<li>Protein identity: human vs macaque, human vs mouse, macaque vs mouse</li>
-<li>Sequence length and alignment status</li>
-<li>Key domains, if available</li>
-<li>A plain language interpretation: “highly conserved core barrier protein”, “moderately conserved”, or “not suitable for simple cross-species comparison”</li>
-<li>A downloadable CSV and JSON result</li>
-</ul>
-<p><strong>Checkable by hand.</strong> The download is meant to be verifiable without rerunning anything: each row carries the database IDs and versions it came from, so any number can be looked up and checked directly.</p>
 </section>
 <section id="about-this-project" class="level2">
 <h2 class="anchored" data-anchor-id="about-this-project">About this project</h2>
@@ -773,8 +772,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque"</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls."</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque&quot;</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> &quot;A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls.&quot;</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> article</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -793,7 +792,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## What's in this project</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## What&#39;s in this project</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>::: {.hub-grid}</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
@@ -871,48 +870,31 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## What's currently being built</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## What&#39;s currently being built</span></span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>A small, modular version of the pipeline, built one layer at a time and checked at each step.</span>
-<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>**In progress.** The first rough version, covering the orthologue layer and protein identity,</span>
-<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>can be used now: <span class="co">[</span><span class="ot">Conservation MVP</span><span class="co">](mvp.qmd)</span>.</span>
-<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a>**The question.** Primary: how conserved is the coding sequence of blood brain barrier genes</span>
-<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>across human, macaque and mouse? Secondary: how conserved is their expression, using RNA</span>
-<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>sequencing?</span>
+<span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>The first pipeline tried to score every BBB gene at once. The project now narrows to the</span>
+<span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>**transporters**, the solute carrier (SLC) and ATP binding cassette (ABC) families, which</span>
+<span id="cb1-104"><a href="#cb1-104" aria-hidden="true" tabindex="-1"></a>decide whether a drug crosses the barrier and which <span class="co">[</span><span class="ot">Song 2020</span><span class="co">](papers/song2020.qmd)</span> and</span>
+<span id="cb1-105"><a href="#cb1-105" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">Miao 2026</span><span class="co">](papers/miao2026.qmd)</span> both find diverging between mouse and human.</span>
+<span id="cb1-106"><a href="#cb1-106" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-107"><a href="#cb1-107" aria-hidden="true" tabindex="-1"></a>**The question.** For BBB transporters, does a difference in **expression** between species go</span>
+<span id="cb1-108"><a href="#cb1-108" aria-hidden="true" tabindex="-1"></a>together with a difference in **coding sequence**, across human, macaque and mouse?</span>
 <span id="cb1-109"><a href="#cb1-109" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-110"><a href="#cb1-110" aria-hidden="true" tabindex="-1"></a>**The plan.**</span>
 <span id="cb1-111"><a href="#cb1-111" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**A small gene set.** Fewer than 100 genes, starting with transporters, so the software can</span>
-<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>   be built and checked by hand.</span>
-<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**The orthologue layer first.** Human, macaque and mouse orthologues, keeping one-to-one</span>
-<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>   orthologues only.</span>
-<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Sequence conservation modules**, added step by step.</span>
-<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**RNA as the secondary layer**, using the workflows from the</span>
-<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">bioinformatical view</span><span class="co">](literature-review.qmd#the-bioinformatical-view)</span>.</span>
-<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a><span class="ss">5. </span>**Replicate published results.** Once it works and can reproduce other papers, apply it to</span>
-<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>   the full blood brain barrier gene set.</span>
+<span id="cb1-112"><a href="#cb1-112" aria-hidden="true" tabindex="-1"></a><span class="ss">1. </span>**Replicate Miao et al. 2026** as a calibration: capillary endothelial expression in mouse</span>
+<span id="cb1-113"><a href="#cb1-113" aria-hidden="true" tabindex="-1"></a>   and human, with one-to-one orthologues, Seurat, Wilcoxon and Bonferroni.</span>
+<span id="cb1-114"><a href="#cb1-114" aria-hidden="true" tabindex="-1"></a><span class="ss">2. </span>**Re-run sequence conservation on the transporter set**, reusing the clean steps of the</span>
+<span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>   <span class="co">[</span><span class="ot">first pipeline</span><span class="co">](audit.qmd)</span> and applying the audit fixes.</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a><span class="ss">3. </span>**Link expression and coding-sequence differences** gene by gene.</span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a><span class="ss">4. </span>**Write the introduction**: why the barrier matters, and what species differences in it</span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a>   mean for drug delivery between human, mouse and macaque. **In progress.**</span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a><span class="fu">## About this project</span></span>
 <span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>**What it returns, per gene:**</span>
-<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human, macaque and mouse orthologue IDs</span>
-<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Whether the orthology is one-to-one</span>
-<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Protein identity: human vs macaque, human vs mouse, macaque vs mouse</span>
-<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Sequence length and alignment status</span>
-<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Key domains, if available</span>
-<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A plain language interpretation: "highly conserved core barrier protein", "moderately</span>
-<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>  conserved", or "not suitable for simple cross-species comparison"</span>
-<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>A downloadable CSV and JSON result</span>
-<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>**Checkable by hand.** The download is meant to be verifiable without rerunning anything:</span>
-<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>each row carries the database IDs and versions it came from, so any number can be looked up</span>
-<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a>and checked directly.</span>
-<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a><span class="fu">## About this project</span></span>
-<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>Research project by **Yara Ismail**, under the supervision of **Dr. Claire Clelland**.</span>
-<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>Everything — data, scripts, and this site — is in the</span>
-<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a>Research project by **Yara Ismail**, under the supervision of **Dr. Claire Clelland**.</span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>Everything — data, scripts, and this site — is in the</span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a><span class="co">[</span><span class="ot">GitHub repository</span><span class="co">](https://github.com/Mmynemious/BBB-Gene-Conservation)</span>.</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">

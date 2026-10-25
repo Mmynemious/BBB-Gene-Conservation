@@ -99,40 +99,23 @@ The papers, databases and tools this project is built on, with full citations.
 
 ## What's currently being built
 
-A small, modular version of the pipeline, built one layer at a time and checked at each step.
-**In progress.** The first rough version, covering the orthologue layer and protein identity,
-can be used now: [Conservation MVP](mvp.qmd).
+The first pipeline tried to score every BBB gene at once. The project now narrows to the
+**transporters**, the solute carrier (SLC) and ATP binding cassette (ABC) families, which
+decide whether a drug crosses the barrier and which [Song 2020](papers/song2020.qmd) and
+[Miao 2026](papers/miao2026.qmd) both find diverging between mouse and human.
 
-**The question.** Primary: how conserved is the coding sequence of blood brain barrier genes
-across human, macaque and mouse? Secondary: how conserved is their expression, using RNA
-sequencing?
+**The question.** For BBB transporters, does a difference in **expression** between species go
+together with a difference in **coding sequence**, across human, macaque and mouse?
 
 **The plan.**
 
-1. **A small gene set.** Fewer than 100 genes, starting with transporters, so the software can
-   be built and checked by hand.
-2. **The orthologue layer first.** Human, macaque and mouse orthologues, keeping one-to-one
-   orthologues only.
-3. **Sequence conservation modules**, added step by step.
-4. **RNA as the secondary layer**, using the workflows from the
-   [bioinformatical view](literature-review.qmd#the-bioinformatical-view).
-5. **Replicate published results.** Once it works and can reproduce other papers, apply it to
-   the full blood brain barrier gene set.
-
-**What it returns, per gene:**
-
-- Human, macaque and mouse orthologue IDs
-- Whether the orthology is one-to-one
-- Protein identity: human vs macaque, human vs mouse, macaque vs mouse
-- Sequence length and alignment status
-- Key domains, if available
-- A plain language interpretation: "highly conserved core barrier protein", "moderately
-  conserved", or "not suitable for simple cross-species comparison"
-- A downloadable CSV and JSON result
-
-**Checkable by hand.** The download is meant to be verifiable without rerunning anything:
-each row carries the database IDs and versions it came from, so any number can be looked up
-and checked directly.
+1. **Replicate Miao et al. 2026** as a calibration: capillary endothelial expression in mouse
+   and human, with one-to-one orthologues, Seurat, Wilcoxon and Bonferroni.
+2. **Re-run sequence conservation on the transporter set**, reusing the clean steps of the
+   [first pipeline](audit.qmd) and applying the audit fixes.
+3. **Link expression and coding-sequence differences** gene by gene.
+4. **Write the introduction**: why the barrier matters, and what species differences in it
+   mean for drug delivery between human, mouse and macaque. **In progress.**
 
 ## About this project
 
