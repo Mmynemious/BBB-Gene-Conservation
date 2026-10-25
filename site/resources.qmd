@@ -61,4 +61,4 @@ Human Protein Atlas, tissue RNA consensus — <https://www.proteinatlas.org>
 
 This pipeline was developed by Yara Ismail with the assistance of Claude (Anthropic) for R
 script writing and debugging. All scientific decisions, interpretation, and research design
-were made by the author under supervision of Dr. Claire Clelland.
+were made by the author.
