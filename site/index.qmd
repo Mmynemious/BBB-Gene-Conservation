@@ -62,7 +62,25 @@ together with a difference in **coding sequence**, across human, macaque and mou
 4. **Write the introduction**: why the barrier matters, and what species differences in it
    mean for drug delivery between human, mouse and macaque. **In progress.**
 
-**Progress.** [Step 1, the transporter target list](method-driven-pipeline.qmd), is written up.
+**Progress.**
+
+::: {.paper-list}
+
+::: {.paper-card}
+### [Step 1: Transporter target list](method-driven-pipeline.qmd)
+
+::: {.paper-meta}
+[25 Oct 2026]{.pm} [Human · mouse · macaque]{.pm} [SLC and ABC]{.pm} [Ensembl 113 one-to-one]{.pm}
+:::
+
+Every SLC and ABC transporter from the HGNC gene groups, mapped to strict one-to-one
+orthologues in mouse and macaque. 467 genes are one-to-one between human and mouse, 449 across
+all three species, and every gene left out is logged with the reason.
+
+[Read the step →](method-driven-pipeline.qmd)
+:::
+
+:::
 
 ## Future work
 

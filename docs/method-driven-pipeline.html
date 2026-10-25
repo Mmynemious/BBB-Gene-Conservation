@@ -213,6 +213,44 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 <section id="step-1-transporter-target-list" class="level2">
 <h2 class="anchored" data-anchor-id="step-1-transporter-target-list">Step 1: Transporter target list</h2>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 22%">
+<col style="width: 78%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Field</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><strong>Date</strong></td>
+<td>25 October 2026</td>
+</tr>
+<tr class="even">
+<td><strong>Species</strong></td>
+<td><strong>Human, mouse and macaque</strong></td>
+</tr>
+<tr class="odd">
+<td><strong>Gene set</strong></td>
+<td>All SLC and ABC transporters from the <strong>HGNC gene groups</strong>, protein-coding only, without the four ABC members that have no membrane domain. 527 HGNC entries to start</td>
+</tr>
+<tr class="even">
+<td><strong>Orthology</strong></td>
+<td><strong>Strict one-to-one</strong> from <strong>Ensembl release 113</strong>, cross-checked against <strong>NCBI</strong>. ABCB1 paired with mouse Abcb1a by hand</td>
+</tr>
+<tr class="odd">
+<td><strong>Transcripts</strong></td>
+<td><strong>MANE Select</strong> for human, <strong>Ensembl Canonical</strong> for mouse and macaque</td>
+</tr>
+<tr class="even">
+<td><strong>Result</strong></td>
+<td><strong>467 genes</strong> one-to-one between human and mouse, <strong>449 genes</strong> across all three species</td>
+</tr>
+</tbody>
+</table>
 <p>After conducting the literature review, I have noticed that for gene conservation analysis, most papers used a strict one-to-one orthologue mapping system and focused heavily on canonical BBB transporter genes, namely the solute carrier transporters (SLC) and the ATP-binding cassette transporters (ABC). For the transport genes, I expanded the project scope into evaluating the coding sequence divergence (dN/dS &amp; % sequence identity) across the entire SLC and ABC transporters across human, macaque, and mouse.</p>
 <p>For this goal, I decided to use a strict one-to-one orthologue mapping to avoid confusion, since a hierarchical one-to-many orthologue system across three species still lacks proper macaque annotations. With strict one-to-one mapping, there is only one orthologue per species, so no choice between orthologues is made. MANE Select (human) and Ensembl Canonical (mouse, macaque) decide which transcript of each gene is compared.</p>
 <p>% sequence identity and dN/dS are results to be measured later from the same codon alignment.</p>
@@ -704,34 +742,45 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">## Step 1: Transporter target list</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>After conducting the literature review, I have noticed that for gene conservation analysis, most papers used a strict one-to-one orthologue mapping system and focused heavily on canonical BBB transporter genes, namely the solute carrier transporters (SLC) and the ATP-binding cassette transporters (ABC). For the transport genes, I expanded the project scope into evaluating the coding sequence divergence (dN/dS &amp; % sequence identity) across the entire SLC and ABC transporters across human, macaque, and mouse.</span>
-<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>For this goal, I decided to use a strict one-to-one orthologue mapping to avoid confusion, since a hierarchical one-to-many orthologue system across three species still lacks proper macaque annotations. With strict one-to-one mapping, there is only one orthologue per species, so no choice between orthologues is made. MANE Select (human) and Ensembl Canonical (mouse, macaque) decide which transcript of each gene is compared.</span>
-<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>% sequence identity and dN/dS are results to be measured later from the same codon alignment.</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>Additionally, orthologues will be matched to capillary endothelial cells in a later step in order to check whether the orthologues are indeed active on the blood-brain barrier, rather than on peripheral tissue functions.</span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>After selecting my rules, I gathered the dataset for all SLC and ABC transporters and used a Python script for a strict one-to-one orthologue mapping across the three species, which started from 527 HGNC entries (474 SLC + 53 ABC). Without further checking or overlapping the results with those from other papers such as Miao et al. (2026), the final list contains 425 SLC and 42 ABC transporter genes that are one-to-one between human and mouse. Of these, 409 SLC and 40 ABC genes are also one-to-one with macaque and form the three-species set.</span>
-<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>A few technical decisions were made while building the script: The script did not use my ^SLC/^ABC pattern because it misses SLC genes with other names (such as MFSD2A) and includes pseudogenes; it used the gene list from the HGNC group instead. Furthermore, I used BioMart for the orthologue mapping and found that BioMart cannot export the orthologues and the mouse and macaque transcripts in one query, so the script combines several queries. In order to make sure the mapping stayed one-to-one, the script stops automatically when it recognizes the same gene ID twice. At last, each CDS was checked against the Ensembl 113 FASTA files to confirm it is complete.</span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>As for the biological issues, the strict one-to-one orthologue mapping cost me genes like the ABCB1 (P-gp) protein due to one-to-many orthologues in mouse. This gene was added manually due to the importance of P-gp as the main efflux pump of the BBB, using the mouse copy Abcb1a, which is the copy found in the mouse BBB datasets (Daneman 2010, Munji 2019). The same issue occurred for an additional 21 genes on the mouse side that were not manually added to date (25.10.2026). Furthermore, one-to-many orthologue implementation might be too early to implement without the recalibration of this project to a paper like Miao et al. (2026).</span>
-<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>On the macaque side, BCRP (ABCG2) and SLC29A1 were dropped from the three-species set because no macaque orthologue was found, probably due to the annotation gap in macaque. They remain in the human and mouse set. In addition, some macaque transcripts seemed to be the wrong isoform.</span>
-<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>A known issue still to be corrected: Ensembl pairs human ABCG2 with mouse Abcg3 instead of Abcg2. This was found by cross-checking against NCBI.</span>
-<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>An additional side note for the technical versions of this pipeline: orthology and transcripts were taken from Ensembl release 113 (October 2024). The HGNC gene groups and the NCBI gene orthologues were downloaded on October 25th 2026.</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="fu">### Files</span></span>
-<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Script: <span class="in">`scripts/v2/step1_transporter_targets.py`</span></span>
-<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human and mouse set: <span class="in">`processed/v2/step1_expression_set.csv`</span></span>
-<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Three-species set: <span class="in">`processed/v2/step1_three_species_set.csv`</span></span>
-<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Excluded genes with reasons: <span class="in">`processed/v2/step1_exclusions.csv`</span></span>
-<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Summary: <span class="in">`processed/v2/step1_summary.txt`</span></span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Downloaded source data: <span class="in">`raw_data/v2_step1/`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> Field <span class="pp">|</span> <span class="pp">|</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="pp">|---|---|</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Date** <span class="pp">|</span> 25 October 2026 <span class="pp">|</span></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Species** | **Human, mouse and macaque** <span class="pp">|</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Gene set** | All SLC and ABC transporters from the **HGNC gene groups**, protein-coding only, without the four ABC members that have no membrane domain. 527 HGNC entries to start <span class="pp">|</span></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Orthology** | **Strict one-to-one** from **Ensembl release 113**, cross-checked against **NCBI**. ABCB1 paired with mouse Abcb1a by hand <span class="pp">|</span></span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Transcripts** | **MANE Select** for human, **Ensembl Canonical** for mouse and macaque <span class="pp">|</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="pp">|</span> **Result** | **467 genes** one-to-one between human and mouse, **449 genes** across all three species <span class="pp">|</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>: {tbl-colwidths="<span class="co">[</span><span class="ot">22,78</span><span class="co">]</span>"}</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>After conducting the literature review, I have noticed that for gene conservation analysis, most papers used a strict one-to-one orthologue mapping system and focused heavily on canonical BBB transporter genes, namely the solute carrier transporters (SLC) and the ATP-binding cassette transporters (ABC). For the transport genes, I expanded the project scope into evaluating the coding sequence divergence (dN/dS &amp; % sequence identity) across the entire SLC and ABC transporters across human, macaque, and mouse.</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>For this goal, I decided to use a strict one-to-one orthologue mapping to avoid confusion, since a hierarchical one-to-many orthologue system across three species still lacks proper macaque annotations. With strict one-to-one mapping, there is only one orthologue per species, so no choice between orthologues is made. MANE Select (human) and Ensembl Canonical (mouse, macaque) decide which transcript of each gene is compared.</span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>% sequence identity and dN/dS are results to be measured later from the same codon alignment.</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>Additionally, orthologues will be matched to capillary endothelial cells in a later step in order to check whether the orthologues are indeed active on the blood-brain barrier, rather than on peripheral tissue functions.</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>After selecting my rules, I gathered the dataset for all SLC and ABC transporters and used a Python script for a strict one-to-one orthologue mapping across the three species, which started from 527 HGNC entries (474 SLC + 53 ABC). Without further checking or overlapping the results with those from other papers such as Miao et al. (2026), the final list contains 425 SLC and 42 ABC transporter genes that are one-to-one between human and mouse. Of these, 409 SLC and 40 ABC genes are also one-to-one with macaque and form the three-species set.</span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>A few technical decisions were made while building the script: The script did not use my ^SLC/^ABC pattern because it misses SLC genes with other names (such as MFSD2A) and includes pseudogenes; it used the gene list from the HGNC group instead. Furthermore, I used BioMart for the orthologue mapping and found that BioMart cannot export the orthologues and the mouse and macaque transcripts in one query, so the script combines several queries. In order to make sure the mapping stayed one-to-one, the script stops automatically when it recognizes the same gene ID twice. At last, each CDS was checked against the Ensembl 113 FASTA files to confirm it is complete.</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>As for the biological issues, the strict one-to-one orthologue mapping cost me genes like the ABCB1 (P-gp) protein due to one-to-many orthologues in mouse. This gene was added manually due to the importance of P-gp as the main efflux pump of the BBB, using the mouse copy Abcb1a, which is the copy found in the mouse BBB datasets (Daneman 2010, Munji 2019). The same issue occurred for an additional 21 genes on the mouse side that were not manually added to date (25.10.2026). Furthermore, one-to-many orthologue implementation might be too early to implement without the recalibration of this project to a paper like Miao et al. (2026).</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a>On the macaque side, BCRP (ABCG2) and SLC29A1 were dropped from the three-species set because no macaque orthologue was found, probably due to the annotation gap in macaque. They remain in the human and mouse set. In addition, some macaque transcripts seemed to be the wrong isoform.</span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>A known issue still to be corrected: Ensembl pairs human ABCG2 with mouse Abcg3 instead of Abcg2. This was found by cross-checking against NCBI.</span>
+<span id="cb1-36"><a href="#cb1-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-37"><a href="#cb1-37" aria-hidden="true" tabindex="-1"></a>An additional side note for the technical versions of this pipeline: orthology and transcripts were taken from Ensembl release 113 (October 2024). The HGNC gene groups and the NCBI gene orthologues were downloaded on October 25th 2026.</span>
+<span id="cb1-38"><a href="#cb1-38" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-39"><a href="#cb1-39" aria-hidden="true" tabindex="-1"></a><span class="fu">### Files</span></span>
+<span id="cb1-40"><a href="#cb1-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-41"><a href="#cb1-41" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Script: <span class="in">`scripts/v2/step1_transporter_targets.py`</span></span>
+<span id="cb1-42"><a href="#cb1-42" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Human and mouse set: <span class="in">`processed/v2/step1_expression_set.csv`</span></span>
+<span id="cb1-43"><a href="#cb1-43" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Three-species set: <span class="in">`processed/v2/step1_three_species_set.csv`</span></span>
+<span id="cb1-44"><a href="#cb1-44" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Excluded genes with reasons: <span class="in">`processed/v2/step1_exclusions.csv`</span></span>
+<span id="cb1-45"><a href="#cb1-45" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Summary: <span class="in">`processed/v2/step1_summary.txt`</span></span>
+<span id="cb1-46"><a href="#cb1-46" aria-hidden="true" tabindex="-1"></a><span class="ss">- </span>Downloaded source data: <span class="in">`raw_data/v2_step1/`</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button" data-in-quarto-modal=""><i class="bi"></i></button></div>
 </div></div></div></div></div>
 </div> <!-- /content -->
 <footer class="footer">
