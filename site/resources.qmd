@@ -7,13 +7,13 @@ subtitle: "The papers, databases and tools this project is built on"
 
 Daneman R, Zhou L, Agalliu D, Cahoy JD, Kaushal A, Barres BA (2010).
 The mouse blood–brain barrier transcriptome: a new resource for understanding the development
-and function of brain endothelial cells. *PLOS ONE* 5(10): e13741.
+and function of brain endothelial cells. *PLOS ONE* 5(10): e13741. <https://doi.org/10.1371/journal.pone.0013741>
 : Mouse BBB gene list — `step1`. Supplementary tables S3–S5 were used in error; S6 is the
 BBB-enriched table. See the [audit](audit.qmd).
 
 Munji RN, et al. (2019).
 Profiling the mouse brain endothelial transcriptome in health and disease.
-*Nature Neuroscience* 22(11): 1892–1902.
+*Nature Neuroscience* 22(11): 1892–1902. <https://doi.org/10.1038/s41593-019-0497-x>
 : Mouse BBB-enriched genes (518) — `step1`.
 
 Wälchli T, et al. (2024).
@@ -23,12 +23,12 @@ Single-cell atlas of the human brain vasculature.
 
 Yang AC, et al. (2022).
 A human brain vascular atlas reveals diverse mediators of Alzheimer's risk.
-*Nature* 603: 885–892.
+*Nature* 603: 885–892. <https://doi.org/10.1038/s41586-021-04369-3>
 : Human endothelial subtype markers — `step4b`. Only the first (arterial) sheet was read.
 
 Winkler EA, et al. (2022).
 A single-cell atlas of the normal and malformed human brain vasculature.
-*Science* 375(6584): eabi7377.
+*Science* 375(6584): eabi7377. <https://doi.org/10.1126/science.abi7377>
 : Human endothelial markers — `step4b`.
 
 ## Consulted, not used
@@ -36,7 +36,7 @@ A single-cell atlas of the normal and malformed human brain vasculature.
 Giger T, Khaitovich P, Somel M, Lorenc A, Lizano E, Harris LW, Ryan MM, Lan M, Wayland MT,
 Bahn S, Pääbo S (2010).
 Evolution of neuronal and endothelial transcriptomes in primates.
-*Genome Biology and Evolution*. GEO: GSE12293.
+*Genome Biology and Evolution*. GEO: GSE12293. <https://doi.org/10.1093/gbe/evq018>
 : Originally logged as the macaque dataset. The downloaded samples are all human, so it does
 not supply macaque expression data. See the [audit](audit.qmd).
 

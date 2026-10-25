@@ -2,7 +2,15 @@
 **Clelland Lab Collaboration — Yara**
 
 ## Project Goal
-How similar are the genomes of human, non-human primate (rhesus macaque), and mouse across blood-brain barrier (BBB) genes? This project compares BBB coding regions, non-coding regions, and regulatory regions across three species to assess evolutionary conservation.
+Do blood-brain barrier (BBB) transporters that differ in **expression** between human, rhesus macaque and mouse also differ in **coding sequence**? The project focuses on the solute carrier (SLC) and ATP binding cassette (ABC) transporter families, which decide whether a drug crosses the barrier.
+
+Project website, including the literature review and the audit of the first pipeline: <https://bbb-gene-conservation.vercel.app>
+
+## Current plan
+1. Replicate Miao et al. 2026 (capillary endothelial expression, mouse vs human) as a calibration.
+2. Re-run sequence conservation on the transporter set, reusing the clean steps of the first pipeline and applying the audit fixes.
+3. Link expression and coding-sequence differences gene by gene.
+4. Write the introduction.
 
 ---
 
@@ -16,11 +24,14 @@ BBB-Gene-Conservation/
 │   ├── winkler_2022/
 │   ├── yang_2022/
 │   ├── walchli_2024/
-│   └── giger_2010/
-├── processed/          # Cleaned, standardized outputs (populated during analysis)
-├── scripts/            # R and Python analysis scripts (populated during analysis)
-└── docs/               # Research papers and project documentation
+│   └── hpa_liver/      # Human Protein Atlas, used for the first pipeline's control set
+├── processed/          # Outputs of the first pipeline
+├── scripts/            # R scripts, step1 to step5h, plus eval_step* audit scripts
+├── site/               # Quarto sources for the project website
+└── docs/               # The rendered website (what Vercel serves) — no paper PDFs here
 ```
+
+Paper PDFs are not stored in this repository; the website's Resources page links each paper by DOI.
 
 ---
 
@@ -58,20 +69,7 @@ BBB-Gene-Conservation/
 - **Why it matters:** Most comprehensive human brain vascular atlas to date; covers fetal and adult across 5 CNS pathologies
 - **Note:** Large file — requires R + Seurat to process
 
-### Giger et al. (2010) — Primate Neuronal vs Endothelial Transcriptome Evolution
-- **Species:** Human, Chimpanzee, Rhesus Macaque (*Homo sapiens, Pan troglodytes, Macaca mulatta*)
-- **Method:** Microarray (Affymetrix HG-U133 Plus 2.0) — laser-capture microdissected neurons and endothelial cells
-- **Key file:** `Giger2010_GSE12293_Human_NeuronEndothelial_ExpressionMatrix.txt` — GEO series matrix
-- **Why it matters:** Shows endothelial genes are more conserved across primates than neuronal genes; provides baseline conservation rates
-
 ---
-
-## What's Still Needed (Future Steps)
-
-- Genome annotation files (GTF) for human (GRCh38), macaque (Mmul_10), mouse (GRCm39) — from Ensembl
-- NCBI genome assemblies for sequence-level comparisons (very large files, downloaded when needed)
-- Control gene set (to be defined after Dr. Clelland input)
-
 
 ---
 

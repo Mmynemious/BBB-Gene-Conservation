@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Yara Ismail">
-<meta name="dcterms.date" content="2026-10-11">
+<meta name="dcterms.date" content="2026-10-25">
 
 <title>Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque – BBB Gene Conservation</title>
 <style>
@@ -79,7 +79,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-6b38416d90cdbb41281c8a2a0df0236b.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-204905c8f2a13f9dbcd1d9ce328f69a2.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -211,7 +211,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">October 11, 2026</p>
+      <p class="date">October 25, 2026</p>
     </div>
   </div>
   
@@ -280,29 +280,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 <section id="whats-currently-being-built" class="level2">
 <h2 class="anchored" data-anchor-id="whats-currently-being-built">What’s currently being built</h2>
-<p>The first pipeline tried to score every BBB gene at once. The project
-now narrows to the <strong>transporters</strong>, the solute carrier
-(SLC) and ATP binding cassette (ABC) families, which decide whether a
-drug crosses the barrier and which <a href="papers/song2020.html">Song
-2020</a> and <a href="papers/miao2026.html">Miao 2026</a> both find
-diverging between mouse and human.</p>
-<p><strong>The question.</strong> For BBB transporters, does a
-difference in <strong>expression</strong> between species go together
-with a difference in <strong>coding sequence</strong>, across human,
-macaque and mouse?</p>
+<p>The first pipeline tried to score every BBB gene at once. The project now narrows to the <strong>transporters</strong>, the solute carrier (SLC) and ATP binding cassette (ABC) families, which decide whether a drug crosses the barrier and which <a href="./papers/song2020.html">Song 2020</a> and <a href="./papers/miao2026.html">Miao 2026</a> both find diverging between mouse and human.</p>
+<p><strong>The question.</strong> For BBB transporters, does a difference in <strong>expression</strong> between species go together with a difference in <strong>coding sequence</strong>, across human, macaque and mouse?</p>
 <p><strong>The plan.</strong></p>
 <ol type="1">
-<li><strong>Replicate Miao et al. 2026</strong> as a calibration:
-capillary endothelial expression in mouse and human, with one-to-one
-orthologues, Seurat, Wilcoxon and Bonferroni.</li>
-<li><strong>Re-run sequence conservation on the transporter
-set</strong>, reusing the clean steps of the <a href="audit.html">first
-pipeline</a> and applying the audit fixes.</li>
-<li><strong>Link expression and coding-sequence differences</strong>
-gene by gene.</li>
-<li><strong>Write the introduction</strong>: why the barrier matters,
-and what species differences in it mean for drug delivery between human,
-mouse and macaque. <strong>In progress.</strong></li>
+<li><strong>Replicate Miao et al.&nbsp;2026</strong> as a calibration: capillary endothelial expression in mouse and human, with one-to-one orthologues, Seurat, Wilcoxon and Bonferroni.</li>
+<li><strong>Re-run sequence conservation on the transporter set</strong>, reusing the clean steps of the <a href="./audit.html">first pipeline</a> and applying the audit fixes.</li>
+<li><strong>Link expression and coding-sequence differences</strong> gene by gene.</li>
+<li><strong>Write the introduction</strong>: why the barrier matters, and what species differences in it mean for drug delivery between human, mouse and macaque. <strong>In progress.</strong></li>
 </ol>
 </section>
 <section id="about-this-project" class="level2">
@@ -772,8 +757,8 @@ mouse and macaque. <strong>In progress.</strong></li>
   });
   </script><div class="modal fade" id="quarto-embedded-source-code-modal" tabindex="-1" aria-labelledby="quarto-embedded-source-code-modal-label" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"><div class="modal-content"><div class="modal-header"><h5 class="modal-title" id="quarto-embedded-source-code-modal-label">Source Code</h5><button class="btn-close" data-bs-dismiss="modal"></button></div><div class="modal-body"><div class="">
 <div class="code-copy-outer-scaffold"><div class="sourceCode" id="cb1" data-shortcodes="false"><pre class="sourceCode markdown code-with-copy"><code class="sourceCode markdown"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
-<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> &quot;Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque&quot;</span></span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> &quot;A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls.&quot;</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="an">title:</span><span class="co"> "Blood–Brain Barrier Gene Conservation Across Human, Mouse, and Macaque"</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="an">subtitle:</span><span class="co"> "A quantitative analysis of coding-sequence conservation and selection pressure in BBB genes vs. liver controls."</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="an">toc:</span><span class="co"> false</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="an">page-layout:</span><span class="co"> article</span></span>
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">---</span></span>
@@ -792,7 +777,7 @@ mouse and macaque. <strong>In progress.</strong></li>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## What&#39;s in this project</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="fu">## What's in this project</span></span>
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>::: {.hub-grid}</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
@@ -870,7 +855,7 @@ mouse and macaque. <strong>In progress.</strong></li>
 <span id="cb1-97"><a href="#cb1-97" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-98"><a href="#cb1-98" aria-hidden="true" tabindex="-1"></a>:::</span>
 <span id="cb1-99"><a href="#cb1-99" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## What&#39;s currently being built</span></span>
+<span id="cb1-100"><a href="#cb1-100" aria-hidden="true" tabindex="-1"></a><span class="fu">## What's currently being built</span></span>
 <span id="cb1-101"><a href="#cb1-101" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-102"><a href="#cb1-102" aria-hidden="true" tabindex="-1"></a>The first pipeline tried to score every BBB gene at once. The project now narrows to the</span>
 <span id="cb1-103"><a href="#cb1-103" aria-hidden="true" tabindex="-1"></a>**transporters**, the solute carrier (SLC) and ATP binding cassette (ABC) families, which</span>

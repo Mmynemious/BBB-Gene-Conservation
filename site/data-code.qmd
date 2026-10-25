@@ -105,8 +105,7 @@ quarto render site
 ```
 
 Sources live in `site/`; the rendered site is written to `docs/`, which is what the
-deployment serves. The single-file predecessor is kept at `site/_legacy-tutorial.qmd` — the
-leading underscore stops Quarto from rendering it.
+deployment serves.
 
 ## Processed data
 
