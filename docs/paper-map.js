@@ -3,6 +3,7 @@
 (function () {
   const groups = {
     expr:  { label: "BBB across species",       color: "#2C6C4C" },
+    immune:{ label: "Barrier and immunity",     color: "#0F7C80" },
     model: { label: "Human models",             color: "#6B4C9A" },
     pipe:  { label: "Cross-species pipelines",  color: "#1F4FA8" },
     sel:   { label: "Immune gene evolution",    color: "#875110" },
@@ -17,6 +18,7 @@
     { id: "kumabe",     label: "Kumabe 2025",        sub: "Primate proteomics",     g: "expr",  x: 520, y: 140, href: "papers/kumabe2025.qmd" },
     { id: "obrown",     label: "O'Brown 2018",       sub: "Review across organisms",g: "expr",  x: 420, y: 40,  href: "papers/obrown2018.qmd" },
     { id: "park",       label: "Park 2019",          sub: "Human BBB chip",         g: "model", x: 700, y: 80,  href: "papers/park2019.qmd" },
+    { id: "smyth",      label: "Smyth 2025",         sub: "CNS immune privilege",   g: "immune",x: 640, y: 270, href: "papers/smyth2025.qmd" },
     { id: "sciam",      label: "Scientific American",sub: "The Healthy Brain",      g: "wider", x: 790, y: 190, href: "reading/sciam-healthy-brain-2026.qmd" },
     { id: "loverso",    label: "LoVerso 2015",       sub: "Pipeline in one graph",  g: "pipe",  x: 110, y: 480, href: "papers/loverso2015.qmd" },
     { id: "sheng",      label: "Sheng 2022",         sub: "CoRMAP, OrthoMCL",       g: "pipe",  x: 110, y: 330, href: "papers/sheng2022.qmd" },
@@ -44,6 +46,8 @@
     ["loverso", "beker", "method", "LoVerso lays out the steps; Beker shows how to handle multiple datasets and quality control."],
     ["nandakumar", "shultz", "agrees", "Immune genes are enriched for positive selection, within rodents and across birds and mammals. Both rely on BUSTED."],
     ["cury", "shultz", "shared", "Both follow immune genes across very long evolutionary distances: Shultz across birds and mammals, Cury back to bacteria."],
+    ["smyth", "obrown", "agrees", "The barrier is not a sealed wall: O'Brown reports regional leakiness, Smyth reports communication with the immune system at the CNS borders."],
+    ["smyth", "sciam", "agrees", "Both describe a healthy brain that is not sealed off from the rest of the body."],
     ["miao", "project", "shared", "Same two species and the same question, measured by expression instead of coding sequence. The SLC family diverges most."],
     ["kumabe", "project", "agrees", "Macaque sits closer to human than mouse does, from protein expression instead of sequence."],
     ["song", "project", "limit", "Song's pericyte markers, PDGFRB, CSPG4, KCNJ8, ABCC9, NOTCH3 and VTN, are all on the gene list."],
@@ -55,6 +59,7 @@
     ["nandakumar", "project", "method", "dN/dS on coding sequence against a random control set, the same comparison as BBB genes against control genes."],
     ["shultz", "project", "method", "dN/dS on coding sequence across a whole genome, with one sequence per species in the species tree set."],
     ["cury", "project", "method", "Uses conservation the other way round: homology search and phylogeny from a known system to find new immune genes in humans."],
+    ["smyth", "project", "limit", "Immune cells cross at three barriers: vascular, choroid plexus epithelium and arachnoid. This project's genes come from the vascular one only."],
   ];
 
   const kinds = {

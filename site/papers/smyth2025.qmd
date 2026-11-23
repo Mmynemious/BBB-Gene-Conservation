@@ -1,0 +1,83 @@
+---
+title: "Smyth and Kipnis 2025"
+subtitle: "Redefining CNS immune privilege"
+---
+
+> Smyth LCD, Kipnis J (2025). Redefining CNS immune privilege. *Nature Reviews Immunology*
+> 25(10):766-775. Perspective, published online 2 May 2025.
+> <https://doi.org/10.1038/s41577-025-01175-0>
+
+| Field | |
+|---|---|
+| **Year** | Published online 2 May 2025 |
+| **Models** | A perspective, drawing on work across species. No new data |
+| **Brain region** | **The borders of the CNS** rather than a region: perivascular and subarachnoid spaces, choroid plexus, meninges, vasculature |
+| **Measures** | None of its own |
+| **Method** | Perspective on the literature |
+| **Cross-species stats** | None |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+**There is neuroimmune communication, particularly at border sites that encase the CNS.** These
+are the **perivascular and subarachnoid spaces**, the **choroid plexus**, the **meninges**, the
+**vasculature**, and the **meningeal lymphatic vessels**. There is **extensive interaction with
+the cerebrospinal fluid**.
+
+The immune system at the CNS borders can **fight infections**, **aid in tissue repair**, and
+**orchestrate behaviour**.
+
+When **T cells are primed in the periphery**, they can reach the brain and **reject grafts
+there**.
+
+**Immune privilege** of the CNS: a broader absence of immunological activity and immune
+surveillance within and around the CNS. It is possible that the CNS **rejects tissue more slowly
+and is more tolerant than peripheral tissues, but is not completely privileged**.
+
+Immune privilege was put down to two things: the **BBB**, and the **brain parenchyma**, which
+does not have lymphatic vessels.
+
+Now the **assumption that the CNS and the immune system are isolated from one another is
+challenged**.
+
+**Immunological isolation.** The previous assumption: the BBB and the brain parenchyma isolate
+the CNS.
+
+**Immune surveillance.** Immune isolation: the lack of lymphatics in the CNS parenchyma means
+that CNS antigens are not surveilled by the immune system. Wastes were assumed to be processed
+by cells within the brain. Then the **glymphatic hypothesis**: exchange between the CSF and the
+CNS interstitial fluid that enables the removal of wastes from the CNS.
+
+**Immune cell trafficking at brain barriers.** The **vascular** barrier, the **choroid plexus
+epithelium**, and the **meningeal arachnoid barrier**.
+
+**Conclusion.** The CNS is **less privileged than previously known**, with slower rejection than
+other organs. **What are the molecular pathways that govern the movement of immune cells between
+the meninges and the brain?**
+
+## What I take from it
+
+The BBB was one of the two reasons the CNS was thought to be isolated from the immune system,
+and that assumption is now challenged. The CNS is less privileged than previously known.
+
+## Open questions from this read
+
+- What are the molecular pathways that govern the movement of immune cells between the meninges
+  and the brain? Left open by the paper itself.
+
+## How it relates to this project
+
+1. **The BBB is one of three barriers here.** Immune cells cross at the vascular barrier, the
+   choroid plexus epithelium and the meningeal arachnoid barrier. This project's genes come from
+   the vascular one only.
+
+2. **It agrees with O'Brown 2018 and the Scientific American reading.** The barrier is not a
+   sealed wall: O'Brown reports regional leakiness, and this paper reports communication with
+   the immune system at the borders.
+
+## Reference detail from the paper
+
+- **From the abstract:** the CSF acts as an immune mediator, letting the immune system at the
+  borders respond to challenges in the parenchyma. The authors describe immune privilege as an
+  **accord** between the two systems rather than isolation.

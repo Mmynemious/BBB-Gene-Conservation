@@ -136,6 +136,21 @@ clear demonstration that immortalised cell lines drift away from real brain endo
 [Read the entry →](papers/kumabe2025.qmd)
 :::
 
+::: {.paper-card}
+### [Smyth and Kipnis 2025](papers/smyth2025.qmd)
+
+::: {.paper-meta}
+[2025]{.pm} [Perspective]{.pm} [CNS borders]{.pm} [Immune privilege]{.pm}
+:::
+
+The assumption that the CNS and the immune system are isolated from one another is challenged.
+There is neuroimmune communication at the border sites that encase the CNS, and immune cells
+traffic at the vascular, choroid plexus and arachnoid barriers. The CNS is less privileged than
+previously known, with slower rejection than other organs.
+
+[Read the entry →](papers/smyth2025.qmd)
+:::
+
 :::
 
 *More to follow.*
