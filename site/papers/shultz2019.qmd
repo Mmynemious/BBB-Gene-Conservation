@@ -1,0 +1,126 @@
+---
+title: "Shultz and Sackton 2019"
+subtitle: "Immune genes are hotspots of shared positive selection across birds and mammals"
+---
+
+> Shultz AJ, Sackton TB (2019). Immune genes are hotspots of shared positive selection across
+> birds and mammals. *eLife* 8:e41815. <https://doi.org/10.7554/eLife.41815>.
+> Open access under CC BY 4.0.
+> Read on [PubMed Central](https://pmc.ncbi.nlm.nih.gov/articles/PMC6338464/).
+
+| Field | |
+|---|---|
+| **Year** | 2019 |
+| **Models** | **39 bird species**, compared against **24 mammal genomes** from Enard et al. 2016 |
+| **Brain region** | **None.** A genome-wide scan. The transcriptomes come from pathogen challenge studies in various tissues |
+| **Measures** | **DNA** for selection, coding sequence between species. **RNA** for the pathogen challenge data, 26 reanalysed studies in birds and mammals |
+| **Method** | Hierarchical orthologous groups across birds. **11,231 genes** run with the gene tree as input, **8,669** with the species tree as input (one sequence per species only) |
+| **Cross-species stats** | **PAML** site models (M1a vs M2a, M7 vs M8, M8 vs M8a) and **HyPhy BUSTED**, FDR-corrected p < 0.05. KEGG pathway enrichment. Bird and mammal overlap with Fisher's exact tests and logistic regression |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+This paper is about the immune genes. The title is Immune Genes are Hotspots of Shared Positive
+Selection Across Birds and Mammals, by Allison J. Shultz and Timothy Sackton at Harvard
+University.
+
+What they did is they assumed that there is a **common selective pressure across different
+taxa**, and they used alignments of **orthologous protein coding genes from 39 species of
+birds** to estimate positive selection across **11,000 genes** conserved across birds. They also
+used **pathogen challenge transcriptome data**. They noticed that genes upregulated in, I do not
+know what exactly, response to pathogens are also enriched for positively selected genes.
+Proteins that interact with viruses experience about **two times as many amino acid changes**
+compared to proteins that do not.
+
+Birds are used since they share **convergent features with mammals**, which will be important
+later on, because they can actually **cross-reference the enrichment pathways** of positively
+selected genes across species.
+
+The methods include comparative genomics in birds, in which they did a **genome-wide scan of
+positive selection without any a priori assumptions of gene function**. This is a strong
+starting point, because it makes it very clear later on whether their assumption about
+positively selected genes and the immune system is correct or not.
+
+They found **four categories where positive selection is high**: the **immune system**, the
+**recombination and replication** genes, **lipid metabolism** genes, and **phototransduction**
+genes. Their key hypothesis is that **adaptation against pathogens consistently involves the
+same genes across evolutionary timescales**, which again allows for the cross-reference of
+enrichment of pathways.
+
+They found out that there are **strong signatures of positive selection throughout the avian
+genome**. They used **PAML and HyPhy**. They used a **gene tree** as an input tree, and then for
+**8,669 genes** they used a **species tree** as an input tree. They used the **dN/dS** parameter,
+I believe, and they also used **BUSTED**, which, yeah, maybe not too important for me.
+
+So the immune system, recombination, lipid metabolism and phototransduction pathways are
+**enriched for positive selection in birds**. Genes under positive selection have significantly
+larger overall **differential expression effect values** compared to those only under positive
+selection in birds or those not under positive selection.
+
+**Pathogens drive shared signatures of selection across birds and mammals.** There is a **strong
+overlap** in genes with positive selection, and **viruses produce the strongest signature** of
+pathogen mediated selection.
+
+## What I take from it
+
+The scan without any a priori assumptions of gene function is a strong starting point, because
+it makes it very clear whether their assumption about positively selected genes and the immune
+system is correct or not. And using birds allows them to cross-reference the enrichment
+pathways of positively selected genes across species.
+
+## Checks against the paper
+
+- **Upregulated in response to what?** Pathogen challenge. They reanalysed 12 bird studies
+  covering seven pathogens: four viruses, two bacteria and one protist. Genes upregulated after
+  infection were more likely to be under positive selection than genes not differentially
+  expressed.
+- **Two times as many amino acid changes for virus interacting proteins?** That is a result from
+  mammals that they cite, Enard et al. 2016, not a finding of this paper.
+- **Genome-wide GWAS?** A genome-wide scan, not a GWAS. A GWAS links variants to a trait within
+  one species; this scans every gene for selection across species.
+- **11,000 genes, and 8,669 on the species tree?** Yes. 11,231 genes with the gene tree, 8,669
+  with the species tree. The species tree set only kept alignments with one sequence per
+  species; the gene tree set allowed up to three paralogs.
+- **The dN/dS parameter, I believe?** Yes. All the PAML site models and BUSTED test whether some
+  sites have dN/dS above 1. 14% of genes passed every test.
+- **Four categories?** Yes. 18 KEGG pathways were significantly enriched, and they fall into
+  immune, recombination and replication, lipid metabolism and phototransduction.
+- **Larger differential expression effect values?** The comparison has three groups: genes under
+  selection in **both birds and mammals**, in birds only, or in neither. The genes under
+  selection in both had the largest effect values, mostly in response to viruses.
+- **Strong overlap between birds and mammals?** Yes, significant at every cutoff they tried, on
+  4,931 genes with results in both. It held after removing the most constrained genes and
+  accounting for alignment length.
+
+## Open questions from this read
+
+- BUSTED, again marked as not too important for me. Second paper in a row that relies on it.
+
+## How it relates to this project
+
+1. **It uses the same measure.** dN/dS on aligned coding sequence, across a whole genome, is the
+   conservation measure this project uses on its BBB genes.
+
+2. **It shows the one sequence per species choice.** The species tree analysis kept only
+   alignments with one sequence per species, the same restriction as the one-to-one orthologue
+   decision in this project.
+
+3. **It pairs with Nandakumar 2025.** Both papers find immune genes enriched for positive
+   selection, one across birds and mammals and one within rodents, and both lean on BUSTED.
+
+## Reference detail from the paper
+
+- **Proportions under positive selection** (gene trees, 11,231 genes): M1a vs M2a 17%, M7 vs M8
+  67%, M8 vs M8a 33%, BUSTED 56%, all tests 1,562 genes (14%). Species trees: 1,203 of 8,669
+  (14%) in all tests.
+- **Overall ω** (M0 model): mean 0.15, median 0.10. Median 0.344 for genes under selection
+  against 0.084 for the rest.
+- **Alignment length:** longer genes were more often under selection, likely more power to
+  detect it.
+- **Pathway enrichment:** 351 selected genes and 3,347 background genes mapped to KEGG with
+  chicken as reference; 18 pathways enriched at q < 0.1.
+- **Bird and mammal transcriptomes:** significant overlap in upregulated genes for influenza A,
+  West Nile virus, E. coli and Mycoplasma; none in downregulated genes for viruses or bacteria.
+- **Classic host pathogen genes under selection in both clades** and upregulated after
+  infection: PKR, PARP9, MX1.

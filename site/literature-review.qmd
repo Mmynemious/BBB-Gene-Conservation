@@ -210,6 +210,21 @@ serve as the baseline. Cytokines and cell surface proteins come out highest.
 [Read the entry →](papers/nandakumar2025.qmd)
 :::
 
+::: {.paper-card}
+### [Shultz and Sackton 2019](papers/shultz2019.qmd)
+
+::: {.paper-meta}
+[2019]{.pm} [39 birds · 24 mammals]{.pm} [DNA · RNA]{.pm} [Coding sequence]{.pm} [Method]{.pm}
+:::
+
+A genome-wide scan of positive selection in birds without any a priori assumptions of gene
+function. The immune system, recombination and replication, lipid metabolism and
+phototransduction come out on top. Birds share convergent features with mammals, so the
+enriched pathways can be cross-referenced, and viruses produce the strongest shared signature.
+
+[Read the entry →](papers/shultz2019.qmd)
+:::
+
 :::
 
 ## Wider reading
