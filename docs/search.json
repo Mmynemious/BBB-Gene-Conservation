@@ -684,5 +684,12 @@
     "title": "Shultz and Sackton 2019",
     "section": "Reference detail from the paper",
     "text": "Reference detail from the paper\n\nProportions under positive selection (gene trees, 11,231 genes): M1a vs M2a 17%, M7 vs M8 67%, M8 vs M8a 33%, BUSTED 56%, all tests 1,562 genes (14%). Species trees: 1,203 of 8,669 (14%) in all tests.\nOverall ω (M0 model): mean 0.15, median 0.10. Median 0.344 for genes under selection against 0.084 for the rest.\nAlignment length: longer genes were more often under selection, likely more power to detect it.\nPathway enrichment: 351 selected genes and 3,347 background genes mapped to KEGG with chicken as reference; 18 pathways enriched at q &lt; 0.1.\nBird and mammal transcriptomes: significant overlap in upregulated genes for influenza A, West Nile virus, E. coli and Mycoplasma; none in downregulated genes for viruses or bacteria.\nClassic host pathogen genes under selection in both clades and upregulated after infection: PKR, PARP9, MX1."
+  },
+  {
+    "objectID": "literature-review.html#how-the-papers-connect",
+    "href": "literature-review.html#how-the-papers-connect",
+    "title": "Literature Review",
+    "section": "How the papers connect",
+    "text": "How the papers connect\nEach box is a paper, the dark box in the middle is this project, and each line is a relationship taken from the entries. Click a paper to see its connections and why they hold."
   }
 ]

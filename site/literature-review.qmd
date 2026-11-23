@@ -1,6 +1,8 @@
 ---
 title: "Literature Review"
 subtitle: "Papers on BBB gene conservation, translational models, and comparative genomics — with comments"
+resources:
+  - paper-map.js
 ---
 
 Papers are read against six fields, in the order below, so entries stay comparable. Each
@@ -37,6 +39,16 @@ endothelial signal in neurons; isolated microvessels or sorted endothelium do no
 : What was done to compare across species — orthologue assignment, differential tests and
 thresholds, alignment, selection estimates, phylogenetic versus pairwise, multiple-testing
 correction.
+
+## How the papers connect
+
+Each box is a paper, the dark box in the middle is this project, and each line is a
+relationship taken from the entries. Click a paper to see its connections and why they hold.
+
+```{=html}
+<div id="paper-map"></div>
+<script src="paper-map.js"></script>
+```
 
 ## Papers
 
