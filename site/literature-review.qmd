@@ -237,6 +237,21 @@ enriched pathways can be cross-referenced, and viruses produce the strongest sha
 [Read the entry →](papers/shultz2019.qmd)
 :::
 
+::: {.paper-card}
+### [Cury et al. 2024](papers/cury2024.qmd)
+
+::: {.paper-meta}
+[2024]{.pm} [Bacteria · eukaryotes]{.pm} [Protein]{.pm} [Homology search]{.pm} [Method]{.pm} [Abstract and discussion]{.pm}
+:::
+
+A reverse approach: discovering eukaryotic proteins of defence by sequence similarity with
+bacterial antiphage systems. From a known bacterial system to an HMM profile, a search of
+eukaryotic proteomes, conserved candidates, and an experimental test of antiviral function.
+Proteins like these are involved at multiple levels of eukaryotic immune pathways.
+
+[Read the entry →](papers/cury2024.qmd)
+:::
+
 :::
 
 ## Wider reading

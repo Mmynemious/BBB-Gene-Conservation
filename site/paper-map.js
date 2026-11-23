@@ -5,7 +5,7 @@
     expr:  { label: "BBB across species",       color: "#2C6C4C" },
     model: { label: "Human models",             color: "#6B4C9A" },
     pipe:  { label: "Cross-species pipelines",  color: "#1F4FA8" },
-    sel:   { label: "Positive selection",       color: "#875110" },
+    sel:   { label: "Immune gene evolution",    color: "#875110" },
     wider: { label: "Wider reading",            color: "#7E8885" },
     self:  { label: "This project",             color: "#141817" },
   };
@@ -24,6 +24,7 @@
     { id: "barr",       label: "Barr 2025",          sub: "CrossFilt",              g: "pipe",  x: 290, y: 395, href: "papers/barr2025.qmd" },
     { id: "nandakumar", label: "Nandakumar 2025",    sub: "Rodent immune genes",    g: "sel",   x: 640, y: 470, href: "papers/nandakumar2025.qmd" },
     { id: "shultz",     label: "Shultz 2019",        sub: "Birds and mammals",      g: "sel",   x: 790, y: 370, href: "papers/shultz2019.qmd" },
+    { id: "cury",       label: "Cury 2024",          sub: "Immune genes from bacteria", g: "sel", x: 800, y: 515, href: "papers/cury2024.qmd" },
   ];
 
   // kind: agrees | method | limit | shared
@@ -42,6 +43,7 @@
     ["loverso", "sheng", "method", "Two whole pipelines for cross-species expression: LoVerso aligns to existing genomes, CoRMAP assembles de novo and groups genes with OrthoMCL."],
     ["loverso", "beker", "method", "LoVerso lays out the steps; Beker shows how to handle multiple datasets and quality control."],
     ["nandakumar", "shultz", "agrees", "Immune genes are enriched for positive selection, within rodents and across birds and mammals. Both rely on BUSTED."],
+    ["cury", "shultz", "shared", "Both follow immune genes across very long evolutionary distances: Shultz across birds and mammals, Cury back to bacteria."],
     ["miao", "project", "shared", "Same two species and the same question, measured by expression instead of coding sequence. The SLC family diverges most."],
     ["kumabe", "project", "agrees", "Macaque sits closer to human than mouse does, from protein expression instead of sequence."],
     ["song", "project", "limit", "Song's pericyte markers, PDGFRB, CSPG4, KCNJ8, ABCC9, NOTCH3 and VTN, are all on the gene list."],
@@ -52,6 +54,7 @@
     ["loverso", "project", "method", "The frame for where each workflow fits in the method-driven pipeline."],
     ["nandakumar", "project", "method", "dN/dS on coding sequence against a random control set, the same comparison as BBB genes against control genes."],
     ["shultz", "project", "method", "dN/dS on coding sequence across a whole genome, with one sequence per species in the species tree set."],
+    ["cury", "project", "method", "Uses conservation the other way round: homology search and phylogeny from a known system to find new immune genes in humans."],
   ];
 
   const kinds = {

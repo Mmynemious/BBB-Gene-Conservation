@@ -1,0 +1,76 @@
+---
+title: "Cury et al. 2024"
+subtitle: "Conservation of antiviral systems across domains of life reveals immune genes in humans"
+---
+
+> Cury J, Haudiquet M, Hernandez Trejo V, Mordret E, Hanouna A, Rotival M, Tesson F,
+> Bonhomme D, Ofir G, Quintana-Murci L, Benaroch P, Poirier EZ, Bernheim A (2024). Conservation
+> of antiviral systems across domains of life reveals immune genes in humans. *Cell Host &
+> Microbe* 32(9):1594-1607.e5. <https://doi.org/10.1016/j.chom.2024.08.002>.
+> Open archive under an Elsevier user license.
+>
+> Commentary in the same issue: Culbertson EM, Levin TC. There and back again: discovering
+> antiviral and antiphage defenses using deep homology. *Cell Host & Microbe* 32(9):1466-1468.
+
+| Field | |
+|---|---|
+| **Year** | Published 11 September 2024 |
+| **Models** | **Bacteria and eukaryotes**, with candidates tested for antiviral function in **human** cells |
+| **Brain region** | **None** |
+| **Measures** | **Protein sequence** similarity, then antiviral **function** |
+| **Method** | HMM profiles of known bacterial antiphage systems, searched against eukaryotic proteomes |
+| **Cross-species stats** | Homology search and phylogeny across domains of life |
+
+: {tbl-colwidths="[22,78]"}
+
+*Read from the abstract, highlights and discussion only.*
+
+## My reading
+
+The key ideas, from skimming through the abstract and the discussion.
+
+A **subset of eukaryotic immune proteins originates from prokaryotic antiphage systems**. A
+**phylogeny-driven search** identifies eukaryotic immune proteins linked to bacteria.
+
+It is a **reverse approach**: discovering eukaryotic proteins of defence by **sequence
+similarity with bacterial antiphage systems**. A **homology search**, then a **phylogeny**, to
+retrieve previously unknown evolutionary relationships between prokaryotic and eukaryotic
+systems of defence.
+
+The workflow:
+
+1. Known bacterial antiphage system
+2. **HMM profile**
+3. Search eukaryotic proteomes
+4. Remove contaminants
+5. Prioritise conserved candidates
+6. Experimentally test antiviral function
+
+**Discussion.** They use the conservation of immune proteins across domains of life to
+discover immune genes in humans. **Proteins similar to antiviral defence mechanisms in bacteria
+are involved at multiple levels of eukaryotic immune pathways.**
+
+## What I take from it
+
+Conservation itself is the tool here: starting from a known system and searching by sequence
+similarity finds immune genes in humans that were not known before.
+
+## Open questions from this read
+
+- The results and methods sections, not read yet.
+
+## How it relates to this project
+
+1. **It uses conservation to find genes, the other way round from this project.** This project
+   starts from a gene list and measures how conserved it is. Cury starts from conservation, by
+   homology and phylogeny, and uses it to find genes.
+
+2. **It pairs with Shultz 2019.** Both follow immune genes across very long evolutionary
+   distances: Shultz across birds and mammals, Cury back to bacteria.
+
+## Reference detail from the paper
+
+- **Named links** (from the abstract): two proteins of the anti-transposon piRNA pathway are
+  related to the antiphage system **Mokosh**. Human **GIMAPs** are related to **Eleos**, and
+  **FHAD1** and **CTRC**, encoded in microsynteny, to **Lamassu**. GIMAPs, FHAD1 and CTRC
+  showed antiviral activity.
