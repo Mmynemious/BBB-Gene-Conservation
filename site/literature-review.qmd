@@ -195,6 +195,21 @@ positives, and there is no one-to-many orthologue system because they are cut ou
 [Read the entry →](papers/barr2025.qmd)
 :::
 
+::: {.paper-card}
+### [Nandakumar et al. 2025](papers/nandakumar2025.qmd)
+
+::: {.paper-meta}
+[2025]{.pm} [30 rodents]{.pm} [DNA]{.pm} [Coding sequence]{.pm} [Method]{.pm}
+:::
+
+Which immune genes are key targets for positive selection in Muridae and Cricetidae, and
+whether that is a direct effect of gene function or an indirect effect of other factors. They
+work a lot with pN/pS and dN/dS, which we also used on the CDS, and random non-immune genes
+serve as the baseline. Cytokines and cell surface proteins come out highest.
+
+[Read the entry →](papers/nandakumar2025.qmd)
+:::
+
 :::
 
 ## Wider reading

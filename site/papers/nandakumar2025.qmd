@@ -1,0 +1,140 @@
+---
+title: "Nandakumar et al. 2025"
+subtitle: "Positive selection on mammalian immune genes: effects of gene function and selective constraint"
+---
+
+> Nandakumar M, Lundberg M, Carlsson F, Råberg L (2025). Positive Selection on Mammalian Immune
+> Genes: Effects of Gene Function and Selective Constraint. *Molecular Biology and Evolution*
+> 42(1):msaf016. <https://doi.org/10.1093/molbev/msaf016>. Open access under CC BY.
+> Code: <https://github.com/lraberg/PositiveSelectionRodentImmuneGenes>
+
+| Field | |
+|---|---|
+| **Year** | Published 21 January 2025 |
+| **Models** | **30 rodent genomes**: 15 Muridae and 15 Cricetidae, house mouse as reference. Population data from wild house mouse and bank vole |
+| **Brain region** | **None.** Immune genes across the whole body. Expression taken from ten organs as a covariate |
+| **Measures** | **DNA.** Coding sequence between species, plus polymorphism within species |
+| **Method** | Orthologues from TOGA annotations, PRANK codon alignments, IQ-TREE2 gene trees. 977 immune genes and 1,005 control genes after filtering |
+| **Cross-species stats** | **BUSTED** (HyPhy), gene-wide on the full CDS, model-averaged over three variants, Benjamini-Hochberg correction. CODEML M1a vs M2a for comparison. **dN/dS** and **pN/pS** compared between categories with Dunnett's tests |
+
+: {tbl-colwidths="[22,78]"}
+
+## My reading
+
+I looked at the paper called Positive Selection on Mammalian Immune Genes: Effects of Gene
+Function and Selective Constraint. What the researchers did, they wanted to look at the
+**immune genes that are targets for positive selection**. Positive selection is a process in
+which genes are favoured and reproduced if their function ensures a higher likelihood of
+survival.
+
+They took **rodents** to analyse the mammalian immune genes. They looked at **gene function,
+gene expression, protein-protein interaction**, and also the **selective constraint**. They
+looked at **pattern recognition receptors, PRRs**, which were expected to have a higher
+positive selection rate than other genes. They also expected that for **cytokines** and for
+**cell surface proteins**. And they reasoned that the gene function might determine the
+positive selection.
+
+I noted down that they worked a lot with selective constraint, **pN divided by pS**, and also
+**dN divided by dS**, which we also used when we looked at the CDS.
+
+So the focus is essentially that they wanted to see **what immune genes were key targets for
+positive selection**, and whether the enrichment of signatures of positive selection in certain
+genes is a **direct effect of gene function or an indirect effect of other factors**.
+
+They looked at the **Cricetidae and Muridae** families, and they found that there were around
+**1,100 genes** that they could divide into **six categories**, which proved their initial
+assumptions. The genes that they used were screened against other sources to check whether the
+immune function was covered by **at least two sources**. They also needed this categorization to
+separate the **host pathogen genes** from the other ones, because the host pathogen genes have a
+**co-evolution** process which the other genes might not have, and this might also influence
+the positive selection.
+
+They also had **control genes**. I am not quite sure why this approach works, in which they just
+took randomly **1,300 protein-coding mouse genes** which are not associated with immune related
+processes. So I am thinking that when they take random genes, which should not express a high
+positive selection because they are not related to the immune system in any way, they can use
+this as a **baseline** for their genes that do show a higher positive selection. I think.
+
+They tested for positive selection with **dN/dS**. They looked at the CDS for the dN/dS, but
+they noticed that the CDS rarely allows for a positive selection calculation, so they used
+**BUSTED**. I will say I skipped this because I did not think it was very important for me.
+
+What they saw is that immune genes had signatures of positive selection, including **Tlr1 and
+Ifih1**, and there were also some in the cytokines. Then they compared the full protein CDS
+with **Dunnett's test**, to check, I believe, for a correlation. They saw that there is a
+**higher positive selection in cytokines and cell surface proteins**, and the differences in
+pN/pS match the different categories they assigned the immune genes to based on their gene
+function.
+
+In the discussion they note that **PRRs, cytokines and cell surface proteins had similar,
+higher proportions** of genes with signatures of positive selection than control genes. But for
+the PRR genes, since there are not that many in the genome that they could use in a
+bioinformatical way, they state that there is **limited statistical power**, so it cannot be
+completely generalized. It does give you a hint that there might be a higher positive
+selection. They also note the co-evolution of host and pathogen, which I also kind of skipped.
+And they discuss why **cytokines and cell surface proteins are common targets of pathogen immune
+evasion**, and how that raises the proportion of positive selection in those genes.
+
+## What I take from it
+
+They worked a lot with pN/pS and dN/dS, which we also used when we looked at the CDS. And the
+random control genes, which are not related to the immune system in any way, work as a
+baseline for the genes that do show a higher positive selection.
+
+## Checks against the paper
+
+- **Immune cells or immune genes?** Genes. The title is Positive Selection on Mammalian Immune
+  *Genes*.
+- **Around 1,100 genes in six categories?** 1,273 immune genes were collected, 1,112 fit one of
+  the six categories, and 977 passed alignment filters. The six are PRRs, cytokines, other cell
+  surface proteins, intracellular signalling, extracellular proteases, and effectors.
+- **Covered by at least two sources?** Yes, at least two of four: Amigo2, KEGG, PANTHER and
+  Reactome.
+- **Why do random control genes work?** As you thought, they are the background rate. Controls
+  are not free of positive selection, 8.9% of them showed it against 13.0% of immune genes. The
+  question is whether immune genes sit above that.
+- **The CDS rarely allows a positive selection calculation?** BUSTED still runs on the full
+  CDS. It asks whether some sites on some branches have dN/dS above 1, which an average over the
+  whole gene rarely shows.
+- **Dunnett's test for a correlation?** Not a correlation. It compares each category against
+  the control group.
+- **Higher selection in cytokines and cell surface proteins?** Yes. But once pN/pS was
+  accounted for, only cytokines stayed higher than controls. The authors read cytokines as a
+  direct effect of function, and cell surface proteins as mostly an indirect effect of low
+  constraint.
+- **Expression and protein-protein interaction?** Neither predicted positive selection once the
+  category was taken into account.
+- **Limited power for PRRs?** Yes. 3 of 56 PRRs were under positive selection, so the difference
+  from controls was not significant.
+
+## Open questions from this read
+
+- How does BUSTED work, and why is it preferred over CODEML here? Skipped on this read.
+- The host pathogen co-evolution part of the discussion. Skipped on this read.
+
+## How it relates to this project
+
+1. **It uses the same measure.** dN/dS on aligned coding sequence is what this project uses for
+   conservation, so it is a worked example of that measure on a published gene set.
+
+2. **It uses a control set the same way.** Random genes outside the category of interest as a
+   baseline is the comparison this project makes between BBB genes and its control genes.
+
+3. **It names an established algorithm.** BUSTED is a candidate for a positive selection test in
+   the method-driven pipeline, next to the dN/dS ratio itself.
+
+## Reference detail from the paper
+
+- **Proportion under positive selection** (BUSTED model-average): 89 of 1,005 control genes
+  (8.9%) against 127 of 977 immune genes (13.0%), P = 0.0030. At FDR q < 0.2: 20 (2%) against
+  37 (3.8%).
+- **By category:** cytokines and cell surface proteins higher than controls (Dunnett's P = 0.014
+  and 0.023). Effectors and proteases each under 50 genes, with only one or two selected.
+- **dN/dS:** every immune category except intracellular signalling higher than controls;
+  signalling lower (P = 0.0005).
+- **pN/pS:** mean of house mouse (Harr et al. 2016, German samples, N = 8) and bank vole
+  (Lundberg et al. 2020, N = 31). PRRs, cytokines and cell surface proteins higher than
+  controls (P ≤ 0.013); signalling lower (P = 0.0029).
+- **Named genes under positive selection:** Ifih1 and Tlr1 (PRRs), Ifnb1 and Il12b (cytokines),
+  Ifngr2 and Il12rb1 (cytokine receptors), Cd80 (cell surface). Full list in supplementary
+  table S2.
