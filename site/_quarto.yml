@@ -4,6 +4,7 @@ project:
   render:
     - "*.qmd"
     - "papers/*.qmd"
+    - "steps/*.qmd"
     - "reading/*.qmd"
     - "reading/sciam/*.qmd"
 
